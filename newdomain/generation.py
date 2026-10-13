@@ -60,7 +60,7 @@ def _verify_or_write_header(header_path, current, resume):
     return current
 
 
-def _reconcile_resume(journal, out_file, expected=None):
+def _reconcile_resume(journal, out_file, expected=None, expected_model=None):
     """Validate the entire run before any worker can dispatch.
 
     Completed, hash-pinned results are reusable. Unknown/in-flight/failed jobs,
@@ -84,6 +84,8 @@ def _reconcile_resume(journal, out_file, expected=None):
     for entry_key, entry in journal._entries.items():
         qid, arm, prompt, model = entry_key.split("|")
         key = (qid, arm)
+        if expected_model is not None and model != expected_model:
+            raise RuntimeError("journal model identity mismatch")
         if key in seen or (expected is not None and key not in expected):
             raise RuntimeError("unknown or duplicate journal job")
         seen.add(key)
@@ -155,7 +157,7 @@ def run_live_v2(stage, arms, revision, repeat=0, dataset=None,
             mod = baseline_mod
             index = mod.NewDomainBaseline(mod.build_chunks(mod.load_units(corpus_path)))
         else:
-            mod = importlib.import_module("newdomain.candidate")
+            mod = importlib.import_module("newdomain.clauses" if arm == "C3B" else "newdomain.candidate")
             index = mod.create_index(documents_path=corpus_path)
         adapters[arm] = (mod, index)
         init[arm] = {"initialization_s": time.perf_counter() - t, "chunks": len(index.chunks)}
@@ -444,11 +446,15 @@ def _guard_run(function):
         stage, revision = p["stage"], p["revision"]
         if stage not in ("dev", "final") or not isinstance(revision, str) or not revision or any(c in revision for c in "/\\"):
             raise ValueError("invalid run name or stage")
-        allowed = {"B0", "C1"} if function.__name__ == "run_live_v2" else {"C1", "C2P", "C2R"}
+        allowed = {"B0", "C1", "C3B"} if function.__name__ == "run_live_v2" else {"C1", "C2P", "C2R"}
         if not set(p["arms"]) <= allowed:
             raise ValueError("unsupported arm")
         cases = json.loads(Path(p["casefile"]).read_text())
         expected = _validate_jobs(cases, p["arms"])
+        from newdomain.paths import _ensure_outside_repo
+        for field in ("corpus_path", "casefile", "output_dir", "freeze_file"):
+            if p.get(field) is not None:
+                _ensure_outside_repo(Path(p[field]), field)
         root = Path(p["output_dir"])
         out = root / f"{stage}-{revision}-results.jsonl"
         header = root / f"{stage}-{revision}-header.json"
@@ -459,7 +465,7 @@ def _guard_run(function):
                 raise FileExistsError("run results or journal already exist")
             _verify_or_write_header(header, identity, p["resume"])
             if p["resume"]:
-                _reconcile_resume(journal, out, expected)
+                _reconcile_resume(journal, out, expected, "deepseek-flash")
             else:
                 with out.open("x", encoding="utf-8") as fh:
                     fh.flush()

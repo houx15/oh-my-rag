@@ -74,8 +74,9 @@ def _resolve_canonical_response(row: Dict[str, Any]) -> Tuple[Any, Optional[Dict
     canonical = row.get("response")
 
     if raw is not None:
-        if arm == "C1":
-            from newdomain import candidate as c1_mod
+        if arm in ("C1", "C3B"):
+            from newdomain import candidate, clauses
+            c1_mod = clauses if arm == "C3B" else candidate
             response, meta = c1_mod.canonicalize(raw, context)
             if not meta.get("ok"):
                 return response, meta, "canonicalize_rejected"
@@ -120,7 +121,7 @@ def validate_row(row: Dict[str, Any]) -> Dict[str, Any]:
     if arm == "B0":
         from newdomain import baseline as b0_mod
         gate = b0_mod.validate(response, context)
-    elif arm == "C1":
+    elif arm in ("C1", "C3B"):
         from newdomain import candidate as c1_mod
         gate = c1_mod.validate(response, context)
     elif arm in ("C2P", "C2R"):
@@ -393,8 +394,9 @@ def cmd_prepare(args) -> int:
         from newdomain import cycle2 as c2_mod
         index = c2_mod.create_index(mode=mode, documents_path=corpus_path)
         build = c2_mod.build_messages
-    elif mode == "C1":
-        from newdomain import candidate as c1_mod
+    elif mode in ("C1", "C3B"):
+        from newdomain import candidate, clauses
+        c1_mod = clauses if mode == "C3B" else candidate
         index = c1_mod.create_index(documents_path=corpus_path)
         build = c1_mod.build_messages
     elif mode == "B0":
@@ -488,7 +490,7 @@ def main() -> int:
     pr.add_argument("--corpus", required=True, help="Corpus JSONL path")
     pr.add_argument("--questions", required=True, help="Questions JSON path")
     pr.add_argument("--output", required=True, help="Output directory (file must not exist)")
-    pr.add_argument("--mode", default="C2P", choices=["B0", "C1", "C2P", "C2R"])
+    pr.add_argument("--mode", default="C2P", choices=["B0", "C1", "C3B", "C2P", "C2R"])
 
     sub.add_parser("help", help="Show usage and path configuration")
 

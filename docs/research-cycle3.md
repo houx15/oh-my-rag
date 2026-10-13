@@ -2,8 +2,9 @@
 
 Literature window: **2025-10-12 through 2026-10-12**, inclusive. This is a targeted
 review. Submission, revision and publication dates are distinguished below.
-Implementation status: recovery/reporting integration only; no new method has
-established a quality improvement. No unrecognized external code was installed
+Implementation status: recovery/reporting integration plus an opt-in C3B clause
+packing ablation and typed numeric utilities. No new method has established an
+answer-quality improvement. No unrecognized external code was installed
 or executed, and no upstream source or prompts were copied.
 
 ## Failure-to-method matrix
@@ -92,3 +93,55 @@ $27.69268935; a new $6 allocation including at least $2 final/regression reserve
 is a proposal, not an estimate or separate fresh allowance. Verify the shared
 canonical ledger and reserve conservatively before every paid call. No new
 paid research has run at this checkpoint. No deployment or private upload.
+
+
+## Implemented offline ablations — 2026-10-13
+
+`newdomain/clauses.py` provides **C3B-v2**, an independently written adaptation
+of exact sentence-pointer evidence representation and compact clue grouping.
+It reuses C1 retrieval, original chunks, system prompt, answer schema, generation
+model/caps and canonical validation. Only handle boundaries change: complete
+clauses are packed toward 240 characters; one longer clause stays whole within
+its original chunk. S2G-RAG and CompSelect are conceptual acknowledgments, not
+code/model/prompt dependencies or reproduced benchmarks. This does not repair
+clauses already cut by the upstream chunker or recover absent pages.
+
+Offline diagnosis reused the 60 exposed C1 contexts. All **60 rebuilt C1 prompt
+hashes matched** their saved originals. These are development diagnostics, not
+a fresh quality test. Clause instances repeat across contexts and are not
+independent samples or human-verified necessary facts.
+
+| Variant | Mean handles/prompt | Mean prompt bytes | Budget rejection count |
+|---|---:|---:|---:|
+| C1 | 22.27 | 15,162.85 | 0/60 |
+| C3B-v1: one handle per clause | 212.60 | 25,409.50 among 14 accepted only | **46/60** |
+| C3B-v2: packed complete clauses | 22.45 | 15,175.38 | 0/60 |
+
+**Negative result retained:** C3B-v1's metadata explosion makes it unsuitable
+for paid testing under the unchanged request limit. C3B-v2 has the same source
+chunks and avoids 383 internal splits among 12,756 syntactically delimited
+clause instances. This is a representation property, **not evidence of better
+answers, correct OCR, entailment or necessary-clause coverage**. Single-pass
+mean prompt construction was about 0.075 ms for C1 versus 0.235 ms for C3B-v2;
+this excludes retrieval/model/validation and is not end-to-end latency evidence.
+API calls and charges for these diagnostics: **zero**.
+
+Reproduce locally with the private saved result path:
+
+```sh
+python -m newdomain.research_diagnostics --results /private/exposed-results.jsonl
+python -m newdomain.runner prepare --corpus /private/corpus.jsonl \
+  --questions /private/development.json --output /private/prepared --mode C3B
+```
+
+`newdomain/numeric.py` independently implements fixed Decimal conversions and
+scope-checked comparisons. It is **not wired to automatic answer generation**.
+It returns operand provenance, a derived flag and `premise_verified=false`;
+ambiguous values, unsupported units and mismatched entity/period/measure scopes
+are rejected. No paper or upstream repository is credited for this arithmetic.
+
+Synthetic tests cover long conditions, negation/decimal preservation, exact
+handle resolution, unchanged C1 defaults, numeric scales, incompatible units
+and comparison scope. Real runner recovery tests also include C3B. These tests
+establish mechanics, not semantic accuracy. Fresh frozen Chinese evaluation
+custody is still unresolved; no paid C3B evaluation or promotion has occurred.

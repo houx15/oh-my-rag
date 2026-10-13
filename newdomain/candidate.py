@@ -230,7 +230,7 @@ C1_SYSTEM_PROMPT = (
 
 
 def build_messages(q: str, retrieved_results: Sequence[Dict[str, Any]],
-                   mode: str = "C1") -> List[Dict[str, str]]:
+                   mode: str = "C1", *, passage_builder=None) -> List[Dict[str, str]]:
     if mode != "C1":
         raise ValueError("unsupported mode %r (C1 only)" % (mode,))
     if not isinstance(q, str) or not q.strip():
@@ -239,7 +239,7 @@ def build_messages(q: str, retrieved_results: Sequence[Dict[str, Any]],
     if not results:
         raise ValueError("no contexts supplied")
     context_map = {c["id"]: c["text"] for c in results}
-    handles = passages_for_contexts(context_map)
+    handles = (passage_builder or passages_for_contexts)(context_map)
     lines = ["问题：" + q, "", "检索资料（【编号】为证据段落句柄，引用时原样填写编号）：", ""]
     for handle in sorted(handles, key=lambda h: [int(x) for x in h[1:].split("S")]):
         p = handles[handle]
@@ -287,7 +287,7 @@ def usage_problem(usage) -> Optional[str]:
     return None
 
 
-def canonicalize(response, context_map) -> Tuple[Any, Dict[str, Any]]:
+def canonicalize(response, context_map, *, passage_builder=None) -> Tuple[Any, Dict[str, Any]]:
     """Envelope precheck, strict parse, handle-only resolution, protocol assembly.
     On ANY failure: returns (ORIGINAL response unchanged, failure metadata)."""
     meta: Dict[str, Any] = {"mode": "C1_passage_handles", "ok": False, "resolved": [],
@@ -321,7 +321,7 @@ def canonicalize(response, context_map) -> Tuple[Any, Dict[str, Any]]:
         if not isinstance(obj, dict) or set(obj) != {"sentences"} or not isinstance(obj["sentences"], list):
             meta["errors"].append("c1_root_schema")
             return response, meta
-        handles = passages_for_contexts(context_map)
+        handles = (passage_builder or passages_for_contexts)(context_map)
         out_sentences = []
         seen_boundary: Dict[str, int] = {}
         for i, s in enumerate(obj["sentences"]):

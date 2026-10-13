@@ -55,3 +55,11 @@ already dispatched at the time of a failure may finish and remain accounted for.
 The `newdomain` synthetic suite blocks sockets and calls actual runner entrypoints
 with synthetic provider responses. No live benchmark or claimed research gain
 is established by passing those tests.
+
+## Opt-in research variant
+
+`--mode C3B` in prepare/generation uses complete-clause packing with the C1
+retrieval and answer contract. It is not promoted: only offline prompt and
+mechanical tests have run. `research_diagnostics` compares representation and
+prompt size on exposed saved contexts without provider calls. See the research
+plan for the rejected first variant and exact interpretation limits.

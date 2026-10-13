@@ -439,6 +439,12 @@ def _guard_judge(function):
         identity = _run_identity(p["corpus_path"], p["casefile"], p.get("freeze_file"), [], "deepseek-v4-pro")
         identity.update(runner=function.__name__, stage=stage, name=name,
                         result_inputs=[hashlib.sha256(Path(f).read_bytes()).hexdigest() for f in p["files"]])
+        from newdomain.paths import _ensure_outside_repo
+        for field in ("corpus_path", "casefile", "output_dir", "freeze_file"):
+            if p.get(field) is not None:
+                _ensure_outside_repo(Path(p[field]), field)
+        for path in p["files"]:
+            _ensure_outside_repo(Path(path), "judge input")
         root = Path(p["output_dir"])
         out = root / f"{stage}-{name}-judge.jsonl"
         with DispatchJournal(root / f"{stage}-{name}-judge-journal.jsonl") as journal:
@@ -446,7 +452,7 @@ def _guard_judge(function):
                 raise FileExistsError("judge results or journal already exist")
             _verify_or_write_header(root / f"{stage}-{name}-judge-header.json", identity, p["resume"])
             if p["resume"]:
-                _reconcile_resume(journal, out, expected)
+                _reconcile_resume(journal, out, expected, "deepseek-v4-pro")
             else:
                 with out.open("x", encoding="utf-8") as fh:
                     fh.flush()

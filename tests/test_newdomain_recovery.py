@@ -33,10 +33,10 @@ class RunnerRecovery(unittest.TestCase):
         self.addCleanup(self.net.stop)
 
     def variants(self):
-        for arm in ("B0", "C1", "C2P", "C2R"):
-            runner = run_live_v2 if arm in ("B0", "C1") else run_cycle2
+        for arm in ("B0", "C1", "C3B", "C2P", "C2R"):
+            runner = run_live_v2 if arm in ("B0", "C1", "C3B") else run_cycle2
             content = {"sentences": [{"text": "补贴比例最高不超过50%。",
-                **({"citations": [{"id": "X:1", "quote": "补贴比例最高不超过50%。"}]} if arm == "B0" else {"evidence": ["E1S1" if arm == "C1" else "E1"]})}]}
+                **({"citations": [{"id": "X:1", "quote": "补贴比例最高不超过50%。"}]} if arm == "B0" else {"evidence": ["E1S1" if arm in ("C1", "C3B") else "E1"]})}]}
             if arm == "B0":
                 content["handoff"] = False
             yield arm, runner, dict(stage="dev", arms=[arm], revision="test"), _resp(json.dumps(content)), "dev-test-results.jsonl", "dev-test-journal.jsonl"
@@ -116,3 +116,20 @@ class RunnerRecovery(unittest.TestCase):
         path.unlink()
         with DispatchJournal(path):
             pass
+
+    def test_model_mismatch_blocks_all_dispatch(self):
+        def mutate(result, journal, name):
+            rows = [json.loads(line) for line in journal.read_text().splitlines()]
+            for row in rows:
+                row["key"] = row["key"].rsplit("|", 1)[0] + "|wrong-model"
+            journal.write_text("".join(json.dumps(row) + "\n" for row in rows))
+        self.exercise(mutate)
+
+    def test_direct_runner_private_output_boundary(self):
+        root = Path(__file__).resolve().parents[1]
+        with patch("newdomain.transport.chat") as call:
+            with self.assertRaises(RuntimeError):
+                run_live_v2("dev", ["C1"], "boundary", output_dir=root / "forbidden-private-output",
+                    corpus_path=self.corpus, casefile=self.questions, live_context=self.ctx)
+            call.assert_not_called()
+        self.assertFalse((root / "forbidden-private-output").exists())

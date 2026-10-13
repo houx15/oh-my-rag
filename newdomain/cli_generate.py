@@ -20,7 +20,7 @@ def main() -> int:
                     help="Resume a prior interrupted run (requires --live)")
     ap.add_argument("--profile", type=Path, default=None)
     ap.add_argument("--stage", default="dev", choices=["dev", "final"])
-    ap.add_argument("--mode", default="C2P", choices=["B0", "C1", "C2P", "C2R"])
+    ap.add_argument("--mode", default="C2P", choices=["B0", "C1", "C3B", "C2P", "C2R"])
     ap.add_argument("--corpus", required=True, type=Path)
     ap.add_argument("--questions", required=True, type=Path)
     ap.add_argument("--output", required=True, type=Path)
@@ -110,7 +110,7 @@ def _live(args) -> int:
     from newdomain.generation import run_live_v2, run_cycle2
     revision = args.output.name
     try:
-        if args.mode in ("B0", "C1"):
+        if args.mode in ("B0", "C1", "C3B"):
             run_live_v2(args.stage, [args.mode], revision,
                         output_dir=args.output,
                         casefile=args.questions,

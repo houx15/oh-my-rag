@@ -20,6 +20,7 @@ in the intended environment before spending.
 ```sh
 python -m newdomain.runner help
 python -m unittest discover -s tests -p 'test_newdomain*.py'
+python -m unittest discover -s tests -p 'test_research_methods.py'
 ```
 
 The published synthetic tests require no private corpus or network. Other legacy
@@ -51,6 +52,12 @@ The proposed experiments and evaluation protocol are informed by
 These are **research references, not implemented model reproductions**. No
 upstream code, prompts, weights or datasets from those projects are included.
 The research plan records dates, repository checks and license limitations.
-Method-specific implementation credits will be added only for methods actually
-used and evaluated. Existing B0/C1/C2 inference methods retain their local
-provenance in module documentation.
+The opt-in `newdomain/clauses.py` C3B variant independently adapts exact
+sentence-pointer representation and compact clause grouping, conceptually
+informed by S2G-RAG and CompSelect. It reuses C1's inference contract and is not
+either paper's trained system. Offline ablations rejected an initial variant
+that exceeded the request limit on 46/60 prompts; complete-clause packing fits
+all 60 exposed prompts. Answer-quality/latency gains remain unmeasured.
+`newdomain/numeric.py` is independent engineering, not a paper reproduction,
+and is not automatically routed into answers. Existing B0/C1/C2 methods retain
+their local provenance in module documentation.
