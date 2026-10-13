@@ -27,7 +27,7 @@ def validate(content, answer_ids, required_ids):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','report']);p.add_argument('--root',type=Path,required=True);p.add_argument('--name',required=True);p.add_argument('--cases',type=Path,required=True);a=p.parse_args();root=a.root;name=a.name
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['prepare','report']);p.add_argument('--root',type=Path,required=True);p.add_argument('--name',required=True);p.add_argument('--cases',type=Path,required=True);p.add_argument('--manifest',type=Path);a=p.parse_args();root=a.root;name=a.name
     cases={c['qid']:c for c in json.loads(a.cases.read_text())};assessed=json.loads((root/f'{name}-assessed.json').read_text())
     if a.action=='prepare':
         jobs=[];key=[];ordered=list(assessed);random.Random(131637).shuffle(ordered)
@@ -36,6 +36,8 @@ def main():
             c=cases[row['qid']];body={'question':c['question'],'required_source':c['fixed_context'],'retrieved_source':row['context'],'answer':{f'A{i+1}':s['text'] for i,s in enumerate(row['answer']['sentences'])},'obligations':[{k:r[k] for k in ('id','criterion','support')} for r in c['obligations']]}
             jid=f'PTR-{len(jobs):03d}';jobs.append({'qid':jid,'messages':[{'role':'system','content':PROMPT},{'role':'user','content':json.dumps(body,ensure_ascii=False)}]});key.append({'job':jid,'qid':row['qid'],'arm':row['arm']})
         path=root/f'{name}-pointer-jobs.json';write_new(path,jobs);write_new(root/f'{name}-pointer-key.json',key);freeze(path,Path(__file__).resolve().parents[1]);f=path.with_suffix('.freeze.json');x=json.loads(f.read_text());x['hashes'].update({str(p.resolve()):sha(p) for p in (Path(__file__),a.cases,root/f'{name}-assessed.json')});f.write_text(json.dumps(x,indent=2)+'\n');print(json.dumps({'jobs':len(jobs)}));return
+    if a.manifest is None:raise ValueError('report requires pinned tariff manifest')
+    tariffs=json.loads(a.manifest.read_text())['models']
     jobs={j['qid']:json.loads(j['messages'][1]['content']) for j in json.loads((root/f'{name}-pointer-jobs.json').read_text())};keys={k['job']:k for k in json.loads((root/f'{name}-pointer-key.json').read_text())};verdict={};invalid=[]
     rows=[json.loads(l) for l in (root/f'{name}-pointer-results.jsonl').read_text().splitlines()]
     if len(rows)!=len(keys) or {r['qid'] for r in rows}!=set(keys):raise ValueError('coverage')
@@ -48,10 +50,10 @@ def main():
     detail=[];metrics={}
     for row in assessed:
         v=verdict.get((row['qid'],row['arm']),{'adequate':False,'schema_valid':False,'error':'invalid generation'})
-        detail.append({'qid':row['qid'],'arm':row['arm'],'group':row['group'],'valid':row['valid'],'verdict':v,'latency_ms':row['response']['parent_observed_timings']['full_ms'],'usage':row['response']['usage']})
+        detail.append({'qid':row['qid'],'arm':row['arm'],'group':row['group'],'valid':row['valid'],'verdict':v,'latency_ms':row['response']['parent_observed_timings']['full_ms'],'usage':row['response']['usage'],'model':row['response']['requested_model']})
     for arm in sorted({r['arm'] for r in detail}):
         ds=[x for x in detail if x['arm']==arm];ms=[x['latency_ms'] for x in ds]
-        metrics[arm]={'n':len(ds),'valid':sum(x['valid'] for x in ds),'adequate':sum(x['verdict']['adequate'] is True for x in ds),'unresolved':sum(x['verdict']['adequate'] is None for x in ds),'p50_ms':float(np.percentile(ms,50)),'p95_ms':float(np.percentile(ms,95)),'generation_usd':sum((x['usage']['input_tokens']*.3+x['usage']['output_tokens']*1.2)/1e6 for x in ds)}
+        metrics[arm]={'n':len(ds),'valid':sum(x['valid'] for x in ds),'adequate':sum(x['verdict']['adequate'] is True for x in ds),'unresolved':sum(x['verdict']['adequate'] is None for x in ds),'p50_ms':float(np.percentile(ms,50)),'p95_ms':float(np.percentile(ms,95)),'generation_usd':sum((x['usage']['input_tokens']*tariffs[x['model']]['input_per_1m']+x['usage']['output_tokens']*tariffs[x['model']]['output_per_1m'])/1e6 for x in ds)}
     result={'metrics':metrics,'detail':detail,'invalid_reviews':invalid,'limitation':'Same-provider model review plus assistant-source obligations; no human gold. Unresolved evaluation outputs are not candidate losses. Transport timings exclude retrieval.'};write_new(root/f'{name}-pointer-comparison.json',result);print(json.dumps(metrics,indent=2))
 
 

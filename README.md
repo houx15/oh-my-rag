@@ -102,3 +102,16 @@ The continuing objective and plateau rules are in
 [OPTIMIZATION_GOAL.md](OPTIMIZATION_GOAL.md); the
 [optimization log](docs/optimization-log.md) tracks new work beyond this completed
 comparison. Publication is blocked, but safe local research continues.
+
+### Continuing research experiments (local, opt-in)
+
+See [the continuing evidence log](docs/optimization-log.md) for completed prompt,
+retrieval, model-capacity and premise-uncertainty ablations, including negative
+results and evaluator failures. C1 remains the default. `newdomain.guardrails`
+provides opt-in missing-record routing and exact fixed-sentence contract
+normalization; these are independently implemented local engineering safeguards,
+not claimed reproductions of a paper. They do not create facts or model usage.
+The uncertainty prompt is experimental; two corrected errors do not establish a
+broad quality gain. Existing research acknowledgments apply only as described in
+[the research record](docs/research-cycle3.md); no upstream code was copied for
+these safeguards.
