@@ -84,9 +84,10 @@ group labels exist and disclose when they do not.
 
 Proposed practical gate: at least +5 percentage points adequacy, no new invalid
 outputs/regression failures or supported-claim deterioration, p95 within +10%.
-These are decision thresholds, not power guarantees. Stop after two development
-comparisons without a Pareto improvement; keep C1 if inconclusive. Never tune
-following final exposure.
+These are decision thresholds, not power guarantees. The original two-comparison stopping proposal is superseded by the sustained
+optimization request: continue useful isolated hypotheses until a defensible
+scoped plateau or genuine blocker, within the unchanged cumulative cap. Keep C1
+if inconclusive and never tune on exposed finals as though they were unseen.
 
 The cumulative API ceiling remains $100, from a verified baseline of
 $27.69268935. The authorized live comparison used a nested $12 maximum allocation

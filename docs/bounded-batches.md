@@ -44,3 +44,8 @@ admission, premature closure, append-only next-batch lineage, removed accounting
 tags, and worker timeout bounds. Full normal and optimized Python suites passed
 299 tests before activation. No external code or provider was added; C1 answer
 and retrieval defaults are unchanged.
+
+New receipts explicitly pin the candidate arm (`C9S` or `C10D`); older receipts
+retain the original C9S interpretation. Binding rejects a changed arm even when
+call counts match. Candidate choice does not change any financial, privacy or
+execution limit.

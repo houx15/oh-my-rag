@@ -106,4 +106,14 @@ class BatchRenewalTests(unittest.TestCase):
         with l._locked():l._state['reservations'][-1].pop('batch_id')
         with self.assertRaises(AuthorizationError):l.reserve('deepseek-flash',10,1)
 
+
+    def test_explicit_candidate_arm_pinned(self):
+        self.jobs=[dict(j,qid=j['qid'].replace('C9S','C10D')) for j in self.jobs];self.jobs_path.write_text(json.dumps(self.jobs))
+        with self.assertRaises(AuthorizationError):activate(profile_path=self.profile,root=self.root,name='scope',reason='test',output=self.receipt)
+        event=activate(profile_path=self.profile,root=self.root,name='scope',reason='test',output=self.receipt,candidate_arm='C10D')
+        self.assertEqual(event['candidate_arm'],'C10D')
+        p=BatchPolicy(self.receipt,self.path,'final',self.deny);l=SpendLedger(self.root/'ledger.final.json',self.manifest,stage='final',batch_policy=p);p.bind_jobs(l,self.jobs_path,'deepseek-flash',self.jobs)
+        wrong=[dict(j,qid=j['qid'].replace('C10D','C9S')) for j in self.jobs]
+        with self.assertRaises(AuthorizationError):p.bind_jobs(l,self.jobs_path,'deepseek-flash',wrong)
+
 if __name__=='__main__':unittest.main()

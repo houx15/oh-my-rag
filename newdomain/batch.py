@@ -46,7 +46,7 @@ def validate_audit(state):
         if digest(records)!=c['reservations_sha256']:raise AuthorizationError('closed batch reservations changed')
 
 
-def activate(*, profile_path, root, name, reason, output):
+def activate(*, profile_path, root, name, reason, output, candidate_arm="C9S"):
     """Record one explicitly scoped batch; no network, deadline reset or new ledger."""
     from newdomain.profile import load_profile,verify_profile
     from newdomain.paths import _ensure_outside_repo
@@ -64,9 +64,10 @@ def activate(*, profile_path, root, name, reason, output):
     if prior!=Decimal(str(raw.get('prior_spend_usd',0))):raise AuthorizationError('prior accounting mismatch')
     if Decimal(str(manifest.spend_cap_usd))+prior>Decimal(str(raw.get('original_total_cap_usd',100))):raise AuthorizationError('cumulative cap widened')
     jobs=root/f'{name}-jobs.json';cases=root/f'{name}-cases.json';rows=json.loads(jobs.read_text());case_rows=json.loads(cases.read_text())
+    if candidate_arm not in ('C9S','C10D'):raise AuthorizationError('unapproved candidate arm')
     ids={c['qid'] for c in case_rows}
     if len(ids)!=24 or len(case_rows)!=24 or len(rows)!=48 or len({j['qid'] for j in rows})!=48:raise AuthorizationError('expected frozen 24-case/48-generation batch')
-    if {j['qid'] for j in rows}!={q+'-'+arm for q in ids for arm in ('C1','C9S')}:raise AuthorizationError('unexpected generation arms or questions')
+    if {j['qid'] for j in rows}!={q+'-'+arm for q in ids for arm in ('C1',candidate_arm)}:raise AuthorizationError('unexpected generation arms or questions')
     ledger=SpendLedger(paths['ledger_path'],manifest,stage='final',simulated=False)
     with ledger._locked():
         state=ledger._state
@@ -82,7 +83,7 @@ def activate(*, profile_path, root, name, reason, output):
               'additional_committed_cap_usd':'4','max_retries':0,'manifest_path':str(paths['manifest_path']),'manifest_sha256':file_sha(paths['manifest_path']),
               'ledger_path':str(paths['ledger_path']),'denylist_path':str(paths['redaction_names_path']),'denylist_sha256':file_sha(paths['redaction_names_path']),
               'generation_jobs_path':str(jobs),'generation_jobs_sha256':file_sha(jobs),'review_jobs_path':str(root/f'{name}-axis-jobs.json'),
-              'case_path':str(cases),'case_sha256':file_sha(cases),'question_ids':sorted(ids),
+              'case_path':str(cases),'case_sha256':file_sha(cases),'question_ids':sorted(ids),'candidate_arm':candidate_arm,
               'baseline_reservations_sha256':digest(state['reservations']),'baseline_reservations_count':len(state['reservations']),
               'baseline_totals':dict(state['totals']),'previous_sha256':events[-1]['sha256'] if events else None}
         event=dict(body,sha256=digest(body))
@@ -103,6 +104,7 @@ class BatchPolicy:
         for field in ('recorded_epoch','deadline_epoch'):
             if isinstance(e.get(field),bool) or not isinstance(e.get(field),(int,float)) or not math.isfinite(e[field]):raise AuthorizationError('invalid batch time')
         if not 0<e['deadline_epoch']-e['recorded_epoch']<=3600:raise AuthorizationError('batch window widened')
+        if e.get('candidate_arm','C9S') not in ('C9S','C10D'):raise AuthorizationError('unapproved candidate arm')
         self.id=e['id'];self.check_files()
 
     def check_files(self):
@@ -127,7 +129,7 @@ class BatchPolicy:
         self.check_files();path=Path(path).resolve();e=self.event
         expected=e['generation_jobs_path'] if model=='deepseek-flash' else e['review_jobs_path'] if model=='deepseek-v4-pro' else None
         if str(path)!=expected or len(rows)!=MODELS.get(model):raise AuthorizationError('unexpected batch job file or count')
-        expected_ids={q+'-'+arm for q in e['question_ids'] for arm in ('C1','C9S')} if model=='deepseek-flash' else set(e['question_ids'])
+        expected_ids={q+'-'+arm for q in e['question_ids'] for arm in ('C1',e.get('candidate_arm','C9S'))} if model=='deepseek-flash' else set(e['question_ids'])
         if {r['qid'] for r in rows}!=expected_ids:raise AuthorizationError('batch question scope changed')
         binding={'batch_id':self.id,'model':model,'path':str(path),'sha256':file_sha(path)}
         with ledger._locked():

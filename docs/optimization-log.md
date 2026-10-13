@@ -249,3 +249,50 @@ All 24 answers per arm remain in cost and timing denominators. The generation
 and transport figures above stand; reviews cost an additional $0.14996784.
 C1 remains unchanged. The nonadjacent-definition retrieval hypothesis remains
 untested, and these targeted results do not establish a practical plateau.
+
+
+### C10D: nonadjacent definitions, completed development test
+
+An opt-in deterministic selector adds at most one exact definition chunk from
+the top-ranked document within the unchanged eight-chunk context. Multiple
+candidate definition pages/sentences cause abstention from enrichment; no
+cross-document definition lookup, per-case IDs or answer labels are used.
+C1 defaults remain unchanged. The project code was written independently.
+
+Twenty-four questions were frozen before generation in four previously exposed
+source families: eight boundary, eight matched near-boundary and eight unknown/
+nonnumeric controls. Corpus/topics are not unseen and labels are assistant
+source-reviewed, not human gold. Complete reference-chunk coverage rose from
+1/24 to 19/24; 19 insertions had zero wrong-reference-document joins and zero
+listed reference-chunk displacements. Source bundles include definitions that
+some controls do not strictly need, so this is not a necessary-evidence recall
+estimate. Compiled multi-policy documents with conflicting definitions are
+skipped. Synthetic tests also cover wrong-document rejection and local exception
+retention; these checks cannot certify the initial retrieval anchor's identity.
+
+Masked assistant adjudication: C1 17/24, C10D 19/24, two wins and zero losses
+(exact paired sign-test p=0.5). Boundary adequacy is 3/8 versus 5/8; matched
+controls 6/8 each; unknown/nonnumeric controls 8/8 each under conservative
+interpretation, with three borderline wording concerns each recorded separately.
+All 48 answers are valid. Four-family descriptive bootstrap: 0 to +16.67 pp;
+this is weak targeted development evidence, not broad promotion evidence.
+
+Raw paired model review reports 17/24 versus 21/24. It misses both arms' incorrect
+100-boundary answer and a candidate answer whose opening denial contradicts its
+later correct rule. It also penalizes a terse unknown refusal that the conservative
+assistant review treated as a borderline explanation issue. Original judgments
+are retained separately; no majority vote converts them into gold.
+
+Generation cost: $0.0255951/$0.0251286; transport p95: 1969/1872 ms for C1/C10D.
+Mean local retrieval including selection: 2.505/2.506 ms; selector build 5.44 ms.
+These small-sample timings are not production end-to-end p95. All 72 calls cost
+$0.20449182, cumulative $30.91562091; zero open reservations, no retries, eleven
+prior ledger hashes verified. The batch is closed. Relevant normal and optimized
+Python regressions passed 109 tests.
+
+Failure localization: three numeric interpretation errors persist even with
+the definition present, including answers that quote the right rule and then
+contradict it. Two unanswered questions miss the local procedural page even
+though it ranks first in BM25: fusion/document-diversity pushes it out of the
+final context. Next isolate protection of the strongest lexical hit from logical
+consistency prompting. No plateau or default promotion is claimed.

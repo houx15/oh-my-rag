@@ -63,6 +63,13 @@ quality gain and higher p95 latency; C1 remains the default.
 and is not automatically routed into answers. Existing B0/C1/C2 methods retain
 their local provenance in module documentation.
 
+The opt-in `newdomain/definitions.py` C10D selector is independent engineering:
+it adds a bounded same-document definition chunk, without copying a paper
+algorithm or code. Its targeted development test improved source coverage and
+corrected two boundary answers, but left three interpretation errors and two
+retrieval misses. It is not promoted; detailed negative results and evaluator
+disagreements are in [the optimization log](docs/optimization-log.md).
+
 ## Completed frozen comparison — 2026-10-13
 
 | Evidence | C1 | C3B packed clauses |
