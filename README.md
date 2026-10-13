@@ -10,7 +10,38 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Latest focused experiments — October 13, 2026
+## Latest measured checkpoint — October 13, 2026
+
+[Focused repairs and actual end-to-end results](docs/focused-results-cycle6.md):
+whole-table aggregation and targeted building evidence now have measured answer
+benefits. On9 newly frozen synthetic phrasings, source-requirement checks improve
+**6/9→8/9**, with2 gains and0 regressions. The remaining “楼层范围” trigger miss
+is retained without tuning on that check. These share source/entities with
+exposed development cases and use assistant source review, not human gold.
+
+The development comparisons reach5/9→9/9 for aggregation and3/6→6/6 for building
+facts after versioned refinements; source restoration supplies the platform/subset
+distinction in3/3 targeted cases. Final prompts map to the earliest matching
+successful checkpoints, never to the highest-scoring answer. C1 remains the broad
+default; these methods are opt-in research candidates.
+
+All **49 paid requests** completed with known usage,0 retries and0 responses over
+20 seconds. Actual warm end-to-end timing (retrieval through validated answer,
+excluding cache hits/cold startup/offline review) is **p50 2.996s, p95 4.274s,
+maximum 5.215s**.11 byte-identical outputs were reused and excluded from timings.
+The120s collection/125s parent deadline preserves the20s latency-failure threshold;
+these under6s results do not prove the longer deadline caused service recovery.
+
+Known-token peak-price estimate this cycle: **CNY0.317262**; new unknown-usage
+settlements0. Cumulative conservative ledger: **$69.18204225/$200**, zero open
+reservations, no active paid run. All prior settlements remain.439 tests pass in
+normal and optimized Python modes. No deployment, push or artifact upload.
+
+GM161 is now disputed in the primary audit:22 supported passes,0 definite false
+passes,13 genuine failures,6 false failures,7 disputed/ambiguous. Both readings,
+its original full score and the historical audit snapshot are preserved.
+
+## Earlier focused experiments — October 13, 2026
 
 [Focused experiment results](docs/focused-experiments-20261013.md): the revised
 judge rubric did not improve agreement on12 source-reviewed controls (9/12 for
@@ -43,8 +74,9 @@ why the lexical abstention flag alone cannot establish a false pass.
 
 The [fairness audit](docs/fairness-diagnostic-20261013.md) reviews48 original
 questions from both datasets, balanced between original passes and failures.
-Assistant source review found22 supported passes,1 false pass,13 genuine
-failures,6 false failures and6 ambiguous cases. This deliberately stratified
+Assistant source review now records22 supported passes,0 definite false passes,13 genuine
+failures,6 false failures and7 disputed/ambiguous cases. GM161 was moved to the
+disputed category; both readings and its original full score are preserved. This deliberately stratified
 sample does not estimate population error rates; no original scores changed.
 Prior40 source annotations plus this sample cover82 unique questions.
 
@@ -149,10 +181,12 @@ raised by IRT-Judge and Reliability without Validity; no IRT model was implement
 The opt-in `newdomain/facet_recovery_v2.py` independently tests one requested-facet
 addition under a fixed context count, conceptually informed by S2G-RAG and
 CompSelect. Its first variant selected a neighboring property's evidence and was
-rejected offline; v2 has no completed paid quality result. These are conceptual
+rejected offline. V2 was tested, then `facet_recovery_v3.py` preferred concrete
+entity-specific access facts over dated forecasts; see the measured checkpoint. These are conceptual
 credits, not copied algorithms or reproduced models. `newdomain/scoped_aggregation.py`
 is independent source-row arithmetic and conditional entity handling; it is not
-attributed to a paper implementation and is not promoted without answer tests.
+attributed to a paper implementation. `scoped_aggregation_v2.py` corrects the
+unique-mode wording and has the measured opt-in answer tests linked above.
 
 The opt-in `newdomain/definitions.py` C10D selector is independent engineering:
 it adds a bounded same-document definition chunk, without copying a paper

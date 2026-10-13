@@ -53,7 +53,7 @@ D36 rows197,307,288 classify these actual examples as生命类. The open request
 not require the reference's exact examples. This is reference-example lock-in,
 not demonstrated factual failure.
 
-**False pass, with interpretation caveat — GM161**
+**Disputed pass — GM161 (revised primary classification)**
 
 Question:「请介绍一下光明区有哪？ 拿，拿多少项科技成果？」
 
@@ -66,14 +66,14 @@ Original score2/2/2/2, pass, both Boolean checks true. Scorer reason:
 CALC:D36 and D30page1 support381 source-collection records and category counts;
 they do not support claiming the entire requested answer lacks evidence after
 answering it. The unqualified last sentence has no explicit separate referent.
-I retain the assistant whole-answer false-pass label, not a claim that381 is
-numerically false and not a mechanical inference from an abstention flag.
+The primary audit now records this case as disputed/ambiguous, not a definite
+false pass. One reading negates the whole answer; the other limits the final
+sentence to an unknown exhaustive district-wide total. Both readings and the
+original full score remain. The lexical flag alone cannot resolve them.
 
-The lexical co-occurrence flag was downgraded to a review trigger; the individually
-re-read GM161 label was not changed. Counts therefore remain22 supported passes,
-1 false pass,13 true failures,6 false failures,6 ambiguous. If a human interprets
-the last sentence narrowly as “the exhaustive district-wide total is unknown,”
-GM161 should instead be ambiguous:22/0/13/6/7. This sensitivity is explicit. In the
+The summary is revised to22 supported passes,0 definite false passes,13 true
+failures,6 false failures,7 disputed/ambiguous. Earlier counts22/1/13/6/6 remain
+only in the archived historical snapshot. In the
 new source-restoration run both arms omit this generic sentence and answer the
 core count correctly; those are different saved answers, not a revision of the
 old control and not an additional counted repair.

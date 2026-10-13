@@ -90,8 +90,10 @@ optimization request: continue useful isolated hypotheses until a defensible
 scoped plateau or genuine blocker, within the unchanged cumulative cap. Keep C1
 if inconclusive and never tune on exposed finals as though they were unseen.
 
-The cumulative API ceiling remains $100, from a verified baseline of
-$27.69268935. The authorized live comparison used a nested $12 maximum allocation
+The initial cumulative API ceiling was $100, from a verified baseline of
+$27.69268935. The later explicitly authorized ceiling is $200 with all prior
+accounting carried; see [latest measured follow-up](focused-results-cycle6.md).
+The initial authorized live comparison used a nested $12 maximum allocation
 within the existing canonical ledgers, with conservative reservation before
 every call. This supersedes the earlier $6 proposal; it is not a fresh ledger
 allowance. Completed accounting is reported below. No deployment or private upload.

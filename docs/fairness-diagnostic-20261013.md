@@ -7,13 +7,13 @@ failures each), assistant source review found:
 | Review verdict | Guangming | Niuhuang | Total |
 |---|---:|---:|---:|
 | Supported original pass |11|11|22|
-| False pass |1|0|1|
+| Definite false pass |0|0|0|
 | Genuine failure |9|4|13|
 | False failure |2|4|6|
-| Ambiguous |1|5|6|
+| Disputed / ambiguous |2|5|7|
 
 These are sample counts, not population rates or human gold. Three of the six
-false failures and the false pass have high-confidence source evidence; the
+false failures have high-confidence source evidence; the
 other three false failures depend partly on the open-ended answer standard.
 The13 genuine failures have9 high-confidence and4 medium-confidence judgments.
 The reviewer saw scores and rationales; this was not a blinded independent review.
@@ -32,14 +32,17 @@ both evidence booleans=true and valid output; a fail does not mean wholly wrong.
 - GM015/GM016: valid life-science examples failed because they differed from
   reference examples. R089's existence question was penalized for not listing
   all reference books/counts. These are reference anchoring/coverage inflation.
-- GM161: supported count followed by contradictory no-evidence statement still
-  passed. This is both a generation defect and a judge false pass.
+- GM161: disputed. The last sentence can negate the whole supported count answer,
+  or refer only to the unknown exhaustive district-wide total. The main audit now
+  records ambiguous rather than an unqualified false pass. Both interpretations,
+  the original full score and the earlier audit snapshot are retained. A lexical
+  abstention flag does not decide the semantic label.
 - GM048/GM146: relevant floor/transport source pages did not reach the context.
   Diagnose candidate recall versus evidence selection before changing generation.
 - GM090: independent source-column aggregation verifies the modal application
   field108/381. Missing aggregation routing, not an arithmetic hallucination.
 - GM045/GM174: the source platform-total line was deleted by preprocessing;
- 381 is a subset, not the platform's total. The restored source is untested.
+ 381 is a subset, not the platform's total. Later focused source comparisons are recorded separately.
 - N263 and other deictic questions lack dialogue context. References cannot
   establish the antecedent merely by naming one. N392 additionally violates the
   explicit one-sentence request regardless of its ambiguous antecedent.

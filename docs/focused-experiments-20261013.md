@@ -10,7 +10,7 @@ The old complete report's answer tables and scores remain unchanged.
 
 |Experiment|Evidence|Decision|
 |---|---|---|
-|Calibration|12 fixed-answer controls ×2 rubrics; both agree with assistant source labels9/12|Reject clarified rubric. The actual contradictory GM161 answer still passes; no human-gold calibration established.|
+|Calibration|12 fixed-answer controls ×2 rubrics; both agree with assistant source labels9/12|Reject clarified rubric. GM161 is now disputed; excluding that control gives9/11 for both rubrics. Original scores and historical9/12 labels remain saved.|
 |Source restoration|48/74 outputs;16/37 complete pairs; raw passes11/16→13/16;2 gains,0 losses among completed pairs|GM142/GM174 source review supports distinguishing platform over1000 from381 collected rows. Partial development evidence only.|
 |Scoped aggregation|Frozen24 generation jobs; first request and retry time out;0 outputs|No answer-quality claim. Offline source mode108/381, subtraction166−44=122, conditional entity count19 verified.|
 |Bounded recovery v1|Offline selection picked neighboring-property transport evidence|Rejected before paid testing.|
