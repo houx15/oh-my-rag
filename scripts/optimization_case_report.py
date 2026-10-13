@@ -40,7 +40,7 @@ def cohort(c):
     raw=read(c['results']);rows=[];evidence=[]
     if c['format']=='legacy':
         selected=[x for x in raw if x['arm']==c['arm'] and (not c.get('origin') or x['origin']==c['origin'])]
-        scores=unique([x for x in read(c['scores']) if x['arm']==c['arm']],lambda x:x['qid'])
+        scores=unique([x for x in read(c['scores']) if x.get('arm')==c['arm'] or ('arm' not in x and c['arm'] in x.get('scores',{}))],lambda x:x['qid'])
         for x in selected:
             qid=x['qid'];s=scores[qid]['scores'][c['arm']]
             score='; '.join(k+'='+str(s[k]) for k in ['correctness','support','relevance','completeness','citation_entailment','reference_complete','adequate'])
@@ -63,8 +63,37 @@ def cohort(c):
             qid=x['qid'].rsplit('-',1)[0];s=scores[qid,c['arm']];text=answer_text(x['response']);ms=x['response']['parent_observed_timings']['full_ms']
             score='assistant adequate='+str(s['adequate_on_conservative_review'])+'; excluded_primary='+str(s.get('exclude_primary',False))+'; '+s.get('notes','')
             if s.get('additional_concern'):score+='; concern: '+s['additional_concern']
+            if qid in c.get('missing_model_review_qids',[]):score+='; paired model review: MISSING (not completed)'
             rows.append([qid+' | '+cases[qid]['question'],text,score,str(ms)+' ms'])
             evidence.append({'qid':qid,'arm':c['arm'],'response_id':x['response'].get('response_id'),'timing_field':'response.parent_observed_timings.full_ms','timing_value':ms,'answer_sha256':hashlib.sha256(text.encode()).hexdigest(),'score_source':s,'events_perfcounter':x['response'].get('events_perfcounter')})
+    elif c['format']=='niuhuang':
+        selected=[x for x in raw if x['arm']==c['arm']]
+        scores=unique(read(c['scores']),lambda x:(x['qid'],x['repeat']))
+        independent=unique([x for x in read(c['independent'])['rows'] if x['arm']==c['arm']],lambda x:(x['qid'],x['repeat']))
+        cases=unique(read(c['cases']),lambda x:x['qid'])
+        if {x['qid'] for x in selected}!=set(cases):raise ValueError('incomplete Niuhuang cohort')
+        for x in selected:
+            qid=x['qid'];key=(qid,x['repeat']);s=scores[key]['scores'][c['arm']];other=independent[key]
+            if x['question']!=cases[qid]['question']:raise ValueError('question changed from freeze')
+            # K's delivered output includes deterministic source-span construction.
+            # Show the saved FINAL output verbatim, not intermediate handle JSON.
+            text='\n'.join(z['text'] for z in x['answer']['sentences'])
+            if answer_text(x['response'])!=text:raise ValueError('final response differs from canonical answer')
+            primary='; '.join(k+'='+str(s[k]) for k in ['correctness','support','relevance','completeness','citation_entailment','reference_complete','adequate'])+'; '+s.get('issue','')
+            oscore=other['scores']
+            secondary='; '.join(k+'='+str(oscore[k]) for k in ['correctness','support','relevance','completeness','citation_entailment','reference_complete'])+'; adequate='+str(other['adequate'])+'; '+oscore.get('issue','')
+            rows.append([qid+' | '+x['question'],text,'Primary DeepSeek-v4-pro: '+primary+'\nIndependent GLM: '+secondary,str(x['full_ms'])+' ms'])
+            evidence.append({'qid':qid,'arm':c['arm'],'answer_sha256':hashlib.sha256(text.encode()).hexdigest(),'answer_source':'saved final response after deterministic construction','raw_intermediate_content_sha256':hashlib.sha256(x['raw_response']['content'].encode()).hexdigest(),'timing_field':'full_ms','timing_value':x['full_ms'],'score_source':s,'independent_score_source':other,'local_route':x.get('local_route'),'response_transformations':x.get('response_transformations')})
+    elif c['format']=='pending':
+        # Explicit coverage gaps: never invent an answer, score or duration.
+        covered=set(c['covered_qids'])
+        if len(covered)!=len(c['covered_qids']):raise ValueError('duplicate covered question')
+        source=unique(raw,lambda x:x['qid'])
+        if not covered <= set(source):raise ValueError('covered question absent from source')
+        for qid,x in source.items():
+            if x['origin']==c['origin'] and qid not in covered:
+                rows.append([qid+' | '+x['question'],'MISSING — no evaluated C1 answer in audited result cohorts','MISSING — not scored','MISSING — no observed response time'])
+                evidence.append({'qid':qid,'arm':c['arm'],'status':'missing_evaluated_output','answer_sha256':None,'timing_value':None,'score_source':None})
     else:raise ValueError('unknown source format')
     if len(rows)!=c['expected_n'] or len({e['qid'] for e in evidence})!=len(rows):raise ValueError('unexpected or duplicated cohort count')
     return rows,evidence
@@ -88,7 +117,7 @@ def main():
             body+=['<tr>'+''.join('<td>'+html.escape(x)+'</td>' for x in row)+'</tr>']
             md+=['| '+' | '.join(html.escape(x).replace('|','&#124;').replace('\n','<br>') for x in row)+' |']
         body+=['</tbody></table></section>'];md+=['']
-        sources={k:{'path':c[k],'sha256':hashlib.sha256(Path(c[k]).read_bytes()).hexdigest()} for k in ['results','scores','cases','key'] if k in c}
+        sources={k:{'path':c[k],'sha256':hashlib.sha256(Path(c[k]).read_bytes()).hexdigest()} for k in ['results','scores','cases','key','independent'] if k in c}
         receipt['cohorts'].append({'title':c['title'],'n':len(rows),'sources':sources,'records':evidence,'csv_sha256':hashlib.sha256(csvpath.read_bytes()).hexdigest()})
     body+=['</html>']
     for name,text in [('report.html','\n'.join(body)),('report.md','\n'.join(md)),('verification.json',json.dumps(receipt,ensure_ascii=False,indent=2))]:

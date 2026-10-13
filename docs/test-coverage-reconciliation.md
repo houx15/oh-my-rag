@@ -39,3 +39,7 @@ Final checkpoint: two modal-comparator tests, three report-prose/source-key test
 and two whole-batch request-allowance tests bring 330 to **337**. Full discovery
 passes 337 normally and 337 under `-O`, zero skips. A new test-placement import
 error was corrected; its failed log is retained separately. No suite was excluded.
+
+Latest provenance/report continuation: 337 + 4 reporting tests + 9 offline
+request-allocation proposal tests = **350**, passing normal and optimized full
+discovery with zero skips. No legacy suite was excluded.

@@ -161,3 +161,11 @@ Full acceptance now passes 337 tests in both Python modes; cumulative cost is
 $32.51849835. More paid work is blocked by the unchanged 1,800-call final-stage
 request limit; all batches are closed, with zero open reservations. Private case
 report: 300 verified rows, exactly four columns, no upload.
+
+The latest [case-report provenance checkpoint](docs/case-report-provenance.md)
+separates 光明 C1 from the verified 牛黄 K synthetic benchmark. It reports missing
+real-user coverage and unfinished reviews explicitly; no cross-corpus SOTA claim
+is made. The reusable four-column exporter preserves delivered outputs, actual
+scores and each run's distinct timing boundary. Full offline acceptance is 350
+tests in both Python modes. Request-allocation proposals remain non-dispatching
+until the original 1,800-call allocation's provenance is resolved.
