@@ -24,6 +24,29 @@ def inspect_answer(text, requirements):
             for r in requirements]
 
 
+def risk_checks(text, requirements):
+    """Conservative review flags for two calibrated semantic risk patterns.
+
+    These flags are not a general entailment model and never repair answers.
+    """
+    value = normalized(text)
+    risks = []
+    for req in requirements:
+        if any(re.search(r"(?:不要求|无需|无须|不必|不需要).{0,10}(?:" + pattern + r")", value)
+               for pattern in req["patterns"]):
+            risks.append({"id":"negated_obligation:"+req["id"],"status":"contradiction_risk_needs_review"})
+    refusal = re.search(r"资料(?:不足|未包含)|无法确认|不能确认|没有.{0,8}依据", value)
+    if refusal:
+        # Narrow positive payment assertions. Explanatory caps and negated
+        # payment claims are excluded; other fabrications remain a review task.
+        for match in re.finditer(r"(?:已经|已|今天|现已|实际)?(?:到账|收到|获批|支付)(?:了)?[0-9]+(?:\.[0-9]+)?(?:万|亿)?元", value):
+            prefix=value[max(0,match.start()-8):match.start()]
+            if not re.search(r"未|不|无法|不能|没有|并非|假设|例如",prefix):
+                risks.append({"id":"unsupported_fact_after_refusal","status":"unsupported_claim_risk_needs_review"})
+                break
+    return risks
+
+
 def validate_annotations(annotations, cases):
     if annotations["status"] != "posthoc_assistant_source_review_not_human_gold":
         raise ValueError("annotation provenance missing")
@@ -80,7 +103,8 @@ def main():
             checks = inspect_answer(text, item["requirements"])
             results.append({"qid":key[0], "arm":arm, "stratum":cases[key[0]]["stratum"],
                 "checks":checks, "original_both_adequate":all(j[key]["adequate"] for j in judges),
-                "flagged_ids":[c["id"] for c in checks if c["status"].startswith("missing")]})
+                "flagged_ids":[c["id"] for c in checks if c["status"].startswith("missing")],
+                "risk_flags":risk_checks(text, item["requirements"])})
         for control in item["controls"]:
             flags = [c["id"] for c in inspect_answer(control["text"], item["requirements"]) if c["status"].startswith("missing")]
             controls.append({"qid":item["qid"],"name":control["name"],"expected_flags":control["expected_flags"],"actual_flags":flags,"matches_expectation":set(flags)==set(control["expected_flags"])})
@@ -88,6 +112,7 @@ def main():
             checks = inspect_answer(control["text"], item["requirements"])
             blindspots.append({"qid":item["qid"], "name":control["name"], "reason":control["reason"],
                 "flagged_ids":[c["id"] for c in checks if c["status"].startswith("missing")],
+                "risk_flags":risk_checks(control["text"], item["requirements"]),
                 "semantic_status":"assistant_constructed_error_requires_review"})
     result = {"status":ann["status"],"annotation_sha256":digest(args.annotations),
         "tool_sha256":digest(__file__),"limitations":ann["limitations"],"results":results,"controls":controls,"known_semantic_blindspots":blindspots,

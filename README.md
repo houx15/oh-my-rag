@@ -97,3 +97,8 @@ The [offline evaluation repair](docs/evaluation-repair.md) records source-bound
 obligations, three observed omission flags, and explicit semantic blind spots.
 It preserves frozen scores and requires source-aware adjudication before further
 paid optimization; assistant source review is not independent human gold.
+
+The continuing objective and plateau rules are in
+[OPTIMIZATION_GOAL.md](OPTIMIZATION_GOAL.md); the
+[optimization log](docs/optimization-log.md) tracks new work beyond this completed
+comparison. Publication is blocked, but safe local research continues.

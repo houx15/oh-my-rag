@@ -31,3 +31,14 @@ class CriteriaTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+class SemanticRiskTests(unittest.TestCase):
+    def test_negated_requirement_flagged(self):
+        req=[{'id':'completion','patterns':['本区建成']}]
+        self.assertEqual(mod.risk_checks('无需本区建成即可申请',req)[0]['id'],'negated_obligation:completion')
+        self.assertEqual(mod.risk_checks('要求在本区建成才可申请',req),[])
+
+    def test_refusal_does_not_excuse_fabrication(self):
+        self.assertTrue(mod.risk_checks('本次资料未包含依据。但该企业今天到账123万元。',[]))
+        self.assertEqual(mod.risk_checks('资料不足，不能确认今天到账123万元。',[]),[])
+        self.assertEqual(mod.risk_checks('资料不足，政策最高上限123万元不能当作到账额。',[]),[])
