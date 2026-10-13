@@ -90,3 +90,40 @@ not by the dollar ceiling. All batches closed with zero open reservations. Ten
 repeated model reviews and the prepared all 60 original-case regression remain
 uncompleted. Do not reset or route around the request limit. The requested private
 four-column report is verified (300 rows, HTML/Markdown/CSV); C1 remains default.
+
+## Latest user target — original questions, 2026-10-13
+
+Continue actual optimization until every eligible unique original 牛黄 case passes
+under the unchanged source-grounded rubric, or a real blocker is evidenced. The
+current eligible scope is 315 unique cases representing331 privacy-screened rows
+(205 unique live questions plus110 evaluation questions);64 sensitive live rows
+remain excluded,16 duplicate rows retain aliases. All315 outcomes count, including
+failed generation and malformed scores. The earlier120 curated cases are separate.
+This target does not authorize fabricated success, gold-answer lookup, removing
+failures, weakening scores, or treating every failure as clarification.
+
+Use verified `deepseek-flash` (V4.1 Flash alias at verification) for generation and
+all primary scoring. Inspect source evidence with Codex as a second diagnostic
+view; preserve raw primary scores and report disagreements without relabeling.
+Each substantial change must be checked on 光明 for generalizability. Keep a
+predeclared 光明 confirmation subset out of subsequent tuning, while clearly
+stating that all supplied questions were previously evaluated and it is therefore
+not a genuinely untouched test set. Additional untouched natural conversations
+remain necessary for an independent generalization claim.
+
+Implement portable intent, evidence selection and grounded-answer improvements;
+retain verbatim questions and honest context clarification. Freeze bounded batches,
+preserve prior ledgers and cumulative $100 cap, no unapproved providers, no uploads,
+GitHub push or deployment. Superseding user-authorized scope allocations use the
+existing audited successor mechanism, never reset historical spend or deadlines.
+
+
+Latest explicit budget amendment: cumulative LLM limit is **$200 total**, not
+$200 additional. Historical spend, reservations and dispatch identities remain
+intact. Apply the increase only through an audited successor allocation after the
+active run is reconciled; do not modify its frozen manifest. Target source-verified
+quality on both 牛黄 and 光明, without calling model judgments human gold.
+Additional authorized hypotheses include guarded manual ASR aliases (user supplied
+“派的” → “pad”, meaning the presentation/material library), precomputed synonyms,
+source/topic/entity partitions with cross-partition fallback, and composition of
+already approved models. Discuss concrete unresolved bottlenecks with the user.

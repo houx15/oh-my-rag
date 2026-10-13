@@ -19,7 +19,7 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
     from newdomain.paths import _ensure_outside_repo
     destination=_ensure_outside_repo(Path(destination),'Successor allocation')
     if destination.exists():raise AuthorizationError('successor destination must be new; never restart or overwrite')
-    if not isinstance(authority,dict) or authority.get('total_cap_usd')!=100 or not authority.get('user_instruction') or not authority.get('source_thread'):
+    if not isinstance(authority,dict) or authority.get('total_cap_usd') not in (100,200) or not authority.get('user_instruction') or not authority.get('source_thread'):
         raise AuthorizationError('explicit new user scope required')
     if type(request_cap)!=int or not 1<=request_cap<=4000:raise AuthorizationError('bounded new request allocation required')
     if not scope_hashes:raise AuthorizationError('frozen scope hashes required')
@@ -44,7 +44,9 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
         closed={c['batch_id'] for c in states['final'].get('batch_closures',[])}
         if any(e['id'] not in closed for e in states['final'].get('batch_renewals',[])):raise AuthorizationError('old batch not closed')
         for stage,s in states.items():total+=Decimal(str(s['totals']['charged_cost_usd']));requests+=s['totals']['requests_dispatched']
-        remaining=Decimal(100)-total
+        authorized_cap=Decimal(str(authority['total_cap_usd']))
+        if authorized_cap < Decimal(str(old._raw.get('original_total_cap_usd',100))):raise AuthorizationError('successor may not silently reduce the cumulative cap')
+        remaining=authorized_cap-total
         if remaining<=0:raise AuthorizationError('cumulative cap exhausted')
         destination.mkdir(parents=True)
         event={'id':uuid.uuid4().hex,'recorded_epoch':time.time(),'authority':authority,'successor_directory':str(destination.resolve()),'old_manifest_sha256':file_sha(old_path),'prior_cumulative_usd':str(total),'prior_cumulative_requests':requests,'scope_hashes':scope_hashes,'request_cap':request_cap,'old_state_sha256':{stage:digest(s) for stage,s in states.items()}}
@@ -54,7 +56,7 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
             s['successor_allocation']=event;ledgers[stage]._persist_locked()
             path=Path(profile[stage+'_ledger_path']);prior.append({'path':str(path),'sha256':file_sha(path),'spent':s['totals']['charged_cost_usd']})
         raw=copy.deepcopy(old._raw)
-        raw.update(authorized=True,status_note='Fresh user-authorized V4.1 Flash full rerun; all prior accounting carried; no new provider, no uploads or deployment.',spend_cap_usd=float(remaining),final_eval_reserve_usd=float(remaining),request_cap=request_cap,global_deadline_s=86400,max_concurrency=3,max_retries=0,prior_runs=prior,prior_spend_usd=float(total),original_total_cap_usd=100,prior_requests_dispatched=requests,authority_receipt_sha256=file_sha(destination/'authority-receipt.json'),scope_hashes=scope_hashes)
+        raw.update(authorized=True,status_note='User-authorized optimization scope; all prior accounting carried; no new provider, no uploads or deployment.',spend_cap_usd=float(remaining),final_eval_reserve_usd=float(remaining),request_cap=request_cap,global_deadline_s=86400,max_concurrency=3,max_retries=0,prior_runs=prior,prior_spend_usd=float(total),original_total_cap_usd=float(authorized_cap),prior_requests_dispatched=requests,authority_receipt_sha256=file_sha(destination/'authority-receipt.json'),scope_hashes=scope_hashes)
         raw['models']={k:v for k,v in raw['models'].items() if k in ('deepseek-flash','text-embedding-v3')}
         write_new(destination/'manifest.json',raw)
         manifest=AuthorizationManifest.load(destination/'manifest.json')

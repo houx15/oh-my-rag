@@ -196,3 +196,20 @@ scores and each run's distinct timing boundary. Full offline acceptance is 350
 tests in both Python modes. Those old request-allocation proposals stayed non-dispatching. The later explicit
 Flash full-rerun authorization uses the audited successor described above; old
 ledger history and stopped jobs remain preserved.
+
+### Original-question optimization experiments
+
+[Current checkpoint](docs/original-optimization-checkpoint.md) records a bounded
+retrieval fix and a partially completed cross-domain prompt ablation, including
+a repaired 光明 evidence-order harness error. These remain experimental; they are not an all-pass claim.
+
+The independent catalogue-to-evidence experiment in `newdomain/entity_bridge.py`
+uses the distinction between retrieval keys and source evidence discussed by
+[M-RAG: Semantic Key-Value Indexing for Retrieval-Augmented Generation](https://arxiv.org/abs/2603.26667)
+(Xu Sun et al.; arXiv submission history reports January6,2026, revised July21,2026).
+This is conceptual acknowledgment only: we do not reproduce its learned markers,
+GPU experiments or performance claims. The paper links the
+[authors' repository](https://github.com/9sxx/M-RAG); no upstream code, prompts or
+assets were copied, installed or executed. No repository license was verified;
+reuse of that code requires a separate license check. Our exact-name bridge has
+only offline retrieval evidence so far, not measured answer-quality gains.

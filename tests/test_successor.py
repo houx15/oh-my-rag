@@ -47,3 +47,12 @@ class SuccessorTests(unittest.TestCase):
     def test_wrong_cap_authority_rejected(self):
         self.auth['total_cap_usd']=101
         with self.assertRaises(AuthorizationError):self.create()
+
+    def test_explicit_total_cap_increase_preserves_prior_accounting(self):
+        self.auth['total_cap_usd']=200
+        p=self.create();raw=json.loads(Path(p['manifest_path']).read_text())
+        self.assertEqual(raw['original_total_cap_usd'],200)
+        self.assertAlmostEqual(raw['prior_spend_usd']+raw['spend_cap_usd'],200)
+        self.assertEqual(raw['prior_requests_dispatched'],1)
+        self.assertGreater(raw['prior_spend_usd'],0)
+        self.assertEqual(self.ledgers['final'].snapshot()['totals'],self.old['final']['totals'])
