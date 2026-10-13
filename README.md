@@ -26,11 +26,18 @@ the frozen bounded-retrieval experiment remains unrun. Successful calls are
 checkpointed; local journal-ID validation and pre-reservation DNS checks are fixed.
 All430 offline tests pass in normal and optimized Python modes.
 
-Cumulative conservative budget accounting is **$68.86469825 / $200**, with zero
+Cumulative conservative budget accounting is **$68.86478025 / $200**, with zero
 open reservations and no active paid work. Unknown usage is settled at the full
 bound; this is not verified invoice spend. Successful Bailian token usage is
 priced in CNY and booked at the same numeric USD amount conservatively. Default
 C1 remains unchanged; no push, deployment or artifact upload occurred.
+
+The [timeout follow-up](docs/timeout-diagnosis-20261013.md) identifies the local
+60-second read deadline as the terminating mechanism; the upstream cause remains
+unproven. One115-byte diagnostic call subsequently succeeded in1.677s,17 input/6
+output tokens, zero retries. It does not establish full-size workload recovery.
+The follow-up includes actual Chinese Q/A/source/scorer examples and explains
+why the lexical abstention flag alone cannot establish a false pass.
 
 ## Previous diagnostic checkpoint — October 13, 2026
 
