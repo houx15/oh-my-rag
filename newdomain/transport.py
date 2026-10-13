@@ -177,9 +177,16 @@ class LiveContext:
             raise PriorLedgerError(
                 f"Prior spend mismatch: computed {total:.8f} != manifest {expected:.8f}")
         cap = m.get("spend_cap_usd")
-        if cap is not None and round(cap + total, 8) != 100:
+        authorized_total = m.get("original_total_cap_usd", 100)
+        if authorized_total != 100:
+            if not m.get("authority_receipt_sha256"):
+                raise PriorLedgerError("increased cap requires audited authority receipt")
+            authority = json.loads(receipt.read_text()).get("authority", {})
+            if authorized_total != 200 or authority.get("total_cap_usd") != authorized_total:
+                raise PriorLedgerError("cumulative cap disagrees with explicit authority")
+        if cap is not None and round(cap + total, 8) != authorized_total:
             raise PriorLedgerError(
-                f"Cap chain broken: {cap} + {total} != 100")
+                f"Cap chain broken: {cap} + {total} != {authorized_total}")
 
 
 # ---------------------------------------------------------------------------

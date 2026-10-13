@@ -199,9 +199,10 @@ ledger history and stopped jobs remain preserved.
 
 ### Original-question optimization experiments
 
-[Current checkpoint](docs/original-optimization-checkpoint.md) records a bounded
-retrieval fix and a partially completed cross-domain prompt ablation, including
-a repaired 光明 evidence-order harness error. These remain experimental; they are not an all-pass claim.
+The [earlier checkpoint](docs/original-optimization-checkpoint.md) preserves the
+partial-run history and repaired evidence-order harness error. The
+[completed continuation](docs/original-optimization-cycle2.md) is the current
+result, including negative transfer results and remaining source limitations.
 
 The independent catalogue-to-evidence experiment in `newdomain/entity_bridge.py`
 uses the distinction between retrieval keys and source evidence discussed by
@@ -213,3 +214,17 @@ GPU experiments or performance claims. The paper links the
 assets were copied, installed or executed. No repository license was verified;
 reuse of that code requires a separate license check. Our exact-name bridge has
 only offline retrieval evidence so far, not measured answer-quality gains.
+
+The [continued original-question experiments](docs/original-optimization-cycle2.md)
+include the completed90→155/315 牛黄 comparison, negative 光明 global-transfer
+results, and the narrow catalogue-count improvement9→14/17. All are exposed,
+model-judged experiments; no production default or all-pass claim follows.
+The query-plan experiment also acknowledges the meaning-preserving query-variant
+idea in [CQC-RAG](https://arxiv.org/abs/2606.13438) (Sun, Liu and Shao; first
+submitted June11,2026). Our bounded retrieval-hypothesis interface is independently
+written and is not a reproduction of its multi-view confidence estimator.
+The [author-linked repository](https://github.com/FrancesPlus/CQC-RAG) was inspected
+read-only; no upstream code or prompt was copied or executed, no code license was
+verified, and no peer-reviewed venue is claimed from its placeholder publication
+metadata. The query-planning pilot gains one net pass in each small domain subset,
+with regressions in 牛黄 and an extra model call; it is not adopted as a default.

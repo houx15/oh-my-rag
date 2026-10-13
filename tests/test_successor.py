@@ -52,6 +52,8 @@ class SuccessorTests(unittest.TestCase):
         self.auth['total_cap_usd']=200
         p=self.create();raw=json.loads(Path(p['manifest_path']).read_text())
         self.assertEqual(raw['original_total_cap_usd'],200)
+        ctx=LiveContext(manifest_path=Path(p['manifest_path']),redaction_names_path=self.deny,stage='final')
+        ctx._check_prior()
         self.assertAlmostEqual(raw['prior_spend_usd']+raw['spend_cap_usd'],200)
         self.assertEqual(raw['prior_requests_dispatched'],1)
         self.assertGreater(raw['prior_spend_usd'],0)
