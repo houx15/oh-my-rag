@@ -228,3 +228,10 @@ read-only; no upstream code or prompt was copied or executed, no code license wa
 verified, and no peer-reviewed venue is claimed from its placeholder publication
 metadata. The query-planning pilot gains one net pass in each small domain subset,
 with regressions in 牛黄 and an extra model call; it is not adopted as a default.
+
+The [coherent candidate checkpoint](docs/original-optimization-cycle3.md) records
+223/330 光明 and155/315 牛黄 primary passes from deterministic replay of saved
+experiments, with live and supplied questions separated. It preserves the
+negative exact-book ablation, identifies additional privacy-filter evidence loss,
+and documents the private four-column report. This is exposed-development
+evidence, not a fresh joint run or production deployment.
