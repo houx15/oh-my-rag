@@ -5,6 +5,7 @@ saved result with the exact selected context for every original case.
 """
 import argparse,csv,hashlib,html,json,math
 from pathlib import Path
+from newdomain.coherent_candidate_v2 import select as select_v2
 from newdomain.coherent_candidate import select
 from newdomain.ordered_context import from_retrieval
 from newdomain.paths import _ensure_outside_repo
@@ -31,20 +32,29 @@ def build(config, output):
     out=_ensure_outside_repo(Path(output),'Private coherent report');out.mkdir(exist_ok=False)
     c=read(config);base=Path(c['baseline']);typed=Path(c['typed']);counts=Path(c['counts'])
     cases=read(base/'cases-prepared.json');gens=indexed(base/'generation-results.jsonl');reviews=indexed(base/'review-results.jsonl');nh=indexed(typed/'results.jsonl');gm=indexed(counts/'results.jsonl');aggregates=read(counts/'aggregate.json') if (counts/'aggregate.json').exists() else read(c['aggregate'])
-    records=[];selected_counts=set();regressions=[]
+    fresh=indexed(c["fresh_results"]) if c.get("fresh_results") else None
+    fresh_sources={r["id"]:r["text"]for r in read(c["fresh_corpus_records"])}if fresh else {}
+    if fresh is not None and set(fresh)!={x["qid"]for x in cases}:raise ValueError("fresh coverage incomplete")
+    records=[];selected_counts=set();regressions=[];current_regressions=[]
     for case in cases:
         q=case['qid'];corpus=case['corpus'];g=gens[q]
-        if corpus=='regression':regressions.append({'case':case,'generation':g,'review':reviews[q]});continue
+        if corpus=='regression':
+            regressions.append({'case':case,'generation':g,'review':reviews[q]})
+            if fresh:current_regressions.append({'case':case,'generation':fresh[q],'review':{'score':fresh[q]['score']}})
+            continue
         baseline_context=from_retrieval(case['prepared']['retrieval']['results'],g['context']) if corpus=='guangming' else g['context']
-        route=select(corpus,case['question'],baseline_context,aggregates)
-        if route['route']=='nh-focused-typed-v2':chosen=nh[q];score=chosen['score'];source=typed/'results.jsonl';timing='生成阶段；不含检索与评分';ms=chosen['generation_ms']
+        route=select_v2(corpus,case['question'],baseline_context,aggregates,fresh_sources)if fresh else select(corpus,case['question'],baseline_context,aggregates)
+        if fresh:
+            chosen=fresh[q];score=chosen['score'];source=Path(c['fresh_results']);timing='本轮路由至答案验证；不含冻结上游检索与评分';ms=chosen['generation_ms']
+            if route['route']=='gm-c1-catalogue-counts':selected_counts.add(q)
+        elif route['route']=='nh-focused-typed-v2':chosen=nh[q];score=chosen['score'];source=typed/'results.jsonl';timing='生成阶段；不含检索与评分';ms=chosen['generation_ms']
         elif route['route']=='gm-c1-catalogue-counts':chosen=gm[q];score=chosen['score'];source=counts/'results.jsonl';timing='生成阶段；不含预先计算、检索与评分';ms=chosen['generation_ms'];selected_counts.add(q)
         else:chosen=g;score=reviews[q]['score'];source=base/'generation-results.jsonl';timing='原始检索至答案处理完成；不含评分';ms=g['full_ms']
         if chosen['question']!=case['question'] or chosen['context']!=route['context']:raise ValueError('saved result does not match question/route/context: '+q)
         answer=chosen.get('answer');text='\n'.join(s['text']for s in answer.get('sentences',[])) if isinstance(answer,dict) else ''
         if score and score['adequate'] and not chosen['valid']:raise ValueError('invalid answer counted as pass')
         display=('【未通过输出验证】\n' if not chosen['valid'] else '')+text if text else '未交付有效答案'
-        records.append({'qid':q,'corpus':corpus,'origin':case['origin'],'question':case['question'],'answer':text,'answer_display':display,'score':score,'mechanically_valid':chosen['valid'],'ms':ms,'timing_scope':timing,'route':route['route'],'source_file':str(source),'answer_sha256':hashlib.sha256(text.encode()).hexdigest(),'reused_saved_result':True})
+        records.append({'qid':q,'corpus':corpus,'origin':case['origin'],'question':case['question'],'answer':text,'answer_display':display,'score':score,'mechanically_valid':chosen['valid'],'ms':ms,'timing_scope':timing,'route':route['route'],'source_file':str(source),'answer_sha256':hashlib.sha256(text.encode()).hexdigest(),'reused_saved_result':not bool(fresh)})
     if selected_counts!=set(gm):raise ValueError('counting cohort mismatch')
     if len(records)!=645 or len({r['qid']for r in records})!=645:raise ValueError('original cohort incomplete')
     summaries=[]
@@ -80,10 +90,32 @@ def build(config, output):
         historical.append({'qid':case['qid'],'origin':'历史合同回归；未重跑','question':case['question'],'answer_display':(('【未通过输出验证】\n'if not g['valid']else'')+text) if text else '未交付有效答案','score':item['review']['score'],'ms':g['full_ms'],'timing_scope':'历史原始记录；非当前候选重跑'})
     failures=[r['qid']for r in historical if not(r['score']or{}).get('adequate')]
     parts+=['<section><h2>历史回归检查 · 单独核算</h2><p>首版665条 = 本页645条语料问题 + 以下20条合同回归。没有删除任何语料问题；历史回归19/20通过，未通过：'+e('、'.join(failures))+'。这些历史结果未作为当前候选的新回归验证。</p><details class="full"><summary>查看全部20条历史回归及原始失败</summary>',table(historical),'</details></section>']
+    if fresh:
+        current=[]
+        for item in current_regressions:
+            case=item['case'];g=item['generation'];text='\n'.join(x['text']for x in (g.get('answer')or{}).get('sentences',[]))
+            current.append({'qid':'CURRENT:'+case['qid'],'origin':'本轮固定上下文合同检查','question':case['question'],'answer_display':(('【未通过输出验证】\n'if not g['valid']else'')+text)if text else'未交付有效答案','score':g['score'],'ms':g['generation_ms'],'timing_scope':'本轮固定上下文至答案验证；不含评分'})
+        passed=sum(bool((r['score']or{}).get('adequate'))for r in current)
+        parts+=['<section><h2>本轮合同检查 · 单独核算</h2><p>相同20条固定上下文检查重新生成并评分：'+str(passed)+'/20通过。这是所列合同子集，不代表完整生产安全验证。</p><details class="full"><summary>查看本轮20条检查</summary>',table(current),'</details></section>']
+        rendered=''.join(parts).replace('复用该次原始记录','该次实际记录').replace('同一套明确路由：牛黄采用聚焦回答与严格边界格式；光明保留 C1，仅清单计数问题加入可复算统计。','同一套明确路由：牛黄采用聚焦回答、严格边界格式与引用段号提示；光明保留 C1，清单计数优先，其次按成果名称连接详细证据。').replace('按预先明确的路由复用各实验的全部适用结果，没有逐题挑选高分答案；尚未进行此组合的全流程重跑或独立盲评。两组计时范围不同，不汇总或跨组比较 P95。','本轮全部答案和主评分重新生成；上游检索复用冻结结果，不是重新嵌入检索或新的留出测试。没有逐题挑选高分答案；本配置尚未经过独立盲评。').replace('20条历史合同回归结果单独保存在附录，未在本轮重跑。','20条历史合同结果与本轮相同20条的重新评测结果分开呈现。')
+        parts=[rendered]
+    if c.get('interrupted_run'):
+        stopped=Path(c['interrupted_run']);status=read(stopped/'stop-reconciliation.json')
+        notice='<section><h2>后续统一配置重跑中断 · 不替换上述完整结果</h2><p>DeepSeek 返回 HTTP402，后续重跑仅完成321/665条评分，保存324条生成结果；3条待续评分，341条尚未开始。没有重试。以上主表仍为上一次完整结果，不据此不完整样本宣布总体提升。上游检索复用冻结结果。累计保守记账$39.77140635/$200，其中本次失败请求保守预留结算$1.8903168。账户问题需在提供商侧处理。</p><p>桥接重复实验：4题各重复3次，两组为6/12与12/12；引用地址提示定向试验：9/30→14/30，6增1退。均为已暴露问题的开发实验。40条预选来源诊断已完成，仍不是人工金标准。</p><p><a href="developer-appendix/interrupted-coverage.json">查看全部665条执行状态</a> · <a href="developer-appendix/interrupted-reconciliation.json">查看中断与账本核对</a></p></section>'
+        if status["completed"]!=321 or status["expected"]!=665 or status["status"]!="blocked_provider_http402":raise ValueError("interruption notice needs updated verified values")
+        parts[0]=parts[0].replace('<div class="cards">',notice+'<div class="cards">',1)
     parts+=['<p class="note">回答、分数与计时均来自保存的实际输出。原始来源、路由验证及限制见本地开发者附录；未上传外部网站。</p></main></body></html>']
     (out/'report.html').write_text(''.join(parts));(out/'records.json').write_text(json.dumps(records,ensure_ascii=False,indent=2));(out/'summary.json').write_text(json.dumps(summaries,ensure_ascii=False,indent=2));appendix=out/'developer-appendix';appendix.mkdir();(appendix/'historical-regressions.json').write_text(json.dumps(regressions,ensure_ascii=False));(appendix/'configuration.json').write_text(json.dumps(c,ensure_ascii=False,indent=2))
     inputs=[base/'cases-prepared.json',base/'generation-results.jsonl',base/'review-results.jsonl',typed/'results.jsonl',counts/'results.jsonl',Path(c['aggregate']),Path(__file__),Path(__file__).parents[1]/'newdomain/coherent_candidate.py',Path(__file__).parents[1]/'newdomain/catalogue_counts.py']
     receipt={'source_hashes':{str(p):digest(p)for p in inputs},'report_sha256':digest(out/'report.html'),'records_sha256':digest(out/'records.json'),'columns':COLUMNS,'route_counts':{route:sum(r['route']==route for r in records)for route in sorted({r['route']for r in records})},'question_context_score_custody_verified':True,'paid_calls':0,'generalization':'exposed-development only; composite replay, not fresh end-to-end confirmation'}
+    if fresh:
+        receipt['fresh_results_sha256']=digest(c['fresh_results']);receipt['fresh_corpus_sha256']=digest(c['fresh_corpus_records']);receipt['generalization']='fresh generation and scoring with frozen upstream retrieval; exposed questions, not held out';receipt['source_hashes'][str(Path(__file__).parents[1]/'newdomain/coherent_candidate_v2.py')]=digest(Path(__file__).parents[1]/'newdomain/coherent_candidate_v2.py')
+        (appendix/'current-contract-regressions.json').write_text(json.dumps(current_regressions,ensure_ascii=False,indent=2))
+    if c.get('interrupted_run'):
+        for source,destination in [('coverage.json','interrupted-coverage.json'),('stop-reconciliation.json','interrupted-reconciliation.json')]:
+            (appendix/destination).write_bytes((stopped/source).read_bytes())
+            receipt['source_hashes'][str(stopped/source)]=digest(stopped/source)
+        receipt['incomplete_candidate_excluded_from_headlines']=True
     (out/'verification.json').write_text(json.dumps(receipt,indent=2));return summaries
 
 if __name__=='__main__':

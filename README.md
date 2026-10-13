@@ -202,7 +202,9 @@ ledger history and stopped jobs remain preserved.
 The [earlier checkpoint](docs/original-optimization-checkpoint.md) preserves the
 partial-run history and repaired evidence-order harness error. The
 [completed continuation](docs/original-optimization-cycle2.md) is the current
-result, including negative transfer results and remaining source limitations.
+complete result, including negative transfer results and remaining source limitations.
+The [latest checkpoint](docs/original-optimization-cycle4.md) records the additional
+pilots and provider-blocked unified rerun; it does not supersede the complete scores.
 
 The independent catalogue-to-evidence experiment in `newdomain/entity_bridge.py`
 uses the distinction between retrieval keys and source evidence discussed by
@@ -212,8 +214,11 @@ This is conceptual acknowledgment only: we do not reproduce its learned markers,
 GPU experiments or performance claims. The paper links the
 [authors' repository](https://github.com/9sxx/M-RAG); no upstream code, prompts or
 assets were copied, installed or executed. No repository license was verified;
-reuse of that code requires a separate license check. Our exact-name bridge has
-only offline retrieval evidence so far, not measured answer-quality gains.
+reuse of that code requires a separate license check. Our independently written exact-name bridge improved a four-question pilot
+from3/4 to4/4; a paired replication over the same four questions with three
+repeats yielded6/12 versus12/12. These are four exposed question clusters, not
+12 independent test questions. Broader confirmation was interrupted by provider
+HTTP402 and remains incomplete. See the [interruption checkpoint](docs/original-optimization-cycle4.md).
 
 The [continued original-question experiments](docs/original-optimization-cycle2.md)
 include the completed90→155/315 牛黄 comparison, negative 光明 global-transfer
