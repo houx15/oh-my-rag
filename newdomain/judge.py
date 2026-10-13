@@ -233,15 +233,15 @@ def judge_live_v2(stage, files, name, reuse=(), dataset=None,
                 messages[1]["content"] = json.dumps(payload, ensure_ascii=False)
             result["judge_input"] = payload
             result["prompt_sha256"] = hashlib.sha256(json.dumps(messages, ensure_ascii=False).encode()).hexdigest()
-            status = journal.check_resume(qid, "__paired__", result["prompt_sha256"], "deepseek-v4-pro")
+            status = journal.check_resume(qid, "__paired__", result["prompt_sha256"], "deepseek-flash")
             if status == "skip":
                 skipped = True
                 return
             if status is not None:
                 raise JudgeValidationError("prior failed judge dispatch")
-            journal.record_started(qid, "__paired__", result["prompt_sha256"], "deepseek-v4-pro")
+            journal.record_started(qid, "__paired__", result["prompt_sha256"], "deepseek-flash")
             dispatched = True
-            response = chat(ctx, messages, model="deepseek-v4-pro")
+            response = chat(ctx, messages, model="deepseek-flash")
             result["response"] = response
             result["scores"], norm = parse_scores(response, mapping, rr)
             if norm:
@@ -259,7 +259,7 @@ def judge_live_v2(stage, files, name, reuse=(), dataset=None,
                         os.fsync(f.fileno())
                 if dispatched:
                     journal.record_terminal(qid, "__paired__", result["prompt_sha256"],
-                        "deepseek-v4-pro", success="error" not in result,
+                        "deepseek-flash", success="error" not in result,
                         error=result.get("error"), result_sha256=hashlib.sha256(raw.encode()).hexdigest())
                 print(json.dumps({"qid": qid, "scores": result.get("scores"),
                                   "error": result.get("error")}, ensure_ascii=False), flush=True)
@@ -337,15 +337,15 @@ def judge_cycle2(stage, files, name, dataset,
         dispatched = False
         try:
             e["prompt_sha256"] = hashlib.sha256(json.dumps(msg, ensure_ascii=False).encode()).hexdigest()
-            status = journal.check_resume(r["qid"], r["arm"], e["prompt_sha256"], "deepseek-v4-pro")
+            status = journal.check_resume(r["qid"], r["arm"], e["prompt_sha256"], "deepseek-flash")
             if status == "skip":
                 skipped = True
                 return
             if status is not None:
                 raise JudgeValidationError("prior failed judge dispatch")
-            journal.record_started(r["qid"], r["arm"], e["prompt_sha256"], "deepseek-v4-pro")
+            journal.record_started(r["qid"], r["arm"], e["prompt_sha256"], "deepseek-flash")
             dispatched = True
-            response = chat(ctx, msg, model="deepseek-v4-pro")
+            response = chat(ctx, msg, model="deepseek-flash")
             e["response"] = response
             e["scores"], norm = parse_scores(response, e["mapping"], [r])
             e["shape_normalization"] = norm
@@ -362,7 +362,7 @@ def judge_cycle2(stage, files, name, dataset,
                         os.fsync(f.fileno())
                 if dispatched:
                     journal.record_terminal(r["qid"], r["arm"], e["prompt_sha256"],
-                        "deepseek-v4-pro", success="error" not in e,
+                        "deepseek-flash", success="error" not in e,
                         error=e.get("error"), result_sha256=hashlib.sha256(raw.encode()).hexdigest())
                 print(json.dumps({"qid": r["qid"], "arm": r["arm"],
                                   "scores": e.get("scores"), "error": e.get("error")},
@@ -438,7 +438,7 @@ def _guard_judge(function):
             for path, digest in json.loads(Path(p["freeze_file"]).read_text())["hashes"].items():
                 if hashlib.sha256(Path(path).read_bytes()).hexdigest() != digest:
                     raise ValueError("final freeze mismatch")
-        identity = _run_identity(p["corpus_path"], p["casefile"], p.get("freeze_file"), [], "deepseek-v4-pro")
+        identity = _run_identity(p["corpus_path"], p["casefile"], p.get("freeze_file"), [], "deepseek-flash")
         identity.update(runner=function.__name__, stage=stage, name=name, workers=p["workers"],
                         result_inputs=[hashlib.sha256(Path(f).read_bytes()).hexdigest() for f in p["files"]])
         from newdomain.paths import _ensure_outside_repo
@@ -454,7 +454,7 @@ def _guard_judge(function):
                 raise FileExistsError("judge results or journal already exist")
             _verify_or_write_header(root / f"{stage}-{name}-judge-header.json", identity, p["resume"])
             if p["resume"]:
-                _reconcile_resume(journal, out, expected, "deepseek-v4-pro")
+                _reconcile_resume(journal, out, expected, "deepseek-flash")
             else:
                 with out.open("x", encoding="utf-8") as fh:
                     fh.flush()

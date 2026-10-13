@@ -406,6 +406,8 @@ class SpendLedger:
 
     # -- guards -------------------------------------------------------------
     def _require_not_halted_locked(self) -> None:
+        if self._state.get("successor_allocation"):
+            raise AuthorizationError("ledger retired into recorded successor allocation; historical counters are preserved")
         if self._state.get("halted"):
             raise AuthorizationError(
                 f"ledger HALTED: {self._state['halted'].get('reason')} — "

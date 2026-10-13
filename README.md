@@ -10,6 +10,27 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
+## Current original-question checkpoint
+
+The [original-question evaluation](docs/original-question-evaluation.md) now
+covers the supplied utterances without rewriting them. Fresh Flash primary
+review passes are **60/113 (53.1%) for 光明 original live questions** and
+**55/205 (26.8%) for 牛黄 original live questions**; completed-request p95 is
+**2.379 s / 3.024 s**. Supplied simulation/evaluation questions are reported
+separately. The old 牛黄 115/120 curated result did not establish real-user
+performance. These strict model judgments are not human-gold accuracy.
+
+All 665 generation outcomes and primary reviews are recorded; 168 exactly
+unchanged 光明 generations were reused with their original timings. One stream
+failure and one malformed review remain visible. Cumulative accounted cost is
+**$34.41373425 / $100**, with zero open reservations or provider retries.
+The newly authorized scope carries all prior accounting forward and retires
+old admission; it supersedes the historical request-cap blocker below.
+A preselected independent 80-case check is complete: 18 verdicts disagree;
+17/20 regressions pass both judges. Full offline acceptance passes 356 tests in
+both Python modes. The private presentation keeps only 光明 / 牛黄 sections and four columns;
+case exports, source text and ledgers remain outside Git. No deployment or push.
+
 ## Run locally
 
 Use Python 3.9 or later on macOS/Linux. The existing environment uses
@@ -44,7 +65,12 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
-The proposed experiments and evaluation protocol are informed by
+The isolated tokenizer uses the existing [jieba 0.42.1](https://github.com/fxsjy/jieba)
+`Tokenizer` API (MIT, verified in installed package metadata). No upstream source
+was copied or redistributed; existing dependency notices remain intact.
+
+
+The experiments and evaluation protocol are informed by
 [S2G-RAG (ACL 2026)](https://aclanthology.org/2026.acl-long.1185/),
 [CompSelect / Less is More (WWW 2026)](https://arxiv.org/abs/2502.11811),
 [IRT-Judge](https://arxiv.org/abs/2602.00521), and
@@ -158,7 +184,7 @@ C15T scored 24/24 versus C1 21/24 on the broader curated set, then 24/24 versus 
 on an unchanged all-case repeat. These are assistant source judgments on 24 unique
 questions, not 48 independent cases or human-gold accuracy. It remains opt-in.
 Full acceptance now passes 337 tests in both Python modes; cumulative cost is
-$32.51849835. More paid work is blocked by the unchanged 1,800-call final-stage
+$32.51849835. At that historical checkpoint, more paid work was blocked by the 1,800-call final-stage
 request limit; all batches are closed, with zero open reservations. Private case
 report: 300 verified rows, exactly four columns, no upload.
 
@@ -167,5 +193,6 @@ separates 光明 C1 from the verified 牛黄 K synthetic benchmark. It reports m
 real-user coverage and unfinished reviews explicitly; no cross-corpus SOTA claim
 is made. The reusable four-column exporter preserves delivered outputs, actual
 scores and each run's distinct timing boundary. Full offline acceptance is 350
-tests in both Python modes. Request-allocation proposals remain non-dispatching
-until the original 1,800-call allocation's provenance is resolved.
+tests in both Python modes. Those old request-allocation proposals stayed non-dispatching. The later explicit
+Flash full-rerun authorization uses the audited successor described above; old
+ledger history and stopped jobs remain preserved.

@@ -147,6 +147,16 @@ class LiveContext:
             raise PriorLedgerError(f"Manifest unreadable: {e}") from e
         if hashlib.sha256(self.manifest_path.read_bytes()).hexdigest() != self._manifest_sha256:
             raise PriorLedgerError("authorization manifest changed during live context")
+        if m.get("authority_receipt_sha256"):
+            receipt = self.manifest_path.parent / "authority-receipt.json"
+            ready = self.manifest_path.parent / "ready.json"
+            if not ready.exists() or hashlib.sha256(receipt.read_bytes()).hexdigest() != m["authority_receipt_sha256"]:
+                raise PriorLedgerError("successor allocation incomplete or authority receipt changed")
+            if json.loads(ready.read_text()).get("manifest_sha256") != self._manifest_sha256:
+                raise PriorLedgerError("successor readiness manifest mismatch")
+            for path, pinned in m.get("scope_hashes", {}).items():
+                if hashlib.sha256(Path(path).read_bytes()).hexdigest() != pinned:
+                    raise PriorLedgerError("successor frozen scope changed")
         total = 0.0
         for x in m.get("prior_runs", []):
             f = Path(x["path"])
