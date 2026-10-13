@@ -10,7 +10,29 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Latest diagnostic checkpoint — October 13, 2026
+## Latest focused experiments — October 13, 2026
+
+[Focused experiment results](docs/focused-experiments-20261013.md): the revised
+judge rubric did not improve agreement on12 source-reviewed controls (9/12 for
+both rubrics), so it was rejected. Source restoration produced48/74 outputs
+before transport failures; only16/37 pairs are complete. On those pairs the raw
+judge passes11→13, with two source-supported repairs to platform-versus-subset
+counts. This is an incomplete development experiment, not population accuracy.
+
+The separate aggregation phase then failed before its first output. Four
+successive network attempts across two questions, including one bounded retry
+each, timed out at about61 seconds before response headers. Paid work stopped;
+the frozen bounded-retrieval experiment remains unrun. Successful calls are
+checkpointed; local journal-ID validation and pre-reservation DNS checks are fixed.
+All430 offline tests pass in normal and optimized Python modes.
+
+Cumulative conservative budget accounting is **$68.86469825 / $200**, with zero
+open reservations and no active paid work. Unknown usage is settled at the full
+bound; this is not verified invoice spend. Successful Bailian token usage is
+priced in CNY and booked at the same numeric USD amount conservatively. Default
+C1 remains unchanged; no push, deployment or artifact upload occurred.
+
+## Previous diagnostic checkpoint — October 13, 2026
 
 The [fairness audit](docs/fairness-diagnostic-20261013.md) reviews48 original
 questions from both datasets, balanced between original passes and failures.
@@ -114,6 +136,16 @@ quality gain and higher p95 latency; C1 remains the default.
 `newdomain/numeric.py` is independent engineering, not a paper reproduction,
 and is not automatically routed into answers. Existing B0/C1/C2 methods retain
 their local provenance in module documentation.
+
+The fixed-answer calibration controls use the evaluation-validity questions
+raised by IRT-Judge and Reliability without Validity; no IRT model was implemented.
+The opt-in `newdomain/facet_recovery_v2.py` independently tests one requested-facet
+addition under a fixed context count, conceptually informed by S2G-RAG and
+CompSelect. Its first variant selected a neighboring property's evidence and was
+rejected offline; v2 has no completed paid quality result. These are conceptual
+credits, not copied algorithms or reproduced models. `newdomain/scoped_aggregation.py`
+is independent source-row arithmetic and conditional entity handling; it is not
+attributed to a paper implementation and is not promoted without answer tests.
 
 The opt-in `newdomain/definitions.py` C10D selector is independent engineering:
 it adds a bounded same-document definition chunk, without copying a paper
