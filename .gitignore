@@ -1,0 +1,38 @@
+# secrets — never commit
+.env.local
+.env
+*.key
+*.pem
+
+# local state
+.DS_Store
+.omo/
+.venv/
+__pycache__/
+*.pyc
+.cache/
+
+# generated artifacts (regenerable)
+runs/
+index/artifacts/
+
+# Private historical inputs, ledgers, outputs and handoff artifacts
+20261008/
+eval/optimization/data/
+eval/gold.jsonl
+eval/data/
+index/chunks_v2.jsonl
+index/topic_cards.json
+*.xlsx
+*.xls
+*.zip
+*.tar
+*.gz
+*.log
+*.lock
+*.created
+*ledger*.json
+*manifest*.json
+*results*.jsonl
+*judge*.jsonl
+.env.*
