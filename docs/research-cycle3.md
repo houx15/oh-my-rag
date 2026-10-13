@@ -222,3 +222,27 @@ Reproduction entrypoints: `python -m newdomain.experiment` for freeze/main runs,
 private paths/ledgers; private corpus and results are not distributed. No upstream
 code, weights, prompts or data were copied; README acknowledgments describe
 conceptual adaptations and measurement references precisely.
+
+
+## Additional primary-source checks during failure localization
+
+- [From BM25 to Corrective RAG](https://arxiv.org/abs/2604.01733), first
+  submitted2026-04-02; no venue publication verified. It separately measures
+  retrieval and numerical answer quality and compares fusion/reranking on whole
+  financial documents. Its conclusions do not establish transfer to this chunked
+  Chinese corpus. Paper reference43 points to code/data DOI
+  `10.5281/zenodo.19382814`; that record was inaccessible during this review,
+  so repository contents/license/reproducibility remain unverified. Its extra
+  Azure/Cohere endpoints are outside the present approved-provider scope.
+  No code or prompts adopted; C11B was independently implemented before this check.
+- [VeNRA](https://arxiv.org/abs/2603.04663), submitted2026-03-04, revised
+  2026-03-08; no venue publication verified. Its typed facts and deterministic
+  execution are relevant to separating correct arithmetic from wrong operands,
+  entities and periods. The paper explicitly links
+  [pagand/VeNRA](https://github.com/pagand/VeNRA). Its README declares
+  CC-BY-NC-SA4.0; a conventional main/LICENSE URL returned404, so file-specific
+  terms and full reproducibility are not established. No code, weights, prompts
+  or data adopted or run. Generated Python execution and a trained3B verifier
+  would be a materially different implementation; the current numeric utilities
+  and predicate-prompt experiment are not VeNRA reproductions. Reported gains
+  and latency are not assumed to transfer here.

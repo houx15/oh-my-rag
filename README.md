@@ -70,6 +70,11 @@ corrected two boundary answers, but left three interpretation errors and two
 retrieval misses. It is not promoted; detailed negative results and evaluator
 disagreements are in [the optimization log](docs/optimization-log.md).
 
+`newdomain/lexical.py` C11B is also independent engineering: it preserves a
+missing strongest lexical hit only within the existing top document. Targeted
+gains remain unconfirmed, and a broader test did not activate the intervention.
+It is opt-in and does not change C1.
+
 ## Completed frozen comparison — 2026-10-13
 
 | Evidence | C1 | C3B packed clauses |

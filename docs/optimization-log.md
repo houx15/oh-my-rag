@@ -296,3 +296,48 @@ contradict it. Two unanswered questions miss the local procedural page even
 though it ranks first in BM25: fusion/document-diversity pushes it out of the
 final context. Next isolate protection of the strongest lexical hit from logical
 consistency prompting. No plateau or default promotion is claimed.
+
+
+### C11B: protect a same-document strongest lexical hit
+
+C11B independently preserves the BM25 rank-one chunk when it is absent from C1's
+final context and belongs to the same document as C1's first result. It replaces
+only the eighth chunk, without definition enrichment or prompt changes. An
+unrestricted exposed-data probe found a cross-document hit; the implemented
+same-document guard rejects that join. This does not certify role identity within
+a document. Normal and optimized regressions passed 113 tests.
+
+Frozen development: 24 new questions in four known families, balanced target,
+matched-role/limit, and unknown/actual-record controls. Eleven insertions produce
+no wrong-reference-document join or listed reference-chunk loss; full reference
+bundle coverage rises 3/24 to 6/24 (some bundles contain contextual pages not
+strictly needed). Masked assistant adequacy rises 17/24 to 21/24, four wins and
+zero losses; paired sign-test p=0.125, four-family descriptive bootstrap 0 to
++37.5 pp. Raw paired model review agrees on these adequate-count totals.
+All48 answers valid. Generation costs $0.0252858/$0.0259047; transport p95
+1800/1928 ms (+7.1%); mean retrieval including selection 2.371/3.480 ms.
+
+A material adverse transition remains: on one pair with identical prompts,
+C1 refuses and C11B emits a correct computed number with a wrong policy cap and
+subject scope. Both are inadequate, so net-adequacy hides the increased harm.
+This is sampling variability rather than an established selector effect, but
+must not be discarded. A shared comparison also joins the wrong approval-role
+branch. No default promotion. The72calls cost $0.20157414, cumulative
+$31.11719505, zero open reservations; batch closed.
+
+A separately frozen broader set covers24questions in eight families disjoint
+from development. After dispatch began but before answer inspection, the audit
+found all24paired prompts identical: C11B did not activate. This run is therefore
+an unchanged-context repeated-C1 stability control, NOT confirmation of retrieval
+benefit. Preserve the original preregistration and this deviation. Both arms score
+23/24 under masked assistant review, sharing an explicit-negation error. All48
+answers valid. The zero-difference bootstrap is degenerate and establishes no
+accuracy equivalence. Transport p95 differs2303/1995 ms despite identical prompts,
+illustrating small-sample/provider variability. Generation cost $0.0280401/
+$0.0279477. All72calls cost $0.20280612, cumulative $31.32000117; no unresolved
+reservations or retries. Prior ledger hashes verified; batch closed.
+
+Future efficacy confirmation must audit intervention activation before dispatch.
+No useful benefit can be attributed to an inactive retrieval intervention. Next
+isolate predicate interpretation with identical definition-enriched evidence,
+keeping lexical preservation out of that comparison. C1 stays default.

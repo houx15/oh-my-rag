@@ -64,7 +64,7 @@ def activate(*, profile_path, root, name, reason, output, candidate_arm="C9S"):
     if prior!=Decimal(str(raw.get('prior_spend_usd',0))):raise AuthorizationError('prior accounting mismatch')
     if Decimal(str(manifest.spend_cap_usd))+prior>Decimal(str(raw.get('original_total_cap_usd',100))):raise AuthorizationError('cumulative cap widened')
     jobs=root/f'{name}-jobs.json';cases=root/f'{name}-cases.json';rows=json.loads(jobs.read_text());case_rows=json.loads(cases.read_text())
-    if candidate_arm not in ('C9S','C10D'):raise AuthorizationError('unapproved candidate arm')
+    if candidate_arm not in ('C9S','C10D','C11B'):raise AuthorizationError('unapproved candidate arm')
     ids={c['qid'] for c in case_rows}
     if len(ids)!=24 or len(case_rows)!=24 or len(rows)!=48 or len({j['qid'] for j in rows})!=48:raise AuthorizationError('expected frozen 24-case/48-generation batch')
     if {j['qid'] for j in rows}!={q+'-'+arm for q in ids for arm in ('C1',candidate_arm)}:raise AuthorizationError('unexpected generation arms or questions')
@@ -104,7 +104,7 @@ class BatchPolicy:
         for field in ('recorded_epoch','deadline_epoch'):
             if isinstance(e.get(field),bool) or not isinstance(e.get(field),(int,float)) or not math.isfinite(e[field]):raise AuthorizationError('invalid batch time')
         if not 0<e['deadline_epoch']-e['recorded_epoch']<=3600:raise AuthorizationError('batch window widened')
-        if e.get('candidate_arm','C9S') not in ('C9S','C10D'):raise AuthorizationError('unapproved candidate arm')
+        if e.get('candidate_arm','C9S') not in ('C9S','C10D','C11B'):raise AuthorizationError('unapproved candidate arm')
         self.id=e['id'];self.check_files()
 
     def check_files(self):
