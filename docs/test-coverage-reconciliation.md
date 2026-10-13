@@ -34,3 +34,8 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tests .venv/bin/python -O -m unittest disco
 These are local offline tests, including legacy private-fixture dependencies and
 mocked transport. They do not establish semantic correctness or live service
 availability. Full discovery remains the applicable acceptance scope going forward.
+
+Final checkpoint: two modal-comparator tests, three report-prose/source-key tests
+and two whole-batch request-allowance tests bring 330 to **337**. Full discovery
+passes 337 normally and 337 under `-O`, zero skips. A new test-placement import
+error was corrected; its failed log is retained separately. No suite was excluded.

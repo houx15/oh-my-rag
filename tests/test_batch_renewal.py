@@ -125,4 +125,19 @@ class BatchRenewalTests(unittest.TestCase):
         p=BatchPolicy(self.receipt,self.path,'final',self.deny);l=SpendLedger(self.root/'ledger.final.json',self.manifest,stage='final',batch_policy=p);p.bind_jobs(l,self.jobs_path,'deepseek-flash',self.jobs)
         with self.assertRaises(AuthorizationError):p.bind_jobs(l,self.jobs_path,'deepseek-flash',[dict(j,qid=j['qid'].replace('C10D','C1')) for j in self.jobs])
 
+
+    def test_activation_rejects_insufficient_whole_batch_request_allowance(self):
+        limited=copy.deepcopy(self.manifest);limited.request_cap=72
+        with patch('newdomain.batch.AuthorizationManifest.load',return_value=limited):
+            with self.assertRaisesRegex(AuthorizationError,'remaining request allowance'):
+                activate(profile_path=self.profile,root=self.root,name='scope',reason='synthetic cap check',output=self.receipt)
+        self.assertFalse(self.receipt.exists())
+        self.assertEqual(self.ledger.snapshot().get('batch_renewals',[]),[])
+    def test_activation_accepts_exact_whole_batch_request_allowance(self):
+        limited=copy.deepcopy(self.manifest);limited.request_cap=73
+        with patch('newdomain.batch.AuthorizationManifest.load',return_value=limited):
+            event=activate(profile_path=self.profile,root=self.root,name='scope',reason='synthetic exact cap check',output=self.receipt)
+        self.assertEqual(event['max_calls'],72)
+        self.assertEqual(event['baseline_totals']['requests_dispatched'],1)
+
 if __name__=='__main__':unittest.main()

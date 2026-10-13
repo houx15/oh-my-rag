@@ -75,6 +75,9 @@ def activate(*, profile_path, root, name, reason, output, candidate_arm="C9S", b
         dev=json.loads(Path(profile['dev_ledger_path']).read_text())
         if state['halted'] or dev['halted'] or state['totals']['open_reservations'] or dev['totals']['open_reservations']:raise AuthorizationError('unresolved canonical state')
         validate_audit(state)
+        required_calls=sum(MODELS.values())
+        if state['totals']['requests_dispatched']+required_calls>manifest.request_cap:
+            raise AuthorizationError('insufficient remaining request allowance for complete batch')
         events=state.get('batch_renewals',[]);now=time.time()
         closures=state.get('batch_closures',[]);validate_chain(closures)
         closed={c['batch_id'] for c in closures}

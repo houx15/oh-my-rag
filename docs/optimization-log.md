@@ -438,3 +438,20 @@ HTML, Markdown and per-section lossless CSV exports. The checkpoint includes all
 primary C1 and experimental variants are not pooled. Raw prose, recorded scores,
 response IDs, timestamps and exact transport durations are traceable in private
 verification receipts. HTML cells and CSV round trips were checked exactly.
+
+### Typed annotation isolation, broad comparison and unchanged repeat
+
+[The typed checkpoint](typed-condition-checkpoint.md) records the completed C14E/
+C14T table ablation, C1/C15T broader comparison and all 24-pair unchanged repeat,
+including costs, source/reference corrections, v1 parser defect, scope limits and
+reviewer failures. Results are 22/24→24/24, 21/24→24/24 and 22/24→24/24 respectively.
+The repeat is not a new holdout. No overall plateau or default promotion claimed.
+
+Cumulative spend $32.51849835; 278 calls/$0.80989428 in this typed continuation.
+Final-stage request cap 1800 was reached after 14/24 repeated model reviews. The
+remaining 10 were not completed; all 48 repeat generations and assistant scores are
+complete. No retry, zero open reservations, all 11 batches closed. Whole-batch
+request-cap preflight now prevents beginning an unaffordable-in-calls batch.
+Full acceptance passes 337 tests in both Python modes, preserving all legacy tests.
+The original 60-question rerun is prepared but has zero paid calls; do not describe
+it as completed. The private four-column case report contains 300 verified rows.

@@ -81,3 +81,12 @@ scorer limitations, aggregation, variant/commit/setup and provider-versus-end-to
 timing outside the tables. Validate every row against raw outputs and score files.
 Keep the reusable reporting generator in this repo and private data outside it.
 Provide the exact Mac mini path for SCP; no upload, push or deployment.
+
+Latest safe checkpoint: [typed-condition evidence](docs/typed-condition-checkpoint.md).
+The typed candidate has promising observed gains and unchanged-repeat evidence;
+no overall plateau is claimed. Full 337-test acceptance passes in both Python
+modes. Further paid work is blocked by the pinned final-stage request cap 1800,
+not by the dollar ceiling. All batches closed with zero open reservations. Ten
+repeated model reviews and the prepared all 60 original-case regression remain
+uncompleted. Do not reset or route around the request limit. The requested private
+four-column report is verified (300 rows, HTML/Markdown/CSV); C1 remains default.
