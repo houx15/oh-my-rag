@@ -15,7 +15,7 @@ from decimal import Decimal
 from eval.optimization.budget import AuthorizationError, AuthorizationManifest, SpendLedger
 
 MODELS = {'deepseek-flash':48, 'deepseek-v4-pro':24}
-ARM_PAIRS = {('C1','C9S'),('C1','C10D'),('C1','C11B'),('C10D','C12P'),('C10D','C13T')}
+ARM_PAIRS = {('C1','C9S'),('C1','C10D'),('C1','C11B'),('C10D','C12P'),('C10D','C13T'),('C14E','C14T'),('C1','C15T')}
 
 
 def digest(value):

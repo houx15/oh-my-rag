@@ -45,3 +45,9 @@ class TypedConditionsTests(unittest.TestCase):
     def test_truncation_disclosed(self):
         x=compile_ledger('注册资本100万元',{'D:1':'注册资本不少于100万元。'*20},limit=2)
         self.assertEqual(len(x['conditions']),2);self.assertEqual(x['omitted_conditions'],18)
+
+    def test_modal_prohibition_compiles_upper_bound(self):
+        x=compile_ledger('成立60个月',{'D:1':'成立时间不得超过60个月。'})['conditions'][0]
+        self.assertEqual(x['operator'],'le')
+    def test_uncertain_negation_does_not_compile(self):
+        self.assertEqual(quantities('不一定超过100万元'),[])

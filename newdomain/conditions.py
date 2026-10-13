@@ -11,8 +11,8 @@ from newdomain import candidate
 
 NUMBER = r"(?:[0-9]+(?:\.[0-9]+)?|[一二三四五六七八九十])"
 UNIT = r"(?:万平方米|平方米|亿元|万元|元|个月|月|年|%|％|次|项|家)"
-OPS = {"不超过":"le", "最高不超过":"le", "最高":"le", "不低于":"ge", "不少于":"ge", "超过":"gt", "低于":"lt", "以上":None, "以下":None}
-PATTERN = re.compile(r"(?P<pre>最高不超过|不超过|不低于|不少于|超过|低于|最高)?(?P<n>"+NUMBER+r")(?P<u>"+UNIT+r")(?P<post>以上|以下)?(?P<local>[（(](?:不含本数|含本数)[）)])?")
+OPS = {"不得超过":"le", "不得低于":"ge", "不高于":"le", "不超过":"le", "最高不超过":"le", "最高":"le", "不低于":"ge", "不少于":"ge", "超过":"gt", "低于":"lt", "以上":None, "以下":None}
+PATTERN = re.compile(r"(?P<pre>最高不超过|不得超过|不得低于|不高于|不超过|不低于|不少于|超过|低于|最高)?(?P<n>"+NUMBER+r")(?P<u>"+UNIT+r")(?P<post>以上|以下)?(?P<local>[（(](?:不含本数|含本数)[）)])?")
 UNITS = {"亿元":("CNY", "100000000"),"万元":("CNY","10000"),"元":("CNY","1"),"年":("months","12"),"个月":("months","1"),"月":("months","1"),"%":("percent","1"),"％":("percent","1"),"平方米":("area","1"),"万平方米":("area","10000"),"次":("count:次","1"),"项":("count:项","1"),"家":("count:家","1")}
 CN = dict(zip("一二三四五六七八九十",map(str,range(1,11))))
 MEASURES = ("年产值增速","增速","年产值","单笔资助金额","资助金额","连续运营","实际运营成本","实际支出","实缴资本","注册资本","合同金额","使用面积")
@@ -34,6 +34,7 @@ def quantities(text):
     for m in PATTERN.finditer(clean):
         # Never parse a suffix of an unsupported Chinese numeral or negative.
         if m.start() and clean[m.start()-1] in "零一二三四五六七八九十百千万亿两负-0123456789.":continue
+        if re.search(r'(?:不一定|并非|未必)$',clean[:m.start()]):continue
         left=max(clean.rfind(c,0,m.start()) for c in "。；;！？\n")+1
         ends=[clean.find(c,m.end()) for c in "。；;！？"]
         right=min([e+1 for e in ends if e>=0] or [len(clean)])
@@ -90,7 +91,7 @@ def compile_ledger(question, context, limit=12):
     # Query-measure overlap only; no reference/gold selection. Preserve source
     # order within priority classes and disclose truncation.
     conditions.sort(key=lambda c:0 if c['measure'] in qmeasures else 1)
-    return {"method":"typed-source-conditions-v1","question_quantities":premises,"conditions":conditions[:limit],"omitted_conditions":max(0,len(conditions)-limit),"eligibility_verified":False}
+    return {"method":"typed-source-conditions-v2","question_quantities":premises,"conditions":conditions[:limit],"omitted_conditions":max(0,len(conditions)-limit),"eligibility_verified":False}
 
 
 def augment(question,selected):
