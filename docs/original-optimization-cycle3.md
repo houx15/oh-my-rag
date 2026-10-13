@@ -100,3 +100,34 @@ tools do not expose runtime model/effort, so it cannot be independently confirme
 No uploads, GitHub push, deployment or production-default change. Local artifacts
 remain private. Existing README paper acknowledgments are unchanged because no
 additional upstream method or code was adopted in this continuation.
+
+## Denominator clarification and independent continuation
+
+The original665 run records are330 光明,315 牛黄, and20 separately labeled
+contract-regression checks. The current645 main records contain exactly the same
+330+315 corpus IDs, with no new exclusions or additions. The20 historical records
+are now visible in a separate four-column report section as well as the appendix:
+12 REG-NEXT records, FAQ01–04, and UNSUPPORTED01–04. Their original result is19/20;
+REG:REG-FAQ-03 remains failed. They were not rerun for the current candidate and
+must not be combined into a new665-case performance claim. Existing privacy
+exclusions and deduplication predate the665 run; they do not explain this change.
+The original338 failures (112 光明,225 牛黄,1 regression) remain in immutable saved
+outputs and the archived baseline report. Current main failures107+160 remain
+visible. No original failure was deleted or relabeled to change membership.
+
+Optimization is not exhausted. A continued source-only catalogue-to-detail bridge
+experiment considered all330 光明 questions, kept the counting route's precedence,
+and changed four contexts. Fresh C1 generation and fixed scoring improved3/4 to4/4
+(one gain, no losses, no invalid outputs). Eight calls cost$0.00925110; cumulative
+spend is now$37.02576435, zero retries/open reservations. The small exposed pilot
+is promising but not integrated into the coherent candidate; paired replication,
+source adjudication and new natural confirmation remain useful authorized work.
+Restoration and missing-dialogue-dependent work alone are blocked on inputs.
+
+Any requested restoration permission is narrow: two validated full institutional
+names from column F and a minimal non-contact D30 platform-total clause, retained
+with date/scope. Recipient would be DeepSeek's official chat-completions endpoint,
+model deepseek-flash, for answer generation and fixed-rubric scoring. Contact
+columns G/H, the private contact dictionary, keys, raw-file uploads, additional
+providers and embedding-provider transmission are excluded from that request.
+No exception has been applied or removed field transmitted.

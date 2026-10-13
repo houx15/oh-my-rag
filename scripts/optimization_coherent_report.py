@@ -74,6 +74,12 @@ def build(config, output):
         parts+=['<section><h2>'+('光明'if corpus=='guangming'else'牛黄')+'</h2><p>'+e('；'.join(origin+' '+str(v['pass'])+'/'+str(v['n'])+' 通过'for origin,v in summary['by_origin'].items()))+'</p>',table(sample),'<p class="note">示例按固定哈希顺序选取，不依据得分挑选。全部结果如下。</p><details class="full"><summary>查看全部 '+str(len(rr))+' 条</summary>',table(rr),'</details><details><summary>按计时范围分别查看延迟</summary>']
         for scope,t in summary['timings_by_scope'].items():parts.append('<p>'+e(scope)+'：n='+str(t['n'])+'，P50 '+format(t['p50_ms']/1000,'.3f')+'s，P95 '+format(t['p95_ms']/1000,'.3f')+'s。</p>')
         parts+=['</details></section>']
+    historical=[]
+    for item in regressions:
+        case=item['case'];g=item['generation'];answer=g.get('answer');text='\n'.join(x['text']for x in answer.get('sentences',[])) if isinstance(answer,dict) else ''
+        historical.append({'qid':case['qid'],'origin':'历史合同回归；未重跑','question':case['question'],'answer_display':(('【未通过输出验证】\n'if not g['valid']else'')+text) if text else '未交付有效答案','score':item['review']['score'],'ms':g['full_ms'],'timing_scope':'历史原始记录；非当前候选重跑'})
+    failures=[r['qid']for r in historical if not(r['score']or{}).get('adequate')]
+    parts+=['<section><h2>历史回归检查 · 单独核算</h2><p>首版665条 = 本页645条语料问题 + 以下20条合同回归。没有删除任何语料问题；历史回归19/20通过，未通过：'+e('、'.join(failures))+'。这些历史结果未作为当前候选的新回归验证。</p><details class="full"><summary>查看全部20条历史回归及原始失败</summary>',table(historical),'</details></section>']
     parts+=['<p class="note">回答、分数与计时均来自保存的实际输出。原始来源、路由验证及限制见本地开发者附录；未上传外部网站。</p></main></body></html>']
     (out/'report.html').write_text(''.join(parts));(out/'records.json').write_text(json.dumps(records,ensure_ascii=False,indent=2));(out/'summary.json').write_text(json.dumps(summaries,ensure_ascii=False,indent=2));appendix=out/'developer-appendix';appendix.mkdir();(appendix/'historical-regressions.json').write_text(json.dumps(regressions,ensure_ascii=False));(appendix/'configuration.json').write_text(json.dumps(c,ensure_ascii=False,indent=2))
     inputs=[base/'cases-prepared.json',base/'generation-results.jsonl',base/'review-results.jsonl',typed/'results.jsonl',counts/'results.jsonl',Path(c['aggregate']),Path(__file__),Path(__file__).parents[1]/'newdomain/coherent_candidate.py',Path(__file__).parents[1]/'newdomain/catalogue_counts.py']
