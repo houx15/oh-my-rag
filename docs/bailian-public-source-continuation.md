@@ -6,6 +6,18 @@ reviewed platform-total source statement are no longer pending privacy decisions
 API keys and credentials remain secret. No keys were changed, copied to another
 computer, printed, or stored in new configuration. Nothing was published.
 
+## Latest status
+
+The remaining337-case continuation did not complete: its first three concurrent
+requests timed out, as did a serial follow-up. A separate Qwen3.8 Flash service
+canary completed3 cases (2 primary passes), without establishing model superiority.
+The source-restoration37-case pilot stopped before its first dispatch because
+journal identities disallow the pipe character. It has0 calls and0 added cost.
+The current [fairness diagnostic](fairness-diagnostic-20261013.md) takes priority;
+there is no active paid run. Unified coverage is328/665 and cumulative conservative
+accounting is$55.93499825/$200, with zero open reservations. Earlier account/route
+success does not establish reliability for the longer evaluation requests.
+
 ## Verified serving route
 
 The existing Token Plan main key authenticates and lists `deepseek-v4.1-flash`,

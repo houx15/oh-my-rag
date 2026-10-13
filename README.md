@@ -10,7 +10,33 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current original-question checkpoint
+## Latest diagnostic checkpoint — October 13, 2026
+
+The [fairness audit](docs/fairness-diagnostic-20261013.md) reviews48 original
+questions from both datasets, balanced between original passes and failures.
+Assistant source review found22 supported passes,1 false pass,13 genuine
+failures,6 false failures and6 ambiguous cases. This deliberately stratified
+sample does not estimate population error rates; no original scores changed.
+Prior40 source annotations plus this sample cover82 unique questions.
+
+The complete saved report remains223/330 光明 and155/315 牛黄, with original-user
+subsets65/113 and108/205. The fresh unified candidate is **incomplete:328/665**
+reviewed. Bailian returned the exact `deepseek-v4.1-flash` model name, but later
+requests timed out. A separate `qwen3.8-flash` three-case service check passed2/3;
+it is not a full-dataset comparison. The source-restoration pilot stopped locally
+before dispatch due to a journal-ID validation error, so it has no quality result.
+Cumulative conservative accounting is$55.93499825/$200, with0 open reservations
+and no active paid work. The original $100 cap was explicitly increased while
+preserving all prior charges; the figures below are historical checkpoints.
+
+The user declared corpus/project content public, including institution names and
+the platform-count statement. Source derivatives remain local, credentials remain
+secret, and there is no authorization to publish artifacts or push this repository.
+The next experiments must separate evaluation repair, source restoration,
+aggregation scope and bounded evidence retrieval. No overall improvement claim
+is made from incomplete or exposed data.
+
+## Historical original-question checkpoint
 
 The [original-question evaluation](docs/original-question-evaluation.md) now
 covers the supplied utterances without rewriting them. Fresh Flash primary
