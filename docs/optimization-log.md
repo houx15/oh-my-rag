@@ -227,3 +227,25 @@ production of answers and no confirmation-review charge. The next scientific
 hypothesis is document-wide threshold/exception definitions: distinguish missing
 nonadjacent evidence from interpretation errors before changing retrieval. The
 newly exposed ambiguous case must not be reused as an unseen test.
+
+
+### C9S confirmation review closure
+
+After coordination explicitly authorized one corrected canonical-path retry,
+tool review accepted the command. All 24 paired reviews completed; all 72 calls
+reconcile to $0.20743104, cumulative $30.71112909, with zero open reservations
+and all eleven historical ledger hashes unchanged. The batch is closed through
+an appended audit event. The earlier pending/denied note is a preserved checkpoint,
+not the current status.
+
+Full-set structural validity remains 24/24 for each arm. Conservative assistant
+quality remains 22/23 versus 23/23, with one ambiguous reference per arm excluded.
+Raw paired model review instead reports 24/24 versus 23/24: it accepts C1 on the
+ambiguous boundary case after seeing the logged definition erratum, but misses
+C1's contradiction of certifications explicitly supplied in a different question.
+This disagreement prevents treating model-review counts as gold or claiming a
+confirmed general improvement. The ambiguous case is not silently relabeled.
+All 24 answers per arm remain in cost and timing denominators. The generation
+and transport figures above stand; reviews cost an additional $0.14996784.
+C1 remains unchanged. The nonadjacent-definition retrieval hypothesis remains
+untested, and these targeted results do not establish a practical plateau.
