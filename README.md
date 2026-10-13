@@ -92,3 +92,8 @@ degenerate bootstrap interval are **not human gold or an equivalence proof**.
 See the [research results and limitations](docs/research-cycle3.md) and
 [integration acceptance evidence](docs/integration-acceptance.md). Private
 Chinese QA, source-audit notes, frozen files and ledgers remain local. No deployment.
+
+The [offline evaluation repair](docs/evaluation-repair.md) records source-bound
+obligations, three observed omission flags, and explicit semantic blind spots.
+It preserves frozen scores and requires source-aware adjudication before further
+paid optimization; assistant source review is not independent human gold.
