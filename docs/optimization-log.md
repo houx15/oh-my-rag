@@ -103,3 +103,65 @@ calibrated evaluation family, and a larger preregistered premise test with paire
 source-family uncertainty. Training or a new provider is not implicitly approved.
 Human review would improve validity but is not a prerequisite for continued
 independent work. An authorization deadline or publication block is not a plateau.
+
+## Broader uncertainty replication and next hypothesis
+
+The unchanged C8U prompt was replicated on 32 new Chinese questions across eight
+policy document families, with eight each for unknown premises, known-satisfied
+conditions, known-unsatisfied conditions, and numerical/comparison cases. These
+families differ from the earlier C8U sets, but the corpus and some families were
+used in other research. Exact question nonoverlap is not semantic independence.
+Questions, sources, inference requests, criteria and review rubric were frozen
+before inspecting answers; both arms used identical retrieved evidence.
+
+All 64 outputs were valid. Conservative arm-masked assistant source review found
+30/32 adequate for both C1 and C8U: one C8U win and one loss, with a shared failure
+on a question explicitly restricted to two eligibility conditions. C1 changed a
+comparison role and got its numerical difference wrong. C8U added a false claim
+that an explicitly annual contract amount lacked a stated period. Five borderline
+wording/applicability concerns were retained separately, not silently promoted to
+hard errors. No hard unsupported-assertion or qualifier-omission error was found
+under this limited review; this is not proof those rates are zero.
+
+The paired adequacy difference is 0 percentage points. A descriptive bootstrap
+resampling eight source families (20,000 draws, seed 20261013) spans -9.375 to
++9.375 percentage points. This small clustered sample cannot establish equivalence
+or a plateau. Generation cost was C1 $0.0377331 versus C8U $0.0400575 (+6.2%);
+transport p95 was 1946 versus 2025 ms (+4.0%). C1 remains unchanged.
+
+A separate same-provider fresh-context review received anonymous paired answers
+and five explicit error axes. All 32 reviews satisfied the schema. It detected
+the role/comparison error but accepted the shared requested-scope failure. It
+noticed the annual-period contradiction in notes yet did not flag the premise
+axis. Exact protocol sentences were no longer flagged as unsupported facts.
+This improves one known evaluator defect but does not validate the reviewer as
+a promotion judge. Raw model and assistant judgments remain separate.
+
+This replication used 96 calls, costing $0.32477976 including reviews. Cumulative
+charge is $30.26998209, with zero open reservations and all historical ledger
+hashes unchanged. Every run reconciles against its journal and canonical ledger.
+
+**Next: C9S requested-scope preservation.** The isolated prompt instructs the
+model to retain explicit question facts, answer the requested subset of conditions
+before discussing overall eligibility, and preserve compared roles and periods.
+It changes neither retrieval nor C1 defaults. The implementation and four tests
+are in `scripts/optimization_scope.py` and `tests/test_scope_preparation.py`.
+Twenty-four new scenarios on different pages within the eight exposed families
+are frozen privately: eight local-condition questions, eight known numerical/
+comparison/scope questions, and eight unknown controls. All 48 paired requests
+pass offline privacy and request-budget screening. No answers have been generated;
+this is not an evaluated improvement.
+
+The development authorization expired at 2026-10-13 16:40:02 UTC and the final
+window at 16:48:51 UTC. The replication generation and reviews completed inside
+the final window; no paid calls were started afterward. The next experiment is
+blocked on renewing the existing authorization through its normal controls while
+preserving the cumulative ledger. Deadlines were not reset or bypassed. Offline
+preparation is complete; no practical plateau is claimed. No Git push or direct
+parent-thread message was attempted in this continuation.
+
+Local validation: 284 tests passed in normal Python and again under `python -O`;
+`git diff --check` passed. The added preparation tests verify baseline preservation,
+unchanged evidence/user messages, request-size enforcement and rejection of a
+non-C1 starting arm. Review tests reject duplicate answers, omitted obligations
+and string values masquerading as boolean error flags.

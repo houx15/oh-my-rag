@@ -49,3 +49,10 @@ No publication retry after the rejected push without accepted direct approval.
 Continue safe local work despite publication being blocked. Stop only for a
 user instruction, defensible scoped plateau, or a real resource/authorization
 blocker; leave a reproducible next step when blocked.
+
+Current checkpoint (2026-10-13): broader premise-uncertainty replication produced
+no net assistant-adjudicated gain, with wide uncertainty; C1 remains default.
+C9S requested-scope preservation is implemented and frozen for the next paired
+experiment. Its paid validation is pending renewal of the expired dev/final
+authorization windows; cumulative spending must remain on the same ledger.
+This operational blocker does not satisfy the scientific stopping criterion.
