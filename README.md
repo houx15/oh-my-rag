@@ -72,7 +72,9 @@ disagreements are in [the optimization log](docs/optimization-log.md).
 
 `newdomain/lexical.py` C11B is also independent engineering: it preserves a
 missing strongest lexical hit only within the existing top document. Targeted
-gains remain unconfirmed, and a broader test did not activate the intervention.
+gains replicated in an active-format confirmation, while a broader inactive
+comparison provides only stability evidence. The limited reach and remaining
+errors do not establish broad superiority.
 It is opt-in and does not change C1.
 
 `newdomain/predicate.py` C12P is a generic consistency-prompt experiment, not
@@ -130,8 +132,13 @@ not claimed reproductions of a paper. They do not create facts or model usage.
 The uncertainty prompt is experimental: two initial corrected errors did not
 replicate as a net gain on a broader 32-question comparison (30/32 for both arms
 under conservative assistant source review, with wide uncertainty). C9S requested-
-scope preservation is being evaluated in [audited bounded batches](docs/bounded-batches.md)
+scope preservation and subsequent experiments were evaluated in [audited bounded batches](docs/bounded-batches.md)
 under the sustained optimization request; the original deadlines and all spending
 history remain intact. Existing research acknowledgments apply only as described in
 [the research record](docs/research-cycle3.md); no upstream code was copied for
 these safeguards.
+
+Latest checkpoint: [completed continuation outcome](docs/research-cycle3-outcome.md)
+records C10D/C11B/C12P ablations, active and inactive controls, evaluator errors,
+155 passing offline tests in both Python modes, and reconciled cumulative cost
+$31.70860407. C1 remains default; all recorded batches are closed.

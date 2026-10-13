@@ -314,7 +314,7 @@ bundle coverage rises 3/24 to 6/24 (some bundles contain contextual pages not
 strictly needed). Masked assistant adequacy rises 17/24 to 21/24, four wins and
 zero losses; paired sign-test p=0.125, four-family descriptive bootstrap 0 to
 +37.5 pp. Raw paired model review agrees on these adequate-count totals.
-All48 answers valid. Generation costs $0.0252858/$0.0259047; transport p95
+All 48 answers valid. Generation costs $0.0252858/$0.0259047; transport p95
 1800/1928 ms (+7.1%); mean retrieval including selection 2.371/3.480 ms.
 
 A material adverse transition remains: on one pair with identical prompts,
@@ -322,19 +322,19 @@ C1 refuses and C11B emits a correct computed number with a wrong policy cap and
 subject scope. Both are inadequate, so net-adequacy hides the increased harm.
 This is sampling variability rather than an established selector effect, but
 must not be discarded. A shared comparison also joins the wrong approval-role
-branch. No default promotion. The72calls cost $0.20157414, cumulative
+branch. No default promotion. The 72 calls cost $0.20157414, cumulative
 $31.11719505, zero open reservations; batch closed.
 
-A separately frozen broader set covers24questions in eight families disjoint
+A separately frozen broader set covers 24 questions in eight families disjoint
 from development. After dispatch began but before answer inspection, the audit
-found all24paired prompts identical: C11B did not activate. This run is therefore
+found all 24 paired prompts identical: C11B did not activate. This run is therefore
 an unchanged-context repeated-C1 stability control, NOT confirmation of retrieval
 benefit. Preserve the original preregistration and this deviation. Both arms score
-23/24 under masked assistant review, sharing an explicit-negation error. All48
+23/24 under masked assistant review, sharing an explicit-negation error. All 48
 answers valid. The zero-difference bootstrap is degenerate and establishes no
-accuracy equivalence. Transport p95 differs2303/1995 ms despite identical prompts,
+accuracy equivalence. Transport p95 differs 2303/1995 ms despite identical prompts,
 illustrating small-sample/provider variability. Generation cost $0.0280401/
-$0.0279477. All72calls cost $0.20280612, cumulative $31.32000117; no unresolved
+$0.0279477. All 72 calls cost $0.20280612, cumulative $31.32000117; no unresolved
 reservations or retries. Prior ledger hashes verified; batch closed.
 
 Future efficacy confirmation must audit intervention activation before dispatch.
@@ -347,36 +347,58 @@ keeping lexical preservation out of that comparison. C1 stays default.
 
 C12P appends an independently written generic instruction to interpret scoped
 operators, explicit negation and unknown premises before writing a consistent
-conclusion. It uses exactly the same C10D contexts in all24pairs; no lexical
+conclusion. It uses exactly the same C10D contexts in all 24 pairs; no lexical
 preservation, reference answers or question-specific thresholds enter the prompt.
 It is not symbolic execution or a VeNRA reproduction. Explicit baseline/candidate
 pins allow only reviewed arm pairs while retaining all previous receipt meanings.
-Normal and optimized regressions passed116tests.
+Normal and optimized regressions passed 116 tests.
 
-Twenty-four frozen new questions cover six known families:12boundary/negation,
-6matched and6unknown controls. Existing failure patterns and corpus are exposed.
+Twenty-four frozen new questions cover six known families: 12 boundary/negation,
+6 matched and 6 unknown controls. Existing failure patterns and corpus are exposed.
 Fourteen reference-page bundles are fully present; other bundles may contain
 unneeded contextual pages. Four source-answerable queries in each arm remain
 unanswered because local evidence is missing.
 
-Masked assistant adequacy: C10D14/24 versus C12P15/24, three wins and two losses;
-paired sign-test p=1.0, six-family descriptive bootstrap -8.33 to+16.67pp.
-All48answers structurally valid. The candidate repairs some explicit-premise
+Masked assistant adequacy: C10D 14/24 versus C12P 15/24, three wins and two losses;
+paired sign-test p=1.0, six-family descriptive bootstrap -8.33 to +16.67 pp.
+All 48 answers structurally valid. The candidate repairs some explicit-premise
 errors but introduces an inclusive-duration mistake and denies a provided
 negative premise on other questions. Both arms still contradict themselves or
 give a correct institution with an incorrect boundary/branch explanation.
-Raw model review scores18/24each, missing several such contradictions. Thus
+Raw model review scores 18/24 each, missing several such contradictions. Thus
 no reliable improvement or promotion is supported.
 
-Generation cost $0.0257718/$0.0270570 (+5.0%); transport p95 1932/1897ms.
-The72calls cost $0.20045364, cumulative $31.52045481, zero open reservations,
+Generation cost $0.0257718/$0.0270570 (+5.0%); transport p95 1932/1897 ms.
+The 72 calls cost $0.20045364, cumulative $31.52045481, zero open reservations,
 all prior hashes verified, batch closed. A temporary execution-transport drop
-occurred before review dispatch; read-only verification found exactly48generation
+occurred before review dispatch; read-only verification found exactly 48 generation
 calls and no review journal/reservation before reconnecting. No provider call
 was retried or duplicated.
 
-The broader C11B unchanged-context control's model reviewer scored24/24both,
+The broader C11B unchanged-context control's model reviewer scored 24/24 for both,
 missing the shared explicit-negation error found by source review. Agreement
 continues to be insufficient evidence of validity. The next lexical check will
 verify active insertions before dispatch rather than treat an inactive broader
 sample as an efficacy replication.
+
+
+### Active C11B confirmation and final accounting
+
+The completed [outcome record](research-cycle3-outcome.md) reports the final
+24-case confirmation: assistant adequacy 19/24 versus 22/24, four wins and one
+loss; five active pairs account for all four wins and no losses. A citation-only
+sensitivity gives 20/24 versus 22/24. The unchanged-prompt regression and model
+review disagreements remain explicit. All 48 outputs are structurally valid.
+The 72 calls cost $0.18814926, with generation p95 1820/1877 ms.
+
+Original C1 hashes reproduce on all 60 regression questions. C11B changes 1/60
+and 12/330 exposed contexts, with no baseline-cited chunk displaced in the 60.
+These are coverage checks, not new answer-quality measurements. Final cumulative
+spend is $31.70860407; all seven audited batches are closed, zero reservations
+remain, and eleven historical hashes match. The final tracked offline suite
+passes 155 tests in normal Python and 155 with -O. C1 remains default.
+
+The outcome record defines a scoped stopping point for the tested cheap prompt/
+bounded-context family, its uncertainty, and the next typed-condition hypothesis.
+It does not claim a global RAG plateau or treat budget or weak judges as proof
+that improvement is impossible.

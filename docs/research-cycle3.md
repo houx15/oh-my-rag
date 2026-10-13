@@ -2,9 +2,10 @@
 
 Literature window: **2025-10-12 through 2026-10-12**, inclusive. This is a targeted
 review. Submission, revision and publication dates are distinguished below.
-Implementation status: recovery/reporting integration plus an opt-in C3B clause
-packing ablation and typed numeric utilities. No new method has established an
-answer-quality improvement. No unrecognized external code was installed
+Implementation status: recovery/reporting integration, opt-in clause/definition/
+lexical selectors, prompt ablations and typed numeric utilities. Targeted retrieval
+repairs improved assistant-adjudicated answers; no broad promotion is established.
+See the [completed continuation outcome](research-cycle3-outcome.md). No unrecognized external code was installed
 or executed, and no upstream source or prompts were copied.
 
 ## Failure-to-method matrix
@@ -227,22 +228,22 @@ conceptual adaptations and measurement references precisely.
 ## Additional primary-source checks during failure localization
 
 - [From BM25 to Corrective RAG](https://arxiv.org/abs/2604.01733), first
-  submitted2026-04-02; no venue publication verified. It separately measures
+  submitted 2026-04-02; no venue publication verified. It separately measures
   retrieval and numerical answer quality and compares fusion/reranking on whole
   financial documents. Its conclusions do not establish transfer to this chunked
-  Chinese corpus. Paper reference43 points to code/data DOI
+  Chinese corpus. Paper reference 43 points to code/data DOI
   `10.5281/zenodo.19382814`; that record was inaccessible during this review,
   so repository contents/license/reproducibility remain unverified. Its extra
   Azure/Cohere endpoints are outside the present approved-provider scope.
   No code or prompts adopted; C11B was independently implemented before this check.
-- [VeNRA](https://arxiv.org/abs/2603.04663), submitted2026-03-04, revised
+- [VeNRA](https://arxiv.org/abs/2603.04663), submitted 2026-03-04, revised
   2026-03-08; no venue publication verified. Its typed facts and deterministic
   execution are relevant to separating correct arithmetic from wrong operands,
   entities and periods. The paper explicitly links
   [pagand/VeNRA](https://github.com/pagand/VeNRA). Its README declares
-  CC-BY-NC-SA4.0; a conventional main/LICENSE URL returned404, so file-specific
+  CC-BY-NC-SA4.0; a conventional main/LICENSE URL returned 404, so file-specific
   terms and full reproducibility are not established. No code, weights, prompts
-  or data adopted or run. Generated Python execution and a trained3B verifier
+  or data adopted or run. Generated Python execution and a trained 3B verifier
   would be a materially different implementation; the current numeric utilities
   and predicate-prompt experiment are not VeNRA reproductions. Reported gains
   and latency are not assumed to transfer here.

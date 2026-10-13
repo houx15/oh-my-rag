@@ -50,17 +50,14 @@ Continue safe local work despite publication being blocked. Stop only for a
 user instruction, defensible scoped plateau, or a real resource/authorization
 blocker; leave a reproducible next step when blocked.
 
-Current checkpoint (2026-10-13): broader premise-uncertainty replication produced
-no net assistant-adjudicated gain, with wide uncertainty; C1 remains default.
-C9S requested-scope preservation is in controlled paired evaluation. The old
-24-hour limits were local runner guardrails, not verified user/provider permission
-expirations. Audited bounded batches now continue under the sustained request,
-preserving the original deadlines and all cumulative spending. Each batch records
-explicit call, time and charged-plus-reserved limits. No plateau is established.
+Current checkpoint (2026-10-13): the [completed continuation outcome](docs/research-cycle3-outcome.md)
+records all completed comparisons, active/inactive controls and a scoped practical
+stopping point for the tested cheap prompt/bounded-context family. C11B has narrow
+replicated diagnostic gains; no broad promotion is justified and C1 stays default.
+This is not a global RAG plateau. The next architectural hypothesis and source
+adjudication needs are explicit. No budget or authorization exhaustion is claimed.
 
-Latest stop: C9S discovery completed; confirmation generations and masked source
-review completed, with paired provider review pending. An actual automatic
-approval rejection of a mistyped budget-root command caused the requested stop.
-No live retry occurred. Corrected paths pass offline verification; resume only
-with accepted instruction and still-valid recorded batch limits. This is not a
-plateau and does not reset any deadline or spending history.
+The earlier mistyped-command rejection was resolved under subsequent parent
+coordination; no provider call was retried or duplicated. All seven recorded
+batches are now closed. The original runner deadlines, historical ledgers and
+cumulative spending remain preserved; audited bounded batches did not reset them.
