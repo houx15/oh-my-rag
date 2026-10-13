@@ -402,3 +402,39 @@ The outcome record defines a scoped stopping point for the tested cheap prompt/
 bounded-context family, its uncertainty, and the next typed-condition hypothesis.
 It does not claim a global RAG plateau or treat budget or weak judges as proof
 that improvement is impossible.
+
+### C13T: typed scalar source conditions, first development result
+
+Parent requested substantive continuation beyond the narrow prior stopping point.
+The independently implemented compiler preserves exact source offsets, normalizes
+units with Decimal, interprets document-scoped above/below definitions and local
+endpoint exceptions, and distinguishes unresolved entity/time binding from scalar
+comparison. It never issues an automatic eligibility decision. A small explicit
+measure ontology limits coverage; this is not learned extraction or VeNRA.
+
+On 24 frozen natural-style questions in six exposed families, C10D and C13T share
+identical retrieved contexts. All 48 outputs are valid. Arm-masked assistant source
+review: 18/24 versus 21/24, three wins and no losses; descriptive family interval
+0 to +29.17 percentage points. Exact two-sided paired sign-test p=0.25. Gains
+concern role consistency and explicit premises, not demonstrated arithmetic
+execution. Guidance accompanying the table is a confound to isolate next.
+Shared errors remain: ignored local question scope, a strict numerical boundary,
+and wrong approval-role reasoning despite a correct final yes/no.
+
+Generation cost $0.0274212/$0.0389184 (+41.9%); transport p95 2022/2043 ms (+1.1%).
+All 72 generation/review calls cost $0.22046280, cumulative $31.92906687. Batch
+closed; no open reservations, retries or historical hash changes. No promotion.
+Questions are newly authored, not naturally collected traffic or human gold.
+See private `typed-conditions-20261013` for frozen artifacts and adjudications.
+
+Full acceptance coverage is restored: [test-count reconciliation](test-coverage-reconciliation.md)
+explains 301 + 15 = 316, and why the previous 155 tracked-only run omitted 161
+legacy tests. None were deleted or skipped. Fourteen new compiler tests bring
+full normal and optimized discovery to 330 passing tests each.
+
+The reusable `scripts/optimization_case_report.py` produces private four-column
+HTML, Markdown and per-section lossless CSV exports. The checkpoint includes all
+156 rows in six declared cohorts, user-provided and curated cases separately;
+primary C1 and experimental variants are not pooled. Raw prose, recorded scores,
+response IDs, timestamps and exact transport durations are traceable in private
+verification receipts. HTML cells and CSV round trips were checked exactly.

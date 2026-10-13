@@ -61,3 +61,23 @@ The earlier mistyped-command rejection was resolved under subsequent parent
 coordination; no provider call was retried or duplicated. All seven recorded
 batches are now closed. The original runner deadlines, historical ledgers and
 cumulative spending remain preserved; audited bounded batches did not reset them.
+
+## Active continuation and private case report
+
+The user requests continued substantive optimization beyond the narrow prompt/
+bounded-context plateau. Next: typed source conditions with exact span provenance,
+entity/time/measure separation, false-join, negation and exception controls. Keep
+the method opt-in; frozen natural-style Chinese questions are assistant-curated,
+not claimed natural traffic or independent human gold. Preserve full legacy and
+tracked acceptance coverage; do not use Git tracking status as a test filter.
+
+At a stable checkpoint, deliver private HTML plus Markdown or CSV containing
+exactly four columns: Question | Our answer | Score | Response time. Include
+all cases in declared cohorts, including failures, refusals and ambiguities.
+Separate user-provided exposed cases from newly curated frozen questions through
+section headings; separate the primary validated variant from experiments. Use
+verbatim raw answers, actual recorded per-case scores and timings. Explain rubric,
+scorer limitations, aggregation, variant/commit/setup and provider-versus-end-to-end
+timing outside the tables. Validate every row against raw outputs and score files.
+Keep the reusable reporting generator in this repo and private data outside it.
+Provide the exact Mac mini path for SCP; no upload, push or deployment.
