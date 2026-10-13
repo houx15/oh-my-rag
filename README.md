@@ -75,6 +75,10 @@ missing strongest lexical hit only within the existing top document. Targeted
 gains remain unconfirmed, and a broader test did not activate the intervention.
 It is opt-in and does not change C1.
 
+`newdomain/predicate.py` C12P is a generic consistency-prompt experiment, not
+verified symbolic reasoning. Its three wins and two regressions do not justify
+promotion; the original C1 prompt remains unchanged.
+
 ## Completed frozen comparison — 2026-10-13
 
 | Evidence | C1 | C3B packed clauses |

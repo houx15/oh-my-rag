@@ -116,4 +116,13 @@ class BatchRenewalTests(unittest.TestCase):
         wrong=[dict(j,qid=j['qid'].replace('C10D','C9S')) for j in self.jobs]
         with self.assertRaises(AuthorizationError):p.bind_jobs(l,self.jobs_path,'deepseek-flash',wrong)
 
+
+    def test_nondefault_baseline_is_explicit_and_pinned(self):
+        self.jobs=[dict(j,qid=j['qid'].replace('C1','C10D').replace('C9S','C12P')) for j in self.jobs];self.jobs_path.write_text(json.dumps(self.jobs))
+        with self.assertRaises(AuthorizationError):activate(profile_path=self.profile,root=self.root,name='scope',reason='test',output=self.receipt,candidate_arm='C12P')
+        event=activate(profile_path=self.profile,root=self.root,name='scope',reason='test',output=self.receipt,candidate_arm='C12P',baseline_arm='C10D')
+        self.assertEqual(event['baseline_arm'],'C10D')
+        p=BatchPolicy(self.receipt,self.path,'final',self.deny);l=SpendLedger(self.root/'ledger.final.json',self.manifest,stage='final',batch_policy=p);p.bind_jobs(l,self.jobs_path,'deepseek-flash',self.jobs)
+        with self.assertRaises(AuthorizationError):p.bind_jobs(l,self.jobs_path,'deepseek-flash',[dict(j,qid=j['qid'].replace('C10D','C1')) for j in self.jobs])
+
 if __name__=='__main__':unittest.main()

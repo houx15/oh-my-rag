@@ -49,3 +49,8 @@ New receipts explicitly pin the candidate arm (`C9S`, `C10D` or `C11B`); older r
 retain the original C9S interpretation. Binding rejects a changed arm even when
 call counts match. Candidate choice does not change any financial, privacy or
 execution limit.
+
+A later predicate ablation explicitly pins baselineC10D/candidateC12P; the
+allowlist accepts only reviewed baseline/candidate pairs. Missing baseline fields
+in older receipts retain C1. Tests reject silently changing baseline or candidate.
+Financial, model, data and execution limits are unchanged.

@@ -341,3 +341,42 @@ Future efficacy confirmation must audit intervention activation before dispatch.
 No useful benefit can be attributed to an inactive retrieval intervention. Next
 isolate predicate interpretation with identical definition-enriched evidence,
 keeping lexical preservation out of that comparison. C1 stays default.
+
+
+### C12P: predicate-consistency prompt — rejected
+
+C12P appends an independently written generic instruction to interpret scoped
+operators, explicit negation and unknown premises before writing a consistent
+conclusion. It uses exactly the same C10D contexts in all24pairs; no lexical
+preservation, reference answers or question-specific thresholds enter the prompt.
+It is not symbolic execution or a VeNRA reproduction. Explicit baseline/candidate
+pins allow only reviewed arm pairs while retaining all previous receipt meanings.
+Normal and optimized regressions passed116tests.
+
+Twenty-four frozen new questions cover six known families:12boundary/negation,
+6matched and6unknown controls. Existing failure patterns and corpus are exposed.
+Fourteen reference-page bundles are fully present; other bundles may contain
+unneeded contextual pages. Four source-answerable queries in each arm remain
+unanswered because local evidence is missing.
+
+Masked assistant adequacy: C10D14/24 versus C12P15/24, three wins and two losses;
+paired sign-test p=1.0, six-family descriptive bootstrap -8.33 to+16.67pp.
+All48answers structurally valid. The candidate repairs some explicit-premise
+errors but introduces an inclusive-duration mistake and denies a provided
+negative premise on other questions. Both arms still contradict themselves or
+give a correct institution with an incorrect boundary/branch explanation.
+Raw model review scores18/24each, missing several such contradictions. Thus
+no reliable improvement or promotion is supported.
+
+Generation cost $0.0257718/$0.0270570 (+5.0%); transport p95 1932/1897ms.
+The72calls cost $0.20045364, cumulative $31.52045481, zero open reservations,
+all prior hashes verified, batch closed. A temporary execution-transport drop
+occurred before review dispatch; read-only verification found exactly48generation
+calls and no review journal/reservation before reconnecting. No provider call
+was retried or duplicated.
+
+The broader C11B unchanged-context control's model reviewer scored24/24both,
+missing the shared explicit-negation error found by source review. Agreement
+continues to be insufficient evidence of validity. The next lexical check will
+verify active insertions before dispatch rather than treat an inactive broader
+sample as an efficacy replication.
