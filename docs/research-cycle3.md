@@ -88,11 +88,11 @@ These are decision thresholds, not power guarantees. Stop after two development
 comparisons without a Pareto improvement; keep C1 if inconclusive. Never tune
 following final exposure.
 
-The cumulative API ceiling remains $100. Last verified spending was
-$27.69268935; a new $6 allocation including at least $2 final/regression reserve
-is a proposal, not an estimate or separate fresh allowance. Verify the shared
-canonical ledger and reserve conservatively before every paid call. No new
-paid research has run at this checkpoint. No deployment or private upload.
+The cumulative API ceiling remains $100, from a verified baseline of
+$27.69268935. The authorized live comparison used a nested $12 maximum allocation
+within the existing canonical ledgers, with conservative reservation before
+every call. This supersedes the earlier $6 proposal; it is not a fresh ledger
+allowance. Completed accounting is reported below. No deployment or private upload.
 
 
 ## Implemented offline ablations — 2026-10-13
@@ -143,5 +143,81 @@ are rejected. No paper or upstream repository is credited for this arithmetic.
 Synthetic tests cover long conditions, negation/decimal preservation, exact
 handle resolution, unchanged C1 defaults, numeric scales, incompatible units
 and comparison scope. Real runner recovery tests also include C3B. These tests
-establish mechanics, not semantic accuracy. Fresh frozen Chinese evaluation
-custody is still unresolved; no paid C3B evaluation or promotion has occurred.
+establish mechanics, not semantic accuracy. The frozen live evaluation below
+uses separate inference and reference files; this is logical same-host separation,
+not an OS security boundary. C3B remains opt-in and has not been promoted.
+
+
+## Completed paired live experiment — 2026-10-13
+
+C3B-v2 was unchanged before and after question freeze. Eight pilot questions
+came from two source groups; 40 final questions from nine other groups. Final
+strata: 19 conditions, 7 comparisons, 6 scope questions, 4 factual controls,
+1 numerical question, 3 unanswerable questions. Eight semantically overlapping
+draft topics were replaced before freeze. This was not an exhaustive semantic
+contamination audit or a new-corpus test: the corpus was previously exposed,
+and questions were assistant-authored with explicit source/facet cues. Separate
+inference views contain no references; the source-reviewed reference files are
+for judging only. Original OCR fidelity and references are not human-certified.
+
+Generation used approved `deepseek-flash`, with thinking disabled and unchanged
+C1 retrieval/schema/caps. Sequential randomized interleaving avoids concurrent
+queue contamination. Paired and pointwise rubrics used the same approved
+`deepseek-v4-pro`, also with thinking disabled; their errors are correlated.
+
+| Split | C1 both adequate | C3B both adequate | C1 p95 ms | C3B p95 ms | C1 all-in USD | C3B all-in USD |
+|---|---:|---:|---:|---:|---:|---:|
+| Pilot (8) | 8/8 | 8/8 | 1896.4 | 1756.9 | 0.038175 | 0.037813 |
+| Fresh final (40) | 40/40 | 40/40 | 1684.8 | 1795.5 | 0.319464 | 0.316990 |
+| Exposed regression (20) | 18/20 | 19/20 | 2073.2 | 2235.7 | 0.135969 | 0.138908 |
+
+All-in includes generation, pointwise judging, and half the paired judge cost.
+Final generation-only costs were $0.04635390 / $0.04622310. Final p50 latency was
+1522.4 / 1544.6 ms; TTFT p50 926.5 / 981.6 ms. The preselected first question per
+final group (9) was repeated after regression, with p95 1713.5 / 1821.3 ms and
+generation cost $0.01014300 / $0.01014060. Provider load/cache/sampling and small
+samples limit latency conclusions; this is not a throughput benchmark.
+
+Both final passes scored all four axes (correctness, support, relevance,
+completeness) and citation entailment positively on every case. No final judge
+disagreements or paired adequacy transitions occurred; exact McNemar p=1.
+Source-group bootstrap difference is 0 with a degenerate [0,0] interval; this
+reflects the observed ceiling, **not proof of equal true accuracy**. The sample
+is underpowered and poorly tests numeric generalization/cross-page acquisition.
+The prespecified +5 percentage-point promotion requirement was not met.
+**C1 stays default; C3B stays opt-in. No claim of novel or improved RAG.**
+
+Regression primary/secondary adequate counts: C1 19/20 and 19/20, C3B 20/20 and
+19/20. Three arm/case disagreements concern completeness on one FAQ (C1) and an
+appropriate unsupported-query refusal penalized by the pointwise judge (both).
+The single C3B regression advantage is exposed, rubric-sensitive evidence,
+not a confirmed gain. Fresh fixed-phrase refusal counts were 3 versus 2, but
+C3B declined the third unsupported request with an explanatory answer. Assistant
+inspection found both arms declined all three; lexical counts are only proxies.
+No fixed-phrase refusal appeared on a source-answerable fresh case.
+
+A nonrandom post-hoc assistant spot-check of eight fresh cases found a C3B
+answer missing a completed-project qualifier; another scope qualifier was
+missing from both answers and the authored reference. Both judging passes
+accepted them. Original frozen scores/references remain unchanged and these
+concerns are recorded separately. They demonstrate why automatic agreement is
+insufficient, not a human-adjudicated error rate. Next priority is independent
+source-page/OCR adjudication and harder natural questions before further tuning;
+then isolate evidence-pool misses and facet selection. No further paid run was
+launched on these now-exposed finals.
+
+All 154 generation outputs were valid and all **358** API jobs (154 generation,
+204 judging) completed without retries or unresolved journals. New cost:
+**$1.00760184**; cumulative **$28.70029119**, below the $100 ceiling and nested
+$12 allocation. Response usage at pinned conservative tariffs exactly matches
+the canonical-ledger delta, with zero open reservations/overage. Eleven prior
+ledgers retained their hashes; only the two current canonical ledgers changed.
+All frozen code/input/reference hashes and ten completed journals reconcile.
+Costs are accounting estimates, not invoiced bills or transferable price claims.
+
+Reproduction entrypoints: `python -m newdomain.experiment` for freeze/main runs,
+`scripts/research_supplement.py` for frozen regression/repeat, and
+`scripts/research_report.py` for offline analysis. They require authorized local
+private paths/ledgers; private corpus and results are not distributed. No upstream
+code, weights, prompts or data were copied; README acknowledgments describe
+conceptual adaptations and measurement references precisely.
