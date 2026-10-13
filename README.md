@@ -240,3 +240,10 @@ experiments, with live and supplied questions separated. It preserves the
 negative exact-book ablation, identifies additional privacy-filter evidence loss,
 and documents the private four-column report. This is exposed-development
 evidence, not a fresh joint run or production deployment.
+
+
+The [Bailian/public-source continuation](docs/bailian-public-source-continuation.md)
+records the explicitly authorized provider transition, exact model provenance,
+legacy-host timeout failures, and separately versioned institution/platform source
+restoration. Source restoration is not attributed to a new RAG algorithm or an
+upstream paper. Performance claims await the recorded paired experiments.

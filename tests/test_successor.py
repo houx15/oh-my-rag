@@ -58,3 +58,13 @@ class SuccessorTests(unittest.TestCase):
         self.assertEqual(raw['prior_requests_dispatched'],1)
         self.assertGreater(raw['prior_spend_usd'],0)
         self.assertEqual(self.ledgers['final'].snapshot()['totals'],self.old['final']['totals'])
+
+    def test_bailian_authority_and_tariff_preserve_history(self):
+        with self.assertRaises(AuthorizationError):create_successor(self.profile,self.p/'wrong',self.auth,10,{str(self.scope):file_sha(self.scope)},bailian_route=True)
+        self.assertNotIn('successor_allocation',self.ledgers['final'].snapshot())
+        self.auth['provider']='Alibaba Cloud Bailian pay-as-you-go'
+        p=create_successor(self.profile,self.p/'bailian',self.auth,10,{str(self.scope):file_sha(self.scope)},bailian_route=True)
+        raw=json.loads(Path(p['manifest_path']).read_text())
+        self.assertEqual(set(raw['models']),{'bailian-deepseek-v4.1-flash'})
+        self.assertEqual(raw['provider_route']['model'],'deepseek-v4.1-flash')
+        self.assertEqual(self.ledgers['final'].snapshot()['totals'],self.old['final']['totals'])

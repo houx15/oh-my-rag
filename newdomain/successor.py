@@ -15,7 +15,7 @@ from newdomain.profile import load_profile, verify_profile
 from newdomain.experiment import write_new
 
 
-def create_successor(profile_path, destination, authority, request_cap, scope_hashes):
+def create_successor(profile_path, destination, authority, request_cap, scope_hashes, *, bailian_route=False):
     from newdomain.paths import _ensure_outside_repo
     destination=_ensure_outside_repo(Path(destination),'Successor allocation')
     if destination.exists():raise AuthorizationError('successor destination must be new; never restart or overwrite')
@@ -25,6 +25,9 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
     if not scope_hashes:raise AuthorizationError('frozen scope hashes required')
     for path,h in scope_hashes.items():
         if file_sha(path)!=h:raise AuthorizationError('scope input changed')
+    if type(bailian_route)is not bool:raise AuthorizationError('strict provider route flag required')
+    if bailian_route and authority.get('provider')!='Alibaba Cloud Bailian pay-as-you-go':
+        raise AuthorizationError('explicit Bailian pay-as-you-go provider authority required')
     profile=load_profile(Path(profile_path));verify_profile(profile,'final')
     old_path=Path(profile['manifest_path']);old=AuthorizationManifest.load(old_path)
     ledgers={stage:SpendLedger(Path(profile[stage+'_ledger_path']),old,stage=stage) for stage in ('dev','final')}
@@ -58,6 +61,13 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
         raw=copy.deepcopy(old._raw)
         raw.update(authorized=True,status_note='User-authorized optimization scope; all prior accounting carried; no new provider, no uploads or deployment.',spend_cap_usd=float(remaining),final_eval_reserve_usd=float(remaining),request_cap=request_cap,global_deadline_s=86400,max_concurrency=3,max_retries=0,prior_runs=prior,prior_spend_usd=float(total),original_total_cap_usd=float(authorized_cap),prior_requests_dispatched=requests,authority_receipt_sha256=file_sha(destination/'authority-receipt.json'),scope_hashes=scope_hashes)
         raw['models']={k:v for k,v in raw['models'].items() if k in ('deepseek-flash','text-embedding-v3')}
+        if bailian_route:
+            raw['status_note']='Explicit Bailian pay-as-you-go continuation; all prior spend carried; no Token Plan inference, uploads, credential changes or deployment.'
+            raw['models']={'bailian-deepseek-v4.1-flash':{
+                'input_per_1m':2.0,'output_per_1m':8.0,'verified':True,
+                'context_tokens_upper_bound':1000000,
+                'status':'Conservative USD budget ceiling, NOT invoice tariff/FX conversion. Alibaba Beijing published peak CNY2 input/CNY8 output per million tokens; numerically charge those amounts as USD to overreserve. No cache/night discounts credited. Published source: https://help.aliyun.com/zh/model-studio/deepseek-v4-1-flash (2026-10-13).'}}
+            raw['provider_route']={'provider':'Alibaba Cloud Bailian','endpoint':'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions','model':'deepseek-v4.1-flash','credential_environment_name':'DASHSCOPE_SEARCH_API_KEY','billing':'pay-as-you-go; conservative USD ceiling separately from estimated CNY'}
         write_new(destination/'manifest.json',raw)
         manifest=AuthorizationManifest.load(destination/'manifest.json')
         for stage in ('dev','final'):SpendLedger(destination/f'ledger.{stage}.json',manifest,stage=stage)
