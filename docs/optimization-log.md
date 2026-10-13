@@ -165,3 +165,65 @@ Local validation: 284 tests passed in normal Python and again under `python -O`;
 unchanged evidence/user messages, request-size enforcement and rejection of a
 non-C1 starting arm. Review tests reject duplicate answers, omitted obligations
 and string values masquerading as boolean error flags.
+
+## Administrative deadline clarification and C9S discovery
+
+The earlier stopping note overstated the provenance of the 24-hour deadline.
+Inspection established a local manifest duration plus ledger-creation timestamp,
+not an expired provider credential/tool permission or a verified user-selected
+24-hour restriction. Under the sustained optimization request, an audited bounded
+batch now supplements that guardrail. Original deadlines, manifests, reservations
+and charges were not reset. See [bounded-batch mechanics](bounded-batches.md).
+
+C9S discovery completed all 72 calls within one recorded batch, costing
+$0.23371596. Cumulative spend at closure was $30.50369805, zero open reservations.
+All 48 answers were structurally valid. Masked assistant source review found
+C1 20/24 versus C9S 23/24: three corrected requested-scope false refusals, no
+clear new error, and one shared remaining refusal. Exact paired sign-test p=0.25;
+three discordant examples do not establish general superiority. The descriptive
+eight-family bootstrap interval is +4.17 to +25 percentage points and should not
+be mistaken for reliable small-sample coverage or traffic-weighted performance.
+
+Generation cost was $0.0272025/$0.0283689 (+4.3%); transport p95 was
+2122/1943 ms (-8.4%) for C1/C9S. Eight unknown controls and eight numerical/scope
+controls showed no clear new failure. Actual-amount wording in two hypothetical
+calculation answers remains a separate borderline concern. Human gold and source
+transcription validation are still unavailable; C1 is unchanged.
+
+The completed batch was closed by an appended audit event. The unchanged C9S
+prompt now has a separately frozen 24-question confirmation in eight families
+disjoint from its discovery set, balanced across local-condition, numeric/
+comparison and unknown-control questions. Those families were exposed in earlier
+other experiments, so this is not a new-corpus claim. The new batch records the
+same 72-call, one-hour, $4 charged-plus-reserved constraints and cumulative cap.
+
+C9S confirmation generation completed 48/48 valid answers. Preliminary masked
+assistant source review is C1 22/23 versus C9S 23/23: one corrected refusal that
+ignored certifications explicitly supplied by the question. A financial boundary
+case was excluded because a definition elsewhere in the source contradicts the
+frozen reference's strict-threshold assumption. Original references are preserved;
+post-generation errata are diagnostic, not silently relabeled fresh gold.
+
+Confirmation generation cost was $0.0281250/$0.0293382; transport p95 was
+2016/1825 ms. Costs, validity and latency include all 24 answers per arm, even
+though quality excludes the ambiguous case. Across discovery plus confirmation,
+there are four assistant-adjudicated wins and zero losses in 47 eligible pairs
+(exploratory exact sign-test p=0.125). This remains targeted, small-sample evidence;
+C1 is unchanged and no plateau is claimed.
+
+The 24 confirmation reviews remain pending. Their first preflight exceeded the
+unchanged 30 KB request limit because quote copies duplicated retained source
+text. A tested lossless compaction preserved all sources and citation IDs, and
+all revised requests passed screening before any review dispatch. Subsequently,
+automatic approval review rejected a live command whose budget-root date was
+mistyped. Per the explicit instruction to stop on an actual approval rejection,
+no live retry was attempted. The corrected canonical root is verified and its
+no-network dry run passes. This is a real tool-review stop, distinct from the
+administrative runner deadline. The active batch still has 24 calls available,
+zero reservations open, and its original one-hour deadline unchanged.
+
+Cumulative spending is $30.56116125, including $0.0574632 for confirmation
+production of answers and no confirmation-review charge. The next scientific
+hypothesis is document-wide threshold/exception definitions: distinguish missing
+nonadjacent evidence from interpretation errors before changing retrieval. The
+newly exposed ambiguous case must not be reused as an unseen test.

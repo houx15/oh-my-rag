@@ -114,6 +114,8 @@ not claimed reproductions of a paper. They do not create facts or model usage.
 The uncertainty prompt is experimental: two initial corrected errors did not
 replicate as a net gain on a broader 32-question comparison (30/32 for both arms
 under conservative assistant source review, with wide uncertainty). C9S requested-
-scope preservation is prepared offline; paid validation awaits renewed authorization. Existing research acknowledgments apply only as described in
+scope preservation is being evaluated in [audited bounded batches](docs/bounded-batches.md)
+under the sustained optimization request; the original deadlines and all spending
+history remain intact. Existing research acknowledgments apply only as described in
 [the research record](docs/research-cycle3.md); no upstream code was copied for
 these safeguards.

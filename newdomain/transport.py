@@ -59,7 +59,7 @@ class LiveContext:
     authorization state on construction.
     """
     def __init__(self, *, manifest_path: Path, redaction_names_path: Path,
-                 stage: str = "dev", expected_ledger_path: Path = None):
+                 stage: str = "dev", expected_ledger_path: Path = None, batch_path: Path = None):
         self.manifest_path = Path(manifest_path).resolve()
         self.redaction_names_path = Path(redaction_names_path).resolve()
         self.stage = stage
@@ -107,15 +107,21 @@ class LiveContext:
             ledger_state = json.loads(ledger_path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError) as e:
             raise PriorLedgerError(f"Existing ledger unreadable: {e}") from e
+        self.batch_path = None if batch_path is None else Path(batch_path).resolve()
+        self.batch_policy = None
+        if self.batch_path is not None:
+            from newdomain.batch import BatchPolicy
+            self.batch_policy = BatchPolicy(self.batch_path, self.manifest_path, stage, self.redaction_names_path)
+            self.batch_policy.check_deadline(ledger_state)
         deadline_epoch = ledger_state.get("deadline_epoch")
-        if deadline_epoch is not None:
+        if deadline_epoch is not None and self.batch_policy is None:
             import time as _time
             if _time.time() > float(deadline_epoch):
                 raise LiveAuthorizationError(
                     f"Persisted global deadline has passed "
                     f"({_time.strftime('%Y-%m-%d %H:%M:%S UTC', _time.gmtime(deadline_epoch))}). "
-                    "This is a legitimate authorization boundary. Resuming requires "
-                    "an explicitly authorized new cycle with a new deadline.")
+                    "This is a persisted runner boundary, not proof of provider-permission expiry. "
+                    "Continuation requires a recorded bounded batch under valid user scope.")
         if ledger_state.get("halted"):
             raise LiveAuthorizationError(
                 f"Ledger is halted: {ledger_state['halted'].get('reason', 'unknown')}. "
@@ -127,7 +133,7 @@ class LiveContext:
                 "Manifest does not authorize live dispatch (authorized=false or cap=0).")
 
         # Bind to the existing canonical ledger
-        self.ledger = SpendLedger(ledger_path, self.manifest, stage=stage, simulated=False)
+        self.ledger = SpendLedger(ledger_path, self.manifest, stage=stage, simulated=False, batch_policy=self.batch_policy)
 
     def request_scope(self, model):
         from contextlib import nullcontext
@@ -313,7 +319,8 @@ def _request_worker(connection, settings, kind, payload, live_context_config):
         ctx = LiveContext(
             manifest_path=Path(live_context_config["manifest_path"]),
             redaction_names_path=Path(live_context_config["redaction_names_path"]),
-            stage=live_context_config["stage"])
+            stage=live_context_config["stage"],
+            batch_path=live_context_config.get("batch_path"))
         transport.authorize(ctx)
         transport.on_first_content = lambda: connection.send({"event": "first_content"})
         try:
@@ -342,6 +349,10 @@ class DeadlineTransport:
             raise LiveAuthorizationError(
                 "DeadlineTransport.call requires explicit live context")
         start = time.perf_counter()
+        wall_timeout = self.wall_timeout_s
+        if self._live_context.batch_policy is not None:
+            from newdomain.batch import remaining_timeout
+            wall_timeout = remaining_timeout(self._live_context.batch_policy, wall_timeout)
         first = None
         ctx = multiprocessing.get_context("spawn")
         receive, send = ctx.Pipe(duplex=False)
@@ -351,13 +362,14 @@ class DeadlineTransport:
             "manifest_path": str(self._live_context.manifest_path),
             "redaction_names_path": str(self._live_context.redaction_names_path),
             "stage": self._live_context.stage,
+            "batch_path": str(self._live_context.batch_path) if self._live_context.batch_path is not None else None,
         }
         p = ctx.Process(target=_request_worker, args=(send, worker_settings, kind, payload, live_config))
         p.start()
         send.close()
         try:
             while True:
-                remaining = self.wall_timeout_s - (time.perf_counter() - start)
+                remaining = wall_timeout - (time.perf_counter() - start)
                 if remaining <= 0 or not receive.poll(remaining):
                     raise TransportError("Hard wall deadline exceeded; outcome/usage unknown, reserve retained")
                 try:

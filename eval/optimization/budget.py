@@ -338,7 +338,8 @@ class SpendLedger:
     """Durable reserve-before-dispatch ledger; one canonical file per stage."""
 
     def __init__(self, path: Path | None, manifest: AuthorizationManifest, *, stage: str = "dev",
-                 simulated: bool = False):
+                 simulated: bool = False, batch_policy=None):
+        self.batch_policy = batch_policy
         if stage not in STAGES:
             raise AuthorizationError(f"stage must be one of {STAGES}, got {stage!r}")
         self.path = Path(path) if path else canonical_ledger_path(stage)
@@ -411,6 +412,9 @@ class SpendLedger:
                 "manual resume() with a recorded human decision is required")
 
     def _require_before_deadline_locked(self) -> None:
+        if self.batch_policy is not None:
+            self.batch_policy.check_deadline(self._state)
+            return
         if time.time() > float(self._state["deadline_epoch"]):
             raise AuthorizationError(
                 "persisted global deadline (absolute epoch) passed — no further dispatch or retry; "
@@ -449,6 +453,8 @@ class SpendLedger:
         with self._locked():
             self._require_not_halted_locked()
             self._require_before_deadline_locked()
+            if self.batch_policy is not None:
+                self.batch_policy.admit(self._state, model, est_cost, is_retry)
             t = self._state["totals"]
             if t["open_reservations"] + 1 > self.manifest.max_concurrency:
                 raise AuthorizationError(
@@ -468,6 +474,8 @@ class SpendLedger:
             rec = {"id": rid, "model": model, "est_input_tokens": est_in, "est_output_tokens": est_out,
                    "est_cost_usd": round(est_cost, 8), "state": "open",
                    "is_retry": is_retry, "created_epoch": time.time()}
+            if self.batch_policy is not None:
+                rec["batch_id"] = self.batch_policy.id
             self._state["reservations"].append(rec)
             t["open_reservations"] += 1
             t["reserved_open_cost_usd"] = round(t["reserved_open_cost_usd"] + est_cost, 8)

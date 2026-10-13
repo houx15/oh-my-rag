@@ -52,7 +52,15 @@ blocker; leave a reproducible next step when blocked.
 
 Current checkpoint (2026-10-13): broader premise-uncertainty replication produced
 no net assistant-adjudicated gain, with wide uncertainty; C1 remains default.
-C9S requested-scope preservation is implemented and frozen for the next paired
-experiment. Its paid validation is pending renewal of the expired dev/final
-authorization windows; cumulative spending must remain on the same ledger.
-This operational blocker does not satisfy the scientific stopping criterion.
+C9S requested-scope preservation is in controlled paired evaluation. The old
+24-hour limits were local runner guardrails, not verified user/provider permission
+expirations. Audited bounded batches now continue under the sustained request,
+preserving the original deadlines and all cumulative spending. Each batch records
+explicit call, time and charged-plus-reserved limits. No plateau is established.
+
+Latest stop: C9S discovery completed; confirmation generations and masked source
+review completed, with paired provider review pending. An actual automatic
+approval rejection of a mistyped budget-root command caused the requested stop.
+No live retry occurred. Corrected paths pass offline verification; resume only
+with accepted instruction and still-valid recorded batch limits. This is not a
+plateau and does not reset any deadline or spending history.

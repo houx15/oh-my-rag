@@ -23,6 +23,7 @@ def main():
     p.add_argument('--profile', type=Path, required=True)
     p.add_argument('--stage', choices=['dev','final'], required=True)
     p.add_argument('--model', choices=['deepseek-flash','deepseek-v4-pro'], required=True)
+    p.add_argument('--batch', type=Path)
     p.add_argument('--live', action='store_true')
     p.add_argument('--resume', action='store_true')
     args = p.parse_args()
@@ -46,9 +47,13 @@ def main():
     if not args.live:
         print(json.dumps({'screened_jobs':len(jobs),'live':False}));return
     ctx = ExperimentContext(experiment_root=args.budget_root, manifest_path=paths['manifest_path'],
-        redaction_names_path=paths['redaction_names_path'], stage=args.stage, expected_ledger_path=paths['ledger_path'])
+        redaction_names_path=paths['redaction_names_path'], stage=args.stage, expected_ledger_path=paths['ledger_path'], batch_path=args.batch)
+    if ctx.batch_policy is not None:
+        ctx.batch_policy.bind_jobs(ctx.ledger, args.jobs, args.model, jobs)
     identity = {'jobs':sha(args.jobs),'freeze':sha(args.freeze),'model':args.model,'stage':args.stage,
                 'code':{str(x):sha(x) for x in sorted((Path(__file__).resolve().parents[1]/'newdomain').glob('*.py'))}}
+    if ctx.batch_policy is not None:
+        identity['batch_id'] = ctx.batch_policy.id
     journal_path = output.with_suffix('.journal.jsonl')
     with DispatchJournal(journal_path) as journal:
         _verify_or_write_header(output.with_suffix('.header.json'),identity,args.resume)
