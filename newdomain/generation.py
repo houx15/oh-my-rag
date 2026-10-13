@@ -122,7 +122,7 @@ def _validate_jobs(cases, arms):
 def run_live_v2(stage, arms, revision, repeat=0, dataset=None,
                 output_dir: Path = None, casefile: Path = None,
                 corpus_path: Path = None, freeze_file: Path = None,
-                live_context=None, resume=False, _journal=None):
+                live_context=None, resume=False, _journal=None, workers=3):
     """Behavior-preserving port of run_live_v2.run().
 
     New parameters (output_dir, casefile, corpus_path, freeze_file) supply the
@@ -273,7 +273,7 @@ def run_live_v2(stage, arms, revision, repeat=0, dataset=None,
                                    "error": r.get("error"), "full_ms": r.get("full_ms", 0)},
                                   ensure_ascii=False), flush=True)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(work, jobs))
     print(json.dumps({"terminal": True, "stopped": stop.is_set(), "totals": ctx.ledger.snapshot()["totals"]}))
     if stop.is_set():
@@ -286,7 +286,7 @@ def run_live_v2(stage, arms, revision, repeat=0, dataset=None,
 def run_cycle2(stage, arms, revision, dataset=None,
                output_dir: Path = None, casefile: Path = None,
                corpus_path: Path = None, freeze_file: Path = None, live_context=None,
-               resume=False, _journal=None):
+               resume=False, _journal=None, workers=3):
     """Behavior-preserving port of run_cycle2.run()."""
     from newdomain.transport import LiveAuthorizationError, chat
     from eval.optimization.transports import TransportError
@@ -421,7 +421,7 @@ def run_cycle2(stage, arms, revision, dataset=None,
                 print(json.dumps({"qid": c["qid"], "arm": a, "valid": r.get("valid"),
                                    "error": r.get("error")}), flush=True)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(work, jobs))
     print(json.dumps({"terminal": True, "stopped": stop.is_set(), "totals": ctx.ledger.snapshot()["totals"]}))
     if stop.is_set():
@@ -438,6 +438,8 @@ def _guard_run(function):
         bound = inspect.signature(function).bind(*args, **kwargs)
         bound.apply_defaults()
         p = bound.arguments
+        if type(p["workers"]) is not int or not 1 <= p["workers"] <= 3:
+            raise ValueError("workers must be 1..3")
         if p["live_context"] is None:
             from newdomain.transport import LiveAuthorizationError
             raise LiveAuthorizationError("explicit live_context required")
@@ -459,7 +461,7 @@ def _guard_run(function):
         out = root / f"{stage}-{revision}-results.jsonl"
         header = root / f"{stage}-{revision}-header.json"
         identity = _run_identity(p["corpus_path"], p["casefile"], p["freeze_file"], p["arms"], "deepseek-flash")
-        identity.update(runner=function.__name__, stage=stage, revision=revision, repeat=p.get("repeat", 0))
+        identity.update(runner=function.__name__, stage=stage, revision=revision, repeat=p.get("repeat", 0), workers=p["workers"])
         with DispatchJournal(root / f"{stage}-{revision}-journal.jsonl") as journal:
             if not p["resume"] and (out.exists() or journal.path.exists()):
                 raise FileExistsError("run results or journal already exist")

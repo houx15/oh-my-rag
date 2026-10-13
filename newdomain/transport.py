@@ -129,6 +129,10 @@ class LiveContext:
         # Bind to the existing canonical ledger
         self.ledger = SpendLedger(ledger_path, self.manifest, stage=stage, simulated=False)
 
+    def request_scope(self, model):
+        from contextlib import nullcontext
+        return nullcontext()
+
     def _check_prior(self):
         """Verify prior-ledger hashes; explicit exceptions, not assert."""
         try:
@@ -418,14 +422,15 @@ def privacy_check(payload_text: str, redaction_names_path: Path) -> None:
 
 def chat(ctx: LiveContext, messages, model: str = "deepseek-flash") -> dict:
     """Budget-gated dispatch; revalidates prior hashes before EACH call."""
-    ctx._check_prior()  # revalidate prior ledger hashes before every dispatch
-    screen(messages, ctx.redaction_names_path)
-    i, o = chat_conservative_estimates(ctx.manifest, model)
-    transport = DeadlineTransport(model=model, thinking=False)
-    transport.authorize(ctx)
-    return DispatchGate(transport, ctx.ledger, ctx.manifest, simulated=False).dispatch(
-        kind="chat", payload={"messages": messages},
-        model=model, est_input_tokens=i, est_output_tokens=o)
+    with ctx.request_scope(model):
+        ctx._check_prior()  # revalidate prior ledger hashes before every dispatch
+        screen(messages, ctx.redaction_names_path)
+        i, o = chat_conservative_estimates(ctx.manifest, model)
+        transport = DeadlineTransport(model=model, thinking=False)
+        transport.authorize(ctx)
+        return DispatchGate(transport, ctx.ledger, ctx.manifest, simulated=False).dispatch(
+            kind="chat", payload={"messages": messages},
+            model=model, est_input_tokens=i, est_output_tokens=o)
 
 
 def estimate_cost(manifest_path: Path, model: str = "deepseek-flash",

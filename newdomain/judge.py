@@ -143,7 +143,7 @@ def compact_answer(r):
 def judge_live_v2(stage, files, name, reuse=(), dataset=None,
                   output_dir: Path = None, casefile: Path = None,
                   corpus_path: Path = None, freeze_file: Path = None,
-                  live_context=None, resume=False, _journal=None):
+                  live_context=None, resume=False, _journal=None, workers=3):
     """Behavior-preserving port of judge_live_v2.run()."""
     from newdomain.transport import LiveAuthorizationError, chat
 
@@ -264,7 +264,7 @@ def judge_live_v2(stage, files, name, reuse=(), dataset=None,
                 print(json.dumps({"qid": qid, "scores": result.get("scores"),
                                   "error": result.get("error")}, ensure_ascii=False), flush=True)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(work, jobs))
     if stop.is_set():
         raise RuntimeError("judging stopped; inspect saved results before manual recovery")
@@ -290,7 +290,7 @@ def _screen(messages, redaction_names_path: Path):
 def judge_cycle2(stage, files, name, dataset,
                  output_dir: Path = None, casefile: Path = None,
                  corpus_path: Path = None, redaction_names_path: Path = None,
-                 live_context=None, freeze_file=None, resume=False, _journal=None):
+                 live_context=None, freeze_file=None, resume=False, _journal=None, workers=3):
     """Behavior-preserving port of judge_cycle2.run()."""
     from newdomain.transport import LiveAuthorizationError, chat
 
@@ -368,7 +368,7 @@ def judge_cycle2(stage, files, name, dataset,
                                   "scores": e.get("scores"), "error": e.get("error")},
                                  ensure_ascii=False), flush=True)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(work, prepared))
     if stop.is_set():
         raise RuntimeError("judging stopped; inspect saved results before manual recovery")
@@ -408,6 +408,8 @@ def _guard_judge(function):
         bound = inspect.signature(function).bind(*args, **kwargs)
         bound.apply_defaults()
         p = bound.arguments
+        if type(p["workers"]) is not int or not 1 <= p["workers"] <= 3:
+            raise ValueError("workers must be 1..3")
         if p["live_context"] is None:
             from newdomain.transport import LiveAuthorizationError
             raise LiveAuthorizationError("explicit live_context required")
@@ -437,7 +439,7 @@ def _guard_judge(function):
                 if hashlib.sha256(Path(path).read_bytes()).hexdigest() != digest:
                     raise ValueError("final freeze mismatch")
         identity = _run_identity(p["corpus_path"], p["casefile"], p.get("freeze_file"), [], "deepseek-v4-pro")
-        identity.update(runner=function.__name__, stage=stage, name=name,
+        identity.update(runner=function.__name__, stage=stage, name=name, workers=p["workers"],
                         result_inputs=[hashlib.sha256(Path(f).read_bytes()).hexdigest() for f in p["files"]])
         from newdomain.paths import _ensure_outside_repo
         for field in ("corpus_path", "casefile", "output_dir", "freeze_file"):
