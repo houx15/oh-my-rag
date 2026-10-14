@@ -330,7 +330,7 @@ PROTO versus USE/intent distinctions. Cycle15 subsequently tested task-focused i
 Cycle14’s8frozen synthetic checks remain unrun, not successful confirmations.
 
 
-### Latest closure — Cycles14/15, 2026-10-14
+### Historical closure — Cycles14/15, 2026-10-14
 
 No active paid work. Cycle15 all164 scope hashes verified,490 offline and17 focused
 optimized tests pass. All28 outputs source-reviewed,83/83 delivered citations exact;
@@ -487,3 +487,25 @@ currently determine most of the6→9 gain. The original judge and source assista
 disagree, and fresh synthetic checks would reuse that unsettled standard. This is
 an evaluation bottleneck, not a request to keep cycling prompts or an assertion
 that all algorithmic avenues are exhausted. No new paid run is scheduled.
+
+
+## Cycle16: matched lexical control and selective fallback — 2026-10-14
+
+[Full causal audit, original questions and resource accounting](keyword-marginal-cycle16.md). Adding original-query lexical-top20 with the same fusion removes the earlier aggregate Qwen advantage: raw9/20 versus9/20, source-useful12/20 versus12/20, complete8 versus6. Dictionary: raw8/20 plus one unscored timeout, source-useful11/20. All60 scheduled outcomes and masked source reviews retained. This is exposed-development assistant judgment, not human-gold accuracy.
+
+The earlier baseline omitted that lexical pool. Of38 new Qwen-selected case-record pairs,37 were already in original lexical candidates;24 were in dictionary candidates; none outside their union.524 Qwen-only candidate pairs produce one selected and zero cited passages. Nevertheless, useful valuation/inventory candidates get dropped, and GM068 loses flexible-computing coverage despite binary success. Diagnose and test selection before rejecting the strategy; do not rename clarification or richer existing evidence as novel recall.
+
+Staged full p50/p95: lexical4.961/7.212s; dictionary4.785/8.260s (19returns); Qwen8.229/12.841s. Historical keyword-call time is added to measured warm answer pipeline; no live whole-path claim. The frozen no-evidence fallback triggers4/20, yields only one borderline partial gain (useful12→13, complete8 unchanged), and p95 rises to14.174s. No gate retuning or deployment.
+
+119dispatches, zero retries, one conservatively charged generation timeout, zero open reservations at closure. Increment2.85524; cumulative89.31009345/200.151exact citations across55valid outputs do not prove entailment. Cycle17 separately tests bounded facet selection on three diagnosed original questions; defaultC1 remains unchanged. No new external paper/code adopted by this locally written repair.
+
+
+## Cycle17: evidence-facet repair and evaluation limits — 2026-10-14
+
+[Full paired development result](keyword-facet-cycle17.md):3original questions ×3query arms ×2selectors,18fresh answers. Seven contexts change;53/60prior preparations remain identical offline. No broad-quality or fresh-heldout claim.
+
+N417 changes from bounded abstention to actual historical valuation in all3arms; lexical uses existing book-level evidence, while Qwen contributes explicit弘景曰 evidence. Dictionary retains a conflicting absence sentence; Qwen omits the speaker/transmission chain from its delivered short quote. GM068 Qwen recovers flexible computing and preserves the equal-workload40%+ condition; lexical/dictionary add that number but omit the condition. GM064 Qwen gains optional inventory detail, not a newly recovered technical achievement. Unchanged lexical/dictionary GM064 prompts produce protocol/policy errors; do not attribute their stochastic differences to selection.
+
+Frozen source-usefulness is7→7/9, while conditional complete6→3. The rubric correctly credits safe selected-source abstention but therefore cannot measure end-to-end factual completion: three N417 baseline abstentions count complete even though the corpus has the valuation. Keep these primary ratings unchanged and show targeted-facet recovery separately. This is a measurement limitation, not evidence that recovering the valuation failed. A fresh confirmation needs an explicit end-to-end factual-facet metric, unseen original questions and unchanged controls; none is claimed completed here.
+
+505offline tests and25optimized keyword checks pass;191scope hashes verified.18masked reviews complete;63exact citations across17valid outputs are not entailment proof.36dispatches, one saved answer with missing raw judge after timeout, no retry. Increment2.256376; cumulative91.56646945/200, zero open reservations, no active paid work. The bounded facet selector remains opt-in; C1 default unchanged. No new external implementation adopted or new novelty asserted.

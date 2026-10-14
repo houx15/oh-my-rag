@@ -14,7 +14,30 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — generation evidence use, October 14, 2026
+## Current checkpoint — keyword contribution and evidence selection, October 14, 2026
+
+[Cycle16](docs/keyword-marginal-cycle16.md) adds the missing original-query lexical
+control: lexical and Qwen both score12/20 source-useful and9/20 raw judge passes.
+Qwen staged p95 is12.84s versus7.21s. The frozen fallback yields one borderline
+partial gain but p95 rises to14.17s. These are exposed, source-conditional assistant
+judgments, not end-to-end factual accuracy or live fallback measurements.
+
+[Cycle17](docs/keyword-facet-cycle17.md) tests a bounded selection repair on3original
+questions with18fresh answers. It recovers historical valuation and missing
+flexible-computing evidence, but exposes attribution gaps and two omitted
+performance conditions. Safe selected-source abstentions already score as useful,
+so aggregate7→7/9 conceals factual recovery. The report separates these outcomes
+and preserves negative results. No unseen-original confirmation or default
+promotion; C1 remains default.
+
+505offline tests and25optimized keyword checks pass. All78scheduled outcomes are
+retained; both ledgers closed with zero open reservations at **91.56646945/200USD**
+conservative accounting. Two timeout reservations remain charged, without retry.
+The selector is independently written local engineering; no new external paper
+or code was adopted, and acknowledgments below retain their actual-use scope.
+No upload, push or deployment.
+
+## Previous checkpoint — generation evidence use, October 14, 2026
 
 [Cycle14](docs/use-prompt-cycle14.md) and [Cycle15](docs/use-focus-cycle15.md) hold
 selected evidence, model and validators fixed while changing system instructions.
