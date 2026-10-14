@@ -45,3 +45,15 @@ class GroundedProseTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'duplicate'):render(raw,self.ctx,self.cat['fingerprint'])
   raw=response({'sentences':[{'boundary':'missing'}]});raw['stream_done']=False
   with self.assertRaisesRegex(ValueError,'envelope'):render(raw,self.ctx,self.cat['fingerprint'])
+
+ def test_cross_page_clause_preserves_scope_and_two_exact_citations(self):
+  context={'D77:3:01':'第五条 支持指定材料项目。围绕关键电\n― 3 ―','D77:4:01':'池材料。对经评审的项目按投资20%补贴，最高1000万元。\n第六条 其他事项。'}
+  c=catalog(context);qid=next(k for k,v in c['groups'].items()if v.get('parts'))
+  answer,_=render(response({'sentences':[{'qualified':qid}]}),context,c['fingerprint'])
+  cites=answer['sentences'][0]['citations'];self.assertEqual(len(cites),2)
+  self.assertIn('指定材料',answer['sentences'][0]['text']);self.assertIn('经评审',answer['sentences'][0]['text'])
+  for cite in cites:self.assertIn(cite['quote'],context[cite['id']])
+ def test_never_join_different_or_nonadjacent_documents(self):
+  for second in ['D78:4:01','D77:5:01']:
+   c=catalog({'D77:3:01':'第五条 支持指定材料。条件为电\n― 3 ―',second:'池材料。资助20%，最高1000万元。\n第六条 其他事项。'})
+   self.assertFalse(any(g.get('parts')for g in c['groups'].values()))

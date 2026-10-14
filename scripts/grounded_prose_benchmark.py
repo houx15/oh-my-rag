@@ -17,9 +17,11 @@ from newdomain.journal import DispatchJournal
 from scripts.optimization_full_rerun_v3 import RUBRIC,parse_score
 
 class Runtime:
- def __init__(self,base_runtime):
+ def __init__(self,base_runtime,redaction_names_path,institution_policy_path):
   from scripts.keyword_experiment import runtime,searches
   self.base=runtime(base_runtime);self.searches=searches(self.base)
+  from newdomain.outbound_redaction import OutboundRedactor
+  self.redactor=OutboundRedactor(read(redaction_names_path),read(institution_policy_path))
  def prepare(self,j,arm):
   corpus=j['corpus'];q=j['question']
   if corpus=='regression':
@@ -27,6 +29,7 @@ class Runtime:
   else:
    ctx,msg,tr=self.base.prepare(corpus,q,'baseline')
    ctx,selection=select(self.searches[corpus],q,[],ctx,len(ctx))
+   ctx=self.redactor.value(ctx)
    if corpus=='niuhuang':
     from newdomain.citation_contract_v3 import messages
     msg=messages(self.base.nh_messages(q,ctx))
@@ -36,7 +39,8 @@ class Runtime:
     msg=gm_messages(q,[{**meta.get(k,{}),'id':k,'text':v,'title':meta.get(k,{}).get('title','来源清单的可复算统计'),'locator':meta.get(k,{}).get('locator','derived-counts')}for k,v in ctx.items()])
     msg=self.base.pipelines['baseline'].prepare_gm(q,ctx,msg,meta)['messages']
    tr={**tr,**selection,'retrieval':'live local retrieval with cached embeddings; deterministic lexical fusion'}
-  if arm=='candidate':msg,_=build_messages(q,ctx)
+  ctx=self.redactor.value(ctx);msg=self.redactor.value(msg)
+  if arm=='candidate':msg,_=build_messages(self.redactor.text(q),ctx)
   return ctx,msg,tr
  def canonical(self,j,raw):
   ctx=j['context']
@@ -49,13 +53,13 @@ def append_locked(path,value,lock):
   with path.open('a')as f:f.write(json.dumps(value,ensure_ascii=False)+'\n');f.flush();os.fsync(f.fileno())
 
 def prepare(args):
- n=args.directory;n.mkdir(exist_ok=True);cfg=read(n/'configuration.json');rt=Runtime(cfg['base_runtime'])
+ n=args.directory;n.mkdir(exist_ok=True);cfg=read(n/'configuration.json');rt=Runtime(cfg['base_runtime'],cfg['redaction_names_path'],cfg['institution_policy_path'])
  rows=read(cfg['roster']);selected=set(cfg.get('case_ids',[]));jobs=[];refs=[];failures=[]
  for row in rows:
   if selected and row['qid']not in selected:continue
-  j={k:row[k]for k in ['corpus','question','origin']};j['case_id']=row['qid']
+  j={k:row[k]for k in ['corpus','question','origin']};j['case_id']=row['qid'];j['outbound_question']=rt.redactor.text(j['question'])
   if j['corpus']=='regression':j.update(regression_context=row['prepared']['context'],regression_messages=row['prepared']['messages'])
-  refs.append({k:row[k]for k in ['qid','question','provided_reference','reference_sources','source_status']})
+  refs.append(rt.redactor.value({k:row[k]for k in ['qid','question','provided_reference','reference_sources','source_status']}))
   for arm in ['baseline','candidate']:
    job={**j,'arm':arm,'qid':j['case_id']+'/'+arm}
    try:
@@ -75,8 +79,10 @@ def allocate(args):
  old=Path(live['latest_profile']);p=read(old);m=read(p['manifest_path']);assert read(p['final_ledger_path'])['totals']['open_reservations']==0
  # Historical manifests/ledgers remain intact. Changed code is versioned by Git
  # and gets new hashes for this new authorized scope, never reused for old runs.
- paths=set(m['scope_hashes']);paths.update(str(p)for p in [Path(__file__),R/'newdomain/grounded_prose.py',R/'tests/test_grounded_prose.py',R/'tests/test_retrieval_determinism.py',n/'configuration.json',n/'answer-jobs.json',n/'evaluation-only.json',n/'plan.md',n/'roster-summary.json'])
+ paths=set(m['scope_hashes']);paths.update(str(p)for p in [Path(__file__),R/'newdomain/grounded_prose.py',R/'tests/test_grounded_prose.py',R/'tests/test_retrieval_determinism.py',R/'newdomain/outbound_redaction.py',R/'tests/test_outbound_redaction.py',n/'configuration.json',n/'answer-jobs.json',n/'evaluation-only.json',n/'plan.md',n/'roster-summary.json'])
  for name in ['evidence_pool.py','keyword_control.py','keyword_hypotheses.py','keyword_selection.py','keyword_facet_selection.py']:paths.add(str(R/'newdomain'/name))
+ for filename in ['offline-verification.json','redaction-audit.json','benchmark-code-freeze.json']:
+  if(n/filename).exists():paths.add(str(n/filename))
  scope={f:hashlib.sha256(Path(f).read_bytes()).hexdigest()for f in paths}
  authority=read(b/'bailian-resume-20261013/authority.json');authority['user_instruction']='User explicitly instructs solve retrieval reproducibility, improve evidence-grounded generation, bounded diagnostics then fresh frozen full benchmark. Sole writer, existing providers and screening, cumulative200USD cap, no push/upload/deploy. Historically exposed mixed-origin roster, preserve all failures, no retries or production promotion.'
  d=n/'answers';d.mkdir(exist_ok=True);cap=2*sum('preparation_failure'not in j for j in read(n/'answer-jobs.json'))
@@ -87,7 +93,7 @@ def allocate(args):
 def review_messages(j,answer,raw,valid,ref):
  # Own exact quotations are supplied with the answer; context is not duplicated
  # a second time. Exact substring checks happen locally before review.
- payload={'question':j['question'],'answer':answer,'raw_answer_if_invalid':None if valid else raw.get('content'),'mechanically_valid':valid,'provided_reference':ref['provided_reference'],'reference_sources':dict(ref['reference_sources']),'source_status':ref['source_status']}
+ payload={'question':j.get('outbound_question',j['question']),'answer':answer,'raw_answer_if_invalid':None if valid else raw.get('content'),'mechanically_valid':valid,'provided_reference':ref['provided_reference'],'reference_sources':dict(ref['reference_sources']),'source_status':ref['source_status']}
  omitted=[]
  while len(json.dumps(payload,ensure_ascii=False).encode())>27000 and payload['reference_sources']:
   key=next(reversed(payload['reference_sources']));omitted.append(key);payload['reference_sources'].pop(key)
@@ -98,7 +104,7 @@ def review_messages(j,answer,raw,valid,ref):
 def run(args):
  if not args.live:raise ValueError('explicit --live required')
  from newdomain import bailian_bounded_transport as transport
- n=args.directory;d=n/'answers';ctx=start_ctx(d);cfg=read(n/'configuration.json');rt=Runtime(cfg['base_runtime']);jobs=read(n/'answer-jobs.json');refs={r['qid']:r for r in read(n/'evaluation-only.json')};done={r['qid']for r in lines(d/'results.jsonl')};lock=threading.Lock();runtime_lock=threading.Lock();stop=threading.Event()
+ n=args.directory;d=n/'answers';ctx=start_ctx(d);cfg=read(n/'configuration.json');rt=Runtime(cfg['base_runtime'],cfg['redaction_names_path'],cfg['institution_policy_path']);jobs=read(n/'answer-jobs.json');refs={r['qid']:r for r in read(n/'evaluation-only.json')};done={r['qid']for r in lines(d/'results.jsonl')};lock=threading.Lock();runtime_lock=threading.Lock();stop=threading.Event()
  with DispatchJournal(d/'calls.journal.jsonl')as journal:
   def call(q,kind,messages):
    h=H(messages)

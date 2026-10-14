@@ -46,6 +46,35 @@ def catalog(context):
             groups[qid]={'source':sid,'start':start,'end':end,'text':value,
                          'structural_completeness':'explicit section' if marks else 'complete selected excerpt',
                          'semantic_binding_verified':False}
+    # Join only explicit adjacent pages of the same document already selected.
+    # Each piece keeps its exact source span; no retrieval expansion or inferred
+    # entity relationship. Page footers are excluded by offsets, never rewritten.
+    pages={}
+    for sid,source in sources.items():
+        m=re.fullmatch(r'(D\d+):(\d+):01',source['id'])
+        if m:pages[(m[1],int(m[2]))]=sid
+    for (doc,page),sid in pages.items():
+        next_sid=pages.get((doc,page+1))
+        if not next_sid:continue
+        text=sources[sid]['text'];following=sources[next_sid]['text']
+        marks=list(SECTION.finditer(text));next_marks=list(SECTION.finditer(following))
+        if not marks or not next_marks:continue
+        footer=re.search(r'\n[ \t]*[―—－-]+[ \t]*\d+[ \t]*[―—－-]+[ \t]*$',text)
+        end=footer.start()if footer else len(text)
+        start=marks[-1].start()
+        while start<end and text[start].isspace():start+=1
+        while end>start and text[end-1].isspace():end-=1
+        continuation_end=next_marks[0].start()
+        while continuation_end and following[continuation_end-1].isspace():continuation_end-=1
+        tail=text[start:end];head=following[:continuation_end]
+        if not tail or tail[-1]in '。！？；'or not head or head[-1]not in '。！？；':continue
+        value=tail+'\n'+head
+        if len(value)>1200 or not(POLICY.search(value)and AMOUNT.search(value)):continue
+        qid='Q'+str(len(groups)+1)
+        groups[qid]={'source':sid,'start':start,'end':end,'text':value,
+                     'parts':[{'source':sid,'start':start,'end':end},{'source':next_sid,'start':0,'end':continuation_end}],
+                     'structural_completeness':'explicit section across adjacent selected document pages',
+                     'semantic_binding_verified':False}
     data={'sources':sources,'groups':groups}
     data['fingerprint']=hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     return data
@@ -55,8 +84,8 @@ def build_messages(question,context):
     data=catalog(context)
     body='问题：'+question+'\n资料（保持原始行序；每个S是一个完整选定段落，不是现代有效性认证）：\n'
     for sid,s in data['sources'].items():body+=sid+' ['+s['id']+']\n'+s['text']+'\n\n'
-    directory={qid:{'source':g['source'],'start':g['start'],'end':g['end'],'preview':g['text'][:45]} for qid,g in data['groups'].items()}
-    body+='完整条款Q目录（Python字符位置，end不含；引用后呈现整个区间，预览不是全文）：\n'+json.dumps(directory,ensure_ascii=False)
+    directory={qid:{'source':g['source'],'start':g['start'],'end':g['end'],'preview':g['text'][:45], 'parts':g.get('parts',[])} for qid,g in data['groups'].items()}
+    body+='完整条款Q目录（Python字符位置，end不含；引用后呈现整个区间；parts非空时按顺序拼接多个精确来源区间，预览不是全文）：\n'+json.dumps(directory,ensure_ascii=False)
     messages=[{'role':'system','content':SYSTEM},{'role':'user','content':body}]
     if len(json.dumps(messages,ensure_ascii=False).encode())>30000:raise ValueError('grounded prose prompt byte cap')
     return messages,data
@@ -82,9 +111,11 @@ def render(response,context,expected_hash):
             qid=part['qualified']
             if not isinstance(qid,str)or qid not in data['groups']or qid in seen:raise ValueError('qualified handle')
             seen.add(qid);g=data['groups'][qid];s=data['sources'][g['source']]
-            quote=s['text'][g['start']:g['end']]
+            parts=g.get('parts',[{'source':g['source'],'start':g['start'],'end':g['end']}])
+            citations=[{'id':data['sources'][p['source']]['id'],'quote':data['sources'][p['source']]['text'][p['start']:p['end']]}for p in parts]
+            quote='\n'.join(c['quote']for c in citations)
             if quote!=g['text']:raise ValueError('group source mismatch')
-            result.append({'text':'资料条款：'+quote,'citations':[{'id':s['id'],'quote':quote}]})
+            result.append({'text':'资料条款：'+quote,'citations':citations})
             trace.append({'qualified':qid,**g});continue
         if set(part)!={'text','sources'}:raise ValueError('fact schema')
         text=part['text'];ids=part['sources']
@@ -94,10 +125,10 @@ def render(response,context,expected_hash):
             # Redundant explanations are allowed only beside whole source-bound
             # clauses carrying every stated amount; no free-standing cap claim.
             normalize=lambda value:re.sub(r'\s+','',value).replace('％','%')
-            supported={normalize(m[0])for g in selected_groups if g['source']in ids for m in AMOUNT.finditer(g['text'])}
+            supported={normalize(m[0])for g in selected_groups if any(p['source']in ids for p in g.get('parts',[{'source':g['source']}])) for m in AMOUNT.finditer(g['text'])}
             if any(normalize(m[0])not in supported for m in AMOUNT.finditer(text)):
                 raise ValueError('numeric policy requires whole qualified clause with matching amounts')
         result.append({'text':text,'citations':[{'id':data['sources'][sid]['id'],'quote':data['sources'][sid]['text']}for sid in ids]})
         trace.append({'sources':ids,'semantic_binding_verified':False})
     if sum(len(s['text'])for s in result)>1800:raise ValueError('rendered length cap')
-    return {'sentences':result,'handoff':False},{'configuration':'grounded-prose-v2','provenance':trace,'semantic_binding_verified':False}
+    return {'sentences':result,'handoff':False},{'configuration':'grounded-prose-v3','provenance':trace,'semantic_binding_verified':False}
