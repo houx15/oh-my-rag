@@ -9,9 +9,10 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 
 **No fresh, complete benchmark reproduces the current default across the full
 eligible mixed-origin pool.** C1 remains default; the latest structured candidate
-failed Cycle20's confirmation gate and is not promoted. Paid experiments are
-paused. The closed conservative cumulative ledger is **92.72868945/200USD**, with
-zero open reservations. Smaller diagnostic cohorts do not establish overall
+failed Cycle20's confirmation gate and is not promoted. The user subsequently
+authorized repairs and a fresh full benchmark; Cycle22 diagnostic is in progress.
+The last closed cumulative ledger is **93.04503145/200USD** after Cycle21; active
+reservations and final totals must be read from the shared ledger. Smaller diagnostic cohorts do not establish overall
 performance, and fresh generations do not make historically exposed questions
 unseen. Model judges, OCR references and same-model source review are not human gold.
 
@@ -696,3 +697,52 @@ Cycle20 served its already-frozen contexts identically to both arms after this m
 4. **Evaluation standard:** calibrate the borderline GM177/410 completeness gains and historical-introduction coverage with a human/domain reviewer. Preserve raw and source scores; do not tune the rubric to make the proposed hybrid win.
 
 This review is a stopping point for discussion. No speculative model cycle, runtime implementation, push, upload or deployment. Local diagnostic artifacts contain the five paired examples and20seed results; spend remains unchanged. No new paper/repository method was adopted, and no novelty is asserted.
+
+
+## Retrieval repair and prose diagnostics — 2026-10-14 (work in progress)
+
+User authorized implementation after the denominator audit. Commit8289861 replaces
+unordered floating-point overlap sums with sorted-term `math.fsum` in lexical
+pools, keyword windows and token-coverage gains. Existing record-ID and earliest-
+offset tie breakers remain; there is no rounding tolerance or changed weighting.
+Six fresh processes (hash seeds0,1,2,7,14,19) reproduce identical context and prompt
+hashes on16 mixed-origin questions spanning both corpora. NH-HOP-04 is the sole
+context difference against frozen Cycle20: the formerly unstable tie now selects
+MD-023-0002 consistently. Historical outputs/scores are not rewritten.
+
+The generation revision retains ordinary source-cited prose and full selected
+source/table order; it adds optional exact whole policy-section clauses rather
+than requiring every answer to select a short quotation unit. No300-character
+unit exclusion applies to ordinary factual prose. Structural grouping does not
+certify cross-sentence semantics, OCR hierarchy or speaker ownership. Typed
+clarification, missing-evidence, UI and modern-evidence boundaries are separate.
+No new external paper/code is used; existing acknowledgments retain their scope.
+
+Cycle21 reused the16 exposed mixed-origin questions from Cycle20 (8live,5simulated,
+3evaluation) with32 fresh answers and32 fresh reviews. Baseline is the Cycle10
+adapter plus repaired deterministic original lexical fusion, not exact historical
+C1. Both arms have the same selected evidence and unchanged original full-run
+judge rubric. Baseline raw passes11/16 versus candidate10/16; valid16/16 versus
+14/16; paired1win/2losses. Warm staged latency p50/p95 is3.716/4.639s baseline and
+3.545/6.295s candidate (linear interpolation; n16 is unstable). All64 calls settled
+without failures/retries, incremental0.316342, cumulative93.04503145/200.
+
+The candidate restores valid table classification (GM388), retains explicit
+policy eligibility/basis/cap (GM330), provides specific clarification (N265), and
+handles UI-plus-content (GM124). These are exposed mechanism checks, not overall
+performance gains. It unnecessarily clarifies GM120 and adds irrelevant material
+in several answers. Two candidate delivery failures are contract artifacts:
+GM177 appends clarification to factual prose; GM201 provides complete clauses
+then restates their amounts. Raw grades and invalid responses remain preserved.
+
+Commit55cd844 permits partial factual prose with an explicit clarification and
+permits numerical policy explanations only beside selected whole clauses whose
+same-source amount set contains every stated amount. It does not discard factual
+text or infer semantic relationships. Instructions also distinguish explicit
+objects from unresolved referents and discourage unrelated background/medical
+boundaries. The complete offline suite passes541 tests. Cycle22 freshly tests
+this v2 contract on the same exposed16 cases; it is not independent confirmation.
+The subsequent full benchmark is planned as665cases ×2 independently regenerated
+arms (645 mixed-origin questions plus20 separate fixed-context regressions), with
+no saved-answer reuse, new exclusion or claim of unseen questions. Outcomes and
+ledger totals will be appended after completion; no promotion is authorized.
