@@ -7,6 +7,12 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 
 ## Current state
 
+**Cycle14 is in progress:** prompt-only evidence-use checklist against a fresh
+paired baseline,20 retained original questions, fixed selected evidence/model/
+validator. All10 historicalUSE labels are included, but conditional/limited-source
+cases are explicitly distinguished;2scope cases and8controls are retained.
+No Cycle14 quality outcome is claimed before masked review and settlement.
+
 **No broad retrieval candidate has displaced C1.** Historical C1 scored44/60 with
 both judges, versus36/60 for the longer-context/answer C2P; p95 was1.931s versus
 2.041s. This is an exposed diagnostic comparison, not human-gold accuracy.
@@ -213,6 +219,30 @@ Cycle7 warm latency is **p503.551s,p954.720s,max5.674s**. All times retain their
 measurement scope; different cycles/models/source versions are not a controlled
 latency trend. Full experiment documents are authoritative for exact ledgers and
 negative cases. Transport failures and reused outputs are never silently discarded.
+
+## Exact keyword model, vocabulary and untested retrieval hypotheses
+
+Cycle12’s approved fast route was **Alibaba Bailian `qwen3.8-flash`**, with20
+actual keyword calls and returned model IDs checked. “Small model” is an arm label,
+not a verified parameter-count claim. It was not a local model or DeepSeek keyword
+stage. Source vocabulary used existing tokenization plus exact book-title/Latin
+terms from1507Niuhuang/1174Guangming records: common top25 and lexically related
+top60, deduplicated/top-filled to at most90 terms. Original conversational question
+was unchanged; separately user-supplied pad/LivePad terms were not source-derived.
+The model could propose up to3queries outside the vocabulary, without phonetic
+constraints. Deterministic vocabulary expansion instead joined up to5overlapping
+source terms. Generation/judging used approved `deepseek-v4.1-flash`.
+
+The20-call keyword result is promising only under assistant source review and has
+material latency cost. Cycle13’s two literal selectors did not improve it. Remaining
+**untested hypotheses** include semantic/field-aware ranking of valuation clauses,
+source-window extraction that preserves speaker plus requested attribute, and a
+larger frozen original-question confirmation of the weighted keyword route.
+These are hypotheses, not implemented benefits or a claim all retrieval ideas are
+exhausted. They require separate source-grounded tests and resource estimates;
+no new provider, trained model or extra keyword calls are implied. Immediate
+priority is Cycle14’s generation-use isolation because selected evidence is already
+sufficient in several failures. Earlier keyword negative findings remain unchanged.
 
 ## Decisions, resources and open questions
 
