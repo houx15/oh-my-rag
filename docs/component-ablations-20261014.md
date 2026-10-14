@@ -162,3 +162,46 @@ The sole GM C1 pass gain, GM120, replaces abstention with a supported introducti
 The116-job continuation costs **$1.199642** conservatively. Whole A1/C1 stage: **$8.084218**, including the unchanged **$6.0192** for three unknown-use interrupted calls. By arm, generation+review conservative costs are baseline$2.682298, A1$2.718962 and C1$2.682958; each includes one$2.0064unknown-use charge. These are budget ceilings, not an invoice or FX calculation.
 
 **Cumulative $121.98103945/$200; remaining $78.01896055; zero open reservations and no active paid run.** No push, upload or deployment. Private files include completed-costs.json, completed-reliability-audit.json, completed-source-review.json, summary.json and the updated four-column report. Original results and historical partial checkpoints remain preserved.
+
+## Mechanism-level interpretation and next offline refinement
+
+This section clarifies the completed result; it does not authorize or launch more paid work.
+
+### Exact paired denominators
+
+Each baseline/component contrast schedules **68paired cases:24GM+24NH+20fixed-context regressions**. All-denominator passes count every scheduled case, including interrupted outcomes. Both generations/reviews are available for **66pairs per contrast:24GM+23NH+19regressions**. Both delivered answers are mechanically valid for **64pairs per contrast:24GM+22NH+18regressions**. Across three arms there are65complete reviewed triplets. These populations must not be substituted for one another.
+
+| Contrast | All68 paired wins / losses | Both-reviewed66 paired wins / losses | GM / NH / regression all-scheduled wins-losses |
+|---|---:|---:|---|
+| A1 vs baseline |2 /6|2 /5|0-2 /2-2 /0-2|
+| C1 vs baseline |3 /8|3 /7|1-1 /2-5 /0-2|
+
+These are raw valid-and-rubric outcomes, not source-adjudicated effects. The difference between scheduled and reviewed pairs includes an interrupted regression in each component. The baseline also has an interrupted NH generation. No interruption is imputed as a semantic error, silently excluded, or replaced.
+
+### What A1 actually tests
+
+A1 holds retrieval, source order/text, renderer, model and settings fixed and appends an explicit contract reminder. All66reviewed pairs are prompt-only changes. It therefore isolates this **particular reminder**, not a unified schema/decoder architecture: legacy instructions remain, server-side constrained decoding is not enabled, and no automatic repair or retry is used. Extra prompt length is part of the treatment.
+
+Its two observed mechanical failures are a shortened source title unsupported by the declared alias rules (NH-LIVE-07) and non-exact uncited boundary text (REG-FAQ-04). The reminder does not resolve either constraint. The useful interface boundary at N026 is an answer-level observation, while N173's near-equivalent answers reveal grader-threshold sensitivity. GM349's identical-answer score flip is not an A1 effect. Thus the tested reminder is not promoted; the broader mechanism of a genuinely shared schema/prompt/parser contract remains promising for offline consistency checks and content-preserving normalization. Do not infer that schema validation itself failed.
+
+### What C1 actually tests
+
+C1 is a bundled **packing policy**: all-original branch retention under unchanged source-count and context-byte ceilings, with fallback. Across66reviewed pairs,24change source content,4change source order only, and38have identical prompts. By corpus: GM14content+2order+8identical; NH10content+2order+11identical; regressions19identical. It does not separately isolate the effects of removing lexical additions, changing source order and changing available evidence. The byte/source ceilings are shared upper bounds, not exact equal-length contexts. Earlier descriptions of fixed span extraction mean the extraction algorithm is unchanged, not that selecting another source leaves the effective evidence unchanged.
+
+GM120 shows a useful supported answer replacing abstention, but its cited evidence was already in baseline context; reduced distraction or stochastic answer use is plausible, not proven. NH-LIVE-07 loses a source carrying comparison-relevant composition/indications, showing why protecting every original source can crowd out useful lexical evidence. NH-HOP-02 changes order only and still lacks collection-level aggregation evidence. NH-LIVE-26, NH-SKILL-090 and the regression fixtures use identical prompts: their differing outputs cannot be attributed to an effective packing change. The policy is not promoted, while branch provenance and required-facet protection remain useful mechanisms for refinement.
+
+### Judge scores versus source judgments
+
+The source review supplies no replacement aggregate pass count. Its firm conclusions include: both GM349 answers omit requested early workflow steps available on the preceding candidate page; the identical NH R063 introductions are supported for a concise general introduction under the current actual-question rubric; NH-LIVE-07 loses a relevant comparison source; and the four malformed outputs fail the unchanged declared contracts. Source appropriateness and broad-introduction/personal-use completeness remain separate judgments. These are assistant adjudications of selected cases and local OCR, not independent human gold. Raw scores stay immutable, including the two identical-answer/identical-review-prompt disagreements among17identical-answer pairs.
+
+### Next useful zero-call experiment: B2 dependency-aware swaps
+
+Use the same48primary development questions and frozen candidate pools. First annotate source-only structural dependency spans (procedure predecessors/continuations, row+header+unit, claim+condition/cap) and exact offsets; keep those annotations evaluation-only, separate from the generic selector. GM349 motivates predecessor preservation but must not become a case-ID rule. Do not inspect the597confirmation cases to tune this rule.
+
+Compare three cached representations: (1) current packing; (2) a generic dependency bundle that swaps out redundant/lower-priority evidence within the same source/UTF-8 byte ceilings, with explicit displacement provenance; (3) a diagnostic bundle with relaxed bytes to distinguish genuine budget constraints from selection defects, reported as an unequal-budget upper-bound diagnostic rather than a fair performance gain. Freeze one proposed rule before measuring it. Evaluate required dependency retention, original relevant-facet loss, exact source provenance, OCR uncertainty, bytes, and no-op/fallback rates separately by corpus. No model calls or claim of downstream answer improvement. Reject inferred table relations and candidates that merely gain by dropping another required facet.
+
+If B2 improves source-reviewed dependency coverage without material losses, preserve that mechanism for a later authorized fresh answer test. D0 can then be compared expansion-off/on with packing and original-query span extraction frozen. D0 already changes8/24NH and7/24GM contexts after byte fallbacks, but candidate novelty is not required-evidence gain. Measure newly retained dependencies and displaced useful originals before any new paid expansion experiment. This sequence refines useful mechanisms rather than dismissing dependency bundles or expansion from A1/C1's scores.
+
+### Paid authority remaining
+
+The direct user instruction was to **resume the116unstarted paid ablation jobs within the existing$200cumulative limit**. That action is fully fulfilled. It does not authorize additional calls merely because$78.01896055remains. No new paid job, retry of the three interrupted outcomes, D test, combination, leave-one-out matrix or confirmation run is initiated by this summary request. Further paid scope requires a new direct instruction or otherwise recognized authorization. The shared ledger is closed with zero open reservations; no push, upload or deployment.

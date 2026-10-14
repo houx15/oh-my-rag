@@ -1066,3 +1066,10 @@ GM349's two identical answers share a verified missing-procedure defect: precedi
 ### Authorized component continuation completed
 
 The [completed component ablation](component-ablations-20261014.md#authorized-continuation-completed--october-14-2026) retains all204scheduled outcomes:201reviewed and3preserved interrupted failures. The116resumed jobs completed without new failures/retries, costing$1.199642. All284frozen scope hashes passed; original88outcome rows are byte-identical. Primary passes baseline28/48,A1 26/48,C1 25/48; separate fixed-context regression passes20/20,18/20,18/20. No default replacement, combination or broader confirmation is justified. Raw judgments and source adjudications remain separate, including two identical-answer/prompt score disagreements among17identical-answer pairs. Cumulative$121.98103945/$200, remaining$78.01896055; zero open reservations, no active paid work. No push, upload or deployment.
+
+
+### Mechanism-level interpretation and remaining authority
+
+The [mechanism analysis](component-ablations-20261014.md#mechanism-level-interpretation-and-next-offline-refinement) gives exact denominators:68scheduled pairs per contrast,66both-reviewed pairs,64both-mechanically-valid pairs. Raw scores are not source-adjudicated aggregate outcomes. A1 tests a prompt reminder, not schema unification or constrained decoding. C1 changes a packing policy; its66reviewed pairs include24content changes,4order changes and38identical-prompt controls. Neither tested configuration replaces the baseline, but shared-contract consistency, branch provenance and required-dependency preservation remain useful refinement directions.
+
+Next offline step is a fixed-pool dependency-aware swap experiment with exact offsets, explicit displaced-evidence accounting and the same byte/source ceilings; a relaxed-budget diagnostic must be labeled separately. Expansion follows only with packing fixed and required-evidence gains checked. No new paid work is initiated: the direct authorization to resume116jobs is fulfilled; remaining budget is not itself permission for more calls. Baseline and the narrow parser repair remain retained.
