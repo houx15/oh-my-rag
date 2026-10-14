@@ -10,7 +10,33 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — protocol repair, October 14, 2026
+## Current checkpoint — citation-alignment plateau, October 14, 2026
+
+[Cycle11 fixed-answer citation comparison](docs/citation-cycle11.md) compares
+unchanged quotes, simple neighbor expansion and bounded sentence completion.
+Across **432 historical output records**, all answer text and source IDs remain
+unchanged; mechanical validity stays **422/432** in every arm. These repeated
+outputs are not 432 independent questions, and historical adequacy scores were
+not updated. Eight separately authored synthetic cases were frozen after the
+implementation; prior frozen checks were not tuned.
+
+A separate assistant reviewed **53 masked unique outputs**. Each method repairs
+a different narrow attribution case, but neither fixes the missing 《圣惠方》
+citation, the local “味苦气凉” mismatch, or the false 5–8-floor vacancy claim.
+Extra quotation text often adds irrelevant material. **No net quality advantage
+is established; both variants remain unpromoted and this tuning line stops.**
+The review is same-model and not human gold. C1 remains the default; Cycle10's
+verified opt-in protocol repair is preserved.
+
+The helper is independently engineered, with no copied external code or new
+paper reproduction. Existing literature credits remain scoped to their actual
+use. Cycle11 makes **zero paid calls**; cumulative conservative ledger remains
+**$82.03191625/$200** with no active run. **473 regression tests and five focused
+Python-O checks pass.** Local replay processing p95 is 0.129 ms for neighbor and
+0.057 ms for sentence completion; these are not end-to-end model latencies.
+No push, upload or deployment occurred.
+
+## Previous checkpoint — protocol repair, October 14, 2026
 
 [Cycle10 protocol repair and isolated source effects](docs/protocol-cycle10.md)
 repairs all three final Cycle9 delivery losses without another generation call:
