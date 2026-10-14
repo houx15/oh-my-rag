@@ -19,11 +19,14 @@ is material: source attribution and appropriate clarification can be penalized
 by the original references. Neither reviewer is human gold. The small-model
 component-sum p95 increased from6.140s to11.299s. Candidate-pool diagnostics show
 correct sources dropped during fusion; more keyword calls are not the next step.
-**Cycle13 selection-only ablations are frozen; generation and adjudication pending.**
+**Cycle13 is complete: equal fusion9/20 and token coverage10/20 source-useful,
+versus12/20 for the earlier weighted small-model arm. Neither is promoted.**
+Both new selectors have one protocol failure; source selection alone does not
+resolve policy-scope, attribution or evidence-use failures. [Cycle13 details](keyword-selection-cycle13.md).
 
-Latest settled conservative cumulative spend: **82.90564145 of200USD**, including
+Latest settled conservative cumulative spend: **83.49996345 of200USD**, including
 all earlier ledger chains. This uses conservative numeric tariff reservations,
-not an exchange-rate conversion or invoice. Cycle12 made139 paid calls, no retry;
+not an exchange-rate conversion or invoice. Cycle12/13 made219 paid calls, no retry;
 one judge request was rejected locally before dispatch and remains unscored.
 No privacy-screen exemption was added. [Cycle12 details](keyword-cycle12.md).
 
@@ -204,7 +207,7 @@ remain precise and required existing notices preserved.
 | Oct14 Cycle10 | Separate source/section factors; narrow protocol repair |17original:10/10/9/9 passes across baseline/source/section/both;6synthetic:5 each. Replay final34/37→37/37 valid with no prior-valid changes in328 records.79calls, cumulative82.03191625. [Details](protocol-cycle10.md). |
 | Oct14 Cycle11 | Expand quotations with fixed answers |432replayed outputs:422valid in all arms;53masked outputs show different narrow repairs and unresolved attribution. No net quality gain, stop line;0calls. [Details](citation-cycle11.md). |
 | Oct14 Cycle12 | Free-form Qwen keyword hypotheses plus source vocabulary |20 original×3 fresh arms. Raw8/10/6 vs masked-source9/9/12; source gainsR034,R095,GM125; vocabulary also losesGM128. p956.140/7.020/11.299s staged sum.139paid calls,.8737252 conservative incremental. Promising source result, no promotion; diagnose dropped candidates. [Details](keyword-cycle12.md). |
-| Oct14 Cycle13 | Selection-only equal fusion versus marginal token coverage | Frozen20queries reused,40jobs prepared; no new keyword calls. Generation/source review pending. Historical comparisons disclosed as noncontemporaneous. |
+| Oct14 Cycle13 | Selection-only equal fusion versus marginal token coverage | 20frozenqueries reused,40fresh answers/40judges. Source-usefulness9/20 equal fusion,10/20 token coverage versus12/20 weighted; each19/20 valid. p959.856/10.431s staged sum.0.594322 increment; no promotion. [Details](keyword-selection-cycle13.md). |
 
 Cycle7 warm latency is **p503.551s,p954.720s,max5.674s**. All times retain their original
 measurement scope; different cycles/models/source versions are not a controlled
@@ -221,9 +224,10 @@ CPU source-only selectors have negligible API cost but measured local time matte
 one keyword API adds about2.734s median/5.047s p95 in this pilot. Extra verifiers
 add latency/cost and require calibration. GPU/training reproduction is unverified.
 
-Next: finish Cycle13 with preserved controls and all source-reviewed regressions;
-if a coherent route improves usefulness, freeze a larger original-question
-confirmation before generation, then retain fresh regression checks. Avoid picking
+Next: isolate generation-prompt evidence use with fixed selected contexts and
+unchanged validators, preserving clean and uncertainty controls. Cycle13 did not
+improve on the earlier weighted pilot; the proposed larger40-original keyword
+confirmation remains deferred, not completed. Avoid picking
 one winning arm per question for the main report. Report question, answer, score,
 response time in four columns with method/version and source-review caveats.
 
@@ -246,7 +250,20 @@ this repository alone does not distribute a turnkey benchmark dataset.
 Private artifacts under `/Users/monkey/Documents/Codex/2026-10-12/task/`:
 `keyword-cycle12-20261014/` (60answers, raw/source scores, masked reviews, report,
 settlements, frozen manifests); `keyword-selection-cycle13-20261014/` (plan,
-input provenance,40jobs, tests; later outputs); `flash41-full-rerun-20261013/presentation/`
+input provenance,40answers,80calls, masked source reviews, verification and tests); `flash41-full-rerun-20261013/presentation/`
 (cumulative four-column report and historical appendices). These paths are local,
 not public downloads. [Optimization log](optimization-log.md) and the linked cycle
 records preserve earlier detailed work without copying huge tables here.
+
+
+### 2026-10-14 closing note
+
+Cycle13 recovers GM064’s catalogue source in both arms, yet only equal fusion
+avoids the inappropriate subsidy generalization. N417 still misses valuation:
+real tokenization keeps很贵 together and source-only literal scoring ignores that
+unseen term. R095’s useful raw clarification fails the declared schema in both new
+arms; retain PROTO distinct from USE. All40 source reviews are complete, including
+regressions and borderline cases.145scope hashes verified,483regression tests plus
+10focused optimized checks pass. No active paid stage or open reservations.
+A reproducible check finds293/293 delivered citations exact across100outputs,
+not proof of entailment and not verification of the historical1206 tally.

@@ -22,13 +22,17 @@ three arms. Raw judge passes8/10/6 contrast with masked assistant source-usefuln
 The small-model arm has three source-reviewed gains and no observed losses on this
 exposed pilot, but pipeline-component p95 rises6.140→11.299s. Review is same-model,
 not human gold; no candidate is promoted. Correct candidates can be dropped by
-fusion, so Cycle13 now tests selection only with the20 frozen keyword outputs.
+fusion, so Cycle13 tested selection only with the20 frozen keyword outputs.
+[Cycle13](docs/keyword-selection-cycle13.md) source-usefulness is9/20 for equal
+fusion and10/20 for token coverage, versus12/20 for the earlier weighted arm.
+Each new arm loses one answer at protocol delivery. Neither is promoted; the next
+isolated hypothesis concerns generation instructions, with validators unchanged.
 
 [Historical audit](docs/historical-failure-audit.md) covers318 original answers and
 locates56 defects,23 scorer/reference problems and85 unresolved cases. These are
 historical mixed versions, not current accuracy. Cycle12 settled139paid calls;
-cumulative conservative spend82.90564145/200 before the active bounded Cycle13
-answer stage.483offline tests pass. No new external code or paper implementation
+Cycle13 settled80additional calls; cumulative conservative spend83.49996345/200,
+no active paid run or open reservations.483offline and10focused optimized checks pass. No new external code or paper implementation
 was adopted; existing acknowledgments remain scoped to actual use. No push/upload/
 deployment. Follow the technical report for the evolving state and final settlement.
 
