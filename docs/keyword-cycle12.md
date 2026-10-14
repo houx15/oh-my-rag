@@ -1,4 +1,4 @@
-# Cycle12: free keyword hypotheses with source vocabulary
+# Cycle12: free-form keyword hypotheses with source vocabulary
 
 The user requested a fast-model keyword stage for false abstentions, with no phonetic-similarity requirement. This implementation preserves original-query retrieval, merges additional lexical views, and grounds generation in source text. Hypotheses are never answer evidence. No default is changed before results and source review justify it.
 
@@ -79,3 +79,13 @@ The result is promising source-usefulness on exposed cases at material added
 latency, not justification for promotion. C1 remains default. Cycle12 is independent
 engineering with no external code/prompt/weights or new paper reproduction.
 [Canonical narrative and next steps](technical-report.md).
+
+
+Review standard clarification: “success” means materially useful supported delivery,
+not perfect uncertainty handling or execution of every action. The reviewer accepted
+GM001's strongly indicated比色快检试纸 candidate while flagging missing conditional
+language, and accepted GM125's substantive explanation despite unfulfilled navigation.
+N001’s牛磺→牛黄 substitution was considered materially ambiguous and failed. These
+borderline judgments require human calibration; they are not a universal rule that
+all unconfirmed phonetic corrections fail. See the canonical report’s stage trace
+for USE versus actual protocol rejection and planned prompt-only controls.
