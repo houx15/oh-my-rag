@@ -11,9 +11,11 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 promoted.** Model-and-delivery passes388→382, valid outputs636→585, and warm staged
 p954.918→5.513s. Both arms use repaired deterministic retrieval and the Cycle10
 baseline adapter; this is not exact historical C1/current-default reproduction.
-The separate20-regression comparison had a parser mismatch; its code is fixed,
-but a fresh correction stopped on3 transport failures. All outcomes remain visible.
-Final conservative ledger **113.54423545/200USD**, zero open reservations, no active
+The original20-regression comparison had a parser mismatch; after a blocked attempt,
+a new corrected recovery completes20/20 baseline versus19/20 candidate. All attempts
+remain visible. A narrow offline parser fix recovers one primary candidate answer
+(585→586 valid) without changing original scores.
+Final conservative ledger **113.89682145/200USD**, zero open reservations, no active
 paid work. Fresh generations do not make historically exposed questions unseen.
 Model judges, OCR references and assistant source review are not human gold.
 
@@ -55,7 +57,7 @@ explicit fresh/reused/failed/unrun status; full-pool results first with live,
 simulated, evaluation and regression strata separate; and fixed, human-calibrated
 scoring and comparable latency scope. Diagnostic subsets belong alongside those
 results, not in place of them. The completed primary benchmark below supplies this accounting; human calibration
-and a valid paid correction of the separate regression fixtures remain outstanding.
+remains outstanding; the separate corrected regression recovery is recorded below.
 
 ## Historical experimental principle and keyword investigation (through Cycle15)
 
@@ -905,3 +907,127 @@ conditional coverage without rejecting ordinary explanations, whether source-awa
 numeric helpers survive prompt changes, and whether layout/identity evidence resolves
 relation ambiguity. Human calibration, independent testing and corrected regression
 validation are still needed; no further paid optimization is scheduled.
+
+## Invalid-output diagnosis and regression recovery — 2026-10-14
+
+**Baseline retained; no candidate promotion.** The primary645 live results remain
+388/645 baseline versus382/645 candidate passes and636→585 valid outputs. The
+regression adapter defect never applied to primary GM/NH routing. Its corrected
+fresh20-pair recovery now completes: baseline20/20 passes/valid versus candidate
+19/20, with0wins/1loss. Candidate's remaining failure adds an unallowed top-level
+`note`; the frozen root-schema check correctly rejects it. Raw judge rubric passes
+20/20 in both arms do not make the undelivered candidate output successful.
+
+| Corrected regression (20 cases/arm) | Baseline | Candidate |
+|---|---:|---:|
+| Model-and-delivery passes |20|19|
+| Valid delivery |20|19|
+| Warm staged p50 (seconds) |4.223|4.359|
+| Warm staged p95 (seconds) |5.267|5.558|
+
+All40 answers/40 reviews are fresh under a new recovery ID, same fixed fixture
+contexts/prompts and unchanged candidate generation contract.274 scope hashes
+matched at closure. No in-run retry/failure, no saved generations substituted.
+The recovery explicitly reattempted the three previously failed logical jobs and
+newly attempted37. Prior failed requests, unknown usage,6.0192 conservative charge,
+and37 unstarted rows remain in the original correction artifact. Do not describe
+this cumulative history as retry-free or rewrite its original0→20 parser artifact.
+
+### Exact mechanical categories across primary invalid outputs
+
+All69 invalid responses (60 candidate,9 baseline) parse as JSON; none is a JSON
+syntax failure. Schema/protocol noncompliance and semantic correctness are separate
+axes. A mechanical rejection is neither proof of hallucination nor proof of a
+correct answer being lost.
+
+| Candidate rejection category | Count | Diagnosis / action |
+|---|---:|---|
+| Numeric policy, no required Q selected |19|Model violates explicit whole-clause contract; source amounts may still be correct. No check waived.|
+| Numeric policy, selected Q does not cover every stated literal with its bound source |21|Includes wrong/incomplete clause choices, user premises and calculations. Ten cases have no matching selected clause source for the rejected statement. Requires semantic/operand evidence, not a blanket numeric whitelist.|
+| Mixed `text` + `boundary` objects |10|Prompt explicitly permits only a boundary object alone. Dropping arbitrary boundary prose could discard claims; not normalized silently.|
+| Four source handles where prompt allows at most three |9|All handles exist and are distinct; this is a presentation-limit/model-compliance issue, not unknown sources. Increasing the limit would be an explicit contract change.|
+| Repeated valid Q handle |1|Prompt does not forbid repeat selection, renderer rejected it. General idempotent exact-clause fix917a7a6 recovers this one case.|
+
+Baseline9: four clarification protocol violations (three non-exclusive clarify,
+one mixed text/boundary); two invalid segment references; two title-support/alias
+failures; one overlong sentence. The latter is172characters against160 in the GM
+contract. These are not the regression wrong-corpus-parser bug. No unsupported
+segment, uncited title or unverified alias was silently repaired.
+
+Among40 numeric rejections,34 have every rejected literal somewhere in their cited
+source text. That is **not** semantic support: it does not bind beneficiary, basis,
+period, cap or an OCR table relationship. The other six include user premises,
+arithmetic and a missing own-citation continuation. Their evidence is preserved in
+private `invalid-classification.json`, with per-statement amounts/source bindings.
+
+### Recoverable correct answers versus unsafe blanket acceptance
+
+Source-visible assistant review establishes a **lower bound of five sound candidate
+answers** in the60 invalids; this is not a complete semantic adjudication or human
+gold. Only one is mechanically recovered by the narrow fix. Four remain rejected
+under the frozen literal-matching contract:
+
+- GM293: both platform-construction and compute-purchase subsidy summaries match
+  the full selectedQ12, including conditions, rates/caps/duration. Rendering its
+  duplicate selection once preserves all factual prose and exact evidence.
+- GM325: user35% falls in the30–40% band;10+30=40万元, below60万元 cap. The guard
+  rejects the user-provided35%, although both full policy clauses are selected.
+- GM197: conditional800万元×50%=400万元, capped at300万元; eligibility and cap remain
+  explicit. User premise and derived value need typed verification, not quotation.
+- GM305: correctly distinguishes annual sales increment from gross600万元. The
+  rejected600万元 is the user's premise in a negative comparison, not a policy cap.
+- GM309:200/300/500万元 caps imply100/300/200万元 differences; source and no-subletting
+  condition are retained, but derived100万元 is rejected.
+
+Counterexamples show why broad acceptance is inappropriate: GM168 asserts−196°F
+where the cited source supplies only`-196&#176;` with no scale; neither F nor C may
+be inferred from that string. GM304 supplies a monetary-unit/600万元 continuation
+missing from its own cited page excerpts. GM297 confuses the requested cloud-service
+versus university AI-service comparison with other expenditure categories. These
+are source/task defects independent of formatting. Remaining invalids are mechanically
+classified, not all semantically adjudicated; no total hallucination count is claimed.
+
+### Controlled offline parser ablation
+
+Commit917a7a6 renders repeated identical valid Q selections once and records their
+provenance. It preserves all ordinary factual/boundary text and exact source spans;
+unknown handles, unsupported amounts, duplicate JSON keys, mixed schemas, envelope
+and length checks remain.23 targeted unittest checks pass, including adversarial
+wrong-amount/unknown-handle/extra-root/mixed-boundary cases.
+
+All645 saved primary pairs plus20 corrected regression pairs are replayed through
+the current parsers: **one change only**, GM293 candidate invalid→valid. Baseline
+primary636/645 stays636; candidate585→586/645. All1,260 previously valid answers
+across those populations remain identical. Corrected regressions stay20→19/20.
+Original result files retain their SHA256 hashes and all original scores. This is
+an offline deterministic parser ablation, not a fresh generation benchmark; no
+new overall pass rate or latency result is substituted for the original.
+
+Scientific scope before further spending: unchanged prompts/models permit the
+controlled all-case saved-response replay to isolate this parser effect at zero
+API cost. No primary paid rerun was needed or dispatched. A future change to numeric
+rules, boundary schema or source-count prompts would need newly frozen paired tests
+with controls, not just regrading these exposed invalids. Any full performance claim
+would require both arms on the645 primary roster; the observed full1330-output run
+cost14.162858USD provides a planning scale, not authorization to launch another run.
+
+### Connection diagnosis and final accounting
+
+The restricted shell reproduced DNS`gaierror errno8` in1ms. The same approved host
+resolved four addresses and established TLS1.2 through the permitted execution
+route, with no credentials sent during diagnosis. This explains the boundary and
+is consistent with the earlier immediate errors; the original transport did not
+capture DNS-level cause, so exact historical causality remains an inference.
+One authorized ledgered health check after cooldown returned expected JSON/model/
+usage (30input/5output tokens), costing0.0001USD. No auth, endpoint or provider change.
+The following fresh regression recovery costs0.352486USD.
+
+**Final conservative cumulative113.89682145/200USD; remaining86.10317855; zero open
+reservations and no active paid run.** Prior unknown-use6.0192 remains charged.
+Private artifacts: `grounded-prose-invalid-recovery-20261014/` (classification,
+source notes, network diagnosis, health settlement and all-case offline replay),
+`grounded-prose-regression-recovery-20261014/` (fresh corrected pairs and ledger).
+The primary four-column report shows original645 results, corrected20 regressions,
+and the one offline recovery separately. Historical failures and blocked attempt
+are secondary preserved evidence. README credits are unchanged: no new external
+paper/code/prompt/weight adoption. No push, upload or deployment.

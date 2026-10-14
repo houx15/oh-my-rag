@@ -33,19 +33,27 @@ with repaired retrieval, not exact historical C1. All questions were historicall
 exposed; the judge and24-case source audit are not human gold. The complete run
 retains1330 fresh outputs and reviews, zero transport failures/retries or reuse.
 Its20 separate regression pairs exposed a baseline parser mismatch, so their0→20
-result and the combined665 gain are invalid evidence. The parser fix (`3eeea7e`)
-passes20 targeted tests and20/20 offline reconstructions. A separately recorded
-fresh correction stopped on3 connection failures:0 generated outputs,37 unstarted,
-no automatic retries. Corrected paid regression validation remains blocked.
+result and the combined665 gain are invalid evidence. After a blocked attempt, the
+new corrected regression recovery completes **20/20 baseline versus19/20 candidate**,
+with40 fresh answers/reviews. The prior3 failed calls and37 unstarted outputs remain
+preserved. A single health check confirmed the existing route works outside the
+DNS-restricted shell; no credential/provider changes were made.
 
-The [canonical report](docs/technical-report.md#completed-primary-benchmark-and-blocked-regression-correction--2026-10-14)
-contains origins/exclusions, paired results, source-reviewed failures, latency scope,
-resource costs and the negative decision.546 full offline tests passed before the
-full freeze. Final conservative ledger **113.54423545/200USD**, **86.45576455 remaining**,
-zero open reservations and no active paid work;6.0192 is unknown-use conservative
-charging for the failed correction, not confirmed provider billing. All artifacts
-stay private. No push/upload/deployment or new external code/method adoption;
-existing acknowledgments retain their precise actual-use scope.
+[Invalid-output diagnosis and recovery](docs/technical-report.md#invalid-output-diagnosis-and-regression-recovery--2026-10-14)
+classifies all60 candidate and9 baseline primary invalids. A narrow idempotent-clause
+parser fix (`917a7a6`) recovers one source-reviewed correct answer in offline replay:
+**585→586/645 candidate valid outputs**, baseline636 unchanged. Every previously valid
+answer remains identical. Original live scores and latencies are not replaced.
+Four other inspected correct numeric explanations remain rejected by the frozen
+contract; substantive source errors also occur, so checks are not broadly waived.
+
+The canonical report retains origins/exclusions, paired results, source-reviewed
+failures, costs and the negative decision.546 full offline tests passed before the
+original freeze;23 targeted tests cover the recovery fix. Final conservative ledger
+**113.89682145/200USD**, **86.10317855 remaining**, zero open reservations and no active
+paid work. Prior6.0192 unknown-use conservative charges remain, not confirmed billing.
+All artifacts stay private. No push/upload/deployment or new external code/method
+adoption; existing acknowledgments retain their actual-use scope.
 
 ## Previous checkpoint — Cycle20 confirmation failed, October 14, 2026
 
