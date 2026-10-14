@@ -455,3 +455,13 @@ request-cap preflight now prevents beginning an unaffordable-in-calls batch.
 Full acceptance passes 337 tests in both Python modes, preserving all legacy tests.
 The original 60-question rerun is prepared but has zero paid calls; do not describe
 it as completed. The private four-column case report contains 300 verified rows.
+
+
+## 2026-10-14 — Cycles14/15 prompt-only closure
+
+See [Cycle14](use-prompt-cycle14.md), [Cycle15](use-focus-cycle15.md), and the
+[canonical technical report](technical-report.md). Fixed evidence/model/validators;
+generic source8→9/20(UIonly),task-focused6→9/14(strict4→5;only1borderlinecontentrescue).
+Frozen2content-gain gatefailed; both8-case confirmationsunrun. No promotion.
+136dispatches acrossboth,2.95489increment, cumulative86.45485345/200;Cycle14one
+unknownjudge conservativelysettled,noretry,noopen.490tests+17optimizedchecks.

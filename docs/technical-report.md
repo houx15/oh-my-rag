@@ -7,12 +7,13 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 
 ## Current state
 
-**Cycle14 completed:** generic checklist source-usefulness8→9/20, one UI-capability
-correction, no demonstrated content-use rescue. Format validity18→20/20 does not
-imply correct answers. Rawjudge6→9passes with1unscored timeout; conservative
-cumulative86.06776345/200. [Trace and negative result](use-prompt-cycle14.md).
-**Cycle15 task-focused prompt is prepared**, with fixed evidence/model/validators
-and fresh paired controls. No result claimed yet.
+**Cycle15 completed:** task-focused prompt source-usefulness6→9/14, but only one
+borderline content rescue; other gains repair a conditional referent and unsupported
+UI capability. Strict sensitivity4→5; rawjudge5→4; validity13→14. The predefined
+2-content-rescue gate failed, so8 frozen synthetic checks remain unrun. C1 unchanged.
+[Results and failures](use-focus-cycle15.md). Cycle14's generic checklist likewise
+found only a UI correction (8→9/20); [negative result](use-prompt-cycle14.md).
+Stop this tested prompt-only line; no generalization or broad performance claim.
 
 **No broad retrieval candidate has displaced C1.** Historical C1 scored44/60 with
 both judges, versus36/60 for the longer-context/answer C2P; p95 was1.931s versus
@@ -31,10 +32,11 @@ versus12/20 for the earlier weighted small-model arm. Neither is promoted.**
 Both new selectors have one protocol failure; source selection alone does not
 resolve policy-scope, attribution or evidence-use failures. [Cycle13 details](keyword-selection-cycle13.md).
 
-Latest settled conservative cumulative spend: **86.06776345 of200USD**, including
+Latest settled conservative cumulative spend: **86.45485345 of200USD**, including
 all earlier ledger chains. This uses conservative numeric tariff reservations,
 not an exchange-rate conversion or invoice. Cycle12/13 made219 paid calls; Cycle14 added80dispatches including1unknown-usage
-judge timeout, conservatively settled without retry;
+judge timeout, conservatively settled without retry; Cycle15 added56 fully settled
+dispatches at0.38709 incremental cost. All stages closed, no open reservations;
 one judge request was rejected locally before dispatch and remains unscored.
 No privacy-screen exemption was added. [Cycle12 details](keyword-cycle12.md).
 
@@ -143,7 +145,7 @@ Historical audit locates56 defects (19 GM,37 NH), including21 final-context miss
 no material defect found. These are mutually exclusive primary historical audit
 labels, **not current accuracy estimates or proof that114 answers are gold-correct**.
 
-## USE-stage prompt and structured-output investigation — 2026-10-14
+## Pre-Cycle14 USE-stage investigation — 2026-10-14
 
 User hypothesis: usable evidence may be omitted by the generation instructions or
 suppressed during structured-output validation. Compare the full chain, retaining
@@ -154,7 +156,7 @@ with no new inference and no validator changes. Local evidence:
 
 | Case / version | Selected evidence and instructions | Raw response → parsed/delivered answer | Located failure |
 |---|---|---|---|
-| GM124 historical | D36:330:01 explicitly describes safety-interlock protection. Saved prompt requires grounded facts, permits fixed no-evidence sentence, but gives no explicit split between display operation and explanation. | Raw model already returns only “本次资料未包含回答该问题所需的依据。”; parsing adds protocol field, delivered text unchanged. | USE; secondary UI/intent. No postprocessing suppression. The interface wording may distract generation; causal prompt test pending. |
+| GM124 historical | D36:330:01 explicitly describes safety-interlock protection. Saved prompt requires grounded facts, permits fixed no-evidence sentence, but gives no explicit split between display operation and explanation. | Raw model already returns only “本次资料未包含回答该问题所需的依据。”; parsing adds protocol field, delivered text unchanged. | USE; secondary UI/intent. No postprocessing suppression. The interface wording may distract generation; prompt test was pending at this initial trace; completed results follow in Cycles14/15. |
 | N265 historical | Selected MD-038-0008 explicitly says “药中之贵，莫复过此” and historical valuations. Exact historical prompt is not available in this inspected record; do not substitute a reconstructed current prompt. | Raw model says no price information and adds no-evidence boundary; factual sentence preserved, boundary expanded as declared. | USE; secondary missing antecedent/current-versus-historical ambiguity. Historical valuation should be distinguished from current price; not proof the user's referent is known. |
 | R021 Cycle12 baseline | Selected passage contains除邪逐鬼 but no explicit explanation. Prompt says answer the question and permits only provided-source facts. | Raw response repeats the phrase and says no separate definition; both sentences delivered unchanged. | Incomplete requested explanation, with source-sufficiency/RET secondary possibility. Not evidence the validator deleted an available explanation; do not invent interpretation to force success. |
 | GM064 Cycle12 baseline | Selected policy evidence contains new-materials context; prompt explicitly requires conditions/scope. | Raw answer already omits policy applicability and adds subsidy to achievements; delivered text identical. | SCOPE/USE and relevance, not protocol. Source-scope recognition is not guaranteed by exact handles. |
@@ -168,13 +170,12 @@ postprocessor suppresses information. Intermediate handle JSON can fail the fina
 schema before canonical conversion and still deliver successfully; do not count
 that intermediate diagnostic as final rejection.
 
-Next prompt-only test should hold contexts, model, schema, validator and token caps
-fixed, separating unavailable UI action from an available explanation and checking
-requested facets/conditions before choosing a no-evidence boundary. Use clean
-controls and genuine missing-context/current-data negatives, record raw→delivered
-text retention, source entailment, regressions and latency. Any new output-field
-proposal needs explicit parser tests and is a separate factor. **Do not weaken
-citation, title, boundary or source checks merely to improve pass rates.**
+The pre-Cycle14 proposal was to hold contexts, model, schema, validators and token
+caps fixed while changing generation instructions, with clean and missing-evidence
+controls. Cycles14/15 have now completed that comparison: raw-to-delivered traces
+and source review did not establish the required substantive content gains.
+Their frozen confirmation sets remain unrun. No output fields or validators were
+weakened; accepting unsupported prose would not establish task success.
 
 ## Literature and actual influence
 
@@ -216,6 +217,8 @@ remain precise and required existing notices preserved.
 | Oct14 Cycle11 | Expand quotations with fixed answers |432replayed outputs:422valid in all arms;53masked outputs show different narrow repairs and unresolved attribution. No net quality gain, stop line;0calls. [Details](citation-cycle11.md). |
 | Oct14 Cycle12 | Free-form Qwen keyword hypotheses plus source vocabulary |20 original×3 fresh arms. Raw8/10/6 vs masked-source9/9/12; source gainsR034,R095,GM125; vocabulary also losesGM128. p956.140/7.020/11.299s staged sum.139paid calls,.8737252 conservative incremental. Promising source result, no promotion; diagnose dropped candidates. [Details](keyword-cycle12.md). |
 | Oct14 Cycle13 | Selection-only equal fusion versus marginal token coverage | 20frozenqueries reused,40fresh answers/40judges. Source-usefulness9/20 equal fusion,10/20 token coverage versus12/20 weighted; each19/20 valid. p959.856/10.431s staged sum.0.594322 increment; no promotion. [Details](keyword-selection-cycle13.md). |
+| Oct14 Cycle14 | Fixed-evidence generic checklist |20pairs:raw6→9 with1unscored; source8→9, onlyUIgain; valid18→20; p956.387→7.705s contiguous.80dispatches,2.5678 increment including1unknown conservative settlement.8checks unrun. [Details](use-prompt-cycle14.md). |
+| Oct14 Cycle15 | Task-focused fixed-evidence prompt |14pairs:raw5→4; source6→9 (strict4→5), only1borderlinecontentgain; valid13→14; p957.898→8.851s contiguous.56dispatches,.38709increment,cumulative86.45485345.2content-gain gatefailed;8checks unrun;stop testedline. [Details](use-focus-cycle15.md). |
 
 Cycle7 warm latency is **p503.551s,p954.720s,max5.674s**. All times retain their original
 measurement scope; different cycles/models/source versions are not a controlled
@@ -242,9 +245,9 @@ source-window extraction that preserves speaker plus requested attribute, and a
 larger frozen original-question confirmation of the weighted keyword route.
 These are hypotheses, not implemented benefits or a claim all retrieval ideas are
 exhausted. They require separate source-grounded tests and resource estimates;
-no new provider, trained model or extra keyword calls are implied. Immediate
-priority is Cycle14’s generation-use isolation because selected evidence is already
-sufficient in several failures. Earlier keyword negative findings remain unchanged.
+no new provider, trained model or extra keyword calls are implied. Cycle14/15 have now tested two generation-use prompt variants with fixed evidence.
+Neither met the substantive content-gain gate. Earlier keyword negative findings
+remain unchanged; no automatic next paid experiment is scheduled.
 
 ## Decisions, resources and open questions
 
@@ -256,10 +259,12 @@ CPU source-only selectors have negligible API cost but measured local time matte
 one keyword API adds about2.734s median/5.047s p95 in this pilot. Extra verifiers
 add latency/cost and require calibration. GPU/training reproduction is unverified.
 
-Next: isolate generation-prompt evidence use with fixed selected contexts and
-unchanged validators, preserving clean and uncertainty controls. Cycle13 did not
-improve on the earlier weighted pilot; the proposed larger40-original keyword
-confirmation remains deferred, not completed. Avoid picking
+Cycles14/15 isolate generation instructions with fixed contexts and unchanged
+validators. All65 valid outputs across68 preserve raw factual text; one borderline
+content rescue does not meet the frozen gate. Further work needs a distinct
+hypothesis (for example claim/qualifier selection) and calibrated source labels,
+not more spending on this failed gate. The larger40-original keyword confirmation
+and both8-case prompt confirmations remain unrun. Avoid picking
 one winning arm per question for the main report. Report question, answer, score,
 response time in four columns with method/version and source-review caveats.
 
@@ -288,7 +293,7 @@ not public downloads. [Optimization log](optimization-log.md) and the linked cyc
 records preserve earlier detailed work without copying huge tables here.
 
 
-### 2026-10-14 closing note
+### Earlier Cycle13 closing note — 2026-10-14
 
 Cycle13 recovers GM064’s catalogue source in both arms, yet only equal fusion
 avoids the inappropriate subsidy generalization. N417 still misses valuation:
@@ -306,5 +311,24 @@ not proof of entailment and not verification of the historical1206 tally.
 All38valid outputs preserve raw factual sentences. Source-usefulness8→9/20 reflects
 onlyGM124’s corrected UI boundary. N170’s biography recovery is offset by答→牛黄
 misattribution. N265/R095 become valid but remain semantically wrong. Preserve
-PROTO versus USE/intent distinctions. Cycle15 tests task-focused instructions;
+PROTO versus USE/intent distinctions. Cycle15 subsequently tested task-focused instructions;
 Cycle14’s8frozen synthetic checks remain unrun, not successful confirmations.
+
+
+### Latest closure — Cycles14/15, 2026-10-14
+
+No active paid work. Cycle15 all164 scope hashes verified,490 offline and17 focused
+optimized tests pass. All28 outputs source-reviewed,83/83 delivered citations exact;
+exactness is not entailment. Paired evidence/model/validators fixed; prompt-only
+changes do not affect defaultC1. Generic then task-focused instructions fail the
+predefined substantive-content gate. Richer biographies/definitions already useful
+in the fresh baseline are not rescues. GM072,GM127,N466 andR095 remain instructive
+failures. Retain all raw grades, borderline sensitivity, the Cycle14 timeout and
+unrun frozen checks. Final cumulative conservative spend86.45485345/200.
+
+New implementation/artifacts: `newdomain/evidence_use_prompt.py`,
+`newdomain/evidence_use_prompt_v2.py`, corresponding runners/tests;
+`use-prompt-cycle14-20261014/` and `use-focus-cycle15-20261014/` private directories.
+The report presents one coherent current candidate, all paired outputs in appendices,
+and unchanged historical tables. No external paper/code newly adopted in these
+cycles; existing acknowledgments remain scoped to actual conceptual influence.

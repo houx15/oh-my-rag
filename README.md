@@ -14,27 +14,30 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — keyword hypotheses and selection, October 14, 2026
+## Current checkpoint — generation evidence use, October 14, 2026
 
-[Cycle12](docs/keyword-cycle12.md) ran20 original questions in both corpora across
-three arms. Raw judge passes8/10/6 contrast with masked assistant source-usefulness
-9/9/12 (baseline/vocabulary/small-model); vocabulary has one unscored judge request.
-The small-model arm has three source-reviewed gains and no observed losses on this
-exposed pilot, but pipeline-component p95 rises6.140→11.299s. Review is same-model,
-not human gold; no candidate is promoted. Correct candidates can be dropped by
-fusion, so Cycle13 tested selection only with the20 frozen keyword outputs.
-[Cycle13](docs/keyword-selection-cycle13.md) source-usefulness is9/20 for equal
-fusion and10/20 for token coverage, versus12/20 for the earlier weighted arm.
-Each new arm loses one answer at protocol delivery. Neither is promoted; the next
-isolated hypothesis concerns generation instructions, with validators unchanged.
+[Cycle14](docs/use-prompt-cycle14.md) and [Cycle15](docs/use-focus-cycle15.md) hold
+selected evidence, model and validators fixed while changing system instructions.
+The generic checklist gives only a UI-capability correction. Task-focused prompts
+score6→9/14 under masked assistant source review (strict borderline sensitivity4→5),
+but only one borderline content rescue; raw judge passes5→4 and validity13→14.
+The predefined two-content-rescue gate failed. Both8-case frozen synthetic sets
+remain unrun. C1 stays default; no broad improvement or human-gold accuracy claim.
 
-[Historical audit](docs/historical-failure-audit.md) covers318 original answers and
-locates56 defects,23 scorer/reference problems and85 unresolved cases. These are
-historical mixed versions, not current accuracy. Cycle12 settled139paid calls;
-Cycle13 settled80additional calls; cumulative conservative spend83.49996345/200,
-no active paid run or open reservations.483offline and10focused optimized checks pass. No new external code or paper implementation
-was adopted; existing acknowledgments remain scoped to actual use. No push/upload/
-deployment. Follow the technical report for the evolving state and final settlement.
+All65 valid outputs across68 preserve raw factual text through delivery: remaining
+omissions arise during generation in these traces. Cycle15 actual warm retrieval-
+to-validation p95 is7.898→8.851s; cold/uncached embedding and grading are excluded.
+490 offline tests and17 focused Python-O checks pass. All ledgers settled at
+**86.45485345/200USD**; no active paid work or open reservations. Cycle14's one
+unknown-usage judge timeout remains conservatively charged, without retry.
+
+The exact Qwen keyword model/vocabulary, earlier gains and negative selection
+results remain in the [canonical report](docs/technical-report.md),
+[Cycle12](docs/keyword-cycle12.md) and [Cycle13](docs/keyword-selection-cycle13.md).
+These prompt experiments are independent local engineering, with no new external
+code or paper reproduction; acknowledgments below retain their precise actual-use
+scope. No push, upload or deployment. Stop the tested prompt-only line; unresolved
+task/qualifier selection needs a distinct hypothesis and calibrated source labels.
 
 ## Previous checkpoint — citation-alignment plateau, October 14, 2026
 
