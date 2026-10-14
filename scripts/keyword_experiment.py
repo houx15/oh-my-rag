@@ -49,7 +49,8 @@ def main():
   e=runtime(args.runtime);ss=searches(e);selection=read(n/'selection.json');rows={x['case_id']:x for x in read(b/'broad-original-cycle7-20261014/jobs.json')};jobs=[];evaluation=[]
   for entry in selection:
    r=rows[entry['case_id']];q=r['question'];c=r['corpus'];v=ss[c];t=time.perf_counter();ctx,msg,tr=e.prepare(c,q,'baseline');ms=(time.perf_counter()-t)*1000
-   jobs.append(dict(case_id=r['case_id'],corpus=c,question=q,cohort=entry['cohort'],baseline_context=ctx,baseline_messages=msg,baseline_trace=tr,baseline_preparation_ms=ms,vocabulary=v.vocabulary(q),vocabulary_queries=v.deterministic(q),expansion_messages=v.messages(q)))
+   t=time.perf_counter();vocabulary=v.vocabulary(q);vq=v.deterministic(q);em=v.messages(q);hms=(time.perf_counter()-t)*1000
+   jobs.append(dict(case_id=r['case_id'],corpus=c,question=q,cohort=entry['cohort'],baseline_context=ctx,baseline_messages=msg,baseline_trace=tr,baseline_preparation_ms=ms,vocabulary=vocabulary,vocabulary_queries=vq,expansion_messages=em,hypothesis_preparation_ms=hms))
    evaluation.append({k:r[k]for k in ['case_id','question','provided_reference','reference_sources','reference_status']})
   write(n/'inference.json',jobs);write(n/'evaluation-only.json',evaluation);return
  if args.action=='allocate':
@@ -88,7 +89,7 @@ def main():
      else:
       meta=e.gm['candidate'][3];msg=build_messages(q,[{**meta.get(k,{}),'id':k,'text':v,'title':meta.get(k,{}).get('title','来源清单的可复算统计'),'locator':meta.get(k,{}).get('locator','derived-counts')}for k,v in context.items()]);msg=e.pipelines['baseline'].prepare_gm(q,context,msg,meta)['messages']
     prep=(time.perf_counter()-t)*1000
-    jobs.append(dict(case_id=j['case_id'],qid=j['case_id']+'/'+arm,corpus=c,question=q,cohort=j['cohort'],arm=arm,context=context,messages=msg,trace=trace,baseline_preparation_ms=j['baseline_preparation_ms'],expansion_wall_ms=ex[j['case_id']]['expansion_wall_ms']if arm=='small_model'else 0,merge_rerank_ms=prep,same_prompt=msg==j['baseline_messages']))
+    jobs.append(dict(case_id=j['case_id'],qid=j['case_id']+'/'+arm,corpus=c,question=q,cohort=j['cohort'],arm=arm,context=context,messages=msg,trace=trace,baseline_preparation_ms=j['baseline_preparation_ms'],expansion_wall_ms=ex[j['case_id']]['expansion_wall_ms']if arm=='small_model'else 0,merge_rerank_ms=prep,hypothesis_preparation_ms=j['hypothesis_preparation_ms']if arm!='baseline'else 0,same_prompt=msg==j['baseline_messages']))
   random.Random(1214).shuffle(jobs);write(n/'answer-jobs.json',jobs);return
  if args.action=='run':
   from newdomain import bailian_bounded_transport as transport
@@ -103,7 +104,7 @@ def main():
     try:answer,valid,gate=e.canonical(j['corpus'],response,j['context'],'baseline')
     except (ValueError,KeyError,TypeError)as ex:answer=None;valid=False;gate={'failure':str(ex)}
     cm=(time.perf_counter()-t)*1000
-    item={**j,'generation':response,'answer':answer,'valid':valid,'gate':gate,'generation_wall_ms':ms,'canonicalization_ms':cm,'pipeline_component_sum_ms':j['baseline_preparation_ms']+j['expansion_wall_ms']+j['merge_rerank_ms']+ms+cm,'latency_scope':'Measured serial critical-path component sum across staged expansion/generation; cached original-query embeddings; excludes initialization, evaluation and stage idle time, not a single contiguous request.'};append(d/'generations.jsonl',item)
+    item={**j,'generation':response,'answer':answer,'valid':valid,'gate':gate,'generation_wall_ms':ms,'canonicalization_ms':cm,'pipeline_component_sum_ms':j['baseline_preparation_ms']+j['hypothesis_preparation_ms']+j['expansion_wall_ms']+j['merge_rerank_ms']+ms+cm,'latency_scope':'Measured serial critical-path component sum across staged expansion/generation; cached original-query embeddings; excludes initialization, evaluation and stage idle time, not a single contiguous request.'};append(d/'generations.jsonl',item)
     ref=refs[j['case_id']];payload={**ref,'answer':answer,'raw_answer_if_invalid':None if valid else response['content'],'cited_sources':j['context'],'mechanically_valid':valid};payload.pop('case_id');payload['reference_sources']=dict(payload['reference_sources']);omitted=[]
     while len(json.dumps(payload,ensure_ascii=False).encode())>27000:
      if not payload['reference_sources']:raise ValueError('review too large')
