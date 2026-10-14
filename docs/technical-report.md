@@ -5,6 +5,21 @@ Detailed experiment records linked below retain frozen inputs and negative resul
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
 
+## Experimental principle and active keyword investigation
+
+An initial aggregate score neither accepts nor rejects a strategy. Each strategy
+gets a diagnostic optimization stage: inspect hypothesis quality, marginal evidence
+recall, fusion/selection, answer use, and latency separately; repair the weakest
+supported mechanism and retest controls. Preserve negative results and material
+regressions. Stop based on measured tradeoffs, exhausted justified hypotheses, or
+actual evidence/calibration blockers, not one disappointing aggregate score.
+
+The current authorized focus is **keyword diffusion**, including source-grounded
+marginal candidate accounting and targeted selector diagnosis with downstream
+settings fixed. The typed-policy-record idea below is deferred. Cycle14/15's failed
+prompt gate is a result for those versions, not rejection of keyword diffusion or
+all generation interventions. No additional paid work has started during this audit.
+
 ## Current state
 
 **Cycle15 completed:** task-focused prompt source-usefulness6→9/14, but only one
