@@ -14,7 +14,26 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — keyword contribution and evidence selection, October 14, 2026
+## Current checkpoint — constraint-preservation negative result, October 14, 2026
+
+[Cycle18](docs/claim-constraints-cycle18.md) compares baseline, a preservation guide,
+and guide plus exact source spans on8original questions across both corpora.
+All arms score4/8raw judge passes. Count scope improves with both interventions,
+but the intended condition/attribution repairs fail; valid clarification regresses.
+The span arm adds32.6%generation input tokens and raises warm sample p95 from5.32s
+to7.47s. The frozen gate fails; stop this candidate and keep C1 default.
+
+Factual completion is reported separately from safe abstention. The
+[eight failed Cycle16 cases](docs/keyword-failure-map-cycle16.md) and previously
+missed evidence are explained without changing the completed12/20 result.
+
+513offline tests and8optimized checks pass; all24new outcomes and masked reviews
+are retained.48calls cost0.35785; cumulative conservative ledger
+**91.92431945/200USD**, zero open reservations and no active paid work.
+No transport failures or retries in this cycle. No new external paper/code adopted;
+existing acknowledgments retain actual-use scope. No push, deployment or upload.
+
+## Previous checkpoint — keyword contribution and evidence selection, October 14, 2026
 
 [Cycle16](docs/keyword-marginal-cycle16.md) adds the missing original-query lexical
 control: lexical and Qwen both score12/20 source-useful and9/20 raw judge passes.
