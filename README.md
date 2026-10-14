@@ -393,6 +393,18 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
+Latest [component-ablation checkpoint](docs/component-ablations-20261014.md): the
+narrow parser repair is retained; broader schema/packing changes remain opt-in.
+The fresh trial stopped after 85 completed outputs, with 3 interrupted and 116
+unstarted; paid continuation was rejected by automatic approval review. Two pairs
+with identical answers and identical review prompts received opposite judgments,
+so no component improvement is claimed. Conservative spend is $120.78139745/$200;
+no active paid run or open reservation. Independently written A1 tests an explicit
+schema reminder, conceptually informed by Instructor's validation approach; it
+uses neither Instructor code nor retries. C0/C1 and D0 use the reader-context and
+original-query provenance concepts cited in the trial record; no upstream code
+was copied and no new default was adopted.
+
 The [October 14 component-ablation record](docs/component-ablations-20261014.md)
 credits the reader-context diagnostic and original-query provenance concepts used
 in our evaluation protocol. VeriCite, Instructor, CiteCheck, XGrammar, LlamaIndex,

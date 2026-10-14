@@ -56,3 +56,36 @@ Decision: uncertain. Neither one extra reference ID nor original-branch retentio
 Three arms on all 68 development cases: incumbent baseline, A1 schema reminder only, and C1 all-original branch protection only. A1 appends a compact contract summary, drawing GM limits from existing validator constants; it does not change parsers, handle formats, facts or retrieval. This is a prompt-contract test, not complete schema unification. C1 preserves the original branch only when it fits the baseline source and context-byte ceilings; otherwise it falls back unchanged. All arms use the existing baseline renderer. Twenty regression fixtures have identical C1/baseline prompts and are stochastic repeated-generation controls.
 
 Maximum 204 fresh outputs and 204 fresh rubric reviews (408 calls), no cached outputs as controls. Exact prepared jobs, configuration, evaluation-only references and code hashes are frozen privately. The runner protects the $41.10317855 exploratory ceiling with three-request worst-case headroom; shared cumulative ledger remains authoritative. Outcomes pending; no promotion.
+
+
+### B1 — boundary-envelope feasibility, completed offline
+
+On the frozen 48 primary development cases, 72 newly introduced lexical windows have recorded source offsets. All 72 reconstruct exactly after approved redaction. Minimal enclosing line/sentence envelopes leave 69 unchanged; three require 216 additional UTF-8 bytes in total. The enlargement preserves the original excerpt but cannot fit the unchanged per-case byte ceiling without removing other text. Rejected under this strict control, at $0 and zero generation calls. This is not a semantic table/qualifier completeness test; original-branch windows are outside this diagnostic and no OCR column relationships were inferred. A meaningful dependency-bundle arm requires source-adjudicated dependencies and an explicit displacement control. No B improvement is claimed.
+
+A1/C1 preflight: 204 jobs prepared without failures; A1 contexts and user evidence messages exactly match baseline. C1 changes 14 GM and 11 NH contexts; 7 GM and 8 NH cases fall back because original evidence exceeds the baseline ceiling. Other cases, including all 20 regression fixtures, remain unchanged controls. Recorded legacy retrieval trace fields describe the starting baseline; each job's actual `context` is authoritative for the C1 selected source set. The new component trace identifies fallback explicitly.
+
+
+### Interruption, accounting and approval blocker
+
+The execution tool session disappeared after 85 complete outputs/reviews. Read-only process inspection found no remaining experiment or provider worker. The precise OS termination cause was not logged. Two generations and one review had started without saved responses; one interrupted-review job retains its already saved generation. All three open reservations were settled at their conservative $2.0064 bounds, and journal terminals/failure rows were appended without overwriting prior evidence. There were no retry dispatches. A continuation request for only the 116 never-started jobs was rejected by automatic approval review, which stated that trusted parent clearance for paid calls was missing. No workaround or further paid call was attempted.
+
+The incomplete run is closed: **204 scheduled outputs; 85 completed with reviews, 3 interrupted, 116 not started**. Its 174 dispatched calls cost a conservative **$6.884576**, including **$6.0192** unknown-use charges. Cumulative **$120.78139745/$200**, remaining **$79.21860255**, zero open reservations, no active paid process. Frozen hashes verified: 284. Partial arm counts/latencies are retained privately as observed-subset diagnostics only; they are not comparable final quality estimates. No combination, leave-one-out run, or confirmation was launched. Resumption requires the clearance requested by automatic review and reconciliation against this exact closed state.
+
+### Evaluation reliability — observed identical-answer discordance
+
+Among seven observed arm-pairs with identical canonical answers, two have opposite pass/fail judgments **and identical review prompt hashes**: GM349 baseline/A1 and NH R063 baseline/C1. These pairs are dependent and selected from an incomplete trial, so 2/7 is not a population error-rate estimate. They nevertheless prove that these score flips cannot be attributed to the component's delivered answer. Preserve both raw judgments; do not relabel one arm to manufacture improvement.
+
+Source-visible assistant review of all five observed discordant pairs (four questions) found: the two identical-answer judge disagreements; introduction-question completeness thresholds that inconsistently demand optional book details; and one C1 answer adding a cited but off-target gallstone-origin statement to a question about Bian Que's discovery. Exact citations do not establish relevance or required-facet coverage. This is assistant review, not human gold; no replacement aggregate score is assigned. Required core facets versus optional background need calibration before promotion.
+
+### D0 — frozen offline expansion control
+
+Expansion-off reproduces every frozen development baseline context exactly. Source-vocabulary expansion changes candidate admission only; the original question still chooses source spans, and RRF weights/protected-prefix packing stay fixed. Across 24 NH cases it creates 10 raw context changes, with 2 byte-budget fallbacks and 8 effective changes. Across 24 GM cases it creates 16 raw changes, with 9 fallbacks and 7 effective changes. Source guesses never enter the answer as evidence. Cost $0; two focused tests pass. No quality, latency or causal benefit is established, and no D paid test was launched because packing remains unresolved and paid continuation is blocked.
+
+### Retain / reject / uncertain checkpoint
+
+- Retain A0's narrowly verified duplicate-clause parser repair; it preserves all previously valid outputs and recovers one source-reviewed answer offline.
+- Reject B1 enlargement under the strict no-loss/no-growth control; 69 no-ops and three over-budget envelopes are not a useful new arm.
+- A1 and C1 remain uncertain and opt-in: the trial is incomplete, with direct evidence of judge inconsistency. Keep the incumbent baseline.
+- D0 remains an offline candidate, not an improvement. No components are combined and no default is changed.
+
+External-use scope: the reader-context and original-query provenance literature informs these diagnostics; the isolated implementations are independently written. Instructor motivates evaluating an explicit contract reminder, not installation or adoption of its retry engine. No upstream source, model, dataset or prompt was copied. Docling, CiteCheck, VeriCite, XGrammar and facet-coverage work remain considered evaluation/representation directions, not reproduced systems.

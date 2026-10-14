@@ -1041,3 +1041,12 @@ work, and freezes A/B/C/D contrasts before paid evaluation. A0 retains only the
 verified idempotent parser repair. Further methods are considered or proposed,
 not claimed as implemented improvements. Budget remains $113.89682145/$200;
 $35 is reserved for broader confirmation and $10 for uncertainty.
+
+
+### Component-ablation checkpoint: incomplete, baseline retained
+
+The [trial record](component-ablations-20261014.md) now includes A0, B1, C0 and D0 offline controls and the interrupted fresh A1/C1 experiment. On 68 frozen development cases ×3 arms, 85 outputs/reviews completed; three calls were interrupted and 116 output jobs remain unstarted. Automatic approval review rejected paid continuation for lack of recognized trusted parent clearance. All 284 scope hashes passed; no historical outcomes were rewritten.
+
+Two observed pairs have identical delivered answers and identical review prompts but opposite pass/fail judgments. These are demonstrated judge inconsistencies, not measured component regressions. Five discordant pairs were source-reviewed separately; broad-introduction completeness remains uncalibrated. No aggregate improvement claim, combination or confirmation is warranted. The baseline remains in place.
+
+Cumulative conservative spend is **$120.78139745/$200**, remaining **$79.21860255**, zero open reservations and no active paid work. The partial trial cost $6.884576 includes $6.0192 for three unknown-use interrupted calls; no retries. Private artifacts are `component-A1-C1-development-20261014/` and `component-ablations-20261014/`. No push, upload or deployment.
