@@ -1,5 +1,5 @@
 """Original-query lexical + identical fusion control, without keyword inference."""
-from newdomain.evidence_pool import grams
+from newdomain.evidence_pool import grams, weighted_overlap
 
 def select(search, question, queries, baseline, k):
     if queries:
@@ -26,7 +26,7 @@ def select(search, question, queries, baseline, k):
         text = search.records[rid]
         qg = grams(question)
         offsets = list(range(0, max(1, len(text) - 899), 450)) + [max(0, len(text) - 900)]
-        start = max(offsets, key=lambda a: (sum(search.pool.idf.get(g, 0) for g in grams(text[a:a + 900]) & qg), -a))
+        start = max(offsets, key=lambda a: (weighted_overlap(search.pool.idf, grams(text[a:a + 900]) & qg), -a))
         context[rid] = text[start:start + 900]
         windows[rid] = [start, min(len(text), start + 900)]
     return context, {'views': views, 'hypotheses': [], 'selected': selected,

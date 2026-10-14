@@ -12,6 +12,15 @@ def grams(text):
     return {text[i:i+2]for i in range(len(text)-1) if re.search(r'[\w\u4e00-\u9fff]',text[i:i+2])}
 
 
+def weighted_overlap(weights, terms):
+    """Canonical accurate sum: set/hash/insertion order cannot break rank ties.
+
+    Do not round or introduce an epsilon: genuine unequal scores still rank by
+    weight. Callers retain record-ID and earliest-offset tie breakers.
+    """
+    return math.fsum(weights.get(term, 0.0) for term in sorted(terms))
+
+
 class EvidencePool:
     def __init__(self,records):
         self.records=dict(records)
@@ -23,7 +32,7 @@ class EvidencePool:
         if not 1<=k<=20:raise ValueError('pool bound')
         q=grams(question)
         def rank(channel):
-            scores=[(sum(self.idf.get(g,0)for g in q & gs),rid)for rid,gs in channel.items()]
+            scores=[(weighted_overlap(self.idf, q & gs),rid)for rid,gs in channel.items()]
             return [rid for s,rid in sorted(scores,key=lambda x:(-x[0],x[1])) if s>0]
         key=rank(self.keys);body=rank(self.bodies)
         ids=[]

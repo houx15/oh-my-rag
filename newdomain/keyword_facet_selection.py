@@ -4,7 +4,7 @@ Historical named-author valuation and research-achievement introductions only.
 The candidate pool, original protection, budgets and quote windows stay bounded.
 """
 import re
-from newdomain.evidence_pool import grams
+from newdomain.evidence_pool import grams, weighted_overlap
 from newdomain.keyword_control import select as control
 
 def mode(question, records):
@@ -36,7 +36,7 @@ def select(search, question, queries, baseline, k):
         else:
             body = search.records[rid]
             offsets = list(range(0, max(1, len(body) - 899), 450)) + [max(0, len(body) - 900)]
-            start = max(offsets, key=lambda a: (sum(search.pool.idf.get(g, 0) for g in grams(body[a:a + 900]) & qg), -a))
+            start = max(offsets, key=lambda a: (weighted_overlap(search.pool.idf, grams(body[a:a + 900]) & qg), -a))
             pool[rid] = body[start:start + 900]
     def attributed_value(text):
         for person in people:
@@ -112,7 +112,7 @@ def select(search, question, queries, baseline, k):
             continue
         text = search.records[rid]
         offsets = list(range(0, max(1, len(text) - 899), 450)) + [max(0, len(text) - 900)]
-        start = max(offsets, key=lambda a: (sum(search.pool.idf.get(g, 0) for g in grams(text[a:a + 900]) & qg), -a))
+        start = max(offsets, key=lambda a: (weighted_overlap(search.pool.idf, grams(text[a:a + 900]) & qg), -a))
         context[rid] = text[start:start + 900]
         windows[rid] = [start, min(len(text), start + 900)]
     return context, {**trace, 'selected': selected, 'new_source_windows': windows,
