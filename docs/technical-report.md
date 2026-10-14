@@ -23,6 +23,21 @@ three earlier interruptions remain counted. Final conservative ledger
 paid work. Fresh generations do not make historically exposed questions unseen.
 Model judges, OCR references and assistant source review are not human gold.
 
+The subsequent **[B2 offline dependency-swap replay](component-ablations-20261014.md#b2-dependency-aware-swaps--completed-offline-october-14-2026)**
+uses frozen candidates, questions and source/UTF-8 byte ceilings on24GM+24NH+20regression
+cases. It changes only GM349: restores three early application/review steps while
+retaining later procedure/subsidy evidence, displaces an operator-selection/assessment
+page, and reduces context11,287→10,428bytes at8sources. Assistant source review found
+no requested facet lost in this swap. Other67contexts are unchanged. NH reference-ID
+coverage remains27/63; regressions52/52; GM has no supplied reference-ID maps.
+Metadata/table/qualifier rules trigger no real-case repairs; semantic completeness
+outside the reviewed swap is unknown. No strict budget violations or lost query
+literals were observed, but these proxies do not guarantee semantic preservation.
+All16targeted tests pass; three hash-seed replays are byte-identical. This is a known,
+exposed source-coverage repair, not demonstrated answer-quality or latency improvement.
+Baseline stays default; B2 remains offline/opt-in. Cost$0; ledger unchanged. A proposed
+44-call bounded follow-up requires new direct approval and has not been launched.
+
 The original **420 Guangming supplied Q/A pairs** contain181 real-user and239
 simulated questions. Contact exclusions remove90 (68 real-user,22 simulated),
 leaving330 (113 real-user,217 simulated). Near-duplicate grouping into300 groups

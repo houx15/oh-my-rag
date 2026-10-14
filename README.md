@@ -404,6 +404,17 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
+The completed [B2 offline dependency-swap experiment](docs/component-ablations-20261014.md#b2-dependency-aware-swaps--completed-offline-october-14-2026)
+independently adapts the structural metadata/dependency-bundle idea reviewed in
+[Docling hybrid chunking](https://github.com/docling-project/docling-core/blob/main/docling_core/transforms/chunker/hybrid_chunker.py)
+([MIT](https://github.com/docling-project/docling-core/blob/main/LICENSE)) and the
+candidate-versus-retained-context diagnostic in
+[Recall Is Not Enough](https://arxiv.org/abs/2607.00725v2).
+No upstream code, prompt, model or package was copied or installed. This is conceptual
+use, not reproduction: one exposed procedure case gains coverage; the other67contexts
+are unchanged, and table/header/qualifier rules have no demonstrated real-case benefit.
+No paid calls or default promotion followed this offline result.
+
 Latest [component-ablation checkpoint](docs/component-ablations-20261014.md):
 A1 and C1 completed and are not promoted. A1 independently tests a schema reminder,
 conceptually informed by Instructor's validation approach, without its code or
@@ -416,8 +427,8 @@ The [October 14 component-ablation record](docs/component-ablations-20261014.md)
 credits the reader-context diagnostic and original-query provenance concepts used
 in our evaluation protocol. VeriCite, Instructor, CiteCheck, XGrammar, LlamaIndex,
 Docling and facet-coverage work are reviewed there with dates, licenses and limits.
-These new references are considered/proposed methods, not implemented model
-reproductions or copied code. The completed duplicate-clause parser repair was
+Except for the explicitly scoped conceptual uses above, these references remain
+considered/proposed methods, not implemented model reproductions or copied code. The completed duplicate-clause parser repair was
 independently implemented before this review. Existing actual-use credits below
 retain their original scope.
 

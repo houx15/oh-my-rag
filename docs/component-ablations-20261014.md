@@ -1,6 +1,8 @@
 # Controlled component ablations — 2026-10-14
 
-Latest status: the116authorized jobs are complete. Primary passes: baseline28/48, A1 26/48, C1 25/48; regressions20/20,18/20,18/20. Neither component is promoted. Cumulative$121.98103945; remaining$78.01896055; no active paid run. Earlier blocked-state entries below are historical.
+Latest offline result: B2 restores one known procedure dependency in 1/68 cases; 67 contexts unchanged, no paid calls, baseline retained. See the completed B2 section below.
+
+Latest paid status: the116authorized jobs are complete. Primary passes: baseline28/48, A1 26/48, C1 25/48; regressions20/20,18/20,18/20. Neither component is promoted. Cumulative$121.98103945; remaining$78.01896055; no active paid run. Earlier blocked-state entries below are historical.
 
 Baseline remains the Cycle10 adapter with deterministic original-query lexical fusion, not exact historical C1. Grounded-prose v3 is a rejected overall candidate: on 645 primary cases its original valid-and-all-rubric passes are 382 versus baseline 388; validity is 585 versus 636. Corrected fresh fixed-context regressions are 19 versus 20 out of 20. The narrow duplicate-clause repair independently recovers one saved candidate output (585→586 valid), preserves all 1,260 previously valid outputs, and does not establish a new generation pass rate. Original outcomes remain immutable.
 
@@ -16,7 +18,7 @@ Requested paper window is October 12, 2025–October 12, 2026 inclusive. Inspect
 | [CiteCheck](https://arxiv.org/html/2502.10881v1), first February 15, 2025; outside window, supplementary older work. | Citation overlap is insufficient for condition/cap correctness → remove or mutate a qualifier and test whether the answer-support judgment changes. | [Official repo](https://github.com/xzy-xzy/CiteCheck), [MIT](https://github.com/xzy-xzy/CiteCheck/blob/main/LICENSE). Paper and directory/schema verified; not a complete implementation audit or reproduced benchmark. Proposed offline counterfactual evaluation with source review; no training or online judge adopted. |
 | [XGrammar HF integration](https://github.com/mlc-ai/xgrammar/blob/main/python/xgrammar/contrib/hf.py) | Schema-invalid responses → constrained decoding if the serving stack supports it. | [Apache-2.0](https://github.com/mlc-ai/xgrammar/blob/main/LICENSE). Requires generation-logit control. [Bailian structured-output documentation](https://help.aliyun.com/zh/model-studio/qwen-structured-output) distinguishes JSON syntax from strict schema and has model restrictions; it does not certify our exact DeepSeek endpoint. Considered only; no provider probe or dependency. |
 | LlamaIndex [fusion](https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/retrievers/fusion_retriever.py) and [auto merging](https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/retrievers/auto_merging_retriever.py) | Expansion can displace original evidence; parent merging may add irrelevant text → track branch provenance and protect original evidence before filling uncovered facets. | [MIT](https://github.com/run-llama/llama_index/blob/main/LICENSE). Original query inclusion alone does not guarantee final retention; inspected RRF path does not use retriever weights. Default child-ratio merging does not prove qualifier preservation. Independent offline control proposed, no copied code/dependency. |
-| [Docling hybrid chunker](https://github.com/docling-project/docling-core/blob/main/docling_core/transforms/chunker/hybrid_chunker.py) | Table rows lose headers, or conclusions lose conditions → exact-source dependency bundles of row/header/title/qualifier, within a fixed byte budget. | [MIT](https://github.com/docling-project/docling-core/blob/main/LICENSE). Header repetition is conditional on table representation/serializer; oversized metadata may be dropped. Considered, not installed; no claim that arbitrary OCR text supplies reliable table structure. |
+| [Docling hybrid chunker](https://github.com/docling-project/docling-core/blob/main/docling_core/transforms/chunker/hybrid_chunker.py) | Table rows lose headers, or conclusions lose conditions → exact-source dependency bundles of row/header/title/qualifier, within a fixed byte budget. | [MIT](https://github.com/docling-project/docling-core/blob/main/LICENSE). Header repetition is conditional on table representation/serializer; oversized metadata may be dropped. Conceptually adapted in independently written offline B2 exact-span bundles; not installed or copied. No real-case metadata repair triggered; no claim that arbitrary OCR text supplies reliable table structure. |
 | [Do RAG Systems Cover What Matters?](https://aclanthology.org/2025.naacl-long.301/), NAACL April 2025; outside window, supplementary older work. | Unnecessary abstention and incomplete comparisons → distinguish required answer facets from optional background/follow-up content. | [Author notebooks](https://github.com/SalesforceAIResearch/answer-engine-eval/tree/main/Xie.et.al.2024), [Apache-2.0](https://github.com/SalesforceAIResearch/answer-engine-eval/blob/main/LICENSE). Folder year is not publication date. Notebook inspection reported by the coordinating research review; this executor did not run them. Proposed offline annotation, not three added online model calls. |
 
 All repository links above point to moving branches inspected read-only, not pinned runnable reproductions. Any future source reuse requires a pinned revision and license/notice review. No upstream code, prompts, weights or datasets were copied, installed or executed. Conceptual use in the diagnostic protocol is distinguished from implemented generation methods. Model-judge/OCR agreement is not human gold; citation substring inclusion is not entailment.
@@ -90,7 +92,7 @@ Expansion-off reproduces every frozen development baseline context exactly. Sour
 - A1 and C1 remain uncertain and opt-in: the trial is incomplete, with direct evidence of judge inconsistency. Keep the incumbent baseline.
 - D0 remains an offline candidate, not an improvement. No components are combined and no default is changed.
 
-External-use scope: the reader-context and original-query provenance literature informs these diagnostics; the isolated implementations are independently written. Instructor motivates evaluating an explicit contract reminder, not installation or adoption of its retry engine. No upstream source, model, dataset or prompt was copied. Docling, CiteCheck, VeriCite, XGrammar and facet-coverage work remain considered evaluation/representation directions, not reproduced systems.
+External-use scope: the reader-context and original-query provenance literature informs these diagnostics; the isolated implementations are independently written. Instructor motivates evaluating an explicit contract reminder, not installation or adoption of its retry engine. No upstream source, model, dataset or prompt was copied. At this historical checkpoint Docling, CiteCheck, VeriCite, XGrammar and facet-coverage work remained considered directions. The later B2 section records conceptual use of Docling; none is a reproduced system.
 
 
 ## Offline adjudication after continuation denial
@@ -205,3 +207,46 @@ If B2 improves source-reviewed dependency coverage without material losses, pres
 ### Paid authority remaining
 
 The direct user instruction was to **resume the116unstarted paid ablation jobs within the existing$200cumulative limit**. That action is fully fulfilled. It does not authorize additional calls merely because$78.01896055remains. No new paid job, retry of the three interrupted outcomes, D test, combination, leave-one-out matrix or confirmation run is initiated by this summary request. Further paid scope requires a new direct instruction or otherwise recognized authorization. The shared ledger is closed with zero open reservations; no push, upload or deployment.
+
+
+## B2 dependency-aware swaps — completed offline, October 14, 2026
+
+**One known missing procedure dependency is restored; 67/68 cases are unchanged. Baseline remains default. No paid calls.**
+
+### Frozen experiment
+
+The same 24 Guangming, 24 Niuhuang and 20 fixed-context regression cases use 1,170 frozen candidate case-record pairs. Questions, baseline text/order, candidate records/windows and per-case source-count/UTF-8 byte ceilings are fixed. No retrieval or provider calls occur. Candidate IDs come only from previously recorded original/lexical branches and selected IDs. Evaluation references are separate from selector inputs. All cases are historically exposed; GM349 motivated this rule. Code commit `142f523` preceded the first B2 replay, not prior exposure. The 597-case confirmation partition is untouched.
+
+General rules join explicitly numbered adjacent procedure pages, restore explicit source titles/Markdown table headers and units, or widen clipped sentences containing qualifier cues. They preserve exact source spans; plain OCR columns are not inferred. The first baseline source and dependency anchors are protected; eviction prioritizes lower query overlap and frozen retrieval rank while retaining original query-bigram coverage. Lexical preservation is not semantic preservation. This is opt-in code, with no default pipeline change.
+
+### Measured coverage
+
+| Strict combined vs baseline | Changed / no-op | Detector gaps repaired / lost preexisting dependencies | Supplied reference IDs retained |
+|---|---:|---:|---|
+| Guangming, 24 | 1 / 23 | 1 / 0 | No supplied reference maps; unknown |
+| Niuhuang, 24 | 0 / 24 | 0 / 0 | 27/63 → 27/63, across 22 cases with references |
+| Fixed-context regressions, 20 | 0 / 20 | 0 / 0 | 52/52 → 52/52, across 16 cases with references |
+
+Procedure-only equals combined. Metadata-only and qualifier-only are no-ops on all 68 cases: synthetic tests establish implemented behavior, not demonstrated corpus benefit or absence of these failures. Relaxing only bytes yields the same single swap because the source cap still requires eviction; this unequal-budget diagnostic is not a fair quality comparison. Six variants produce 408 cached variant-case rows. No strict byte/source-limit violations, lost original-query literals or out-of-pool additions were observed. Detector coverage is not an independent semantic recall metric.
+
+### Gain and displaced evidence
+
+GM349 asks about applicant admission steps before agreement signing and rent-subsidy start. `D01:6:01[332:471]` restores application, preliminary review and re-review, 139 characters / 401 UTF-8 bytes. `D01:7:01` remains unchanged with later steps, agreement, subsidy start and caps. The swap removes `D01:4:01` (1,260 bytes), concerning operator selection and annual assessment. Assistant source review found no requested applicant-procedure facet lost; this page remains useful for a different operator-eligibility question. Exact removed text, offsets and hashes are in `source-displacement-review.json` and the replay trace.
+
+Sources remain 8; context decreases 11,287 → 10,428 bytes (−859). This is source-coverage improvement on an exposed motivating case, not a generated-answer or overall quality gain. Other 67 contexts are exactly unchanged, so this replay adds no context regressions there. Semantic completeness outside the single reviewed swap remains unknown. Two absent-predecessor cues (GM349 D01:2:01 and GM412 D33:32:01) remain unresolved; without the preceding heading they are not proven required dependencies and do not justify new retrieval.
+
+### Validation and resources
+
+Nine dependency-specific tests plus seven retrieval/component/expansion tests passed (16 total). Three complete replays under PYTHONHASHSEED 0, 1 and 42 are byte-identical to the first result. Result SHA256: `89b72b4e7cd7d2d26c626284aaf71b70edfa31a089a33fe2fd9d6e2c2ca5b4ed`. Frozen inputs/code hashes, result rows and reproducibility evidence are saved alongside this report. Reuse these results; no rerun needed for documentation.
+
+API cost $0. Cumulative conservative spend stays $121.98103945/$200, remaining $78.01896055, no open reservations. Online latency, answer quality and judge pass effects were not measured. No push, upload or deployment.
+
+### Interpretation and next gate
+
+Retain B2 as an offline opt-in mechanism; keep baseline. Prior A1 tested an appended reminder, not a unified schema; C1 bundled packing/content/order changes and often left identical prompts, so neither establishes a pure mechanism result. B2 repairs one known source gap but is too sparse to justify broad live testing or promotion.
+
+A bounded future proposal, requiring direct approval before allocation or dispatch: 22 fresh outputs plus 22 reviews (44 calls maximum), pairing baseline/B2 for GM349 in three rounds plus eight controls (two GM, two NH, four regressions). Freeze control IDs by deterministic hash before execution; identical-context controls quantify stochastic variability. Proposed conservative stage ceiling $8 within remaining cumulative budget. Three repeats are not three independent cases. Require source-adjudicated necessary steps, retained conditions/caps, exact citation support and mechanical validity; keep raw judge disagreements. First gathering more independently annotated positive dependency examples offline would strengthen any general efficacy claim. This proposal is not authorization and no paid jobs are prepared or launched.
+
+### Actual-use credits
+
+Independently written B2 uses the structural metadata/dependency-bundle idea reviewed in Docling's hybrid chunker and the candidate-versus-retained-context distinction in *Recall Is Not Enough*. No upstream code, model, prompt or package was copied or installed; no reproduction of their systems is claimed. See the repository component-ablation record for source links, dates and license verification. Table/header/qualifier rules have no demonstrated real-case benefit yet.
