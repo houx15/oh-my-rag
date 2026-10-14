@@ -10,7 +10,29 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Latest broad original-question checkpoint — October 14, 2026
+## Latest source-grounded checkpoint - October 14, 2026
+
+[Source-grounded implementation and paired validation](docs/source-grounded-cycle8.md)
+adds bounded book/person/formula coverage, exact source windows, floor arithmetic
+and strict typed query boundaries in one opt-in configuration. Raw model scores:
+**Niuhuang12/43 to17/43**, **Guangming4/6 to5/6** on selected original questions;
+**5/12 to10/12** on separately frozen synthetic wording. These are selected,
+exposed development comparisons, not a new full205-question accuracy estimate.
+The candidate remains unpromoted: source-attribution/scope defects and boundary
+coverage tradeoffs remain, even where the judge passes an answer. H05 is untouched.
+
+The linked reconciliation explains historical108/205 versus80/205: provider and
+both model identities changed, citation-address instructions were added, and
+197/205evidence sequences changed order despite identical source ID/text sets.
+Do not attribute that difference to a single retrieval or model regression.
+
+Final comparison warm p50 **4.066s**, p95 **5.580s**, max **20.762s** (one over20s);
+local boundaries and inherited measurements are labeled. New305paid calls cost
+**CNY2.146658** in known-token peak-rate estimates. Conservative cumulative ledger
+**$76.60103825/$200**, no open reservations or active paid work.450offline tests
+pass;11new focused tests also pass underPython-O. No push, upload or deployment.
+
+## Previous broad original-question checkpoint — October 14, 2026
 
 [Complete paired regression and source audit](docs/broad-original-cycle7.md):
 all318 original questions finished (113 Guangming,205 Niuhuang), with55 extra
@@ -197,6 +219,18 @@ quality gain and higher p95 latency; C1 remains the default.
 `newdomain/numeric.py` is independent engineering, not a paper reproduction,
 and is not automatically routed into answers. Existing B0/C1/C2 methods retain
 their local provenance in module documentation.
+
+
+`newdomain/nh_facet_coverage_v2.py` and the final
+`newdomain/source_grounded_pipeline_v2.py` continue the independently written,
+fixed-budget evidence-coverage/source-window experiments conceptually informed
+by S2G-RAG and CompSelect. They use corpus metadata and exact spans, not those
+papers' trained controllers or selectors. `floor_derivation.py` and
+`typed_query_scope_v2.py` are independent arithmetic/protocol engineering, not
+implementations of an unused paper. No upstream code, prompts, weights or assets
+were adopted; repository-license limitations and existing notices remain as
+recorded in the research matrix. Cycle8 keeps raw judgment separate from source
+review in the spirit of the already cited evaluation-validity references.
 
 The fixed-answer calibration controls use the evaluation-validity questions
 raised by IRT-Judge and Reliability without Validity; no IRT model was implemented.
