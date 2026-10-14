@@ -46,7 +46,8 @@ class Runtime:
   ctx=j['context']
   if j['arm']=='candidate':
    answer,tr=render(raw,ctx,catalog(ctx)['fingerprint']);return answer,True,tr
-  return self.base.canonical('niuhuang'if j['corpus']=='regression'else j['corpus'],raw,ctx,'baseline')
+  # Historical regression fixtures request the GM evidence-handle schema.
+  return self.base.canonical('guangming'if j['corpus']=='regression'else j['corpus'],raw,ctx,'baseline')
 
 def append_locked(path,value,lock):
  with lock:
