@@ -14,7 +14,27 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — constraint-preservation negative result, October 14, 2026
+## Current checkpoint — structured-claim pilot, October 14, 2026
+
+[Cycle19](docs/structured-claims-cycle19.md) tests an opt-in source-unit selection
+contract with deterministic rendering on12original questions across both corpora.
+Frozen source review finds factual completion3→7/12, three target repairs and no
+new material control failure. Two repairs avoid optional risky claims; semantic
+condition/speaker binding is still unsolved. Raw judge passes fall6→3/12, with
+specific judge errors documented. This exposed-development pilot is not human
+gold or unseen-original confirmation. C1 remains default.
+
+Valid delivery11→12/12; warm sample p95 9.507→5.111 seconds (n=12, p95=max).
+Structured quotations are longer and noisier; generation inputtokens rise25.9%.
+527offline tests and14optimized checks pass. All24outputs and reviews retained;
+48calls cost0.347608, cumulative conservative ledger**92.27192745/200USD**,
+zero open reservations and no active paid work. No retries, push, deployment or
+upload. Human calibration and unseen-original confirmation remain outstanding.
+This cycle uses independently written code; no new external paper or repository
+is claimed as implemented. Existing acknowledgments preserve actual-use scope.
+
+## Previous checkpoint — constraint-preservation negative result
+
 
 [Cycle18](docs/claim-constraints-cycle18.md) compares baseline, a preservation guide,
 and guide plus exact source spans on8original questions across both corpora.
@@ -29,7 +49,7 @@ missed evidence are explained without changing the completed12/20 result.
 
 513offline tests and8optimized checks pass; all24new outcomes and masked reviews
 are retained.48calls cost0.35785; cumulative conservative ledger
-**91.92431945/200USD**, zero open reservations and no active paid work.
+**91.92431945/200USD at Cycle18 closure**, zero open reservations then.
 No transport failures or retries in this cycle. No new external paper/code adopted;
 existing acknowledgments retain actual-use scope. No push, deployment or upload.
 
