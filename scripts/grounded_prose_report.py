@@ -9,6 +9,7 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--directory',type=Path,required=True);a=p.parse_args();n=a.directory;jobs=read(n/'answer-jobs.json');results={r['qid']:r for r in lines(n/'answers/results.jsonl')};groups=defaultdict(list)
  for j in jobs:
   groups[(j['arm'],'all')].append(j)
+  if j['corpus']!='regression':groups[(j['arm'],'main_mixed_645')].append(j)
   groups[(j['arm'],j['corpus'])].append(j)
   groups[(j['arm'],j['corpus']+'/'+j['origin'])].append(j)
  metrics={}
@@ -22,11 +23,13 @@ def main():
  for j in jobs:
   if j['arm']!='baseline':continue
   b=results.get(j['qid'],{});c=results.get(j['case_id']+'/candidate',{})
-  if b.get('score')is not None and c.get('score')is not None:paired.append({'case_id':j['case_id'],'baseline':b['score']['adequate'],'candidate':c['score']['adequate']})
+  if b.get('score')is not None and c.get('score')is not None:paired.append({'case_id':j['case_id'],'corpus':j['corpus'],'origin':j['origin'],'baseline':b['score']['adequate'],'candidate':c['score']['adequate']})
  summary={'metrics':metrics,'paired':{'scored_pairs':len(paired),'wins':sum(not x['baseline']and x['candidate']for x in paired),'losses':sum(x['baseline']and not x['candidate']for x in paired)},'generation_reused':0,'human_gold':False,'historically_exposed':True,'promotion':False}
  if(n/'answers/settlement.json').exists():summary['settlement']=read(n/'answers/settlement.json')
  write(n/'summary.json',summary);write(n/'paired-raw-results.json',paired)
  esc=lambda s:html.escape(str(s));parts=['<!doctype html><html lang="zh"><meta charset="utf-8"><title>RAG full case report</title><style>body{font:16px system-ui;max-width:1400px;margin:32px auto;padding:0 20px;color:#17212b}table{border-collapse:collapse;width:100%;margin:20px 0}th,td{border:1px solid #ccd3dc;padding:12px;text-align:left;vertical-align:top}th{background:#eef3f8}td:nth-child(1){width:22%}td:nth-child(2){width:55%;white-space:pre-wrap}small{color:#546273}details{margin:12px 0}select{padding:8px}section{margin-bottom:36px}.fail{color:#922}</style><h1>RAG：完整问题与回答记录</h1>']
+ complete=len(results)==len(jobs)
+ parts.append('<p><strong>'+('运行记录已齐；请同时查看失败／未评分计数。'if complete else '运行中：以下是部分结果，不能据此判断完整性能。已记录 '+str(len(results))+' / '+str(len(jobs))+' 个计划输出。')+'</strong></p>')
  parts+=['<p>本报告保留所有计划问题及失败／未运行项。问题均有历史暴露，不是未见测试集；模型评分不是人工金标准。候选未推广。基线为Cycle10适配器加确定性词法融合，不是历史C1的精确重跑。回归集使用固定历史证据，其余问题本地重跑检索并使用缓存向量。</p>','<p>延迟：热检索／提示构建＋生成＋校验的阶段耗时之和；不含排队、评分、冷启动及未缓存向量请求。所有评分标准保持冻结。四列正文默认展示基线；可切换整套候选，绝不逐题挑最好答案。</p>','<label>回答版本 <select id="arm"><option value="baseline">基线（未推广候选）</option><option value="candidate">候选：普通正文＋完整条款</option></select></label>','<h2>完整分母与结果</h2><table><tr><th>版本／来源</th><th>原始评分通过／计划</th><th>有效／已评分／未运行</th><th>P50／P95 秒</th></tr>']
  for key,m in metrics.items():
   f=lambda v:'—'if v is None else f'{v:.3f}'

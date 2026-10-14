@@ -14,7 +14,26 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — confirmation failed, October 14, 2026
+## Current checkpoint — full benchmark running, October 14, 2026
+
+The user authorized repairs after the denominator audit. Deterministic lexical
+ranking/window scoring is fixed (`8289861`) and reproduced across six process
+hash seeds on both corpora. A source-grounded prose candidate with optional
+complete policy clauses, adjacent-page source spans and explicit boundaries is
+frozen at `1443e35`; **546 offline tests pass**. The fresh full run schedules
+665 historically exposed cases ×2 arms (645 mixed-origin questions plus20
+separate regressions), with no generated-answer reuse. Both arms use the same
+corrected retrieval; the baseline is the Cycle10 adapter, not exact historical C1.
+The run is in progress, so no full performance result or promotion is claimed.
+
+Two exposed16-case diagnostics cost0.633488 total; the last closed cumulative
+ledger is93.36217745/200USD before the active full run. V1 had11→10 raw passes
+and16→14 valid outputs; V2 had12→13 raw passes and16→15 valid outputs. These are
+mechanism checks, not overall performance. The remaining cross-page clause gap
+was repaired offline before the fixed full run. No new external method/code
+was adopted; existing acknowledgments retain their actual-use scope.
+
+## Previous checkpoint — Cycle20 confirmation failed, October 14, 2026
 
 [Cycle20](docs/structured-confirmation-cycle20.md) freezes the structured candidate
 and tests16 mixed-origin questions outside Cycles16–19:8 live/real-user,5 pre-existing
