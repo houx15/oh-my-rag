@@ -89,3 +89,30 @@ Expansion-off reproduces every frozen development baseline context exactly. Sour
 - D0 remains an offline candidate, not an improvement. No components are combined and no default is changed.
 
 External-use scope: the reader-context and original-query provenance literature informs these diagnostics; the isolated implementations are independently written. Instructor motivates evaluating an explicit contract reminder, not installation or adoption of its retry engine. No upstream source, model, dataset or prompt was copied. Docling, CiteCheck, VeriCite, XGrammar and facet-coverage work remain considered evaluation/representation directions, not reproduced systems.
+
+
+## Offline adjudication after continuation denial
+
+No new provider calls. All 85 saved reviewed outputs were inventoried; raw result, response, job and reference hashes are unchanged. They cover 53 of 68 cases, with only **four complete three-arm cases**. Common reviewed pairs are **15 A1/baseline** (3 GM, 6 NH, 6 regressions) and **11 C1/baseline** (2 GM, 8 NH, 1 regression). This is inadequate coverage for overall quality, latency or cross-corpus adoption claims. The 116 unstarted jobs and three interrupted outputs remain separate.
+
+### Two identical-answer disagreements: source adjudication
+
+**GM349:** local corpus page `D01:6:01` explicitly supplies application, operator initial review and science/innovation-center review. The chosen `D01:7:01` starts at step four. Page6 was available at rank11 in the recorded original-query lexical candidate branch but was not selected. Both identical answers correctly state subsidy commencement but omit the earlier steps despite the question asking the pre-signing process. Assistant adjudication: both materially incomplete; the baseline full-pass verdict is not supported. This establishes a candidate-to-context evidence loss and a shared answer defect, not an A1 treatment effect. Source is local OCR, not independently verified human gold.
+
+**NH R063:** both identical answers cite source support for the book identity, volume count, author/date, organization, classification and entry columns. Under the existing rubric to answer the actual broad introduction request, assistant adjudication considers both adequate concise introductions. Drug count, gallstone-formula count and a world-memory listing are optional background unless requested; demanding all reference details is not a calibrated completeness rule. The world-memory sentence appears in the full supplied reference source but is beyond the truncated reader excerpt. This explains a reference-versus-reader asymmetry without excusing unsupported claims. Neither raw score is overwritten, and this assistant adjudication is not promoted to human gold.
+
+### Mechanisms and preliminary regressions
+
+| Observed comparison | What the saved evidence establishes | What it does not establish |
+|---|---|---|
+| A1, all15 paired cases | Identical contexts; all baseline and A1 outputs mechanically valid. Two raw pass losses include one identical-answer judge flip and one uncertain introduction-facet threshold. | No observed paired validity gain; no robust quality loss or gain. |
+| C1, 11 paired cases | Four change source content, one changes only source order, six have identical prompts. | Treating all eleven as effective packing changes would be misleading. |
+| NH-LIVE-26 | An off-target but cited extra claim appears in the C1-labeled output. C1 actually fell back, leaving the prompt identical. | The content defect cannot be attributed to changed packing. |
+| NH-LIVE-07 | All-original protection drops `MD-028-0004`, containing one compared formula's composition/indications. The answer covers fewer requested comparison details; both judges fail. | A binary pass metric alone does not capture the evidence-content regression. Original-branch protection does not guarantee required-facet preservation. |
+| NH-HOP-02 | Same source texts, different order under C1. All three arms substitute a book-level formula count for the requested dataset count and fail to supply two names. | Format reminders or reordering cannot create missing collection-level aggregation evidence. The supplied exact reference count is not independently accepted as gold here. |
+| NH-SKILL-008 | C1 emits a mixed boundary/text object and is rejected. Raw output is retained. | No silent text deletion or clinical inference is justified; a schema failure is separate from semantic/source safety review. |
+| NH R071 | Core book source remains, secondary records and answer emphasis change. | A reliable completeness regression is not established without agreed required facets. |
+
+The next useful representation hypothesis is to preserve a selected procedure's preceding structural steps when available in the candidate pool, with explicit byte/displacement controls. GM349 is a motivating example, not a per-question rule or validation set. No such change has been implemented. For evaluation, define question-required core facets separately from optional reference background before examining confirmation outcomes; keep exact-answer/prompt consistency checks as an audit. No additional judge call or automatic regrade was made.
+
+**Current decision:** baseline retained; A0 remains the only narrowly supported retained repair. A1/C1 efficacy is unresolved, B1 remains rejected under its strict budget control, D0 is offline-only. Paid continuation remains blocked after two automatic-review denials; no workaround attempted. Spend remains **$120.78139745**, remaining **$79.21860255**, zero open reservations. Private supporting artifacts: `offline-paired-audit.json`, `offline-source-adjudication.json`, `offline-source-page6.json`.

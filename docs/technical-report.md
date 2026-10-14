@@ -1050,3 +1050,10 @@ The [trial record](component-ablations-20261014.md) now includes A0, B1, C0 and 
 Two observed pairs have identical delivered answers and identical review prompts but opposite pass/fail judgments. These are demonstrated judge inconsistencies, not measured component regressions. Five discordant pairs were source-reviewed separately; broad-introduction completeness remains uncalibrated. No aggregate improvement claim, combination or confirmation is warranted. The baseline remains in place.
 
 Cumulative conservative spend is **$120.78139745/$200**, remaining **$79.21860255**, zero open reservations and no active paid work. The partial trial cost $6.884576 includes $6.0192 for three unknown-use interrupted calls; no retries. Private artifacts are `component-A1-C1-development-20261014/` and `component-ablations-20261014/`. No push, upload or deployment.
+
+
+### Offline source adjudication: no new calls
+
+The [updated ablation record](component-ablations-20261014.md#offline-adjudication-after-continuation-denial) audits all85 saved reviewed outputs:53cases, only4complete triplets,15A1pairs and11C1pairs. It withholds overall gains and preserves all raw outcomes.
+
+GM349's two identical answers share a verified missing-procedure defect: preceding page6 was in the lexical candidate pool but dropped from selected context. NH R063's two identical introductions are source-supported; the opposite verdicts arise from an unstable optional-detail requirement. These are separate assistant source adjudications, not rewritten judge scores or human gold. C1 also drops a useful comparison source in NH-LIVE-07; another apparent C1 regression occurs on an identical fallback prompt and cannot be attributed to packing. Baseline retained; paid continuation blocked. Spend and remaining budget are unchanged at $120.78139745 and $79.21860255, with zero open reservations.
