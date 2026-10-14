@@ -14,24 +14,38 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — full benchmark running, October 14, 2026
+## Current checkpoint — complete primary benchmark, October 14, 2026
 
-The user authorized repairs after the denominator audit. Deterministic lexical
-ranking/window scoring is fixed (`8289861`) and reproduced across six process
-hash seeds on both corpora. A source-grounded prose candidate with optional
-complete policy clauses, adjacent-page source spans and explicit boundaries is
-frozen at `1443e35`; **546 offline tests pass**. The fresh full run schedules
-665 historically exposed cases ×2 arms (645 mixed-origin questions plus20
-separate regressions), with no generated-answer reuse. Both arms use the same
-corrected retrieval; the baseline is the Cycle10 adapter, not exact historical C1.
-The run is in progress, so no full performance result or promotion is claimed.
+Deterministic lexical ranking/window scoring is fixed (`8289861`), reproduced across
+six process hash seeds on both corpora. The prose/optional-complete-clause candidate
+was tested on **645 primary questions with fresh paired answers and reviews**:
 
-Two exposed16-case diagnostics cost0.633488 total; the last closed cumulative
-ledger is93.36217745/200USD before the active full run. V1 had11→10 raw passes
-and16→14 valid outputs; V2 had12→13 raw passes and16→15 valid outputs. These are
-mechanism checks, not overall performance. The remaining cross-page clause gap
-was repaired offline before the fixed full run. No new external method/code
-was adopted; existing acknowledgments retain their actual-use scope.
+| Metric | Baseline | Candidate |
+|---|---:|---:|
+| Model scoring + valid delivery |388/645|382/645|
+| Valid outputs |636/645|585/645|
+| Warm staged p95 |4.918s|5.513s|
+| Guangming passes |225/330|208/330|
+| Niuhuang passes |163/315|174/315|
+
+**Do not promote the generation candidate.** The baseline is the Cycle10 adapter
+with repaired retrieval, not exact historical C1. All questions were historically
+exposed; the judge and24-case source audit are not human gold. The complete run
+retains1330 fresh outputs and reviews, zero transport failures/retries or reuse.
+Its20 separate regression pairs exposed a baseline parser mismatch, so their0→20
+result and the combined665 gain are invalid evidence. The parser fix (`3eeea7e`)
+passes20 targeted tests and20/20 offline reconstructions. A separately recorded
+fresh correction stopped on3 connection failures:0 generated outputs,37 unstarted,
+no automatic retries. Corrected paid regression validation remains blocked.
+
+The [canonical report](docs/technical-report.md#completed-primary-benchmark-and-blocked-regression-correction--2026-10-14)
+contains origins/exclusions, paired results, source-reviewed failures, latency scope,
+resource costs and the negative decision.546 full offline tests passed before the
+full freeze. Final conservative ledger **113.54423545/200USD**, **86.45576455 remaining**,
+zero open reservations and no active paid work;6.0192 is unknown-use conservative
+charging for the failed correction, not confirmed provider billing. All artifacts
+stay private. No push/upload/deployment or new external code/method adoption;
+existing acknowledgments retain their precise actual-use scope.
 
 ## Previous checkpoint — Cycle20 confirmation failed, October 14, 2026
 

@@ -7,14 +7,15 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 
 ## Current evidence and denominator summary — 2026-10-14
 
-**No fresh, complete benchmark reproduces the current default across the full
-eligible mixed-origin pool.** C1 remains default; the latest structured candidate
-failed Cycle20's confirmation gate and is not promoted. The user subsequently
-authorized repairs and a fresh full benchmark; the full v3 benchmark is in progress.
-The last closed cumulative ledger is **93.36217745/200USD** after Cycle22; active
-reservations and final totals must be read from the shared ledger. Smaller diagnostic cohorts do not establish overall
-performance, and fresh generations do not make historically exposed questions
-unseen. Model judges, OCR references and same-model source review are not human gold.
+**The fresh645-question paired benchmark is complete; grounded-prose-v3 is not
+promoted.** Model-and-delivery passes388→382, valid outputs636→585, and warm staged
+p954.918→5.513s. Both arms use repaired deterministic retrieval and the Cycle10
+baseline adapter; this is not exact historical C1/current-default reproduction.
+The separate20-regression comparison had a parser mismatch; its code is fixed,
+but a fresh correction stopped on3 transport failures. All outcomes remain visible.
+Final conservative ledger **113.54423545/200USD**, zero open reservations, no active
+paid work. Fresh generations do not make historically exposed questions unseen.
+Model judges, OCR references and assistant source review are not human gold.
 
 The original **420 Guangming supplied Q/A pairs** contain181 real-user and239
 simulated questions. Contact exclusions remove90 (68 real-user,22 simulated),
@@ -53,7 +54,8 @@ exclusion/alias and exposure accounting; exact baseline/candidate versions;
 explicit fresh/reused/failed/unrun status; full-pool results first with live,
 simulated, evaluation and regression strata separate; and fixed, human-calibrated
 scoring and comparable latency scope. Diagnostic subsets belong alongside those
-results, not in place of them. Such a new benchmark has not been run or scheduled.
+results, not in place of them. The completed primary benchmark below supplies this accounting; human calibration
+and a valid paid correction of the separate regression fixtures remain outstanding.
 
 ## Historical experimental principle and keyword investigation (through Cycle15)
 
@@ -699,7 +701,7 @@ Cycle20 served its already-frozen contexts identically to both arms after this m
 This review is a stopping point for discussion. No speculative model cycle, runtime implementation, push, upload or deployment. Local diagnostic artifacts contain the five paired examples and20seed results; spend remains unchanged. No new paper/repository method was adopted, and no novelty is asserted.
 
 
-## Retrieval repair and prose diagnostics — 2026-10-14 (work in progress)
+## Retrieval repair and prose diagnostics — 2026-10-14 (historical preparation)
 
 User authorized implementation after the denominator audit. Commit8289861 replaces
 unordered floating-point overlap sums with sorted-term `math.fsum` in lexical
@@ -748,7 +750,7 @@ no saved-answer reuse, new exclusion or claim of unseen questions. Outcomes and
 ledger totals will be appended after completion; no promotion is authorized.
 
 
-## Fresh full benchmark freeze — 2026-10-14 (running)
+## Fresh full benchmark freeze — 2026-10-14 (frozen protocol)
 
 Cycle22 completes32 fresh outputs/64 calls: baseline12/16 raw passes and16/16
 valid, candidate13/16 and15/16 valid; paired2wins/1loss. Warm staged p50/p95
@@ -791,3 +793,115 @@ partial progress and includes every scheduled record, failure and unscored item.
 A24-case source audit is selected by fixed case-ID hashes,6 per origin stratum,
 without reading scores; it supplements the complete raw evaluation and is not
 human gold. Candidate/prompt/rubric remain fixed during the full run.
+
+## Completed primary benchmark and blocked regression correction — 2026-10-14
+
+**Do not promote grounded-prose-v3.** The first complete fresh paired run on the
+645 eligible mixed-origin questions yields **388→382 model-and-delivery passes**,
+**636→585 valid outputs**, and warm staged p95 **4.918→5.513s**. Niuhuang improves
+while Guangming regresses. The deterministic ranking repair is independently
+verified; this generation bundle does not establish an overall improvement.
+
+| Population | n per arm | Baseline passes | Candidate passes | Valid baseline→candidate | p50 baseline→candidate (s) | p95 baseline→candidate (s) |
+|---|---:|---:|---:|---:|---:|---:|
+| Primary mixed-origin pool |645|388|382|636→585|3.913→3.924|4.918→5.513|
+| Guangming |330|225|208|329→281|3.831→3.873|4.817→5.364|
+| GM real-user |113|74|71|112→108|3.953→4.102|4.878→5.770|
+| GM simulated |217|151|137|217→173|3.773→3.801|4.764→4.891|
+| Niuhuang |315|163|174|307→304|3.995→4.018|4.975→5.540|
+| NH live |205|113|117|199→200|3.994→4.110|5.081→5.941|
+| NH supplied evaluation |110|50|57|108→104|4.035→3.757|4.915→5.312|
+
+Pass means all four frozen judge axes equal2, citation entailment and reference
+completeness true, **and valid delivery**. The unchanged raw judge JSON is retained.
+Before the delivery gate, primary rubric passes are391→413; these are not delivered
+successes. Paired primary outcomes are73 wins/79 losses (GM29/46; NH44/33).
+The descriptive exact two-sided McNemar p=0.685 does not support a gain and is not
+a population-valid efficacy claim on this exposed, model-judged roster.
+
+Both arms independently generated every answer and review:1330 generations and
+1330 reviews across645 primary plus20 regression cases. All scheduled outputs
+are recorded/scored; zero execution failures, retries, answer reuse or new exclusions.
+At closure258 frozen scope hashes matched; the later isolated parser correction
+is versioned separately, and the original runner is archived privately. Candidate
+freeze1443e35, same retrieval/context across arms, baseline Cycle10 adapter with
+repaired lexical fusion—not exact historical C1/current-default reproduction.
+The preceding16-case diagnostics overlap this historically exposed pool. Regression
+contexts were fixed fixtures; primary retrieval ran locally with cached embeddings.
+Latency is the sum of warm retrieval/prompt, generation and validation stages,
+excluding queue, grading, cold setup and new embedding requests. One generation per
+arm; no human gold, independent-provider judge or unseen confirmation is claimed.
+
+### Regression adapter defect and transparent correction attempt
+
+The original20 baseline regression fixtures requested GM `evidence` handles but
+were sent through NH canonicalization. All20 failed `sentence_schema`; the candidate
+passed20/20. **The apparent regression0→20 and combined665 gain388→402 are invalid
+comparative evidence.** Primary645 parsing is unaffected. All original outputs and
+scores remain unchanged, including the defective regression rows.
+
+Commit3eeea7e routes regression fixtures to the correct GM parser.20 targeted
+unittest checks pass, and offline reconstruction accepts all20 existing baseline
+outputs under their requested schema; these reconstructions are diagnostic only,
+not retroactively rescored successes. A separate frozen20-pair correction scheduled
+40 fresh answers/40 reviews. Its first3 connection attempts failed before headers
+or usage; admission stopped, with0 generations/reviews and37 outputs unstarted.
+No automatic retry or hidden substitution. Exact network/provider cause is not
+established. Corrected paid regression validation therefore remains **blocked**.
+
+### What the source audit explains
+
+A fixed hash sample selects6 cases per origin (24 questions/48 answers). This
+assistant reviewed selected source evidence with arms visible and raw scores hidden,
+then froze annotations before comparing scores. It is prior-exposed, not arm-blind,
+not human gold, and not a full-corpus recall audit. Sample factual completion is
+14→10/24, source-conditional adequacy18→14/24 and valid delivery24→22/24. Unsupported-
+relation flags2→4 include borderline OCR identity and eligibility interpretation,
+not four proven fabricated facts. These sample rates must not be extrapolated to645.
+
+| Observed mechanism | Paired evidence and practical consequence |
+|---|---|
+| Numeric answer-use regression | GM048 baseline computes42above+4below=46 with the numbering assumption; candidate repeats the range. Candidate prompt replacement dropped existing source-derived floor guidance. This is a bundled prompt regression, not retrieval failure. |
+| Overstrict delivery contract | GM305/315 baseline answers the requested calculation basis; candidate is rejected. Across the primary pool,40 candidate failures are numeric-policy clause/amount checks,10 fact schema,9 source handle and1 qualified handle. Exact clause enforcement costs usable answers. |
+| Relation/scope errors remain | GM142 candidate reverses the381-collection versus over1000-online relationship. GM059 identity binding and GM362 missing preceding category heading remain uncertain in both arms. Full quotation does not prove semantic relevance or OCR layout. |
+| Boundary usefulness can improve | GM193 explains missing current application dates rather than giving a generic refusal. NH-SKILL-044 distinguishes historical memory wording from modern cognitive evidence. These local improvements do not offset full-pool losses. |
+| Retrieval/aggregation still limits answers | NH-HOP-04 still lacks the requested corpus count and two formula names. Adjacent-page clause assembly only works when both pages are selected; it does not recover a missing page. |
+
+Twelve source-review/judge adequacy disagreements remain in the sample. Some concern
+reference material absent from selected retrieval (for example additional awards
+or formula indications); others concern ambiguous intent or eligibility inheritance.
+They are **not automatically judge errors**. The source audit can assess selected-
+evidence binding without proving complete corpus coverage. Preserve both judgments
+for human/domain calibration instead of changing a rubric to favor a candidate.
+
+### Cost, artifacts and research interpretation
+
+The complete run costs14.162858USD; cumulative107.52503545 at its closure. The
+failed correction reserves and conservatively settles3×2.0064=6.0192USD because
+usage is unknown. **Final conservative cumulative113.54423545/200USD; remaining
+86.45576455; zero open reservations and no active paid run.** Unknown-use charges
+are upper-bound accounting, not confirmed provider billing. Including the two
+0.633488 diagnostic stages, this continuation adds20.815546USD to92.72868945.
+Primary generation input tokens decrease2,019,315→1,679,897, but judge input rises
+983,724→1,273,994 because broader quotations travel with answers. Output tokens are
+81,776→82,314; lower generation input did not improve p95.
+
+Private artifacts: `grounded-prose-full-v3-20261014/` contains frozen inputs,
+all responses, scores, completion verification, source audit and primary metrics;
+`grounded-prose-regression-correction-20261014/` retains the parser reconstruction,
+failed requests, unstarted roster and closed ledger. The single primary four-column
+report is `flash41-full-rerun-20261013/presentation/report.html`; historical report
+and failed correction are linked as secondary evidence. No artifact upload/push/
+deployment. HTML structure and row accounting are checked; browser visual QA was
+unavailable and is not claimed.
+
+This remains the known problem of evidence sufficiency versus faithful answer use,
+with an additional engineering contract tradeoff. Earlier S2G-RAG/CompSelect concepts
+motivated bounded evidence work; this independent prose/whole-clause implementation
+is not a reproduction or new academic method. Existing README credits retain their
+actual-use scope; no new upstream code/prompts/weights were adopted. The next
+bounded research questions are whether a non-destructive clause aid preserves
+conditional coverage without rejecting ordinary explanations, whether source-aware
+numeric helpers survive prompt changes, and whether layout/identity evidence resolves
+relation ambiguity. Human calibration, independent testing and corrected regression
+validation are still needed; no further paid optimization is scheduled.
