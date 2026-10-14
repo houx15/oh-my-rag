@@ -7,11 +7,12 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 
 ## Current state
 
-**Cycle14 is in progress:** prompt-only evidence-use checklist against a fresh
-paired baseline,20 retained original questions, fixed selected evidence/model/
-validator. All10 historicalUSE labels are included, but conditional/limited-source
-cases are explicitly distinguished;2scope cases and8controls are retained.
-No Cycle14 quality outcome is claimed before masked review and settlement.
+**Cycle14 completed:** generic checklist source-usefulness8→9/20, one UI-capability
+correction, no demonstrated content-use rescue. Format validity18→20/20 does not
+imply correct answers. Rawjudge6→9passes with1unscored timeout; conservative
+cumulative86.06776345/200. [Trace and negative result](use-prompt-cycle14.md).
+**Cycle15 task-focused prompt is prepared**, with fixed evidence/model/validators
+and fresh paired controls. No result claimed yet.
 
 **No broad retrieval candidate has displaced C1.** Historical C1 scored44/60 with
 both judges, versus36/60 for the longer-context/answer C2P; p95 was1.931s versus
@@ -30,9 +31,10 @@ versus12/20 for the earlier weighted small-model arm. Neither is promoted.**
 Both new selectors have one protocol failure; source selection alone does not
 resolve policy-scope, attribution or evidence-use failures. [Cycle13 details](keyword-selection-cycle13.md).
 
-Latest settled conservative cumulative spend: **83.49996345 of200USD**, including
+Latest settled conservative cumulative spend: **86.06776345 of200USD**, including
 all earlier ledger chains. This uses conservative numeric tariff reservations,
-not an exchange-rate conversion or invoice. Cycle12/13 made219 paid calls, no retry;
+not an exchange-rate conversion or invoice. Cycle12/13 made219 paid calls; Cycle14 added80dispatches including1unknown-usage
+judge timeout, conservatively settled without retry;
 one judge request was rejected locally before dispatch and remains unscored.
 No privacy-screen exemption was added. [Cycle12 details](keyword-cycle12.md).
 
@@ -297,3 +299,12 @@ regressions and borderline cases.145scope hashes verified,483regression tests pl
 10focused optimized checks pass. No active paid stage or open reservations.
 A reproducible check finds293/293 delivered citations exact across100outputs,
 not proof of entailment and not verification of the historical1206 tally.
+
+
+### 2026-10-14 Cycle14 negative result
+
+All38valid outputs preserve raw factual sentences. Source-usefulness8→9/20 reflects
+onlyGM124’s corrected UI boundary. N170’s biography recovery is offset by答→牛黄
+misattribution. N265/R095 become valid but remain semantically wrong. Preserve
+PROTO versus USE/intent distinctions. Cycle15 tests task-focused instructions;
+Cycle14’s8frozen synthetic checks remain unrun, not successful confirmations.
