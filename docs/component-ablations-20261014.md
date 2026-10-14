@@ -1,5 +1,7 @@
 # Controlled component ablations — 2026-10-14
 
+Latest status: the116authorized jobs are complete. Primary passes: baseline28/48, A1 26/48, C1 25/48; regressions20/20,18/20,18/20. Neither component is promoted. Cumulative$121.98103945; remaining$78.01896055; no active paid run. Earlier blocked-state entries below are historical.
+
 Baseline remains the Cycle10 adapter with deterministic original-query lexical fusion, not exact historical C1. Grounded-prose v3 is a rejected overall candidate: on 645 primary cases its original valid-and-all-rubric passes are 382 versus baseline 388; validity is 585 versus 636. Corrected fresh fixed-context regressions are 19 versus 20 out of 20. The narrow duplicate-clause repair independently recovers one saved candidate output (585→586 valid), preserves all 1,260 previously valid outputs, and does not establish a new generation pass rate. Original outcomes remain immutable.
 
 ## Verified research and applicability
@@ -116,3 +118,47 @@ No new provider calls. All 85 saved reviewed outputs were inventoried; raw resul
 The next useful representation hypothesis is to preserve a selected procedure's preceding structural steps when available in the candidate pool, with explicit byte/displacement controls. GM349 is a motivating example, not a per-question rule or validation set. No such change has been implemented. For evaluation, define question-required core facets separately from optional reference background before examining confirmation outcomes; keep exact-answer/prompt consistency checks as an audit. No additional judge call or automatic regrade was made.
 
 **Current decision:** baseline retained; A0 remains the only narrowly supported retained repair. A1/C1 efficacy is unresolved, B1 remains rejected under its strict budget control, D0 is offline-only. Paid continuation remains blocked after two automatic-review denials; no workaround attempted. Spend remains **$120.78139745**, remaining **$79.21860255**, zero open reservations. Private supporting artifacts: `offline-paired-audit.json`, `offline-source-adjudication.json`, `offline-source-page6.json`.
+
+
+## Authorized continuation completed — October 14, 2026
+
+Direct user instruction authorized the116unstarted jobs within the existing $200 cumulative cap. The same frozen run resumed; all88 prior outcome rows remain byte-identical, including the three interrupted failures and their conservative charges. **All116 resumed jobs completed with fresh generations and reviews, without new execution failures or retries.** The full scheduled scope now has204outcomes:201completed with reviews,3preserved interruptions,0unstarted. Total406dispatches (232new), with284scope hashes verified and zero open reservations. The earlier denials/incomplete reports remain historical evidence.
+
+### All-denominator results
+
+Every scheduled case remains in the denominator; interrupted or undelivered outputs do not pass. These are exposed development cases, not human gold or a fresh unseen test. Primary48cases and20fixed-context regressions stay separate.
+
+| Population / metric | Baseline | A1 schema reminder | C1 original-query protection |
+|---|---:|---:|---:|
+| GM passes /24 |17|15|17|
+| NH passes /24 |11|11|8|
+| Primary passes /48 |28|26|25|
+| Primary mechanically valid /48 |47|47|47|
+| Regression passes /20 |20|18|18|
+| Regression mechanically valid /20 |20|18|19|
+| All68 passes (descriptive only) |48|44|43|
+| All68 mechanically valid |67|65|66|
+
+The baseline's missing primary output is an interrupted generation; A1 and C1 each have one mechanically invalid primary output. In regressions, A1 has one interrupted generation and one schema-invalid answer; C1 has one interrupted review of a valid generation and one schema-invalid answer. No historical failure was replaced. The primary differences therefore do not establish a validity benefit for either component.
+
+| Population / observed warm p50, p95 seconds | Baseline | A1 | C1 |
+|---|---:|---:|---:|
+| GM |3.778,4.476|4.120,4.894|3.871,5.468|
+| NH |4.454,5.268|4.450,5.054|4.343,5.035|
+| Fixed-context regressions |3.887,4.877|3.928,5.065|4.026,5.066|
+
+Latency is warm retrieval/prompt +generation+validation component sum, excluding grading, queue and cold setup. It uses observed generations only: NH baseline n23 and regression A1 n19; other cells have the scheduled population size. Unknown interrupted generation latency is not imputed. C1's interrupted review retains a measured generation. Concurrent, interrupted/resumed phases are disclosed; these are not cold serial SLA estimates or convincing small-sample latency improvements.
+
+### Reliability, source review and decisions
+
+There are65complete three-arm reviewed cases and66reviewed baseline pairs per component. C1's66pairs comprise24source-content changes,4order-only changes and38identical-prompt controls. Across all arms,17pairs have identical canonical answers; two have opposite judgments with identical review prompts (GM349 and NH R063). This dependent audit is not a population error-rate estimate. Earlier source adjudications still apply; raw judge scores are unchanged.
+
+The sole GM C1 pass gain, GM120, replaces abstention with a supported introduction, but its used source IDs were already present in the baseline context. A1's interface-response gain at NH N026 is locally useful but not a general schema effect. Near-equivalent NH N173 answers and personal-use-boundary cases expose further threshold inconsistency. Actual mechanical failures include A1's shortened unsupported source title, A1's non-exact uncited boundary text, and C1's missing boundary evidence field. The C1 regression fixture uses the identical baseline prompt, so its failure is not caused by changed packing. NH-LIVE-07's dropped useful comparison source remains a concrete evidence-content drawback. No medical gold or clinical advice is inferred from historical excerpts.
+
+**Decisions:** reject A1 and C1 as default replacements under this tested configuration. Neither improves primary passes, neither preserves general regression performance, and C1 trades a local GM gain for NH losses. This is not a universal rejection of schema validation or evidence protection. Keep the incumbent baseline and the independently verified narrow A0 parser repair. B1 remains rejected under its strict no-growth control; D0 remains offline-only. No independently promising pair of components was established, so no combination, leave-one-out trial or broader paid confirmation was launched. The597-case confirmation partition remains unscored by these new components.
+
+### Cost and closure
+
+The116-job continuation costs **$1.199642** conservatively. Whole A1/C1 stage: **$8.084218**, including the unchanged **$6.0192** for three unknown-use interrupted calls. By arm, generation+review conservative costs are baseline$2.682298, A1$2.718962 and C1$2.682958; each includes one$2.0064unknown-use charge. These are budget ceilings, not an invoice or FX calculation.
+
+**Cumulative $121.98103945/$200; remaining $78.01896055; zero open reservations and no active paid run.** No push, upload or deployment. Private files include completed-costs.json, completed-reliability-audit.json, completed-source-review.json, summary.json and the updated four-column report. Original results and historical partial checkpoints remain preserved.

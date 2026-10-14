@@ -15,7 +15,11 @@ The original20-regression comparison had a parser mismatch; after a blocked atte
 a new corrected recovery completes20/20 baseline versus19/20 candidate. All attempts
 remain visible. A narrow offline parser fix recovers one primary candidate answer
 (585→586 valid) without changing original scores.
-Final conservative ledger **113.89682145/200USD**, zero open reservations, no active
+The subsequent isolated component run is now closed: primary passes baseline28/48,
+A1 schema26/48, C1 packing25/48; separate regressions20/20,18/20,18/20.
+Neither component is promoted. All116authorized continuation jobs completed;
+three earlier interruptions remain counted. Final conservative ledger
+**121.98103945/200USD**, remaining78.01896055, zero open reservations, no active
 paid work. Fresh generations do not make historically exposed questions unseen.
 Model judges, OCR references and assistant source review are not human gold.
 
@@ -1057,3 +1061,8 @@ Cumulative conservative spend is **$120.78139745/$200**, remaining **$79.2186025
 The [updated ablation record](component-ablations-20261014.md#offline-adjudication-after-continuation-denial) audits all85 saved reviewed outputs:53cases, only4complete triplets,15A1pairs and11C1pairs. It withholds overall gains and preserves all raw outcomes.
 
 GM349's two identical answers share a verified missing-procedure defect: preceding page6 was in the lexical candidate pool but dropped from selected context. NH R063's two identical introductions are source-supported; the opposite verdicts arise from an unstable optional-detail requirement. These are separate assistant source adjudications, not rewritten judge scores or human gold. C1 also drops a useful comparison source in NH-LIVE-07; another apparent C1 regression occurs on an identical fallback prompt and cannot be attributed to packing. Baseline retained; paid continuation blocked. Spend and remaining budget are unchanged at $120.78139745 and $79.21860255, with zero open reservations.
+
+
+### Authorized component continuation completed
+
+The [completed component ablation](component-ablations-20261014.md#authorized-continuation-completed--october-14-2026) retains all204scheduled outcomes:201reviewed and3preserved interrupted failures. The116resumed jobs completed without new failures/retries, costing$1.199642. All284frozen scope hashes passed; original88outcome rows are byte-identical. Primary passes baseline28/48,A1 26/48,C1 25/48; separate fixed-context regression passes20/20,18/20,18/20. No default replacement, combination or broader confirmation is justified. Raw judgments and source adjudications remain separate, including two identical-answer/prompt score disagreements among17identical-answer pairs. Cumulative$121.98103945/$200, remaining$78.01896055; zero open reservations, no active paid work. No push, upload or deployment.

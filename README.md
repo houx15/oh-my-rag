@@ -14,7 +14,18 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — complete primary benchmark, October 14, 2026
+## Current checkpoint — isolated ablations completed, October 14, 2026
+
+All116authorized continuation jobs completed without new failures or retries.
+Across48primary development cases, passes are baseline28, schema-reminder A1 26,
+and original-query-protection C1 25; separate20regression passes are20,18,18.
+The three earlier interrupted outcomes remain counted. Neither component is
+promoted; the baseline and verified narrow parser repair remain. See the
+[full ablation record](docs/component-ablations-20261014.md) for source adjudication,
+judge inconsistency, latency and negative results. Continuation cost$1.199642;
+cumulative$121.98103945/$200, remaining$78.01896055. No active paid run or open reservation.
+
+## Prior checkpoint — complete primary benchmark, October 14, 2026
 
 Deterministic lexical ranking/window scoring is fixed (`8289861`), reproduced across
 six process hash seeds on both corpora. The prose/optional-complete-clause candidate
@@ -393,17 +404,13 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
-Latest [component-ablation checkpoint](docs/component-ablations-20261014.md): the
-narrow parser repair is retained; broader schema/packing changes remain opt-in.
-The fresh trial stopped after 85 completed outputs, with 3 interrupted and 116
-unstarted; paid continuation was rejected by automatic approval review. Two pairs
-with identical answers and identical review prompts received opposite judgments,
-so no component improvement is claimed. Conservative spend is $120.78139745/$200;
-no active paid run or open reservation. Independently written A1 tests an explicit
-schema reminder, conceptually informed by Instructor's validation approach; it
-uses neither Instructor code nor retries. C0/C1 and D0 use the reader-context and
-original-query provenance concepts cited in the trial record; no upstream code
-was copied and no new default was adopted.
+Latest [component-ablation checkpoint](docs/component-ablations-20261014.md):
+A1 and C1 completed and are not promoted. A1 independently tests a schema reminder,
+conceptually informed by Instructor's validation approach, without its code or
+retry engine. C0/C1 and D0 use the cited reader-context diagnostic and original-query
+provenance concepts; no upstream code was copied. Two identical-answer/review-prompt
+pairs received opposite judgments, so source review remains separate from raw scores.
+The narrow parser repair predates this review and retains its independent attribution.
 
 The [October 14 component-ablation record](docs/component-ablations-20261014.md)
 credits the reader-context diagnostic and original-query provenance concepts used
