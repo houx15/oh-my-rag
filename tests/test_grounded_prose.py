@@ -23,8 +23,13 @@ class GroundedProseTests(unittest.TestCase):
    answer,_=self.run_answer([{'boundary':kind}]);self.assertEqual(answer['sentences'][0]['citations'],[])
  def test_ui_can_accompany_facts(self):
   self.run_answer([{'boundary':'ui'},{'text':'心电监测属于体表监测。','sources':['S1']}])
- def test_no_mixed_clarification(self):
-  with self.assertRaises(ValueError):self.run_answer([{'boundary':'clarify'},{'text':'猜测对象','sources':['S1']}])
+ def test_partial_fact_and_clarification_is_deliverable_not_semantically_certified(self):
+  answer,trace=self.run_answer([{'text':'已知分类','sources':['S1']},{'boundary':'clarify'}])
+  self.assertEqual(len(answer['sentences']),2);self.assertFalse(trace['semantic_binding_verified'])
+ def test_policy_summary_requires_selected_source_bound_amounts(self):
+  self.run_answer([{'qualified':'Q1'},{'text':'补贴比例20%，最高500万元。','sources':['S2']}])
+  with self.assertRaises(ValueError):self.run_answer([{'qualified':'Q1'},{'text':'最高补贴1000万元。','sources':['S2']}])
+  with self.assertRaises(ValueError):self.run_answer([{'qualified':'Q1'},{'text':'最高补贴500万元。','sources':['S1']}])
  def test_no_separate_source_unit_mismatch(self):
   with self.assertRaises(ValueError):self.run_answer([{'qualified':'Q1','source':'S1'}])
   with self.assertRaises(ValueError):self.run_answer([{'text':'事实','sources':['S9']}])
