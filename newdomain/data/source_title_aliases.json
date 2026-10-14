@@ -1,0 +1,19 @@
+{
+  "aliases": [
+    {
+      "alias": "《本草经疏》",
+      "canonical": "《神农本草经疏》",
+      "source_ids": [
+        "MD-043-0001"
+      ],
+      "evidence": {
+        "source_record": "MD-043-0001",
+        "record_text_sha256": "7467e7635ceb6e06c96aa556968e17ef2034fac71db517c8eb3e87358f15af3d",
+        "metadata_field": "pad锚点.置空原因",
+        "local_transcription_note": "pad 影印本 200 页只覆盖《本草經疏》卷一＋卷二(缪希雍原书三十卷)：放大实读版心，p40「本草經疏 卷一 綠君亭」叶二、p80「卷一」叶四十二、p120「卷二」叶十三、p160「卷二」叶五十三、p200(末页)「卷二」叶九十三——两卷均为总论(续序例上/下)，尚未进入药物各论；牛黄条属卷十六兽部，不在 pad 内",
+        "normalization": "Traditional 經 to simplified 经 in explicitly recorded abbreviated title; no generic suffix inference",
+        "limitation": "Local catalogue/transcription metadata, not newly verified facsimile"
+      }
+    }
+  ]
+}

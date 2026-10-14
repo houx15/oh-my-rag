@@ -10,36 +10,36 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current source-grounded experiment — October 14, 2026
+## Current checkpoint — protocol repair, October 14, 2026
 
-[Cycle9 source repair and paired validation](docs/source-grounded-cycle9.md)
-records one final opt-in configuration, `source-grounded-cycle9-v5`
-(`newdomain/source_grounded_pipeline_v7.py`). A hash-bound ancient-text amendment
-restores a missing speaker marker; exact speaker spans and targeted historical
-coverage preserve source provenance. The original corpus is unchanged.
+[Cycle10 protocol repair and isolated source effects](docs/protocol-cycle10.md)
+repairs all three final Cycle9 delivery losses without another generation call:
+**34/37 → 37/37 mechanical validity**. Across 328 original Niuhuang output records,
+zero previously valid answers change and zero validity regressions occur. This
+is protocol replay, **not an updated adequacy score**. Only declared nonfactual
+boundary grammar and explicitly documented source-title aliases are normalized;
+arbitrary prose, citations and unsupported titles remain rejected.
 
-On 78 previously selected original questions, raw adequacy is **34/78 →40/78**;
-the separate 37-question affected/control test is **10/37 →17/37**. Six new frozen
-synthetic wordings score **6/6 →5/6**. The 78-question display uses score-blind,
-exact-input/output equivalence replay; it is not 156 fresh generations. Three
-attribution gains are near-duplicate questions. These are exposed diagnostics,
-not human-gold accuracy or proven overall improvement. **C1 remains the default**.
+A controlled source/section ablation covers all 11 changed preparations identified
+among 318 original questions, plus 6 stable controls. Raw adequacy is **10/17 baseline,
+10/17 source only, 9/17 sections only, 9/17 both**. Six separately authored frozen
+synthetic checks score **5/6 in all arms**. A separate read-only assistant reviewed
+40 masked unique outputs without labels or scores; this is same-model-family
+review, not human gold. Source repair improves attribution provenance, while
+section retrieval still leaves selected-citation failures. **C1 remains the
+default; the combined experimental candidate is not promoted.**
 
-The source fix resolves a real text omission, but final delivery validity drops
-from 37/37 to 34/37 in the direct original-question test. Section retrieval,
-excerpt-scope mistakes and false model-judge passes remain. Earlier H05 and
-T01–T12 are unchanged and were not tuned. All negative results are retained.
+This cycle used 79 paid requests, estimated **CNY0.565424**. Cumulative conservative
+ledger: **$82.03191625/$200**, all settled, no active paid work, retries or new unknown
+usage. No Cycle10 output exceeded 20s. 468 offline tests and 8 focused Python-O tests
+pass using imported unittest discovery. No push, upload or deployment occurred.
 
-This cycle used 623 paid calls, estimated **CNY4.865454**; cumulative conservative
-ledger **$81.46649225/$200**, with no open reservations or active paid work.
-Final direct original-test warm p95 is **6.513s baseline /5.487s candidate**;
-no Cycle9 output exceeded 20s. 460 offline tests and 10 focused Python-O tests pass.
-No push, deployment or upload occurred.
-
-[Cycle8 results and baseline reconciliation](docs/source-grounded-cycle8.md)
-remain historical context. The old 108/205 versus 80/205 comparison changed provider,
-both models, citation instructions and 197/205 evidence orders, so it cannot
-identify a single cause of regression.
+The adapter in `newdomain/source_grounded_pipeline_v8.py` exposes independent
+source/section/protocol switches for reproducible ablations; it does not replace
+the default. [Cycle9 results](docs/source-grounded-cycle9.md) retain the earlier
+source repair and all negative outcomes. Previous H05/T01–T12 and the six Cycle9
+rewrites were not tuned or changed. The new separately authored checks are also
+frozen and were not used for subsequent code tuning.
 
 ## Previous broad original-question checkpoint — October 14, 2026
 
@@ -204,6 +204,16 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 `--freeze`. No automatic retry, deployment or artifact upload is provided.
 
 ## Research acknowledgments
+
+Cycle10's `protocol_normalization.py` and `section_windows.py` are independently
+written protocol and exact-source-window engineering, not reproductions of a new
+paper. The explicit title alias in
+[`source_title_aliases.json`](newdomain/data/source_title_aliases.json) is grounded
+in the existing local catalogue/transcription metadata; no upstream code or new
+external source was adopted. Its frozen provenance is documented, with no claim
+of automatic alias verification for arbitrary future corpus versions. The
+source-only ablation reuses the credited ancient-text amendment below.
+
 
 Cycle9's independently written source-version and speaker-span mechanisms continue
 the bounded-evidence experiments below; they do not reproduce a trained paper
