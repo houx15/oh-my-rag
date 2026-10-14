@@ -332,3 +332,143 @@ New implementation/artifacts: `newdomain/evidence_use_prompt.py`,
 The report presents one coherent current candidate, all paired outputs in appendices,
 and unchanged historical tables. No external paper/code newly adopted in these
 cycles; existing acknowledgments remain scoped to actual conceptual influence.
+
+
+## Factual synthesis for user discussion — 2026-10-14
+
+This section uses completed artifacts only. No new paid inference or algorithm
+change. Source-review usefulness is not accuracy, and “small model” does not assert
+a verified parameter count.
+
+### Keyword route: exact inputs, full measured overhead and outcomes
+
+Actual keyword model: Alibaba Bailian **`qwen3.8-flash`**,20 responses with actual
+model IDs checked. Final answering and judging use `deepseek-v4.1-flash`.
+The keyword call's user JSON contains `original_conversational_question`, a
+`source_vocabulary` string list, and separate `user_supplied_interface_vocabulary`
+(`pad`, `LivePad`). Vocabulary comes from existing tokenization, exact book titles
+and Latin terms over1507 Niuhuang/1174 Guangming records:25 common terms plus60
+lexically related terms, deduplicated and topped up to at most90. Term-to-source
+IDs are retained locally; the prompt supplies terms, not gold source IDs or answers.
+The original question is unchanged. Up to3 queries of at most60 characters may
+use words outside the list; there is no phonetic-similarity gate. Generated queries
+retrieve source text and are never passed off as answer evidence.
+
+The comparator is the freshly run Cycle12 original-query baseline using the
+Cycle10 adapter/source/protocol state, **not historical C1**. All20 questions per
+arm are exposed diagnostics, not an untouched test population.
+
+| Measurement | Original-query baseline | Free keyword hypotheses | Difference |
+|---|---:|---:|---:|
+| Source-review useful outputs |9/20|12/20|+3, no observed binary losses|
+| Original judge passes |8/20|6/20|−2|
+| Mechanically valid outputs |19/20|20/20|+1|
+| Full pipeline-component p50 |4.568s|7.912s|+3.344s between arm quantiles|
+| Full pipeline-component p95 |6.140s|11.299s|+5.159s between arm quantiles|
+
+The keyword API alone has p50 **2.734s**, p95 **5.047s**. The full numbers above
+also include vocabulary preparation, original retrieval, hypothesis retrieval,
+fusion/window/prompt preparation, answer generation and canonical validation.
+They are measured serial critical-path component sums, not contiguous wall-clock
+requests. Cold initialization, uncached embedding network, idle stage gaps and
+separate grading are excluded. Per-question full-component *paired differences*
+have nearest-rank p50 **+3.596s**, p95 **+6.880s** (range+0.345 to+9.779s);
+these differ from subtracting arm quantiles. Provider/generation variation is part
+of those observed differences, not a causal estimate of keyword overhead alone.
+
+Source-review gains: R034 speaker attribution; R095 missing-antecedent clarification;
+GM125 substantive district information. All three have changed prompts/contexts.
+These are not all newly retrieved missing facts: GM125's original selected context
+already contained relevant district facts. Same-family assistant review with prior
+context and coarse binary labels cannot establish population improvement. The
+20 keyword calls cost0.0111792 in the conservative ledger convention; the entire
+Cycle12 experiment (20Qwen+119DeepSeek dispatches) cost0.8737252, including judges.
+Deterministic vocabulary alone remained9/20 useful: gainGM125, lossGM128.
+
+Equal fusion and literal token coverage were subsequently tested and did not
+improve the weighted route (9/20 and10/20 versus12/20 useful). Untested: semantic/
+field-aware ranking of valuation passages already in the pool; evidence windows
+preserving both speaker and requested attribute; and the larger frozen original-
+question confirmation of weighted keywords. Neither8-case prompt confirmation
+was run. These remain hypotheses, not hidden successes or proof retrieval is solved.
+
+### Two actual Chinese raw-to-final examples
+
+Both examples are fresh Cycle15 **baseline** outputs from
+`use-focus-cycle15-20261014/answers/results.jsonl`; corresponding full prompts,
+contexts and traces are retained. They are not constructed examples.
+
+**GM072 — omission already occurs during generation.**
+
+Question: “请开始介绍光明区简介。”
+
+Raw answer:
+```json
+{"sentences":[{"text":"本次资料未包含回答该问题所需的依据。","evidence":[]}]}
+```
+Final answer:
+```json
+{"sentences":[{"text":"本次资料未包含回答该问题所需的依据。","citations":[]}],"handoff":false}
+```
+Selected D02:1:01 contains science-city/northern-Shenzhen/innovation positioning,
+enough for a bounded introduction, though not a full district profile. The model
+already refuses before validation; canonicalization changes handles/protocol only.
+The task-focused arm also refuses. This localizes omission to generation under
+these prompts, **not proof that a particular prompt sentence caused it**, and not
+evidence that validation deleted an adequate introduction.
+
+**R095 — downstream delivery rejection of a malformed clarification.**
+
+Question: “它有什么影响？”
+
+Raw answer:
+```json
+{"sentences":[{"text":"您问的“它”在本次资料中没有明确所指，无法确定要回答哪本书或哪味药的影响。","citations":[{"id":"MD-016","segs":[0]}]},{"boundary":"clarify"}]}
+```
+Final answer: `null`; gate failure: `unknown/mixed boundary`.
+
+The missing referent warrants clarification, but the generated answer mixes a
+factual/cited sentence with a boundary that the contract requires to stand alone.
+The historical source citation cannot prove missing conversational context.
+The downstream gate causes nondelivery of this raw clarification; generation
+caused the incompatible form. This is not a factual answer removed by validation.
+The task-focused arm becomes valid by silently choosing《新修本草》as “它”; source
+review still fails it. Loosening the validator would not resolve the actual referent.
+
+### What6→9/14 means, and what to do next
+
+A separate assistant, with arm labels/raw scores masked but prior related context,
+judged materially useful source-supported **delivered outputs** on14 exposed
+original questions (8 targets,6 controls). It accepted6 baseline and9 candidate
+outputs. This is a small binary usefulness assessment, not measured accuracy,
+perfect support, successful UI execution, or independent human validation.
+
+Only GM126 replaces blanket abstention with candidate-park content; it remains
+borderline because noisy-name linkage/development scope are unresolved. GM119
+repairs conditional referent wording; GM124 removes an unsupported UI-capability
+claim. Neither adds previously missing substantive content. N170 biography and
+N325 historical definition were already useful in the fresh baseline, so richer
+candidate wording is not a rescue. Excluding all explicitly borderline passes
+leaves4→5/14. The frozen requirement of2 content rescues failed; no confirmation
+calls or promotion followed.
+
+**Next justified algorithmic hypothesis, not implemented:** a narrow typed policy
+fact representation and deterministic rendering, starting with the repeated GM127
+failure. Preserve each source policy as a linked record of eligible beneficiary,
+location/area/lease conditions, subsidy rate, cap/period and exclusions, all with
+source spans. Keep buildings/bases as location conditions rather than recipients.
+Generate a policy sentence only from a complete supported record; do not substitute
+“符合条件” for eligibility. This differs from merely supplying complete clauses or
+adding another reminder: it explicitly represents the relationships repeatedly
+lost despite selected evidence. First test record extraction and rendering offline
+on independently annotated positive/negative cases, with no new provider calls.
+It addresses policy-scope errors only; it will not fix missing evidence or all USE.
+
+Human/user calibration is essential **before treating the broader usefulness gains
+as optimization success**: agree whether a tentative noisy-name park introduction,
+a conditionally guessed referent, or a historical identity description satisfies
+the task; annotate required facets and disqualifying omissions. Those choices
+currently determine most of the6→9 gain. The original judge and source assistant
+disagree, and fresh synthetic checks would reuse that unsettled standard. This is
+an evaluation bottleneck, not a request to keep cycling prompts or an assertion
+that all algorithmic avenues are exhausted. No new paid run is scheduled.
