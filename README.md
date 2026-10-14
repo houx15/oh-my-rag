@@ -3,6 +3,10 @@
 Chinese document-grounded QA research with explicit evidence handles, offline
 validation, budgeted provider calls and paired evaluation.
 
+**[Cumulative technical report](docs/technical-report.md)** — current state, architecture,
+data and evaluation limits, source-grounded failures, literature, dated experiments,
+negative results and next steps. This is the canonical evolving project narrative.
+
 This is a **research checkpoint**, not a production release or a demonstrated
 research improvement. C1 remains the reference candidate. On the historical
 60-question comparison, both-judge adequacy was **44/60 for C1 versus 36/60 for
@@ -10,7 +14,25 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — citation-alignment plateau, October 14, 2026
+## Current checkpoint — keyword hypotheses and selection, October 14, 2026
+
+[Cycle12](docs/keyword-cycle12.md) ran20 original questions in both corpora across
+three arms. Raw judge passes8/10/6 contrast with masked assistant source-usefulness
+9/9/12 (baseline/vocabulary/small-model); vocabulary has one unscored judge request.
+The small-model arm has three source-reviewed gains and no observed losses on this
+exposed pilot, but pipeline-component p95 rises6.140→11.299s. Review is same-model,
+not human gold; no candidate is promoted. Correct candidates can be dropped by
+fusion, so Cycle13 now tests selection only with the20 frozen keyword outputs.
+
+[Historical audit](docs/historical-failure-audit.md) covers318 original answers and
+locates56 defects,23 scorer/reference problems and85 unresolved cases. These are
+historical mixed versions, not current accuracy. Cycle12 settled139paid calls;
+cumulative conservative spend82.90564145/200 before the active bounded Cycle13
+answer stage.483offline tests pass. No new external code or paper implementation
+was adopted; existing acknowledgments remain scoped to actual use. No push/upload/
+deployment. Follow the technical report for the evolving state and final settlement.
+
+## Previous checkpoint — citation-alignment plateau, October 14, 2026
 
 [Cycle11 fixed-answer citation comparison](docs/citation-cycle11.md) compares
 unchanged quotes, simple neighbor expansion and bounded sentence completion.
