@@ -10,8 +10,8 @@ Local artifacts remain private. No push, publication, upload or deployment is au
 **No fresh, complete benchmark reproduces the current default across the full
 eligible mixed-origin pool.** C1 remains default; the latest structured candidate
 failed Cycle20's confirmation gate and is not promoted. The user subsequently
-authorized repairs and a fresh full benchmark; Cycle22 diagnostic is in progress.
-The last closed cumulative ledger is **93.04503145/200USD** after Cycle21; active
+authorized repairs and a fresh full benchmark; the full v3 benchmark is in progress.
+The last closed cumulative ledger is **93.36217745/200USD** after Cycle22; active
 reservations and final totals must be read from the shared ledger. Smaller diagnostic cohorts do not establish overall
 performance, and fresh generations do not make historically exposed questions
 unseen. Model judges, OCR references and same-model source review are not human gold.
@@ -746,3 +746,48 @@ The subsequent full benchmark is planned as665cases ×2 independently regenerate
 arms (645 mixed-origin questions plus20 separate fixed-context regressions), with
 no saved-answer reuse, new exclusion or claim of unseen questions. Outcomes and
 ledger totals will be appended after completion; no promotion is authorized.
+
+
+## Fresh full benchmark freeze — 2026-10-14 (running)
+
+Cycle22 completes32 fresh outputs/64 calls: baseline12/16 raw passes and16/16
+valid, candidate13/16 and15/16 valid; paired2wins/1loss. Warm staged p50/p95
+3.861/8.859s baseline versus3.658/4.921s candidate. Increment0.317146, cumulative
+93.36217745/200, no retry/provider failure. This remains an exposed mixed-origin
+diagnostic, not full performance. GM201 is still invalid because one comparison
+clause crosses the selected D14 pages3/4 and lacks an eligible complete group.
+
+Before the full freeze, v3 adds multi-source clauses only for explicit adjacent
+selected pages of the same document, with separate exact offsets/citations and
+no cross-document joins. The numeric policy summary remains linked to selected
+whole clauses; semantic relevance and category binding are not certified.
+Three NH supplied evaluation questions also had selected text matching the existing
+contact-name denylist. Preflight blocked both arms before dispatch. Additional
+exact redaction now applies symmetrically to outbound evidence/questions/references;
+only already-approved institution literals retain their existing exemption.
+No question was excluded or silently replaced. Private originals are unchanged.
+
+Candidate freeze1443e35:546 offline tests pass; all665 two-arm inputs match;934
+whole-clause renders verify exact source custody; all1330 generation prompts
+pass the existing privacy screen. All258 scope files match. This v3 repair has
+offline validation plus preceding v1/v2 diagnostic evidence; no separate v3 pilot
+score is claimed. Full roster: GM113real+217simulated, NH205live+110evaluation,
+20 separate fixed-context regressions.1330 independently fresh generation jobs
+and1330 fresh reviews; zero saved-generation reuse. Historical exposures and
+the16 diagnostic overlaps remain disclosed. Current baseline is the Cycle10
+adapter with deterministic original lexical fusion, not exact historical C1.
+
+Remaining allowance before full allocation106.63782255. Recent diagnostic usage
+projects13.181380625 for2660 calls; a deliberately pessimistic UTF-8 payload-size
+scenario is129.623696 and exceeds remaining allowance. Neither scenario replaces
+the enforced ledger: each call reserves the pinned full-context bound (2.0064),
+actual usage settles, and up to3 in-flight reservations total6.0192. The run must
+stop on admission/provider failure before exceeding cumulative200; complete
+execution is not guaranteed under pessimistic usage. No automatic retries.
+
+The primary private report has one four-column question/answer/score/latency
+view with a whole-arm switch, never per-question best-answer selection. It labels
+partial progress and includes every scheduled record, failure and unscored item.
+A24-case source audit is selected by fixed case-ID hashes,6 per origin stratum,
+without reading scores; it supplements the complete raw evaluation and is not
+human gold. Candidate/prompt/rubric remain fixed during the full run.
