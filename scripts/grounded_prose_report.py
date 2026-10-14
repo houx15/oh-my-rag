@@ -7,6 +7,8 @@ from scripts.keyword_experiment import read,write,lines
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--directory',type=Path,required=True);a=p.parse_args();n=a.directory;jobs=read(n/'answer-jobs.json');results={r['qid']:r for r in lines(n/'answers/results.jsonl')};groups=defaultdict(list)
+ started={r['key'].split('|')[0]for r in lines(n/'answers/calls.journal.jsonl')if r['status']=='started'}
+ generated={r['qid']for r in lines(n/'answers/responses.jsonl')if r['kind']=='generation'}
  for j in jobs:
   groups[(j['arm'],'all')].append(j)
   if j['corpus']!='regression':groups[(j['arm'],'main_mixed_645')].append(j)
@@ -18,7 +20,7 @@ def main():
   vals=sorted(vals);i=(len(vals)-1)*p;lo=int(i);hi=min(lo+1,len(vals)-1);return vals[lo]+(vals[hi]-vals[lo])*(i-lo)
  for (arm,stratum),items in groups.items():
   rs=[results[j['qid']]for j in items if j['qid']in results];lat=[r['pipeline_component_sum_ms']/1000 for r in rs if 'pipeline_component_sum_ms'in r]
-  metrics[arm+'/'+stratum]={'scheduled':len(items),'recorded':len(rs),'generation_completed':sum('generation'in r for r in rs),'review_completed':sum('review'in r for r in rs),'scored':sum(r.get('score')is not None for r in rs),'raw_passes':sum(bool((r.get('score')or{}).get('adequate'))for r in rs),'valid':sum(bool(r.get('valid'))for r in rs),'execution_failed':sum('execution_failure'in r for r in rs),'not_started':len(items)-len(rs),'p50_seconds':quantile(lat,.5),'p95_seconds':quantile(lat,.95),'latency_samples':len(lat)}
+  metrics[arm+'/'+stratum]={'scheduled':len(items),'recorded':len(rs),'generation_completed':sum(j['qid']in generated for j in items),'review_completed':sum('review'in r for r in rs),'scored':sum(r.get('score')is not None for r in rs),'raw_passes':sum(bool((r.get('score')or{}).get('adequate'))for r in rs),'valid':sum(bool(r.get('valid'))for r in rs),'execution_failed':sum('execution_failure'in r for r in rs),'not_started':sum(j['qid']not in started and j['qid']not in results for j in items),'in_progress':sum(j['qid']in started and j['qid']not in results for j in items),'unscored_recorded':sum(r.get('score')is None for r in rs),'p50_seconds':quantile(lat,.5),'p95_seconds':quantile(lat,.95),'latency_samples':len(lat)}
  paired=[]
  for j in jobs:
   if j['arm']!='baseline':continue
