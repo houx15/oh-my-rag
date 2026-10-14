@@ -67,7 +67,7 @@ def create_successor(profile_path, destination, authority, request_cap, scope_ha
             raw['models']={'bailian-qwen3.8-flash':{
                 'input_per_1m':0.8,'output_per_1m':2.7,'verified':True,
                 'context_tokens_upper_bound':1000000,
-                'status':'Conservative USD budget ceiling, NOT invoice tariff/FX conversion. Alibaba Beijing published CNY0.8 input/CNY2.7 output per million tokens; numerically charge those amounts as USD to overreserve. No cache/night discounts credited. Published source: https://help.aliyun.com/zh/model-studio/deepseek-v4-1-flash (2026-10-13).'}}
+                'status':'Conservative USD budget ceiling, NOT invoice tariff/FX conversion. Alibaba Beijing published CNY0.8 input/CNY2.7 output per million tokens; numerically charge those amounts as USD to overreserve. No cache/night discounts credited. Published source: https://help.aliyun.com/zh/model-studio/qwen3-8-flash (verified2026-10-14).'}}
             raw['provider_route']={'provider':'Alibaba Cloud Bailian','endpoint_template':'https://{workspace}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/chat/completions','model':'qwen3.8-flash','credential_environment_name':'DASHSCOPE_SEARCH_API_KEY','billing':'pay-as-you-go; conservative USD ceiling separately from estimated CNY'}
         if public_source_policy_path is not None:
             if str(public_source_policy_path) not in scope_hashes:raise AuthorizationError('public-source policy must be frozen')
