@@ -109,7 +109,12 @@ def render(response,context,expected_hash):
             result.append({'text':BOUNDARIES[kind],'citations':[]});trace.append({'boundary':kind});continue
         if set(part)=={'qualified'}:
             qid=part['qualified']
-            if not isinstance(qid,str)or qid not in data['groups']or qid in seen:raise ValueError('qualified handle')
+            if not isinstance(qid,str)or qid not in data['groups']:raise ValueError('qualified handle')
+            # The prompt permits repeated selections. Render identical exact
+            # evidence once; never discard ordinary factual or boundary text.
+            if qid in seen:
+                trace.append({'qualified_duplicate':qid,'rendered_once':True})
+                continue
             seen.add(qid);g=data['groups'][qid];s=data['sources'][g['source']]
             parts=g.get('parts',[{'source':g['source'],'start':g['start'],'end':g['end']}])
             citations=[{'id':data['sources'][p['source']]['id'],'quote':data['sources'][p['source']]['text'][p['start']:p['end']]}for p in parts]
@@ -131,4 +136,4 @@ def render(response,context,expected_hash):
         result.append({'text':text,'citations':[{'id':data['sources'][sid]['id'],'quote':data['sources'][sid]['text']}for sid in ids]})
         trace.append({'sources':ids,'semantic_binding_verified':False})
     if sum(len(s['text'])for s in result)>1800:raise ValueError('rendered length cap')
-    return {'sentences':result,'handoff':False},{'configuration':'grounded-prose-v3','provenance':trace,'semantic_binding_verified':False}
+    return {'sentences':result,'handoff':False},{'configuration':'grounded-prose-v3.1-idempotent-clauses','provenance':trace,'semantic_binding_verified':False}

@@ -57,3 +57,22 @@ class GroundedProseTests(unittest.TestCase):
   for second in ['D78:4:01','D77:5:01']:
    c=catalog({'D77:3:01':'第五条 支持指定材料。条件为电\n― 3 ―',second:'池材料。资助20%，最高1000万元。\n第六条 其他事项。'})
    self.assertFalse(any(g.get('parts')for g in c['groups'].values()))
+
+class RepeatedClauseTests(unittest.TestCase):
+ def setUp(self):
+  self.context={'policy':'（一）建设支持。对经批准的平台按实际投入的5%给予最高1000万元资助。'}
+  self.data=catalog(self.context)
+ def test_repeated_clause_renders_once_preserving_fact_and_source(self):
+  parts=[{'text':'经批准的平台按实际投入5%资助，最高1000万元。','sources':['S1']},{'qualified':'Q1'},{'qualified':'Q1'}]
+  answer,trace=render(response({'sentences':parts}),self.context,self.data['fingerprint'])
+  self.assertEqual(len(answer['sentences']),2)
+  self.assertEqual(answer['sentences'][0]['text'],parts[0]['text'])
+  self.assertEqual(answer['sentences'][1]['citations'][0]['quote'],self.context['policy'])
+  self.assertEqual(trace['provenance'][-1],{'qualified_duplicate':'Q1','rendered_once':True})
+ def test_duplicate_selection_does_not_validate_wrong_amount_or_handle(self):
+  for tail in [{'text':'最高资助9999万元。','sources':['S1']},{'qualified':'Q999'}]:
+   with self.assertRaises(ValueError):
+    render(response({'sentences':[{'qualified':'Q1'},{'qualified':'Q1'},tail]}),self.context,self.data['fingerprint'])
+ def test_mixed_boundary_and_extra_root_fields_still_rejected(self):
+  for obj in [{'sentences':[{'text':'并未支持的事实','boundary':'missing'}]}, {'sentences':[{'qualified':'Q1'}],'note':'额外事实'}]:
+   with self.assertRaises(ValueError):render(response(obj),self.context,self.data['fingerprint'])
