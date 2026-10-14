@@ -12,7 +12,7 @@ def main():
  for corpus in ['all','niuhuang','guangming']:
   for arm in ['baseline','vocabulary','small_model']:
    rr=[r for r in rows if r['arm']==arm and(corpus=='all'or r['corpus']==corpus)];ts=sorted(r['pipeline_component_sum_ms']for r in rr)
-   out.append(dict(corpus=corpus,arm=arm,n=len(rr),raw_pass=sum(map(ok,rr)),unscored=sum(r.get('score')is None for r in rr),mechanically_valid=sum(r['valid']for r in rr),raw_gains=[r['case_id']for r in rr if ok(r)and not ok(by[r['case_id']]['baseline'])],raw_losses=[r['case_id']for r in rr if not ok(r)and ok(by[r['case_id']]['baseline'])],p50_ms=ts[math.ceil(.5*len(ts))-1],p95_ms=ts[math.ceil(.95*len(ts))-1],max_ms=ts[-1]))
+   out.append(dict(corpus=corpus,arm=arm,n=len(rr),raw_pass=sum(map(ok,rr)),unscored=sum(r.get('score')is None for r in rr),mechanically_valid=sum(r['valid']for r in rr),raw_gains=[r['case_id']for r in rr if ok(r)and not ok(by[r['case_id']]['baseline'])],raw_losses=[r['case_id']for r in rr if r.get('score')is not None and not ok(r)and ok(by[r['case_id']]['baseline'])],unscored_comparisons=[r['case_id']for r in rr if r.get('score')is None],p50_ms=ts[math.ceil(.5*len(ts))-1],p95_ms=ts[math.ceil(.95*len(ts))-1],max_ms=ts[-1]))
  (n/'summary.json').write_text(json.dumps(out,indent=2))
  masked=[];lineage={}
  for r in rows:
