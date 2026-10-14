@@ -14,7 +14,25 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Current checkpoint — structured-claim pilot, October 14, 2026
+## Current checkpoint — confirmation failed, October 14, 2026
+
+[Cycle20](docs/structured-confirmation-cycle20.md) freezes the structured candidate
+and tests16original questions outside Cycles16–19. Earlier exposure is documented;
+this is held out from the iteration, not truly unseen. Source-reviewed completion
+rises5→7/16, but an ordinary successful case fails, delivery falls16→14/16, and
+raw judge passes fall12→5/16. Accepting two borderline baseline answers as complete
+removes the aggregate completion gain. **Do not promote; C1 stays default.**
+
+The frozen gate fails. Stop this candidate; no further paid run is scheduled.
+Long-table coverage, semantic relation binding, specific clarification and missing
+count evidence remain bottlenecks. Retrieval also failed a reproduction check;
+the matched comparison uses frozen evidence and reports answer-only latency.
+All32outcomes are retained.64calls cost0.456762; cumulative conservative ledger
+**92.72868945/200USD**, zero open reservations. No push, upload or deployment.
+No new external paper/code adopted; existing acknowledgments remain scoped to use.
+
+## Previous checkpoint — structured-claim pilot
+
 
 [Cycle19](docs/structured-claims-cycle19.md) tests an opt-in source-unit selection
 contract with deterministic rendering on12original questions across both corpora.
@@ -27,7 +45,7 @@ gold or unseen-original confirmation. C1 remains default.
 Valid delivery11→12/12; warm sample p95 9.507→5.111 seconds (n=12, p95=max).
 Structured quotations are longer and noisier; generation inputtokens rise25.9%.
 527offline tests and14optimized checks pass. All24outputs and reviews retained;
-48calls cost0.347608, cumulative conservative ledger**92.27192745/200USD**,
+48calls cost0.347608, cumulative conservative ledger**92.27192745/200USD at Cycle19 closure**,
 zero open reservations and no active paid work. No retries, push, deployment or
 upload. Human calibration and unseen-original confirmation remain outstanding.
 This cycle uses independently written code; no new external paper or repository
