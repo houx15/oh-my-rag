@@ -31,6 +31,12 @@ All32outcomes are retained.64calls cost0.456762; cumulative conservative ledger
 **92.72868945/200USD**, zero open reservations. No push, upload or deployment.
 No new external paper/code adopted; existing acknowledgments remain scoped to use.
 
+The [offline synthesis](docs/technical-report.md#offline-synthesis-after-cycle20--2026-10-14)
+explains five paired cases and proposes optional complete qualified clauses alongside
+ordinary prose. No implementation or paid test followed. A separate20-seed offline
+check reproduced lexical retrieval instability from unordered floating-point sums;
+ranking code remains unchanged.
+
 ## Previous checkpoint — structured-claim pilot
 
 

@@ -544,3 +544,105 @@ Source-reviewed factual completion5→7/16 (NH3→3,GM2→4), but valid delivery
 32matched-input/743single-unit checks;233scopehashes;73exactcitations across30valid outputs,26structuredcitationsvisiblerendered—not entailment. Unchangedcandidate's prior527+14tests remain evidence, not claimednew executions. Retrieval failed cross-process reproduction on HOP04, so identical frozen contexts were served; cause unresolved and diagnostic retained. Answer-only p50/p95seconds4.102/6.082→4.048/6.372 excludes retrieval, unlike earlierlatencies. Inputtokens50,880→61,811;output1,724→755; candidate9noisy+2undelivered.64calls,no provider failures/retries,increment0.456762,cumulative92.72868945/200,zeroopenreservations. Initial launcher failed beforedispatch due localmodule shadowing; isolatedlaunch fixed harness withoutcandidatechanges.
 
 All rawgrades/sourcejudgments preserved; source-review remains same-model prior-exposed, human calibration outstanding. Lowerunsupportedassertions3→0 does not erase ordinary-control/deliveryloss. Real bottlenecks: long/table evidence representation, semantic relation binding, specific intent boundaries, missingaggregationevidence and retrievalreproducibility. No new paper/code attribution, no push/upload/deployment; C1default unchanged.
+
+
+## Offline synthesis after Cycle20 — 2026-10-14
+
+**Stop the current structured candidate; keep C1 default.** Its useful property is preserving a complete qualified assertion when the relevant subject, eligibility, basis and cap already occur together. Its failure is forcing every answer through a sentence-sized exact-quotation catalog. The catalog guarantees local text attachment, not semantic coverage or relationships. No additional provider calls, new candidate implementation, reference-score changes or promotion were performed for this review. Ledger stays92.72868945/200USD, open0.
+
+### Five representative original questions and actual output excerpts
+
+Excerpts below are from the completed matched Cycle20 outputs; source OCR is preserved apart from whitespace display. A raw invalid JSON selection is explicitly not a delivered answer. Full answers, context and source-review judgments remain in the private32-row report; these examples were chosen retrospectively for explanation, not a new test set.
+
+#### 1. GM:GM-388 — 优合集创的医疗传感器里，体外检测和心电监测算同一类吗？
+
+Baseline excerpt:
+
+> 不算同一类：资料将体外检测（IVD）类传感器与无创/体表监测类传感器分列为两个不同类别。
+
+Structured candidate (undelivered raw JSON, not an answer):
+
+> {"mode":"answer","claims":[{"source":"S1","claim":"U1","conditions":[],"attribution":"A1"}]}
+
+**Source-backed explanation:** D05:8:01 separates “体外检测（IVD）类传感器” from “无创/体表监測类传感器,” placing ECG under the latter. The selected OCR chart is485characters without sentence terminators; the entire0:485span is rejected by the300-character unit cap. It is visible to the model but cannot be selected. U1instead belongs to S2and describes an incubator operator. The S1/U1attachment fails, and correcting that pair would still leave irrelevant content. This is a representation-coverage failure plus a selection error, not missing retrieval or evidence that the chart distinction is unknowable. Shortening arbitrary rows would also risk detaching headings from their children.
+
+#### 2. GM:GM-330 — 企业出钱发榜解决技术难题，光明的揭榜挂帅资助按出榜的钱算，还是按研发团队投入算？
+
+Baseline excerpt:
+
+> 对经评审通过的重大项目，按发榜方实际出资金额的20%给予最高500万元资助。
+
+Structured candidate (exact quotation in delivered text):
+
+> 支持区内龙头 企业以“揭榜挂帅”的方式发布重大技术攻关需求，鼓励区 内各类创新主体揭榜攻关，对经评审通过的重大项目，按发 榜方实际出资金额的 20%给予最高 500 万元资助。
+
+**Source-backed explanation:** D02:3:01 places “支持区内龙头企业,” “经评审通过的重大项目,” actual issuer contribution,20%and500万元 in the same intact clause. Baseline answers the requested calculation basis but volunteers a benefit assertion whose prose drops the leading-enterprise qualification. The candidate retains it. This is the concrete eligibility success worth preserving, not omission of an optional number. Whether a narrow basis-only answer must volunteer every condition remains a user/domain completeness decision; once the benefit is asserted broadly, its scope matters. Additional damaged OCR clauses in the candidate are unnecessary noise.
+
+#### 3. GM:GM-201 — 在光明做新型显示材料，关键材料项目和补薄弱环节的项目，投资补贴有什么区别？
+
+Baseline excerpt:
+
+> 补薄弱环节项目（新型显示、新能源和5G材料薄弱环节招商）按经评审核定项目实际投资的20%给予补贴，最高不超过1000万元。
+
+Structured candidate (exact quotation in delivered text):
+
+> 对项目落地投资予以支持，按经评审核定项目实际投资的 20%给予补贴，最高不超过 1000 万元。
+
+**Source-backed explanation:** D14:4:01's preceding sentence identifies “产业链薄弱环节集聚招商”; D23:6:01 separately provides supported project types, support mode and “项目建成投产后” prerequisite. The candidate quotes the1000万元rate/cap sentence and operating prerequisite but omits the category joining them to the second branch of the requested comparison. Baseline preserves that category but omits some eligibility in prose. Both are partial under the frozen rubric. Source/condition IDs attached to a sentence do not encode which project category that sentence governs. A complete comparison needs two independently supported benefit records, not three disconnected quotations.
+
+#### 4. GM:GM-124 — 呃，我们还有一页的科技成果是安全连锁保护系统给我们切换到那一页开始讲解。
+
+Baseline excerpt:
+
+> 该系统由深圳先进光源研究院完全自主搭建，基于EPICS/CS-Studio架构，采用冗余架构与故障安全设计，束流切断响应时间最高可达微秒级。
+
+Structured candidate (exact quotation in delivered text):
+
+> 该系统由我院实现完全自主化搭建，可实现定制化开发上层应用软件（上位机）。
+
+**Source-backed explanation:** D36:330:01 later names “单位名称：深圳先进光源研究院”; D30:5:01 directly says “本成果由深圳先进光源研究院完全自主搭建.” Candidate's selected sentence retains “我院,” while its displayed source label names only the generic381-item catalog. The entity resolver is the missing relationship; exact quotation cannot supply it. Baseline resolves the institute but elsewhere says “可切换到该页讲解,” an unsupported UI capability. Candidate avoids that assurance yet does not improve full attribution. Neither issue is corrected by merely enlarging sentence limits.
+
+#### 5. NH:N265 — 它是不是很贵啊？
+
+Baseline excerpt:
+
+> 请补充您指的是哪位人物、哪本书、哪个方剂或哪件事，以及想了解的具体内容。
+
+Structured candidate (delivered boundary):
+
+> 本次资料未包含回答该问题所需的依据。
+
+**Source-backed explanation:** The isolated original question contains no antecedent for “它.” Retrieved price or historical valuation passages cannot identify the intended object. Baseline asks for the missing referent, albeit awkwardly; candidate's generic absence sentence treats missing conversation context like missing documentary evidence. There is no requested factual answer to recover until intent is resolved. This is boundary-reason selection and wording, separate from excerpt coverage.
+
+### Smallest general design recommendation: qualified clauses as an optional output type
+
+Retain ordinary C1 prose with its existing citations and full evidence access. Add a narrowly scoped **qualified-clause segment** only for claims whose full material scope can be assembled and checked from source evidence. Do not force table classification, general introductions, entity explanation and boundary messages through that segment type. This is a proposed engineering change, not an implemented hybrid or a claimed improvement.
+
+A minimal implementation would add one opt-in segment variant alongside existing prose: `qualified_clause(group_id)`. The model chooses an immutable group ID; deterministic rendering supplies the entire qualified clause. Ordinary segments keep their existing prose/citation contract. This requires one versioned output adapter and one group builder/validator, not another model pass or a new retrieval system. A qualified group contains source/version, exact span witnesses, subject/domain, eligibility, calculation basis, rate/cap/period where applicable, and an explicit completeness status. Fields are validated relationships, not labels copied from nearby punctuation. They may be stored as references to an intact self-contained clause first; no requirement to infer every policy as a graph.
+
+Start with unambiguous complete clauses such as GM330. The source-backed group must visibly retain district-leading-enterprise eligibility, reviewed-major-project condition, issuer-actual-contribution basis and the offered20%/500万元benefit. Do not generate a new paraphrase from unverified IDs. Groups with unresolved “该项目/我院,” mixed beneficiaries, uncertain OCR or missing domain must not be labelled complete. Record them as unsupported for this route; preserve supported ordinary answer portions and state the specific limitation rather than silently weaken the policy claim or abstain from the entire question.
+
+Routing must depend on the claim's content and verified group availability, not question IDs or a whitelist of observed wins. A policy-number claim must not bypass qualification checks by being emitted as ordinary prose. Conversely, ordinary factual classification must not fail just because a source has no300-character sentence. Missing-reference, missing-documentary-evidence and unavailable-UI-action boundaries should have separate reasons and appropriate wording; that is a small separate boundary change, not evidence for a renderer improvement.
+
+**What this does and does not buy:** GM330's complete-clause preservation can be reused without removing GM388's ordinary source-backed answer path. It does not solve GM201 automatically: cross-sentence category/benefit links need verified groups before deterministic comparison is safe. It does not resolve “我院” merely from source adjacency, produce absent HOP04dataset counts, or establish modern medical facts from historical sources. The representation coverage and group-construction problem must be made explicit rather than transferred to an untested selector.
+
+Proposed offline acceptance work, before any model experiment: a reviewed fixture for each evidence shape (complete clause, cross-sentence category, table heading/row, anaphoric owner, missing referent); exact-span/source-version checks; reject incomplete policy groups without corrupting unrelated prose; ordinary-path output remains identical when no group is used. Inspect all support relationships manually on these development examples. A subsequent evaluation would still need separately frozen questions and human-calibrated criteria. Do not claim a lower cost or latency until measured; the proposed route adds no required model pass but may increase prompt size/validation work.
+
+### Retrieval reproducibility is a separate confirmed mechanism
+
+The original Cycle20 pre-call reconstruction swapped NH-HOP04's MD-023-0004forMD-023-0002. This review reproduced that same alternative selection using **only the lexical pool/fusion**, with identical records, question and baseline IDs, no dense retrieval, generation or renderer. Across20Python hash seeds,19select0002and seed14selects0004. Three full offline restarts at seeds0/1/2also retain the same baseline IDs; their score rounding varies.
+
+`newdomain/evidence_pool.py` computes scores with `sum(... for g in q & gs)`. Set iteration order changes with process hash seed. At seed14, the mathematically equal title-overlap scores become9.405013009357269for0002and9.405013009357270for0004—one floating-point unit apart. Sorting by descending score before ID means the nominal ID tie-break never sees a tie. Interleaving and `keyword_control.select` then propagate the changed rank to selected evidence. This is sufficient to reproduce the saved source swap independently of rendering. The original failed process's seed was not recorded, so this does not prove there are no additional nondeterministic components.
+
+A diagnostic calculation using sorted terms and `math.fsum` gives the same score and key-top5ordering across all20seeds. **No ranking code was changed.** A future focused reproducibility fix should canonicalize score accumulation in both pool scoring and lexical window scoring, retain explicit ID/offset tie-breaks, and compare complete context text/order/hashes across processes and seeds. The stable diagnostic key ranking is not yet proof of a complete-pipeline fix. Numerical backend warnings from the full retrieval startup are retained separately; they are unnecessary to reproduce this lexical instability and should not be declared its cause without evidence.
+
+Cycle20 served its already-frozen contexts identically to both arms after this mismatch; its answer-only timing and matched rendering comparison therefore remain correctly scoped. It establishes no live retrieval latency or stability. Neither the table failure nor the policy/owner binding failure should be blamed on that separate retrieval defect.
+
+### Decisions still needed for discussion
+
+1. **Required versus volunteered policy detail:** is a correctly scoped calculation-basis answer sufficient, or should every numerical benefit include the full eligibility set? The answer affects GM330/201 grading and how large qualified groups must be. Required information should be visible in delivered text, not only citations.
+2. **Presentation and OCR trust:** permit concise paraphrase for ordinary tables while preserving heading/row provenance? Who verifies ambiguous OCR hierarchy and owner links before a group can be called complete? Enlarging quotation limits alone does not settle those relationships.
+3. **Intent and domain boundaries:** when the antecedent is missing, should the assistant ask a focused follow-up using available conversation state? What explicit wording is required for modern-use uncertainty and unsupported UI actions? Generic abstention is safe in some cases but not equally helpful.
+4. **Evaluation standard:** calibrate the borderline GM177/410 completeness gains and historical-introduction coverage with a human/domain reviewer. Preserve raw and source scores; do not tune the rubric to make the proposed hybrid win.
+
+This review is a stopping point for discussion. No speculative model cycle, runtime implementation, push, upload or deployment. Local diagnostic artifacts contain the five paired examples and20seed results; spend remains unchanged. No new paper/repository method was adopted, and no novelty is asserted.
