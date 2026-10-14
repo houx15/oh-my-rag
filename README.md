@@ -393,6 +393,15 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
+The [October 14 component-ablation record](docs/component-ablations-20261014.md)
+credits the reader-context diagnostic and original-query provenance concepts used
+in our evaluation protocol. VeriCite, Instructor, CiteCheck, XGrammar, LlamaIndex,
+Docling and facet-coverage work are reviewed there with dates, licenses and limits.
+These new references are considered/proposed methods, not implemented model
+reproductions or copied code. The completed duplicate-clause parser repair was
+independently implemented before this review. Existing actual-use credits below
+retain their original scope.
+
 Cycle10's `protocol_normalization.py` and `section_windows.py` are independently
 written protocol and exact-source-window engineering, not reproductions of a new
 paper. The explicit title alias in

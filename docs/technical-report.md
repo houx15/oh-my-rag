@@ -1031,3 +1031,13 @@ The primary four-column report shows original645 results, corrected20 regression
 and the one offline recovery separately. Historical failures and blocked attempt
 are secondary preserved evidence. README credits are unchanged: no new external
 paper/code/prompt/weight adoption. No push, upload or deployment.
+
+
+## Research-informed component ablations — 2026-10-14
+
+The [component protocol and source matrix](component-ablations-20261014.md) integrates
+both source-review rounds, separates in-window papers from older supplementary
+work, and freezes A/B/C/D contrasts before paid evaluation. A0 retains only the
+verified idempotent parser repair. Further methods are considered or proposed,
+not claimed as implemented improvements. Budget remains $113.89682145/$200;
+$35 is reserved for broader confirmation and $10 for uncertainty.
