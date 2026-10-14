@@ -5,7 +5,56 @@ Detailed experiment records linked below retain frozen inputs and negative resul
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
 
-## Experimental principle and active keyword investigation
+## Current evidence and denominator summary — 2026-10-14
+
+**No fresh, complete benchmark reproduces the current default across the full
+eligible mixed-origin pool.** C1 remains default; the latest structured candidate
+failed Cycle20's confirmation gate and is not promoted. Paid experiments are
+paused. The closed conservative cumulative ledger is **92.72868945/200USD**, with
+zero open reservations. Smaller diagnostic cohorts do not establish overall
+performance, and fresh generations do not make historically exposed questions
+unseen. Model judges, OCR references and same-model source review are not human gold.
+
+The original **420 Guangming supplied Q/A pairs** contain181 real-user and239
+simulated questions. Contact exclusions remove90 (68 real-user,22 simulated),
+leaving330 (113 real-user,217 simulated). Near-duplicate grouping into300 groups
+controlled the initial split; it did not remove another30 records. The initial
+October12 run evaluated48 development and60 held-out questions, plus20 separate
+regressions—not all420. The next60-question comparison was distinct from the108
+previously exposed questions, but was itself50 simulated and10 real-user questions.
+Its C1/C2P both-judge44/60 versus36/60 result is now exposed historical evidence.
+
+Niuhuang starts with395 workbook rows (283 live,112 evaluation). Privacy screening
+removes64 rows, leaving331 eligible rows;16 duplicate aliases map to retained
+outcomes, yielding315 distinct questions (205 live,110 evaluation). Thus the
+combined eligible pool is **645 questions =330 Guangming +315 Niuhuang**, comprising
+**318 live/real-user +217 simulated +110 evaluation** questions. Adding20 separate
+regressions yields665 scheduled cases. These are different populations, not a
+progressive reduction of the original420-question benchmark. Excluded records and
+duplicate aliases remain documented in private provenance; no exclusions changed.
+
+| Campaign / date | Denominator and provenance | What the evidence establishes |
+|---|---|---|
+| [Full coverage, October13](original-question-evaluation.md) |645 mixed-origin questions +20 separate regressions;168 matching Guangming generations reused; all665 primary review requests finished, including one malformed/unscored review and one generation failure retained | Broad historical coverage, not an all-fresh current-default reproduction; GM218/330, NH90/315, regressions19/20 |
+| [Coherent report, October13](original-optimization-cycle3.md) |645 matching saved outputs under explicit GM C1/count and NH focused/typed-v2 routing; no score-based answer selection | Latest complete coherent mixed-pool report: GM223/330, NH155/315. Assembled historical results, not fresh end-to-end execution or default promotion;20 regressions were not rerun for this candidate |
+| [Subsequent fresh unified attempt](fairness-diagnostic-20261013.md) |665 planned;328 completed,337 incomplete after provider failures | Interrupted run; cannot establish full benchmark performance |
+| [Broad live regression, Cycle7, October14](broad-original-cycle7.md) |318 live/real-user questions;373 outputs:55 changed cases independently paired and263 common outputs shared | Assembled baseline140/318 versus candidate144/318; exposed regression evidence, not two independent full runs or a mixed-pool/default reproduction |
+| Later diagnostics, October14 |Cycles12/13/14/16:20 questions each; Cycle15:14; Cycle17:3; Cycle18:8; Cycle19:12 | Targeted, often repeated development cohorts; cohort membership and configurations differ. No overall performance estimate from these subset gains |
+| [Cycle20 confirmation, October14](structured-confirmation-cycle20.md) |16 mixed-origin questions,32 fresh outputs:8 live/real-user,5 pre-existing GM simulated,3 pre-existing NH evaluation; all16 historically generated | Excluded from Cycles16–19 only, not truly unseen or original-only. Completion5→7/16, delivery16→14/16, adequacy8→7/16; confirmation gate failed |
+
+Cycle20's8 live/real-user questions are3 GM and5 NH. N265 was also in Cycle14 and
+GM124 in Cycles14/15. The8 planned synthetic checks for Cycles14/15 remain unrun;
+they are distinct from Cycle18's8 evaluated questions. Every historical score,
+failed/unscored outcome and negative result remains unchanged.
+
+A comprehensible future full benchmark needs a frozen roster with origin,
+exclusion/alias and exposure accounting; exact baseline/candidate versions;
+explicit fresh/reused/failed/unrun status; full-pool results first with live,
+simulated, evaluation and regression strata separate; and fixed, human-calibrated
+scoring and comparable latency scope. Diagnostic subsets belong alongside those
+results, not in place of them. Such a new benchmark has not been run or scheduled.
+
+## Historical experimental principle and keyword investigation (through Cycle15)
 
 An initial aggregate score neither accepts nor rejects a strategy. Each strategy
 gets a diagnostic optimization stage: inspect hypothesis quality, marginal evidence
@@ -14,13 +63,13 @@ supported mechanism and retest controls. Preserve negative results and material
 regressions. Stop based on measured tradeoffs, exhausted justified hypotheses, or
 actual evidence/calibration blockers, not one disappointing aggregate score.
 
-The current authorized focus is **keyword diffusion**, including source-grounded
+At the Cycle15 checkpoint, the authorized focus was **keyword diffusion**, including source-grounded
 marginal candidate accounting and targeted selector diagnosis with downstream
 settings fixed. The typed-policy-record idea below is deferred. Cycle14/15's failed
 prompt gate is a result for those versions, not rejection of keyword diffusion or
 all generation interventions. No additional paid work has started during this audit.
 
-## Current state
+## Historical checkpoint through Cycle15
 
 **Cycle15 completed:** task-focused prompt source-usefulness6→9/14, but only one
 borderline content rescue; other gains repair a conditional referent and unsupported
@@ -47,7 +96,7 @@ versus12/20 for the earlier weighted small-model arm. Neither is promoted.**
 Both new selectors have one protocol failure; source selection alone does not
 resolve policy-scope, attribution or evidence-use failures. [Cycle13 details](keyword-selection-cycle13.md).
 
-Latest settled conservative cumulative spend: **86.45485345 of200USD**, including
+At Cycle15 closure, settled conservative cumulative spend: **86.45485345 of200USD**, including
 all earlier ledger chains. This uses conservative numeric tariff reservations,
 not an exchange-rate conversion or invoice. Cycle12/13 made219 paid calls; Cycle14 added80dispatches including1unknown-usage
 judge timeout, conservatively settled without retry; Cycle15 added56 fully settled
@@ -94,8 +143,9 @@ absent literally from the indexed snapshots. No UI action is actually implemente
 Two corpora: Niuhuang historical materia-medica and Guangming institutional/
 technology documents. The Cycle12 source-vocabulary inventory has1507 and1174
 records respectively; these are index records, not independent original documents.
-The retained original-question roster contains318 records:205 Niuhuang and113
-Guangming.64 sensitive live questions were excluded upstream. Niuhuang’s315
+The retained live/real-user-question roster contains318 records:205 Niuhuang and113
+Guangming. Niuhuang screening excluded64 source rows upstream; Guangming separately
+excluded90 contact-related questions. Niuhuang’s315
 presentation records came from331 screened rows with16 duplicate aliases; this
 audit is not coverage of every collected original question.
 The historical60-question C1/C2P comparison,318-question rerun, repeated outputs,
@@ -537,7 +587,7 @@ Raw judge passes6→3/12. In N405 the judge says author/date absent despite the 
 
 ## Cycle20: held-out-from-iteration confirmation fails — 2026-10-14
 
-[Full frozen selection, exact questions, paired outcomes and stopping decision](structured-confirmation-cycle20.md). Candidate b80bf48 and Cycle19 rubric rules unchanged;16originals outside Cycles16–19, eightpercorpus across ordinary successes/conditions/ownership/intent. All16had earlier historical generations; N265Cycle14 andGM124Cycles14/15 exposure documented. Held-out-from-this-iteration, not truly unseen. Cases with representation/evidence gaps retained rather than replaced.
+[Full frozen selection, exact questions, paired outcomes and stopping decision](structured-confirmation-cycle20.md). Candidate b80bf48 and Cycle19 rubric rules unchanged;16 mixed-origin questions outside Cycles16–19 (8 live/real-user,5 pre-existing GM simulated,3 pre-existing NH evaluation), eightpercorpus across ordinary successes/conditions/ownership/intent. All16had earlier historical generations; N265Cycle14 andGM124Cycles14/15 exposure documented. Held-out-from-this-iteration, not truly unseen. Cases with representation/evidence gaps retained rather than replaced.
 
 Source-reviewed factual completion5→7/16 (NH3→3,GM2→4), but valid delivery16→14, source-conditional adequacy8→7, rawjudge12→5. Ordinary GM388 classification regresses because required chart is unselectable and source/unit pairing invalid. GM120 also invalid. GM330 preserves actual required eligibility; GM177/410 gains are borderline completeness judgments. Accepting those two baseline answers as sufficient yields7→7 (posthoc diagnostic, primaryunchanged). GM201 category-to-cap relationship,GM124 “我院”,HOP04datasetcount remain unresolved; N265 clarification and modern-use boundary specificity regress. Frozen gatefails: no promotion and no further paidrun.
 

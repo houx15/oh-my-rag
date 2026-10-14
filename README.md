@@ -17,11 +17,17 @@ trial; those questions are now exposed diagnostics.
 ## Current checkpoint — confirmation failed, October 14, 2026
 
 [Cycle20](docs/structured-confirmation-cycle20.md) freezes the structured candidate
-and tests16original questions outside Cycles16–19. Earlier exposure is documented;
-this is held out from the iteration, not truly unseen. Source-reviewed completion
+and tests16 mixed-origin questions outside Cycles16–19:8 live/real-user,5 pre-existing
+GM simulated and3 pre-existing NH evaluation questions. All16 had historical
+generations; this is held out from the iteration, not truly unseen or original-only. Source-reviewed completion
 rises5→7/16, but an ordinary successful case fails, delivery falls16→14/16, and
 raw judge passes fall12→5/16. Accepting two borderline baseline answers as complete
 removes the aggregate completion gain. **Do not promote; C1 stays default.**
+
+No fresh, complete benchmark reproduces the current default across the full645
+eligible mixed-origin questions. The [denominator and provenance summary](docs/technical-report.md#current-evidence-and-denominator-summary--2026-10-14)
+distinguishes full historical reports, reused outputs, interrupted runs and diagnostic
+subsets. Subset gains do not establish overall performance.
 
 The frozen gate fails. Stop this candidate; no further paid run is scheduled.
 Long-table coverage, semantic relation binding, specific clarification and missing

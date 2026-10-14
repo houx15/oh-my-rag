@@ -1,6 +1,11 @@
 # Cycle20: structured-candidate confirmation fails the promotion gate
 
-Keep C1 default and stop further paid optimization of this candidate. On16originals held out from Cycles16–19, source-reviewed factual completion rises5→7, but one ordinary successful case becomes undeliverable, valid delivery falls16→14, and source-conditional adequacy falls8→7. Two of three completion gains are borderline coverage judgments. Accepting those baseline answers as sufficient yields7→7, with one remaining win and one ordinary-case loss. This sensitivity is diagnostic, not a change to frozen primary ratings.
+Keep C1 default and stop further paid optimization of this candidate. On16 mixed-origin questions excluded from Cycles16–19 (8 live/real-user,5 pre-existing GM simulated,3 pre-existing NH evaluation), source-reviewed factual completion rises5→7, but one ordinary successful case becomes undeliverable, valid delivery falls16→14, and source-conditional adequacy falls8→7. Two of three completion gains are borderline coverage judgments. Accepting those baseline answers as sufficient yields7→7, with one remaining win and one ordinary-case loss. This sensitivity is diagnostic, not a change to frozen primary ratings.
+
+**Provenance limit:** all16 questions had historical generations. This is a fresh
+32-output comparison on an exposed mixed-origin subset, not an original-only or
+truly unseen confirmation, and it does not establish full-benchmark performance.
+See the [cumulative denominator history](technical-report.md#current-evidence-and-denominator-summary--2026-10-14).
 
 ## Frozen candidate and selection
 
@@ -8,11 +13,11 @@ No changes to candidate code b80bf48, prompts,300-character unit/900-character r
 
 The16cases comprise eight per corpus: two ordinary historical successes, two condition questions, two attribution/entity-ownership questions and two ambiguity/intent cases. Fixed SHA256 order selects within question-feature strata; historical raw success is used only for ordinary controls. Question-only routing rules were corrected before context inspection because broad “that”/“says” patterns misclassified ordinary questions; no candidate answers or source suitability informed those corrections. Final rules and input hashes are retained. NH ambiguity includes one missing referent and one UI request; GM ambiguity covers UI/intent boundaries. Attribution includes identity and ownership, not exclusively nested quotation. No claim that this is a representative random sample.
 
-Exact/normalized-close Cycle16–19 questions and explicit overlapping semantic families are excluded. All16already have historical generation records in the earlier665case full rerun. N265 also appeared in Cycle14 and GM124 in Cycles14/15; the exposure audit lists earlier input memberships, including broad Cycle7. Eight questions originate in live/real-user data, five are pre-existing simulated GM questions and three pre-existing NH evalset questions. These are **held out from this iteration, not truly unseen**; the original questions were not newly synthesized for this test.
+Exact/normalized-close Cycle16–19 questions and explicit overlapping semantic families are excluded. All16already have historical generation records in the earlier665case full rerun. N265 also appeared in Cycle14 and GM124 in Cycles14/15; the exposure audit lists earlier input memberships, including broad Cycle7. Eight questions originate in live/real-user data, five are pre-existing simulated GM questions and three pre-existing NH evalset questions. These are **held out from this iteration, not truly unseen**; these pre-existing questions were not newly synthesized for this test.
 
 ### Exact selected questions
 
-| Case | Stratum | Original question |
+| Case | Stratum | Supplied question |
 |---|---|---|
 | NH:N049 | ordinary_success | 嗯，讲黄帝内经。 |
 | NH:N468 | ordinary_success | 从来没有听说伏羲是做这个，是这个有什么医学的认知吗？我我我没这么不觉得呀，伏羲是做这个的吗？ |
