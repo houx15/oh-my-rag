@@ -10,27 +10,36 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Latest source-grounded checkpoint - October 14, 2026
+## Current source-grounded experiment — October 14, 2026
 
-[Source-grounded implementation and paired validation](docs/source-grounded-cycle8.md)
-adds bounded book/person/formula coverage, exact source windows, floor arithmetic
-and strict typed query boundaries in one opt-in configuration. Raw model scores:
-**Niuhuang12/43 to17/43**, **Guangming4/6 to5/6** on selected original questions;
-**5/12 to10/12** on separately frozen synthetic wording. These are selected,
-exposed development comparisons, not a new full205-question accuracy estimate.
-The candidate remains unpromoted: source-attribution/scope defects and boundary
-coverage tradeoffs remain, even where the judge passes an answer. H05 is untouched.
+[Cycle9 source repair and paired validation](docs/source-grounded-cycle9.md)
+records one final opt-in configuration, `source-grounded-cycle9-v5`
+(`newdomain/source_grounded_pipeline_v7.py`). A hash-bound ancient-text amendment
+restores a missing speaker marker; exact speaker spans and targeted historical
+coverage preserve source provenance. The original corpus is unchanged.
 
-The linked reconciliation explains historical108/205 versus80/205: provider and
-both model identities changed, citation-address instructions were added, and
-197/205evidence sequences changed order despite identical source ID/text sets.
-Do not attribute that difference to a single retrieval or model regression.
+On 78 previously selected original questions, raw adequacy is **34/78 →40/78**;
+the separate 37-question affected/control test is **10/37 →17/37**. Six new frozen
+synthetic wordings score **6/6 →5/6**. The 78-question display uses score-blind,
+exact-input/output equivalence replay; it is not 156 fresh generations. Three
+attribution gains are near-duplicate questions. These are exposed diagnostics,
+not human-gold accuracy or proven overall improvement. **C1 remains the default**.
 
-Final comparison warm p50 **4.066s**, p95 **5.580s**, max **20.762s** (one over20s);
-local boundaries and inherited measurements are labeled. New305paid calls cost
-**CNY2.146658** in known-token peak-rate estimates. Conservative cumulative ledger
-**$76.60103825/$200**, no open reservations or active paid work.450offline tests
-pass;11new focused tests also pass underPython-O. No push, upload or deployment.
+The source fix resolves a real text omission, but final delivery validity drops
+from 37/37 to 34/37 in the direct original-question test. Section retrieval,
+excerpt-scope mistakes and false model-judge passes remain. Earlier H05 and
+T01–T12 are unchanged and were not tuned. All negative results are retained.
+
+This cycle used 623 paid calls, estimated **CNY4.865454**; cumulative conservative
+ledger **$81.46649225/$200**, with no open reservations or active paid work.
+Final direct original-test warm p95 is **6.513s baseline /5.487s candidate**;
+no Cycle9 output exceeded 20s. 460 offline tests and 10 focused Python-O tests pass.
+No push, deployment or upload occurred.
+
+[Cycle8 results and baseline reconciliation](docs/source-grounded-cycle8.md)
+remain historical context. The old 108/205 versus 80/205 comparison changed provider,
+both models, citation instructions and 197/205 evidence orders, so it cannot
+identify a single cause of regression.
 
 ## Previous broad original-question checkpoint — October 14, 2026
 
@@ -63,7 +72,7 @@ benefits. On9 newly frozen synthetic phrasings, source-requirement checks improv
 is retained without tuning on that check. These share source/entities with
 exposed development cases and use assistant source review, not human gold.
 
-The development comparisons reach5/9→9/9 for aggregation and3/6→6/6 for building
+The development comparisons reach5/9→9/9 for aggregation and 3/6→6/6 for building
 facts after versioned refinements; source restoration supplies the platform/subset
 distinction in3/3 targeted cases. Final prompts map to the earliest matching
 successful checkpoints, never to the highest-scoring answer. C1 remains the broad
@@ -125,7 +134,7 @@ sample does not estimate population error rates; no original scores changed.
 Prior40 source annotations plus this sample cover82 unique questions.
 
 The complete saved report remains223/330 光明 and155/315 牛黄, with original-user
-subsets65/113 and108/205. The fresh unified candidate is **incomplete:328/665**
+subsets65/113 and 108/205. The fresh unified candidate is **incomplete:328/665**
 reviewed. Bailian returned the exact `deepseek-v4.1-flash` model name, but later
 requests timed out. A separate `qwen3.8-flash` three-case service check passed2/3;
 it is not a full-dataset comparison. The source-restoration pilot stopped locally
@@ -196,6 +205,22 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
+Cycle9's independently written source-version and speaker-span mechanisms continue
+the bounded-evidence experiments below; they do not reproduce a trained paper
+model. The actual text amendment in
+[`niuhuang_source_amendments.json`](newdomain/data/niuhuang_source_amendments.json)
+uses only a short ancient passage from Li Shizhen's *Bencao Gangmu*, checked against
+[Wikisource, 獸之一, revision2629543](https://zh.wikisource.org/w/index.php?oldid=2629543&title=本草綱目/獸之一)
+and [四庫全書本 卷50下, revision 786652](https://zh.wikisource.org/w/index.php?oldid=786652&title=本草綱目_(四庫全書本)/卷50下),
+accessed October 14, 2026. Traditional characters and punctuation were normalized
+for the existing simplified corpus. The underlying ancient text is public domain;
+no modern annotations, images or site code were copied. Both are transcriptions
+on one platform, not independently verified facsimiles. Pinned revisions, exact
+replacement and source hashes remain in the patch; this source credit is separate
+from the requested 2025–2026 paper window. No other source licenses or notices
+were removed or altered.
+
+
 The isolated tokenizer uses the existing [jieba 0.42.1](https://github.com/fxsjy/jieba)
 `Tokenizer` API (MIT, verified in installed package metadata). No upstream source
 was copied or redistributed; existing dependency notices remain intact.
@@ -221,7 +246,7 @@ and is not automatically routed into answers. Existing B0/C1/C2 methods retain
 their local provenance in module documentation.
 
 
-`newdomain/nh_facet_coverage_v2.py` and the final
+`newdomain/nh_facet_coverage_v2.py` and the Cycle8
 `newdomain/source_grounded_pipeline_v2.py` continue the independently written,
 fixed-budget evidence-coverage/source-window experiments conceptually informed
 by S2G-RAG and CompSelect. They use corpus metadata and exact spans, not those
