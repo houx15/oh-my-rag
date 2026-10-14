@@ -10,7 +10,29 @@ C2P**, with p95 latency **1.931 versus 2.041 seconds**. The judges and OCR-deriv
 references are not human gold. Longer passages and answers regressed in that
 trial; those questions are now exposed diagnostics.
 
-## Latest measured checkpoint — October 13, 2026
+## Latest broad original-question checkpoint — October 14, 2026
+
+[Complete paired regression and source audit](docs/broad-original-cycle7.md):
+all318 original questions finished (113 Guangming,205 Niuhuang), with55 extra
+paired baseline answers. On changed Guangming prompts the unchanged judge scores
+**30/55→34/55**,8 gains and4 losses. Full original-question scores are **64/113**
+and **80/205**;263 common outputs are not independent paired samples.
+
+Source review covers all55 pairs plus39 Niuhuang cases. It confirms scoped-count
+and requested-facet gains, finds both false passes and false failures in model
+judgment, and retains floor-total incompleteness, entity-role ambiguity and six
+delivery failures. Original scores are untouched; this is exposed regression,
+not human-gold accuracy or proven superiority. C1 remains the broad default.
+
+All746 paid requests completed,0 retries,0 new unknown usage and0 open reservations.
+Actual warm retrieval-to-validation latency: **p50 3.551s, p95 4.720s, max5.674s**.
+Cold initialization and unmeasured uncached embedding latency are disclosed
+separately. Known-token peak-rate estimate **CNY5.272338**; cumulative conservative
+ledger **$74.45438025/$200**. No active paid run, deployment, push or artifact upload.
+The main report preserves its five historical answer tables and links the complete
+four-column original-case comparison. H05 remains an untuned negative result.
+
+## Previous focused checkpoint — October 13, 2026
 
 [Focused repairs and actual end-to-end results](docs/focused-results-cycle6.md):
 whole-table aggregation and targeted building evidence now have measured answer
