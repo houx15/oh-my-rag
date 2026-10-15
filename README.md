@@ -404,6 +404,13 @@ investigation. Old unjournaled outputs are report-only. Final runs also require
 
 ## Research acknowledgments
 
+The [precomputed-evidence pilot](docs/precomputed-evidence-pilot.md) independently
+implements versioned source records and ordered relationship traversal, conceptually
+informed by [Neo4j hybrid graph retrieval](https://neo4j.com/docs/neo4j-graphrag-python/current/user_guide_rag.html).
+No Neo4j code/package was copied or installed. Flat records and graph traversal have
+identical results in this narrow offline pilot; no graph advantage is claimed.
+Jev and embedding-based routing were considered but not used or evaluated.
+
 The completed [B2 offline dependency-swap experiment](docs/component-ablations-20261014.md#b2-dependency-aware-swaps--completed-offline-october-14-2026)
 independently adapts the structural metadata/dependency-bundle idea reviewed in
 [Docling hybrid chunking](https://github.com/docling-project/docling-core/blob/main/docling_core/transforms/chunker/hybrid_chunker.py)

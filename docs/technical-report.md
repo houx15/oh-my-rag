@@ -5,6 +5,16 @@ Detailed experiment records linked below retain frozen inputs and negative resul
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
 
+## Precomputed evidence pilot — October 15, 2026
+
+[Recorded-before-and-after pilot](precomputed-evidence-pilot.md): source-verified
+flat records and ordered graph traversal yield identical exact cited answers on
+8synthetic development probes plus known GM349. Only1/68existing cases is covered;
+67fall back. GM349 restores three early steps; source review also caught and repaired
+a missing agreement antecedent despite initially passing ID-based tests. No broad
+quality win, graph superiority or end-to-end2second compliance is established.
+Sixteen offline tests pass. Cost$0; baseline unchanged; Jev/embeddings untested.
+
 ## Complete-answer cap — October 15, 2026
 
 The user now requires a complete, validated answer within **2seconds per request**.
