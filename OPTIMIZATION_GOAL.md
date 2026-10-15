@@ -127,3 +127,19 @@ Additional authorized hypotheses include guarded manual ASR aliases (user suppli
 “派的” → “pad”, meaning the presentation/material library), precomputed synonyms,
 source/topic/entity partitions with cross-partition fallback, and composition of
 already approved models. Discuss concrete unresolved bottlenecks with the user.
+
+## Current Gold100 campaign and Git authorization — 2026-10-15
+
+The latest user scope supersedes earlier historical caps/anchors/stopping rules:
+use immutable Simple-RAG-v1, the frozen100 and unchanged rubric; seek at least
+80/100 all-four-2 semantic passes with mean latency within the preregistered
+baseline+10% ceiling, otherwise stop after10completed rounds. Incremental budget
+is200USD with historical123.28267945USD retained separately. See
+[the current campaign](docs/gold100-optimization-results.md).
+
+The user directly authorized ongoing LLM API use for all project data and explicitly
+requested regular commits and pushes. Earlier no-push/publication restrictions in
+historical notes do not block this authorization. Commit and push each verified
+round's reusable code/tests and result summary; label partial checkpoints honestly.
+Keep credentials and private raw inputs/answers/ledgers out of Git. Do not include
+unrelated uncommitted work. Check the remote commit after each push.

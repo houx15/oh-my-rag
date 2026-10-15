@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "source_directory": "gold100-v1-20261015",
+    "source_file": "simple_rag.py",
+    "source_sha256": "6ff270ce7205a6063dc1b8b223f39b4321c725db35511d9c76d6cc06b4ce4180",
+    "repository_sha256": "6ff270ce7205a6063dc1b8b223f39b4321c725db35511d9c76d6cc06b4ce4180",
+    "change": "Exact baseline snapshot."
+  },
+  "r01": {
+    "source_directory": "gold100-opt-r01-v2-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "4cdf8cd9dbfba684b882786ae66c0087de38dfde929e5a97b6f0c0dd1e6593c4",
+    "repository_sha256": "f4b3e5fba6f8efadde970d468929840667362f2a13a9d851e1f6edf968dfc90f",
+    "change": "Only local simple_rag import rewritten to relative package baseline import."
+  },
+  "r02": {
+    "source_directory": "gold100-opt-r02-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "dd83cd3655276da5e145b637e564d0fb93ad795f590e72a5c9b349d9fb06e02f",
+    "repository_sha256": "2f9a672482a4d372abcdf8e05777d823a26bdd49d3a3a1a29257086cf7ac8d72",
+    "change": "Only local simple_rag import rewritten to relative package baseline import."
+  },
+  "r03": {
+    "source_directory": "gold100-opt-r03-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "8a436f0a4bd1dedf7cbbbb183b7736db5c3c8745712a61cd7368ccb30a1fc4ae",
+    "repository_sha256": "cc55768312aeea64c17563556d0db2732964e843aaacde2a1700c0a48023798f",
+    "change": "Only local simple_rag import rewritten to relative package baseline import."
+  }
+}
