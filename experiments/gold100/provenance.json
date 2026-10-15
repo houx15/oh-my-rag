@@ -26,5 +26,12 @@
     "source_sha256": "8a436f0a4bd1dedf7cbbbb183b7736db5c3c8745712a61cd7368ccb30a1fc4ae",
     "repository_sha256": "cc55768312aeea64c17563556d0db2732964e843aaacde2a1700c0a48023798f",
     "change": "Only local simple_rag import rewritten to relative package baseline import."
+  },
+  "r04": {
+    "source_directory": "gold100-opt-r04-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "295f2ad90143655420264da1cbbef1f7ac48447ef19d7fd16b1bed3122a8489a",
+    "repository_sha256": "8753dbbba14c2df92c7370bfad2bed84a050b58a80f4b519081a73a5b54ec10c",
+    "change": "Only local simple_rag import rewritten to relative package baseline import."
   }
 }

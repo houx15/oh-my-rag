@@ -1,7 +1,7 @@
 # Frozen Gold100 candidate algorithms
 
 These opt-in algorithms preserve the private experiment implementations. `baseline.py`
-is the immutable Simple-RAG-v1 implementation; `r01.py`, `r02.py` and `r03.py` expose
+is the immutable Simple-RAG-v1 implementation; `r01.py`, `r02.py` `r03.py` and `r04.py` expose
 `Index(records).search(question)`, `messages(question, chunks)` and
 `validate(raw_response, chunks)`. Only package imports differ from private snapshots;
 `provenance.json` records both hashes. No credentials, questions, reference answers,
@@ -12,6 +12,8 @@ raw corpus, generation outputs or billing ledgers are included.
 - R03: baseline seeds plus original catalog relationships and recomputable record counts.
   Derived snippets retain all input source IDs and hashes. Missing catalog fields remain
   missing; counts describe dataset records, not distinct recipes or complete ancient books.
+
+- R04: baseline retrieval and user payload unchanged; task-focused system prompt and short direct quotes.
 
 The common source validator remains unchanged. R01 resolves handles to exact quotations
 before that check; R03 aggregates are explicitly derived retrieval material whose source
