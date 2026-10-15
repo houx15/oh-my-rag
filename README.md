@@ -671,3 +671,23 @@ records the explicitly authorized provider transition, exact model provenance,
 legacy-host timeout failures, and separately versioned institution/platform source
 restoration. Source restoration is not attributed to a new RAG algorithm or an
 upstream paper. Performance claims await the recorded paired experiments.
+
+
+### Fixed Gold100 comparison series
+
+The [fixed 100-question baseline report](docs/gold100-baseline-results.md) and
+[protocol](docs/gold100-protocol.md) replace incomparable small diagnostic scores
+with a frozen development set covering known failures: 50 Guangming, 40 Niuhuang and 10 separate
+regression fixtures. Simple-RAG-v1 completed 100 fresh generations and 100 assistant
+reviews: 54 semantic passes, 75 mechanically valid outputs, 39 combined passes; mean
+response 5.261 seconds. These are dataset-relative assistant labels, not independent
+human gold or representative traffic accuracy. Historical 6/60/68-case scores are
+not comparable. Raw business questions, source excerpts and detailed artifacts
+remain private; no deployment or provider change follows.
+
+The simple baseline independently implements classical BM25 with smoothed positive
+IDF, fixed character chunks and no learned reranker. Methodological background is
+acknowledged to Manning, Raghavan and Schütze's
+[Introduction to Information Retrieval, Okapi BM25 chapter](https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html).
+This is a conventional baseline, not a recent-paper contribution or exact paper
+reproduction. No upstream code or assets were copied, installed or executed for it.
