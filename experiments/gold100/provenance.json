@@ -47,5 +47,12 @@
     "source_sha256": "09a7b0aaa31ca96d036370ede24cd1b0b7391e6e6b8661ee974eff076eb68050",
     "repository_sha256": "0339405e254cf7e44bae41bbf157c7f9657df34ce57cac6df5498ff245e744ff",
     "change": "Private adapter reuses frozen R05 vectors and delegates to repository R06. R06/R05/R04/R03/baseline and vector artifact are frozen. Cached latency measured; uncached latency estimated with prior measured query embedding, requiring fresh confirmation before promotion."
+  },
+  "r07": {
+    "source_directory": "gold100-opt-r07-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "548a96800383c5593befd3ca4dbe97a0f7307ac4fca8be0e7a0bfd81d3d1ed7c",
+    "repository_sha256": "32f88f27173957d32bdaaf5b1bd4dd703069b8a5483fb6d1cc8cb25e8f2f91bc",
+    "change": "Private adapter delegates to R07; exact R06 retrieval with personal-use metadata, compact source handles and local canonicalization before unchanged baseline validator. All dependencies and reused vector artifact frozen."
   }
 }

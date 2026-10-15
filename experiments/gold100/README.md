@@ -44,7 +44,7 @@ unclosed ledgers and preserves each fresh query embedding latency.
 Run all current offline tests:
 
 ```sh
-.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed tests.test_gold100_compact
 ```
 
 R06 is complete:78/100semantic passes versus54baseline;85mechanical and68combined.
@@ -55,3 +55,10 @@ estimated uncached mean9494.244ms adds prior measured query embedding. Missing
 failure latency is not zero. Both quality and latency miss the target. No new
 embedding charges; round cost2.879544USD includes2.0064conservative unknown-usage
 settlement. All20offline tests pass; private ledgers retain full evidence.
+
+R07 is frozen/preflight-verified; no generation results yet. Retrieval text/order
+match R06for all100cases. Compact answer/evidence pairs resolve to exact original
+quotes before the common validator. Personal-use queries withhold dosage/procedure
+clauses before span splitting;7of100cases activate this source-only filter.
+All exposed handles verified;24offline tests pass. Reused-vector timing remains
+explicitly estimated for uncached comparison; no new embedding charges.
