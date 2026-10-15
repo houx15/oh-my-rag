@@ -1,0 +1,17 @@
+# Precomputed evidence and graph pilot — October 15, 2026
+
+## Before implementation: frozen intent and design
+
+User authorizes trying advance preparation and fast selection, with notes recorded before the trial and results afterward. This first pilot is offline: no Jev/new-provider calls, downloads, paid generation, uploads or default promotion.
+
+Hypothesis: source-verified procedure and subsidy records can answer a narrow question family with deterministic selection and exact cited rendering. A graph may improve maintainability/dependency retrieval; it must be compared against equally prepared flat records to avoid attributing preparation benefits to graph storage.
+
+Scope: existing Guangming entrepreneurship-park source pages D01:6:01 and D01:7:01 from the already frozen B2 pool. Extract the seven numbered procedure steps and complete Article15 subsidy cap paragraph, preserving exact offsets, full conditions and source hashes. Label the signing milestone and subsidy-start step through explicit source annotation. No model-generated facts. This deliberately source-reviewed single-family configuration is not automatic ingestion or broad-domain understanding.
+
+Arms: (a) existing raw selected context, evidence availability only; (b) prepared flat facts; (c) the same facts reached through ordered graph edges. Both prepared arms use identical keyword/alias routing and exact-source answer rendering, no learned model. Route only explicitly scoped questions in three supported forms: pre-signing process, subsidy start, subsidy caps. Mixed unsupported requests must fall back as a whole. Never guess eligibility, exact rent, unit rate or individual approval. Missing/version-mismatched records fail closed.
+
+Freeze before evaluation: eight synthetic development probes covering supported intents, combined request, operator-role ambiguity, unknown amount, out-of-domain and mixed supported/unsupported request. Include the already exposed motivating GM349 separately. These are source-derived development checks, not independent human gold or held-out efficacy. Add source mutation, broken graph and citation-offset tests. Compare flat and graph output equality, required fact coverage, unsupported fallbacks, repeated local routing/render timings and memory-resident scope. No comparison of these local lookup times against live LLM quality/latency as if workloads were equivalent.
+
+Success: exact required fact IDs, all citations reconstruct from versioned source spans, no unsupported answer, flat/graph parity. Any narrow success only justifies a wider reviewed dataset; it does not beat overall baseline. Report offline ingestion time and online selection/render separately. Keep the original corpus and all prior scores unchanged.
+
+Conceptual references: TypeSafe Jev structured decisions (https://typesafe.ai/blog/introducing-system-one-models-and-jev); Neo4j hybrid retrieval plus explicit graph traversal (https://neo4j.com/docs/neo4j-graphrag-python/current/user_guide_rag.html); Sentence Transformers retrieve/rerank (https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html). Only the graph traversal/precomputed evidence concept is used here, implemented independently with Python standard library; no external code copied. Jev, embeddings and learned classifiers remain untested alternatives, not implemented dependencies. Their speed/quality is not inferred from vendor claims.
