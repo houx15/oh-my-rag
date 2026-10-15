@@ -56,7 +56,12 @@ failure latency is not zero. Both quality and latency miss the target. No new
 embedding charges; round cost2.879544USD includes2.0064conservative unknown-usage
 settlement. All20offline tests pass; private ledgers retain full evidence.
 
-R07 is frozen/preflight-verified; no generation results yet. Retrieval text/order
+R07 is complete:73/100semantic,97mechanical,70combined; baseline remains54semantic.
+All100calls returned, with zero retries; three unknown evidence handles fail validation.
+Actual cached mean4781.143ms; estimated uncached mean5372.197ms adds prior query
+embedding timing. Quality misses80, so this is not a promoted result. Round cost
+1.005198USD; campaign spent7.62784625of200USD, history separately retained.
+Retrieval text/order
 match R06for all100cases. Compact answer/evidence pairs resolve to exact original
 quotes before the common validator. Personal-use queries withhold dosage/procedure
 clauses before span splitting;7of100cases activate this source-only filter.
