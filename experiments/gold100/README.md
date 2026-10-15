@@ -34,11 +34,13 @@ R05 preparation: `r05.py` implements exact-source dense/BM25 reciprocal-rank fus
 It requires caller-supplied source and query vectors; it never calls an API or reads
 reference answers. `embedding_transport.py` is a bounded, single-attempt transport;
 private runners additionally enforce the frozen manifest, stage spending cap and
-persistent dispatch journal. Endpoint-specific authorization is pending; no R05
-vector or generation request has been dispatched at this checkpoint.
+persistent dispatch journal. The user directly authorized the specific endpoint and frozen data scope.
+Index construction is running; R05 generation has not started.
+`embedding_artifact.py` refuses incomplete journals, changed response hashes or
+unclosed ledgers and preserves each fresh query embedding latency.
 
 Run all current offline tests:
 
 ```sh
-.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact
 ```
