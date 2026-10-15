@@ -47,10 +47,11 @@ Run all current offline tests:
 .venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed
 ```
 
-R06 is frozen and preflight-verified, with no generation results yet. It composes
-hybrid seeds, exact catalog counts, original record/page/policy dependencies and
-the unchanged R04 prompt within6000context characters. It reuses R05vectors without
-new embedding calls. Actual cached latency and estimated uncached latency (adding
-prior measured query embedding time) must be reported separately. A provisional
-quality/estimated-latency pass requires fresh timing confirmation before promotion.
-All20offline tests pass.
+R06 is complete:78/100semantic passes versus54baseline;85mechanical and68combined.
+It composes hybrid seeds, catalog counts, record/page/policy dependencies and the
+R04prompt within6000characters.100unique dispatches produced99answers and1connection
+failure, retained as failure with no retry. Actual cached mean is8902.935ms over99;
+estimated uncached mean9494.244ms adds prior measured query embedding. Missing
+failure latency is not zero. Both quality and latency miss the target. No new
+embedding charges; round cost2.879544USD includes2.0064conservative unknown-usage
+settlement. All20offline tests pass; private ledgers retain full evidence.
