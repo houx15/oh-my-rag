@@ -5,7 +5,7 @@ class TimeCapTests(unittest.TestCase):
     def row(self, elapsed=2000, valid=True, adequate=True):
         return dict(corpus='fixture',arm='baseline',pipeline_component_sum_ms=elapsed,valid=valid,score={'adequate':adequate})
     def group(self, rows):
-        return summarize(rows)['groups']['fixture/baseline']
+        return summarize(rows,2000)['groups']['fixture/baseline']
     def test_boundary_and_late_answers(self):
         g=self.group([self.row(1999),self.row(2000),self.row(2000.01)])
         self.assertEqual((g['within_cap'],g['valid_adequate_within_cap'],g['over_cap']),(2,2,1))
@@ -21,3 +21,7 @@ class TimeCapTests(unittest.TestCase):
     def test_invalid_cap_rejected(self):
         for cap in [0,-1,float('inf'),True]:
             with self.assertRaises(ValueError):summarize([],cap)
+
+    def test_current_default_is_4700_ms(self):
+        g=summarize([self.row(4700),self.row(4700.01)])['groups']['fixture/baseline']
+        self.assertEqual((g['within_cap'],g['over_cap']),(1,1))

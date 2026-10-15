@@ -2,7 +2,7 @@
 import argparse, collections, hashlib, json, math
 from pathlib import Path
 
-CAP_MS = 2000
+CAP_MS = 4700
 
 def measured(value):
     return type(value) in (int, float) and math.isfinite(value) and value >= 0
@@ -36,9 +36,9 @@ def summarize(rows, cap_ms=CAP_MS):
             'runtime_cancellation_enforced':False}
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--results',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--results',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--cap-ms',type=float,default=CAP_MS);a=p.parse_args()
     rows=[json.loads(l) for l in a.results.read_text().splitlines() if l.strip()]
     ids=[r['qid'] for r in rows]
     if len(ids)!=len(set(ids)):raise ValueError('duplicate results')
-    result=summarize(rows);result['input_sha256']=hashlib.sha256(a.results.read_bytes()).hexdigest()
+    result=summarize(rows,a.cap_ms);result['input_sha256']=hashlib.sha256(a.results.read_bytes()).hexdigest()
     a.output.write_text(json.dumps(result,indent=2)+'\n')

@@ -5,6 +5,28 @@ Detailed experiment records linked below retain frozen inputs and negative resul
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
 
+## Current target: 4.7 seconds — October 15, 2026
+
+The user explicitly replaces the previous2second requirement with **4,700ms for a
+complete, validated answer**. Prioritize answer quality within this allowance;
+do not continue pursuing the old2second goal. Earlier2second findings below remain
+historical. The user proposes US-to-China network differences as a possible cause;
+current measurements do not establish execution geography or isolate cross-border
+network time. The observed2.70second minimum is not a model's irreducible latency.
+
+Reassessment of the saved six-case diagnostic, with no new API calls: current
+contexts finish within4.7seconds in5/6cases; focused complete contexts in6/6cases.
+The remaining baseline comparison takes5.775seconds. Combining the existing
+assistant-required-facet audit, mechanical validity and new deadline gives2/6and
+5/6respectively; these selected exposed cases and one sample per arm do not
+establish general superiority or an end-to-end SLA. Historical timers omit queueing
+and final client delivery. No runtime cancellation or deployment is introduced.
+
+The offline reporting default is now4700ms, with an explicit `--cap-ms 2000` option
+for reproducing prior analysis. Raw outcomes and original `within_2s` fields stay
+unchanged. A separate private `deadline-reassessment-4700ms.json` preserves this
+new reading. Cost remains$122.04494745/$200 with no active paid run.
+
 ## Six-case evidence ceiling diagnostic — October 15, 2026
 
 [Before/after record](evidence-ceiling-diagnostic.md):12fresh calls compare frozen

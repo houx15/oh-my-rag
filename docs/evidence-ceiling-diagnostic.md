@@ -1,5 +1,28 @@
 # Evidence ceiling diagnostic — October 15, 2026
 
+## Current target: 4.7 seconds — October 15, 2026
+
+The user explicitly replaces the previous2second requirement with **4,700ms for a
+complete, validated answer**. Prioritize answer quality within this allowance;
+do not continue pursuing the old2second goal. Earlier2second findings below remain
+historical. The user proposes US-to-China network differences as a possible cause;
+current measurements do not establish execution geography or isolate cross-border
+network time. The observed2.70second minimum is not a model's irreducible latency.
+
+Reassessment of the saved six-case diagnostic, with no new API calls: current
+contexts finish within4.7seconds in5/6cases; focused complete contexts in6/6cases.
+The remaining baseline comparison takes5.775seconds. Combining the existing
+assistant-required-facet audit, mechanical validity and new deadline gives2/6and
+5/6respectively; these selected exposed cases and one sample per arm do not
+establish general superiority or an end-to-end SLA. Historical timers omit queueing
+and final client delivery. No runtime cancellation or deployment is introduced.
+
+The offline reporting default is now4700ms, with an explicit `--cap-ms 2000` option
+for reproducing prior analysis. Raw outcomes and original `within_2s` fields stay
+unchanged. A separate private `deadline-reassessment-4700ms.json` preserves this
+new reading. Cost remains$122.04494745/$200 with no active paid run.
+
+
 ## Before execution
 
 User accepts a direction-setting test of current retrieved evidence, source-reviewed complete evidence, and direct structured answers. Six exposed cases fixed in advance: GM349 (missing preceding procedure), GM120 (introduction/unsupported interface action), NH R063 (broad introduction), NH-LIVE07 (historical comparison), NH-LIVE26 (missing discovery details), REG-FAQ04 (no fabricated trial ID). This is purposive diagnosis, not a representative/held-out benchmark or human gold.
