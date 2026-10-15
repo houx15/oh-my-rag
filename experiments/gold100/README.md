@@ -29,3 +29,16 @@ Private frozen runners remain the authority for paid dispatch, journal deduplica
 budget reservation and all-100 evaluation. This package alone never calls an API.
 See [campaign results](../../docs/gold100-optimization-results.md) for measured outcomes,
 limitations and the current round's status. Do not infer results for a prepared round.
+
+R05 preparation: `r05.py` implements exact-source dense/BM25 reciprocal-rank fusion.
+It requires caller-supplied source and query vectors; it never calls an API or reads
+reference answers. `embedding_transport.py` is a bounded, single-attempt transport;
+private runners additionally enforce the frozen manifest, stage spending cap and
+persistent dispatch journal. Endpoint-specific authorization is pending; no R05
+vector or generation request has been dispatched at this checkpoint.
+
+Run all current offline tests:
+
+```sh
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid
+```
