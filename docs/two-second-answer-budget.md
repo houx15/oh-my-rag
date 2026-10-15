@@ -34,3 +34,28 @@ Next live experiment must replace the earlier44-call B2-only proposal with a lat
 ## Reproduction
 
 `scripts/time_cap_report.py --results <saved-results.jsonl> --output <analysis.json>` records the input SHA256, per-corpus/arm scheduled denominators, missing timing, deadline misses, quality-within-deadline and component medians. Five unit tests cover the exact boundary, late answers, invalid/unsupported fast answers, missing measurements/scores and invalid caps. All source artifacts and original experiment outcomes are unchanged. No new external method attribution is needed for this local evaluation metric.
+
+## Generation-step diagnosis — October 15, 2026
+
+Saved nested timers split the67observed baseline generations as follows. Means are used because they sum to the total; medians do not. The separate two interrupted generations across all arms remain unmeasured, not imputed.
+
+| Measured interval | Baseline mean | Share of generation |
+|---|---:|---:|
+| HTTP request start → response headers |2,242.2ms|56.6%|
+| Headers → first content event |2.4ms|0.1%|
+| First content → response closed |1,180.3ms|29.8%|
+| Worker wrapper timer minus HTTP duration |355.0ms|9.0%|
+| Outer generation timer minus worker wrapper timer |181.3ms|4.6%|
+| Total generation |3,961.3ms|100% (rounding)|
+
+The dominant wait is before headers. The existing clock cannot distinguish DNS/TCP/TLS, upload, provider queueing, prompt prefill or gateway buffering. Calling all2.24seconds model reasoning or queue time would be unsupported. Thinking was explicitly disabled and no reasoning event was observed in all202measured generations. The20second poll returns as soon as the pipe is readable; it is not a mandatory20second sleep. Likewise the2second join is an upper bound, not an unconditional delay. No automatic retries ran in this batch. The benchmark's separate rubric-review request is outside generation time.
+
+The second major interval is receiving the answer, including final usage/DONE and session close, not solely model decoding. Output-token count correlates with this interval (Pearson r≈0.871 across202dependent, nonrandomized observations); this supports testing concise output, not a causal throughput estimate. Input-token count has a weaker correlation with header wait (r≈0.282). Prompt-cache hits occur in some receipts, so caching is neither universally absent nor independently proven effective here.
+
+Code inspection shows a fresh spawn-process worker per request (`newdomain/bailian_bounded_transport.py:176`), constructing a new LiveContext (`:163`), loading/validating local state and importing dependencies, then creating and closing a new HTTP Session (`:91`). HTTP connection reuse across requests is absent. The355msresidual includes worker startup/imports/context validation and IPC; its exact partition is unmeasured. The181msouter residual includes parent checks/screening, ledger reserve/settle, process startup before the inner timer, and cleanup. Do not attribute either residual entirely to process spawning or ledger I/O. Parent/child scope checks read and hash frozen files; their individual cost is not instrumented.
+
+A1 and C1 show the same pattern: mean pre-header wait2.276/2.331seconds, post-first-content interval1.319/1.298seconds, local residual totals0.537/0.541seconds. Baseline by corpus: GM3.766seconds total (2.226before headers,0.979stream), NH4.215seconds (2.366/1.316), regressions3.904seconds (2.120/1.266). This is not only a long-answer problem in one corpus.
+
+**Optimization order:** instrument connection/headers and worker initialization separately; then test a bounded persistent worker with per-worker HTTP reuse while preserving screening, fresh authorization checks, reserve-before-dispatch accounting, cancellation and concurrency limits. This targets roughly0.54seconds of measured local residual plus an unknown connection component, not a guaranteed saving. Shorter evidence-preserving responses target the1.18second streaming interval. Even eliminating all measured local residual leaves baseline mean HTTP time≈3.425seconds, still above2seconds, so approved-route/provider first-response latency must also improve. No live calls or transport changes were made for this diagnosis.
+
+Reproducible private evidence: `two-second-cap-20261015/generation-breakdown.py` and `.json`, including original results SHA256, exact timer-difference formulas and additive checks for every measured row. These are historical timing observations, not cold request-to-client SLA certification.
