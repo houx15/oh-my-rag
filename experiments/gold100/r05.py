@@ -36,7 +36,10 @@ class Index:
             raise ValueError('invalid query vector')
         if not self.chunks:
             return []
-        cosine = self.matrix @ (q / np.linalg.norm(q))
+        # Explicit reduction avoids spurious Apple BLAS floating-point warnings.
+        cosine = np.einsum('ij,j->i', self.matrix, q / np.linalg.norm(q), optimize=False)
+        if not np.isfinite(cosine).all():
+            raise ValueError('nonfinite cosine similarity')
         dense = sorted(range(len(self.chunks)), key=lambda i: (-float(cosine[i]), self.chunks[i]['id']))[:40]
         lexical = [self.by_id[c['id']] for c in self.base.search(question, 40)]
         scores = {}

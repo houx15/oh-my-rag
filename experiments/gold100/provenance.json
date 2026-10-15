@@ -33,5 +33,12 @@
     "source_sha256": "295f2ad90143655420264da1cbbef1f7ac48447ef19d7fd16b1bed3122a8489a",
     "repository_sha256": "8753dbbba14c2df92c7370bfad2bed84a050b58a80f4b519081a73a5b54ec10c",
     "change": "Only local simple_rag import rewritten to relative package baseline import."
+  },
+  "r05": {
+    "source_directory": "gold100-opt-r05-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "c8e8ef5e702f7e1b19d8b7e78605cd65d0a30c5256b6f67e538674ee9508ad05",
+    "repository_sha256": "5194d2323e6a8f5a0632d99c3f942aec1bb4ac3e331f23fd3ceb8022f2f03e4e",
+    "change": "Private adapter loads exact frozen source/query vectors and delegates directly to this repository implementation; both are pinned in private freeze.json. Original baseline prompt and validator retained."
   }
 }

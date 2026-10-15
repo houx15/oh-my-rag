@@ -35,7 +35,8 @@ It requires caller-supplied source and query vectors; it never calls an API or r
 reference answers. `embedding_transport.py` is a bounded, single-attempt transport;
 private runners additionally enforce the frozen manifest, stage spending cap and
 persistent dispatch journal. The user directly authorized the specific endpoint and frozen data scope.
-Index construction is running; R05 generation has not started.
+Index construction finished with428successful calls and zero retries.
+R05 generation is running; no complete-round quality result is claimed yet.
 `embedding_artifact.py` refuses incomplete journals, changed response hashes or
 unclosed ledgers and preserves each fresh query embedding latency.
 
