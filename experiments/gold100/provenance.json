@@ -54,5 +54,12 @@
     "source_sha256": "548a96800383c5593befd3ca4dbe97a0f7307ac4fca8be0e7a0bfd81d3d1ed7c",
     "repository_sha256": "32f88f27173957d32bdaaf5b1bd4dd703069b8a5483fb6d1cc8cb25e8f2f91bc",
     "change": "Private adapter delegates to R07; exact R06 retrieval with personal-use metadata, compact source handles and local canonicalization before unchanged baseline validator. All dependencies and reused vector artifact frozen."
+  },
+  "r08": {
+    "source_directory": "gold100-opt-r08-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "2472d82ab8bc7cb7f9bd460ede05bc8d559413f4a0fa798389018265e3ab9492",
+    "repository_sha256": "0f409ec2a4dd4c57abdf6f642bc07b700cab81dfd5e15eaee4d4b5b0b0812a04",
+    "change": "Private adapter delegates to R08; all R06 spans retained, source-only catalog/lexical supplements, physical page order, explicit omitted counts and expanded personal-use filter. Compact exact handles; common validator unchanged. Dependencies and reused vector artifact frozen. Serialized request bounded29500bytes without dropping original evidence."
   }
 }
