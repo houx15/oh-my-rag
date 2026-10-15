@@ -691,3 +691,20 @@ acknowledged to Manning, Raghavan and Schütze's
 [Introduction to Information Retrieval, Okapi BM25 chapter](https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html).
 This is a conventional baseline, not a recent-paper contribution or exact paper
 reproduction. No upstream code or assets were copied, installed or executed for it.
+
+
+The first paired candidate, [C1-Gold100-v1](docs/gold100-c1-results.md), completed
+100 fresh calls and 100 source-relative assistant reviews on the same frozen set.
+It ports the original October12 C1 architecture (three-channel lexical RRF,
+240-character evidence handles) to the same corpus text and Flash4.1 model;
+titles derive from source first lines, so this is not an exact historical60
+reproduction or the later `C1_original` packing experiment. Both version records
+include architecture diagrams/text and baseline-relative quality, latency and cost.
+
+Semantic passes fell54→40; mechanical validity rose75→99; combined passes39→40.
+Mean latency fell5.261→4.122seconds; mean conservative budget cost rose
+$0.00524556→$0.00713176. This is not an overall quality win and does not promote
+a default change. Raw answers, paired reasons, code/config/source hashes and the
+central version registry remain private. The run reuses this project's original
+C1 implementation and existing jieba/numpy dependencies; existing licenses and
+acknowledgments remain intact. No new upstream paper code was adopted.

@@ -64,3 +64,21 @@
 复核结论：可带上述限制分享；数量、连接关系、哈希、算术、预算、100次dispatch与零重试均检查通过。HTML结构与转义检查通过，未做浏览器渲染视觉检查。无部署、推送、上传或新增provider。
 
 方法背景：[Stanford IR book—Okapi BM25](https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html)。本轮为独立写的经典基线，使用平滑正IDF变体；不声称复现近期论文，未复制/安装/执行上游代码。
+
+
+## Simple-RAG-v1 architecture and version identity
+
+Version: `Simple-RAG-v1`, comparison series `Gold100-v1`. Against itself all metric deltas are zero; this immutable generation result is the comparison anchor for every candidate. See [C1-Gold100-v1](gold100-c1-results.md) for the first full100 paired comparison.
+
+```mermaid
+flowchart LR
+ S[Frozen screened source text] --> I[500-character chunks / overlap80]
+ Q[Question] --> R[Chinese bigram BM25 / top5]
+ I --> R
+ R --> P[Common grounded JSON prompt]
+ P --> M[Flash4.1 one call / thinking off]
+ M --> V[JSON + source ID + exact contiguous quote checks]
+ V --> E[All100 source-backed four-dimension reviews]
+```
+
+No query rewriting, learned reranker, graph, generated aggregates or repair calls. Complete frozen private code/config/source/question/prompt hashes are retained in `gold100-v1-20261015/freeze.json`; raw outputs and scores remain unchanged. The central private `gold100-experiment-registry.json` stores each version's architecture, metrics, cost and deltas against this baseline.
