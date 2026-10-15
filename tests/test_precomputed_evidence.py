@@ -22,3 +22,7 @@ class PrecomputedTests(unittest.TestCase):
         self.assertEqual(answer('光明留创园租金何时开始，联系人电话？',self.bundle,self.sources)['status'],'fallback')
     def test_caps_keep_entire_condition(self):
         a=answer('光明留创园租金面积上限？',self.bundle,self.sources);self.assertIn('依规',a['answer']);self.assertEqual([f['id']for f in a['facts']],['caps'])
+
+    def test_subsidy_start_keeps_agreement_antecedent(self):
+        a=answer('光明留创园租金何时开始？',self.bundle,self.sources)
+        self.assertEqual([f['id']for f in a['facts']],['step6','step7'])

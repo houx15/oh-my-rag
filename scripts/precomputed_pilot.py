@@ -25,7 +25,7 @@ def build(sources):
     steps=['step'+str(i) for i in range(1,8)]
     bundle={'source_hashes':{rid:digest(raw)for rid,raw in sources.items()},'facts':facts,'ordered_steps':steps,
             'next':dict(zip(steps,steps[1:])),'signing':'step6',
-            'intent_facts':{'before_signing':steps[:5],'subsidy_start':['step7'],'subsidy_caps':['caps']},
+            'intent_facts':{'before_signing':steps[:5],'subsidy_start':['step6','step7'],'subsidy_caps':['caps']},
             'scope':'Source-reviewed D01 procedure family, manually assigned intent semantics; source-derived development pilot only.'}
     validate(bundle,sources);return bundle
 
@@ -37,7 +37,7 @@ def run(pool_path,directory):
     (directory/'sources.json').write_text(json.dumps(sources,ensure_ascii=False,indent=2)+'\n')
     (directory/'bundle.json').write_text(json.dumps(bundle,ensure_ascii=False,indent=2)+'\n')
     results=[]
-    for p in probes+[{'id':'GM:GM-349','question':j['question'],'expected':['step1','step2','step3','step4','step5','step7']}]:
+    for p in probes+[{'id':'GM:GM-349','question':j['question'],'expected':['step1','step2','step3','step4','step5','step6','step7']}]:
         a=answer(p['question'],bundle,sources,'flat');b=answer(p['question'],bundle,sources,'graph')
         actual=[f['id']for f in a['facts']]
         results.append({**p,'flat':a,'graph':b,'parity':a==b,'expected_match':actual==p['expected'],'baseline_exact_fact_coverage':[fid for fid in p['expected']if bundle['facts'][fid]['text']in j['baseline'].get(bundle['facts'][fid]['source_id'],'')] if p['id']=='GM:GM-349'else None})
