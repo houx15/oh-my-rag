@@ -1,9 +1,24 @@
 # RAG optimization: cumulative technical report
 
-Canonical project narrative and dated research log. Last updated **2026-10-14**.
+Canonical project narrative and dated research log. Last updated **2026-10-15**.
 Detailed experiment records linked below retain frozen inputs and negative results;
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
+
+## Complete-answer cap — October 15, 2026
+
+The user now requires a complete, validated answer within **2seconds per request**.
+[Deadline analysis and implementation requirements](two-second-answer-budget.md)
+replace latency-only optimization with supported, valid, adequate answers delivered
+by the deadline. Offline reanalysis finds0/202observed completions within2seconds
+across204scheduled A1/C1 outputs; unknowns remain failures to establish success.
+Baseline generation median is3.895seconds and49/67first-token arrivals already
+exceed2seconds. Preparation median is17ms, so retrieval micro-optimization alone
+cannot meet this target. No current configuration is certified compliant. The new
+offline scoring gate does not implement runtime cancellation; no paid calls or
+production changes were made. Next live scope must prioritize approved-route
+latency feasibility and concise evidence-preserving output before further packing
+ablations; the earlier B2-only paid proposal is superseded pending a bounded plan.
 
 ## Current evidence and denominator summary — 2026-10-14
 
