@@ -22,7 +22,7 @@ membership must also be audited. Semantic correctness is reviewed separately.
 Synthetic tests, with no network or paid requests:
 
 ```sh
-.venv/bin/python -m unittest tests.test_gold100_candidates
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt
 ```
 
 Private frozen runners remain the authority for paid dispatch, journal deduplication,
