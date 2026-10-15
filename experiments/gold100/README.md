@@ -36,7 +36,8 @@ reference answers. `embedding_transport.py` is a bounded, single-attempt transpo
 private runners additionally enforce the frozen manifest, stage spending cap and
 persistent dispatch journal. The user directly authorized the specific endpoint and frozen data scope.
 Index construction finished with428successful calls and zero retries.
-R05 generation is running; no complete-round quality result is claimed yet.
+R05 generation and review are complete:54/100semantic passes, mean6811.646ms
+including query embeddings. It does not meet the quality/latency target.
 `embedding_artifact.py` refuses incomplete journals, changed response hashes or
 unclosed ledgers and preserves each fresh query embedding latency.
 
