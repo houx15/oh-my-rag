@@ -44,5 +44,13 @@ unclosed ledgers and preserves each fresh query embedding latency.
 Run all current offline tests:
 
 ```sh
-.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed
 ```
+
+R06 is frozen and preflight-verified, with no generation results yet. It composes
+hybrid seeds, exact catalog counts, original record/page/policy dependencies and
+the unchanged R04 prompt within6000context characters. It reuses R05vectors without
+new embedding calls. Actual cached latency and estimated uncached latency (adding
+prior measured query embedding time) must be reported separately. A provisional
+quality/estimated-latency pass requires fresh timing confirmation before promotion.
+All20offline tests pass.

@@ -40,5 +40,12 @@
     "source_sha256": "c8e8ef5e702f7e1b19d8b7e78605cd65d0a30c5256b6f67e538674ee9508ad05",
     "repository_sha256": "5194d2323e6a8f5a0632d99c3f942aec1bb4ac3e331f23fd3ceb8022f2f03e4e",
     "change": "Private adapter loads exact frozen source/query vectors and delegates directly to this repository implementation; both are pinned in private freeze.json. Original baseline prompt and validator retained."
+  },
+  "r06": {
+    "source_directory": "gold100-opt-r06-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "09a7b0aaa31ca96d036370ede24cd1b0b7391e6e6b8661ee974eff076eb68050",
+    "repository_sha256": "0339405e254cf7e44bae41bbf157c7f9657df34ce57cac6df5498ff245e744ff",
+    "change": "Private adapter reuses frozen R05 vectors and delegates to repository R06. R06/R05/R04/R03/baseline and vector artifact are frozen. Cached latency measured; uncached latency estimated with prior measured query embedding, requiring fresh confirmation before promotion."
   }
 }
