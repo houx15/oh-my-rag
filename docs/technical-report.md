@@ -5,6 +5,24 @@ Detailed experiment records linked below retain frozen inputs and negative resul
 this document is maintained as the project develops into a technical report.
 Local artifacts remain private. No push, publication, upload or deployment is authorized.
 
+## Six-case evidence ceiling diagnostic — October 15, 2026
+
+[Before/after record](evidence-ceiling-diagnostic.md):12fresh calls compare frozen
+current contexts with source-reviewed focused contexts on6deliberately selected,
+historically exposed cases. Assistant-required-facet plus validity counts3/6→5/6,
+but include a stochastic identical-prompt format difference and an uncertain
+completeness loss; no broad/causal baseline win is claimed. GM349 restores missing
+steps; GM120 replaces unnecessary abstention with supported introduction. Two NH
+cases already work; another becomes less explicit about a subquestion. Both arms
+remain0/6under2seconds (p503.713/3.816s). Six prewritten source-backed responses
+render locally, but are not an automatic general answering pipeline.
+
+Cost$0.063908; latest conservative cumulative **$122.04494745/$200**, remaining
+$77.95505255, zero open reservations and no active paid run. Earlier cumulative
+figures below are historical. No failure/retry or disconnect recovery was required.
+Baseline unchanged. Next focus: independently tested prepared evidence and narrow
+deterministic answers; model speed remains a separate unresolved constraint.
+
 ## Precomputed evidence pilot — October 15, 2026
 
 [Recorded-before-and-after pilot](precomputed-evidence-pilot.md): source-verified
