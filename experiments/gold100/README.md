@@ -68,7 +68,11 @@ clauses before span splitting;7of100cases activate this source-only filter.
 All exposed handles verified;24offline tests pass. Reused-vector timing remains
 explicitly estimated for uncached comparison; no new embedding charges.
 
-R08 is frozen and independently preflight-verified; no scored results yet. All R06
+R08 is complete:77/100semantic,100mechanical,77combined; baseline54semantic.
+All100calls returned with zero retries/truncations/open reservations. Cached mean
+4681.465ms, estimated uncached5272.520ms; quality remains below80.
+Cost0.988956USD; campaign8.61680225USD with191.38319775USD remaining.
+All R06
 source spans remain; small catalog groups, source-era metadata and same-document
 lexical matches supplement them. Physical page order is restored inside documents.
 Personal-use omissions are explicit; exact handles and the common validator remain.
