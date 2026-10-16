@@ -97,10 +97,16 @@ source/section offsets, catalog members and exact handles verified;31tests pass.
 No additional LLM or embedding calls in preprocessing. Latency remains actual
 cached plus separately labelled uncached estimate until fresh confirmation.
 
-R10 is preregistered as the final, unchanged-R09 confirmation, not a tuned variant.
+R10 was preregistered as the final, unchanged-R09 confirmation, not a tuned variant.
 `confirmation.py` measures one contiguous query-embedding/retrieval/generation/
 validation wall interval, including per-query bookkeeping. Existing source vectors
 are reused; query vectors are requested fresh once per question. Actual contexts
 are saved because fresh embedding results may affect retrieval. Maximum100query
 and100generation calls share one serial5USDstage ledger, with no retries. Same100
-questions/rubric and original baseline. No new score or timing claim yet.
+questions/rubric and original baseline. Final verified results follow.
+
+R10final confirmation complete: 80/100semantic, 100mechanical,
+fresh contiguous mean6219.807ms (+18.22%baseline), p95 8508.669ms.
+Joint target met: False. All ten rounds complete; stop further optimization.
+Campaign spent10.88285325USD, remaining189.11714675USD.
+All200unique calls settled, no retries/open reservations; full100source-backed reviews.

@@ -143,3 +143,18 @@ historical notes do not block this authorization. Commit and push each verified
 round's reusable code/tests and result summary; label partial checkpoints honestly.
 Keep credentials and private raw inputs/answers/ledgers out of Git. Do not include
 unrelated uncommitted work. Check the remote commit after each push.
+
+## Gold100 final outcome — ten rounds completed
+
+The authorized ten-round campaign is complete; stop further optimization calls.
+R09 scored83/100 with estimated uncached latency5680.119ms. The unchanged R09
+end-to-end confirmation (R10) scored80/100 vs immutable baseline54/100, with
+measured mean6219.807ms (+18.22%), above the5787.421ms ceiling. Quality reached
+80%, but the joint quality/latency target was not met. Do not label this a global
+plateau or automatically change the default. Same frozen100/source/rubric retained,
+all ten rounds compared to the original baseline. See the final campaign report.
+
+Campaign conservative spend10.88285325USD of200USD, remaining189.11714675USD;
+historical123.28267945USD separately retained. All stages closed, no retries or
+open reservations. Reusable code and final results are committed and pushed to
+the existing repository; private raw inputs, responses and ledgers remain local.
