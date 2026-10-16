@@ -1,0 +1,4 @@
+# Tested release runtime (Python 3.9.6); only numpy is needed offline.
+numpy==2.0.2
+# Required only for the existing optional embedding/provider transports.
+requests==2.32.5

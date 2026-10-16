@@ -1,5 +1,12 @@
 # oh-my-rag
 
+**Current tagged release: [v0.1.0 — Gold100 R10](docs/release-v0.1.0.md).**
+Start there for installation, the offline demo, corpus/vector formats and integration.
+The release explicitly selects unchanged R09 as confirmed in R10: 80/100 semantic,
+100/100 mechanical, 6.220s measured mean. The joint latency target was not met;
+results are exposed development-set AI review, not independent generalization.
+Older checkpoint/default descriptions below are historical.
+
 Chinese document-grounded QA research with explicit evidence handles, offline
 validation, budgeted provider calls and paired evaluation.
 
