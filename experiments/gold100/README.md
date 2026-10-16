@@ -96,3 +96,11 @@ text<=9000characters, serialized messages<=29500bytes. 100request reconstruction
 source/section offsets, catalog members and exact handles verified;31tests pass.
 No additional LLM or embedding calls in preprocessing. Latency remains actual
 cached plus separately labelled uncached estimate until fresh confirmation.
+
+R10 is preregistered as the final, unchanged-R09 confirmation, not a tuned variant.
+`confirmation.py` measures one contiguous query-embedding/retrieval/generation/
+validation wall interval, including per-query bookkeeping. Existing source vectors
+are reused; query vectors are requested fresh once per question. Actual contexts
+are saved because fresh embedding results may affect retrieval. Maximum100query
+and100generation calls share one serial5USDstage ledger, with no retries. Same100
+questions/rubric and original baseline. No new score or timing claim yet.
