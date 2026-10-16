@@ -82,7 +82,13 @@ only supplemental spans are removed to meet the unchanged30000byte transport scr
 Initial offline preparation hit that screen before any API call; bounded revision
 is frozen. No new vectors; cached and estimated uncached timing remain separate.
 
-R09 is frozen/preflight-verified, not yet scored. It preserves whole natural units
+R09 is complete:83/100semantic,100mechanical,83combined vs baseline54semantic.
+100unique calls, zero retries/open reservations; all frozen artifacts and ledgers verified.
+Actual cached mean5089.065ms; estimated uncached5680.119ms (+7.96%baseline).
+Fresh end-to-end confirmation is still required before claiming the joint target.
+Cost1.130512USD; campaign9.74731425USD, remaining190.25268575USD.
+The unchanged R09candidate is selected for confirmation, not further tuning.
+It It preserves whole natural units
 without fixed100character cuts, carries exact preceding section provenance and
 adds bounded quoted/choice-term source matches. Personal-use exclusions and
 withheld-content notices are strengthened. All original R06spans remain; source
