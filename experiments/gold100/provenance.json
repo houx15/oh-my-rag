@@ -61,5 +61,12 @@
     "source_sha256": "2472d82ab8bc7cb7f9bd460ede05bc8d559413f4a0fa798389018265e3ab9492",
     "repository_sha256": "0f409ec2a4dd4c57abdf6f642bc07b700cab81dfd5e15eaee4d4b5b0b0812a04",
     "change": "Private adapter delegates to R08; all R06 spans retained, source-only catalog/lexical supplements, physical page order, explicit omitted counts and expanded personal-use filter. Compact exact handles; common validator unchanged. Dependencies and reused vector artifact frozen. Serialized request bounded29500bytes without dropping original evidence."
+  },
+  "r09": {
+    "source_directory": "gold100-opt-r09-20261015",
+    "source_file": "adapter.py",
+    "source_sha256": "13c05b18bef9c689963e93d42c31850bc7be9abf3198173a716cc67c05c94b3e",
+    "repository_sha256": "7444bafd5a923dbe10c9864f99d821b8d4021ba7c047377f3f410c8bf1a31677",
+    "change": "R09 exact natural-line/sentence handles without fixed-width splitting; R08 retrieval plus bounded quoted/choice-term source matches, exact preceding numbered section hints with record offsets, expanded personal-use exclusions and explicit withheld notice. R06 spans retained. All dependencies/vector artifact frozen; original validator unchanged."
   }
 }

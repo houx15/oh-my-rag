@@ -44,7 +44,7 @@ unclosed ledgers and preserves each fresh query embedding latency.
 Run all current offline tests:
 
 ```sh
-.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed tests.test_gold100_compact tests.test_gold100_ordered
+.venv/bin/python -m unittest tests.test_gold100_candidates tests.test_gold100_prompt tests.test_gold100_embeddings tests.test_gold100_hybrid tests.test_gold100_embedding_artifact tests.test_gold100_composed tests.test_gold100_compact tests.test_gold100_ordered tests.test_gold100_intact
 ```
 
 R06 is complete:78/100semantic passes versus54baseline;85mechanical and68combined.
@@ -81,3 +81,12 @@ All27offline tests pass. Context cap8500characters and serialized message cap295
 only supplemental spans are removed to meet the unchanged30000byte transport screen.
 Initial offline preparation hit that screen before any API call; bounded revision
 is frozen. No new vectors; cached and estimated uncached timing remain separate.
+
+R09 is frozen/preflight-verified, not yet scored. It preserves whole natural units
+without fixed100character cuts, carries exact preceding section provenance and
+adds bounded quoted/choice-term source matches. Personal-use exclusions and
+withheld-content notices are strengthened. All original R06spans remain; source
+text<=9000characters, serialized messages<=29500bytes. 100request reconstructions,
+source/section offsets, catalog members and exact handles verified;31tests pass.
+No additional LLM or embedding calls in preprocessing. Latency remains actual
+cached plus separately labelled uncached estimate until fresh confirmation.
